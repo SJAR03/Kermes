@@ -913,24 +913,24 @@ if (isset($varMsj)) {
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="../../plugins/DataTables_1.11.3/media/js/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/DataTables_1.11.3/media/css/dataTables.dataTables.min.css"></script>
-    <script src="../../plugins/DataTables_1.11.3/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.print.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.colVis.min.js"></script>
+    <!-- DataTables  & Plugins-->
+    <script src="../../plugins/DT/DataTables-1.11.2/css/dataTables.dataTables.min.css"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
