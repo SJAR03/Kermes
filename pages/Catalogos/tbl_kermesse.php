@@ -18,13 +18,14 @@ if (isset($varMsj)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kermesse | Kermesse</title>
 
+    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome_5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DataTables_1.11.3/media/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/DataTables_1.11.3/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/DataTables_1.11.3/Buttons-2.0.1/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
