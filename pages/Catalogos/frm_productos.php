@@ -1,9 +1,16 @@
 <?php
-include '../../entidades/vw_kermesse.php';
-include '../../datos/dt_kermesse.php';
+include '../../Entidades/productos.php';
+include '../../Datos/dt_productos.php';
 
-$K = new Dt_Kermesse();
+include '../../Entidades/categoria_producto.php';
+include '../../Datos/dt_categoria_producto.php';
 
+include '../../Entidades/comunidad.php';
+include '../../Datos/dt_Comunidad.php';
+
+$P = new Dt_Producto();
+$dtc = new Dt_CategoriaProducto();
+$dtCo = new Dt_Comunidad();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -11,22 +18,19 @@ if (isset($varMsj)) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla Kermesse</title>
+    <title>AdminLTE 3 | General Form Elements</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -390,8 +394,8 @@ if (isset($varMsj)) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
                                     Forms
@@ -400,7 +404,7 @@ if (isset($varMsj)) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link">
+                                    <a href="../forms/general.html" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>General Elements</p>
                                     </a>
@@ -425,8 +429,8 @@ if (isset($varMsj)) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Tables
@@ -441,7 +445,7 @@ if (isset($varMsj)) {
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="../tables/data.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DataTables</p>
                                     </a>
@@ -843,134 +847,139 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Kermesse Registradas</h1>
+                            <h1>Manipulación de Datos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Kermesse</li>
+                                <li class="breadcrumb-item active">Manipulación de Datos</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Kermesses Registradas</h3>
-                        </div>
 
-                        <div class="card-body">
-                            <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_kermesse.php" title="Registrar una nueva kermesse" target="blank">
-                                    <i class="far fa-plus-square fa-2x"></i>
-                                </a>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Registrar Producto</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Producto</label>
+                                            <input type="text" class="form-control" id="prod_nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de Producto" title="Ingrese el nombre de Producto" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Selecciona la Comunidad</label>
+                                            <select class="form-control" name="comunidad" id="id_comunidad" required>
+                                                <option value="">Seleccione...</option>
+
+                                                <?php foreach ($dtCo->listaComunidad() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
+
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Selecciona la Categoría</label>
+                                            <select class="form-control" name="categoria" id="id_categoria_producto" required>
+                                                <option value="">Seleccione...</option>
+
+                                                <?php foreach ($dtc->listaCat() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_categoria_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
+
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <input type="text" class="form-control" id="prod_descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad</label>
+                                            <input type="text" class="form-control" id="prod_cantidad" name="cantidad" placeholder="Ingrese la cantidad" title="Ingrese la cantidad" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Precio Sugerido</label>
+                                            <input type="text" class="form-control" id="prod_precio" name="precio_sugeridov" placeholder="Ingrese el precio" title="Ingrese el precio" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <select class="form-control" name="prod_estado" id="estado" disabled>
+                                                <option value="1">Ingresado</option>
+                                                <option value="2">Modificado</option>
+                                                <option value="3">Eliminado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                    </div>
+                                </form>
                             </div>
-
-                            <table id="kermesse" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Parroquia</th>
-                                        <th>Kermesse</th>
-                                        <th>Fecha Inicio</th>
-                                        <th>Fecha Final</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($K->listaKerm() as $r) : ?>
-                                        <tr>
-                                            <td><?php echo $r->__GET('id_kermesse'); ?></td>
-                                            <td><?php echo $r->__GET('parroquia'); ?></td>
-                                            <td><?php echo $r->__GET('nombre'); ?></td>
-                                            <td><?php echo $r->__GET('fInicio'); ?></td>
-                                            <td><?php echo $r->__GET('fFinal'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
-                                            <td>
-                                                <a href="#"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="#"><i class="far fa-eye fa-2x"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Parroquia</th>
-                                        <th>Kermesse</th>
-                                        <th>Fecha Inicio</th>
-                                        <th>Fecha Final</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <!-- /.card -->
                         </div>
+                        <!-- /.card -->
                     </div>
+                    <!--/.col (right) -->
                 </div>
-            </div>
-
-
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
-
-
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
-            $(function() {
-                $("#kermesse").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#kermesse_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 </body>
+
+</html>

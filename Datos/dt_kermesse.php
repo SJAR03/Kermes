@@ -8,15 +8,16 @@ class Dt_Kermesse extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_kermesse";
+            $querySQL = "SELECT * FROM dbkermesse.vw_kermesse";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-                $p = new Kermesse();
+                $p = new Vw_Kermesse();
 
                 $p->__SET('id_kermesse', $r->id_kermesse);
                 $p->__SET('idParroquia', $r->idParroquia);
+                $p->__SET('parroquia', $r->parroquia);
                 $p->__SET('nombre', $r->nombre);
                 $p->__SET('fInicio', $r->fInicio);
                 $p->__SET('fFinal', $r->fFinal);

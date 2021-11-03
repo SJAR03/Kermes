@@ -1,10 +1,11 @@
 <?php
 
-class Kermesse
+class Vw_Kermesse
 {
     //Atributos
     private $id_kermesse;
     private $idParroquia;
+    private $parroquia;
     private $nombre;
     private $fInicio;
     private $fFinal;
