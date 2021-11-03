@@ -1,10 +1,10 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/usuario.php';
-include '../../Datos/dt_usuario.php';
+include '../../Entidades/arqueocaja.php';
+include '../../Datos/dt_arqueocaja.php';
 
-$dtu = new dt_usuario();
+$dtu = new dt_arqueocaja();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -18,7 +18,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla Usuarios</title>
+    <title>KERMESSE | Tabla categoria_gastos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -860,31 +860,30 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Usuarios</h3>
+                            <h3 class="card-title">Tabla Arqueo Caja</h3>
                         </div>
 
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID Usuario</th>
-                                        <th>Usuario</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Email</th>
+                                        <th>ID Arqueo Caja</th>
+                                        <th>ID Lista Precio</th>
+                                        <th>Fecha Arqueo</th>
+                                        <th>Gran Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtu->listarUsuaios() as $r):
-                                            echo $dtu->listarUsuaios(); 
+                                        foreach($dtu->listararqueocaja() as $r):
+                                            echo $dtu->listararqueocaja(); 
                                     ?>
                                     <tr>
-                                        <td><?php echo $r->__GET('id_usuario');?></td>
-                                        <td><?php echo $r->__GET('usuario');?></td>
-                                        <td><?php echo $r->__GET('nombres');?></td>
-                                        <td><?php echo $r->__GET('apellidos');?></td>
-                                        <td><?php echo $r->__GET('email');?></td>
+                                        <td><?php echo $r->__GET('id_ArqueoCaja');?></td>
+                                        <td><?php echo $r->__GET('idKermesse');?></td>
+                                        <td><?php echo $r->__GET('fechaArqueo');?></td>
+                                        <td><?php echo $r->__GET('granTotal');?></td>
+                                        
                                     </tr>
                                     <?php
                                     endforeach; 
@@ -892,11 +891,10 @@ if (isset($varMsj)) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>ID Usuario</th>
-                                        <th>Usuario</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Email</th>
+                                        <th>ID Arqueo Caja</th>
+                                        <th>ID Lista Precio</th>
+                                        <th>Fecha Arqueo</th>
+                                        <th>Gran Total</th>
                                     </tr>
                                 </tfoot>
                             </table>
