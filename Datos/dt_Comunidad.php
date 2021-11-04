@@ -9,7 +9,7 @@ class Dt_Comunidad extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad order by nombre";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
