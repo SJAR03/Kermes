@@ -888,8 +888,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('telefono'); ?></td>
                                             <td><?php echo $r->__GET('parroco'); ?></td>
                                             <td>
-                                                <a href="#"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="#"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_edit_parroquia.php?editPa=<?php echo $r->__GET('idParroquia') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_parroquia.php?viewPa=<?php echo $r->__GET('idParroquia') ?>"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

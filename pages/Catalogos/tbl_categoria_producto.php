@@ -888,8 +888,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('descripcion'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="#" title="Editar Categoría" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="#" title="Visualizar Categoría" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_edit_categoria_producto.php?editCP=<?php echo $r->__GET('id_categoria_producto') ?>" title="Editar Categoría" target="blank"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_categoria_producto.php?viewCP=<?php echo $r->__GET('id_categoria_producto') ?>" title="Visualizar Categoría" target="blank"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
