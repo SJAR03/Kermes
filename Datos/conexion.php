@@ -16,15 +16,15 @@ class Conexion
         $serverName = 'localhost';
         $dbName = 'dbkermesse';
         $userName = 'root';
-        $pwd = '123456';
+        $pwd = '12345';
 
 		try
 		{
-            
+
 			$this->pdo = new PDO("mysql:host={$serverName};dbname={$dbName}",$userName,$pwd);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "Se conecto a HR exitosamente!";
-            return $this->pdo; 		        
+            return $this->pdo;
 		}
 		catch(PDOException $e)
 		{
@@ -39,7 +39,7 @@ class Conexion
 		{
             $pdo = null;
             echo "Se desconecto de HR exitosamente!";
-            return $pdo; 		        
+            return $pdo;
         }
         catch(PDOException $e)
 		{
