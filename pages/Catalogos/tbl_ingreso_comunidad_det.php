@@ -30,6 +30,10 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+    <!-- JAlert -->
+    <link rel= "stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
+
+
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -852,7 +856,7 @@ if (isset($varMsj)) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Ingreso Comunidad Det</li>
+                                <li class="breadcrumb-item active">Ingreso Comunidad Detalle</li>
                             </ol>
                         </div>
                     </div>
@@ -867,6 +871,9 @@ if (isset($varMsj)) {
                         </div>
 
                         <div class="card-body">
+                            <div class="form group col-md-12" style="text-align: right;">
+                            <a href="frm_ingreso_comunidad_det.php" title="Resgistrar una nueva comunidad detalle" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                            </div>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -925,23 +932,26 @@ if (isset($varMsj)) {
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+     <!-- Bootstrap 4 -->
+     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+<script src="../../plugins/DT/datatables.min.js"></script>
+<script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+<script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+<script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+<script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+<script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/DT/DataTables-1.11.2/css/dataTables.dataTables.min.css"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <!-- JAlert js -->
+    <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">//optional!!</script>
+
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -953,7 +963,7 @@ if (isset($varMsj)) {
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,

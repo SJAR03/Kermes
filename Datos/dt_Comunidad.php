@@ -32,4 +32,27 @@ class Dt_Comunidad extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function regComunidad(Comunidad $com)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_comunidad(nombre, responsable, desc_contribucion, estado)
+                VALUES (?, ?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                /* $com->__GET('id_comunidad'), */
+                $com->__GET('nombre'),
+                $com->__GET('responsable'),
+                $com->__GET('desc_contribucion'),
+                $com->__GET('estado')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
