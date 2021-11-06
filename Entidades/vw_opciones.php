@@ -1,15 +1,13 @@
 <?php
 
-class usuario
+class Vw_Opciones
 {
-    private $id_usuario;
-    private $usuario;
-    private $password;
-    private $nombre;
-    private $apellido;
-    private $email;
+    //Atributos
+    private $id_opciones;
+    private $opcion_descripcion;
     private $estado;
 
+    //METODOS
     public function __GET($k)
     {
         return $this->$k;

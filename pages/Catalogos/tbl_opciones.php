@@ -1,10 +1,10 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/vw_usuario.php';
-include '../../Datos/dt_usuario.php';
+include '../../Entidades/vw_opciones.php';
+include '../../Datos/dt_opciones.php';
 
-$dtu = new dt_usuario();
+$dto = new dt_opciones();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -18,7 +18,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla Usuarios</title>
+    <title>KERMESSE | Tabla Opciones</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -844,12 +844,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Usuarios</h1>
+                            <h1>Opciones</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Usuarios</li>
+                                <li class="breadcrumb-item active">Opciones</li>
                             </ol>
                         </div>
                     </div>
@@ -859,41 +859,35 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Usuarios</h3>
+                            <h3 class="card-title">Tabla Opciones</h3>
                         </div>
 
                         <div class="card-body">
                             <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_usuario.php" title="Registrar un nuevo usuario" target="blank">
+                                <a href="frm_opciones.php" title="Registrar una nueva opción" target="blank">
                                     <i class="far fa-plus-square fa-2x"></i>
                                 </a>
                             </div>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID Usuario</th>
-                                        <th>Usuario</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Email</th>
+                                        <th>ID Opciones</th>
+                                        <th>Opcion Descripción</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach ($dtu->listarVw_Usu() as $r) :
+                                    foreach ($dto->listarVw_Opc() as $r) :
                                     ?>
                                         <tr>
-                                            <td><?php echo $r->__GET('id_usuario'); ?></td>
-                                            <td><?php echo $r->__GET('usuario'); ?></td>
-                                            <td><?php echo $r->__GET('nombres'); ?></td>
-                                            <td><?php echo $r->__GET('apellidos'); ?></td>
-                                            <td><?php echo $r->__GET('email'); ?></td>
+                                            <td><?php echo $r->__GET('id_opciones'); ?></td>
+                                            <td><?php echo $r->__GET('opcion_descripcion'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="#" title="Editar usuario" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="#" title="Visualizar usuario" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="#" title="Editar opción" target="blank"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="#" title="Visualizar opción" target="blank"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -902,11 +896,8 @@ if (isset($varMsj)) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>ID Usuario</th>
-                                        <th>Usuario</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Email</th>
+                                        <th>ID Opciones</th>
+                                        <th>Opcion Descripción</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>

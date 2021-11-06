@@ -1,15 +1,13 @@
 <?php
 
-class usuario
+class Vw_Rol
 {
-    private $id_usuario;
-    private $usuario;
-    private $password;
-    private $nombre;
-    private $apellido;
-    private $email;
+    //Atributos
+    private $id_rol;
+    private $rol_descripcion;
     private $estado;
 
+    //METODOS
     public function __GET($k)
     {
         return $this->$k;

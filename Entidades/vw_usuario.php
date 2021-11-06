@@ -1,15 +1,16 @@
 <?php
 
-class usuario
+class Vw_Usuario
 {
+    //Atributos
     private $id_usuario;
     private $usuario;
-    private $password;
-    private $nombre;
-    private $apellido;
+    private $nombres;
+    private $apellidos;
     private $email;
     private $estado;
 
+    //METODOS
     public function __GET($k)
     {
         return $this->$k;

@@ -1,13 +1,9 @@
 <?php
 
-class usuario
+class rol
 {
-    private $id_usuario;
-    private $usuario;
-    private $password;
-    private $nombre;
-    private $apellido;
-    private $email;
+    private $id_rol;
+    private $rol_descripcion;
     private $estado;
 
     public function __GET($k)
