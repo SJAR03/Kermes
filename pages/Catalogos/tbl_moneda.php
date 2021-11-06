@@ -18,13 +18,14 @@ if (isset($varMsj)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kermesse | Monedas</title>
 
+    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome_5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DataTables_1.11.3/media/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/DataTables_1.11.3/Responsive-2.2.9/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../plugins/DataTables_1.11.3/Buttons-2.0.1/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -862,6 +863,13 @@ if (isset($varMsj)) {
                         </div>
 
                         <div class="card-body">
+
+                        <div class="form-group col-md-12" style="text-align: right;">
+                                <a href="frm_moneda.php" title="Registrar una nueva moneda" target="blank">
+                                    <i class="far fa-plus-square fa-2x"></i>
+                                </a>
+                            </div>
+
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -913,24 +921,24 @@ if (isset($varMsj)) {
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="../../plugins/DataTables_1.11.3/media/js/jquery.dataTables.min.js"></script>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- DataTables  & Plugins -->
-    <script src="../../plugins/DataTables_1.11.3/media/css/dataTables.dataTables.min.css"></script>
-    <script src="../../plugins/DataTables_1.11.3/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.print.min.js"></script>
-    <script src="../../plugins/DataTables_1.11.3/Buttons-2.0.1/js/buttons.colVis.min.js"></script>
+    <script src="../../plugins/DT/DataTables-1.11.2/css/dataTables.dataTables.min.css"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
@@ -943,7 +951,7 @@ if (isset($varMsj)) {
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": [ "excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
