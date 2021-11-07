@@ -17,7 +17,6 @@ if ($_POST)
             {
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
-                /* $com->__SET('id_comunidad', $_POST['id_comunidad']); */
                 $com->__SET('nombre', $_POST['nombre']);
                 $com->__SET('responsable', $_POST['responsable']);
                 $com->__SET('desc_contribucion', $_POST['desc_contribucion']);

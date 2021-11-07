@@ -33,4 +33,29 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
             die($e->getMessage());
         }
     }
+
+
+    public function regIngComunidadDet(Ingreso_Comunidad_Det $icd)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad_det(id_ingreso_comunidad,id_bono, denominacion, cantidad, subtotal_bono)
+                VALUES (?, ?, ?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                /* $com->__GET('id_comunidad'), */
+                $icd->__GET('id_ingreso_comunidad'),
+                $icd->__GET('id_bono'),
+                $icd->__GET('denominacion'),
+                $icd->__GET('cantidad'),
+                $icd->__GET('subtotal_bono')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

@@ -42,7 +42,6 @@ class Dt_Comunidad extends Conexion
 
             $this->myCon->prepare($sql)
             ->execute(array(
-                /* $com->__GET('id_comunidad'), */
                 $com->__GET('nombre'),
                 $com->__GET('responsable'),
                 $com->__GET('desc_contribucion'),

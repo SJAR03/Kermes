@@ -875,7 +875,7 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="POST" action="../../negocio/ng_Ingreso_Comunidad_Det.php">
                 <div class="card-body">
                 
                 <div class="form-group">
@@ -888,6 +888,7 @@ if (isset($varMsj)) {
                       </tr>
                       <?php endforeach; ?>
                     </select>
+                    <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                   </div> 
 
                   <div class="form-group">

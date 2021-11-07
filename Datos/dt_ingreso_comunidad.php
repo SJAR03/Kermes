@@ -39,4 +39,35 @@ class Dt_Ingreso_Comunidad extends Conexion
             die($e->getMessage());
         }
     }
+
+
+    public function regIngComunidad(Ingreso_Comunidad $ic)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, total_bonos, usuario_creacion, fecha_creacion, usuario_modificacion, fecha_modificacion, usuario_eliminacion, fecha_eliminacion)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                /* $com->__GET('id_comunidad'), */
+                $ic->__GET('id_kermesse'),
+                $ic->__GET('id_comunidad'),
+                $ic->__GET('id_producto'),
+                $ic->__GET('cant_productos'),
+                $ic->__GET('total_bonos'),
+                $ic->__GET('usuario_creacion'),
+                $ic->__GET('fecha_creacion'),
+                $ic->__GET('usuario_modificacion'),
+                $ic->__GET('fecha_modificacion'),
+                $ic->__GET('usuario_eliminacion'),
+                $ic->__GET('fecha_eliminacion')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

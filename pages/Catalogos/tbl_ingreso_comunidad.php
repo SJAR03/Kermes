@@ -978,7 +978,23 @@ if (isset($varMsj)) {
     <!-- Page specific script -->
    
    <script>
-        $(function() {
+    $(document).ready(function()
+        {
+            /////// VARIABLE DE CONTROL MSJ ////////
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+
+            if(mensaje == "1")
+            {
+                successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+             }
+            if(mensaje == "2")
+            {
+                successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+            }
+            ////////////////////////////////////////
+
+        //////////////DATATABLE/////////////////
             $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
@@ -986,7 +1002,7 @@ if (isset($varMsj)) {
                 "buttons": ["excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-            $('#example2').DataTable({
+           /*  $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
@@ -994,8 +1010,10 @@ if (isset($varMsj)) {
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
-            });
-        });
+            }); */
+        ////////////////////////////////////////////
+
+    });  ///FIN DEL $(DOCUMENT).READY ()
     </script>
 
 </body>

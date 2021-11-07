@@ -31,4 +31,25 @@ class Dt_Control_Bonos extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function regControlBonos(Control_Bonos $bon)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_control_bonos(nombre, valor, estado)
+                VALUES (?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                $bon->__GET('nombre'),
+                $bon->__GET('valor'),
+                $bon->__GET('estado')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
