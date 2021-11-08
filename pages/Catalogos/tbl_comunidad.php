@@ -910,6 +910,7 @@ if (isset($varMsj)) {
                                         <th>Responsable</th>
                                         <th>Descripcion de Contribucion</th>
                                         <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

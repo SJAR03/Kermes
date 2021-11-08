@@ -27,7 +27,7 @@ if (isset($varIdIC)) {
 }
 
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
-$IC = $dtIC->getIngComunidad($varIdIC);
+$IC = $dtICom->getIngComunidad($varIdIC);
 
 $varMsj = 0;
 
@@ -1016,7 +1016,7 @@ if (isset($varMsj)) {
   ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
   function setValores()
   {
-    $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad')?>");
+    /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad')?>"); */
     $("#id_kermesse").val("<?php echo $IC->__GET('id_kermesse')?>");
     $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad')?>");
     $("#id_producto").val("<?php echo $IC->__GET('id_producto')?>");

@@ -931,6 +931,7 @@ if (isset($varMsj)) {
                                         <th>Fecha Modificacion</th>
                                         <th>Usuario Eliminacion</th>
                                         <th>Fecha Eliminacion</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

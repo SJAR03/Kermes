@@ -69,7 +69,7 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
 
             $r = $stm->fetch(PDO::FETCH_OBJ);
             
-                $icd = new Ingreso_Comunidad();
+                $icd = new Ingreso_Comunidad_Det();
 
                 //_SET(CAMPOBD, atributoEntidad)
                 $icd->__SET('id_ingreso_comunidad_det', $r->id_ingreso_comunidad_det);
