@@ -1,15 +1,15 @@
 <?php
-    error_reporting(0);
+error_reporting(0);
 
-    include '../../Entidades/arqueoCajaDetalles.php';
-    include '../../Datos/dt_arqueoDetalle.php';
+include '../../Entidades/arqueoCajaDetalles.php';
+include '../../Datos/dt_arqueoDetalle.php';
 
-    $arq = new Dt_ArqueoDetalle();
+$arq = new Dt_ArqueoDetalle();
 
-    $varMsj = 0;
-    if (isset($varMsj)) {
-        $varMsj = $_GET['msj'];
-    }
+$varMsj = 0;
+if (isset($varMsj)) {
+    $varMsj = $_GET['msj'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -876,23 +876,22 @@
                                         <th>Moneda</th>
                                         <th>Denominación</th>
                                         <th>Cantidad</th>
-                                        <th>Subtotal</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($arq->listarArqueoDetalle() as $r):?>
-                                    <tr>
-                                        <td><?php echo $r->__GET('idArqueoCajaDet');?></td>
-                                        <td><?php echo $r->__GET('id_ArqueoCaja');?></td>
-                                        <td><?php echo $r->__GET('moneda');?></td>
-                                        <td><?php echo $r->__GET('valorDenominacion');?></td>
-                                        <td><?php echo $r->__GET('cantidad'); ?></td>
-                                        <td>
+                                    <?php foreach ($arq->listarArqueoDetalle() as $r) : ?>
+                                        <tr>
+                                            <td><?php echo $r->__GET('idArqueoCajaDet'); ?></td>
+                                            <td><?php echo $r->__GET('id_ArqueoCaja'); ?></td>
+                                            <td><?php echo $r->__GET('moneda'); ?></td>
+                                            <td><?php echo $r->__GET('valorDenominacion'); ?></td>
+                                            <td><?php echo $r->__GET('cantidad'); ?></td>
+                                            <td>
                                                 <a href="frm_edit_arqueoDetalle.php?editArqueoDetalle=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
                                                 <a href="frm_edit_arqueoDetalle.php?vieArqueoDetall=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                                 <tfoot>
@@ -902,7 +901,6 @@
                                         <th>Moneda</th>
                                         <th>Denominación</th>
                                         <th>Cantidad</th>
-                                        <th>Subtotal</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -958,7 +956,7 @@
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": [ "excel", "pdf"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
                     "paging": true,
