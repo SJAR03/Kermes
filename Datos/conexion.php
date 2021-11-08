@@ -17,7 +17,7 @@ class Conexion
         $dbName = 'dbkermesse';
         $userName = 'root';
 
-        $pwd = '12345';
+        $pwd = 'Luisito1234';
 
         try {
 
