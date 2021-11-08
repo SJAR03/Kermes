@@ -567,12 +567,11 @@ if (isset($varMsj)) {
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../Catalogos/tbl_opciones.php" class="nav-link" target="blank">
+                                    <a href="../Catalogos/tbl_rol_usuario.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Opciones (Admin Seg)</p>
+                                        <p>Rol Usuarios (Admin Seg)</p>
                                     </a>
                                 </li>
-
 
                                 <li class="nav-item">
                                     <a href="../Catalogos/tbl_rol.php" class="nav-link" target="blank">
@@ -580,6 +579,21 @@ if (isset($varMsj)) {
                                         <p>Rol (Admin Seg)</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_rol_opciones.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Rol Opciones (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_opciones.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Opciones (Admin Seg)</p>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                         <li class="nav-header">EXAMPLES</li>
