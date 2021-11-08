@@ -882,22 +882,22 @@ if (isset($varMsj)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtu->listarlistaPrecios() as $r):
-                                            echo $dtu->listarlistaPrecios(); 
+                                    foreach ($dtu->listarVwlistaPrecios() as $r) :
+                                        echo $dtu->listarlistaPrecios();
                                     ?>
-                                    <tr>
-                                        <td><?php echo $r->__GET('id_lista_precio');?></td>
-                                        <td><?php echo $r->__GET('kermess');?></td>
-                                        <td><?php echo $r->__GET('nombre');?></td>
-                                        <td><?php echo $r->__GET('descripcion');?></td>
-                                        <td><?php echo $r->__GET('estado');?></td>
-                                        <td>
-                                            <a href="frm_lista_precio.php"><i class="far fa-edit fa-2x" title="Editar la lista precio"></i></a>
-                                            <a href="frm_lista_precio.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio"></i></a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?php echo $r->__GET('id_lista_precio'); ?></td>
+                                            <td><?php echo $r->__GET('kermess'); ?></td>
+                                            <td><?php echo $r->__GET('nombre'); ?></td>
+                                            <td><?php echo $r->__GET('descripcion'); ?></td>
+                                            <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td>
+                                                <a href="frm_lista_precio.php"><i class="far fa-edit fa-2x" title="Editar la lista precio"></i></a>
+                                                <a href="frm_lista_precio.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio"></i></a>
+                                            </td>
+                                        </tr>
                                     <?php
-                                    endforeach; 
+                                    endforeach;
                                     ?>
                                 </tbody>
                                 <tfoot>
@@ -962,7 +962,7 @@ if (isset($varMsj)) {
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": [ "excel", "pdf"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
                     "paging": true,

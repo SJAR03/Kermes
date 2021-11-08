@@ -881,21 +881,21 @@ if (isset($varMsj)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtu->listarListaPreciosDet() as $r):
-                                            echo $dtu->listarListaPreciosDet(); 
+                                    foreach ($dtu->listarVwListaPreciosDet() as $r) :
+                                        echo $dtu->listarListaPreciosDet();
                                     ?>
-                                    <tr>
-                                        <td><?php echo $r->__GET('id_listaprecio_det');?></td>
-                                        <td><?php echo $r->__GET('lista_precio');?></td>
-                                        <td><?php echo $r->__GET('Producto');?></td>
-                                        <td><?php echo $r->__GET('precio_venta');?></td>
-                                        <td>
-                                            <a href="frm_listaprecio_Det.php"><i class="far fa-edit fa-2x" title="Editar la lista precio detallada"></i></a>
-                                            <a href="frm_listaprecio_Det.php"><i class="far fa-eye fa-2x" title="Visualizar la lista pregio detallada"></i></a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?php echo $r->__GET('id_listaprecio_det'); ?></td>
+                                            <td><?php echo $r->__GET('lista_precio'); ?></td>
+                                            <td><?php echo $r->__GET('Producto'); ?></td>
+                                            <td><?php echo $r->__GET('precio_venta'); ?></td>
+                                            <td>
+                                                <a href="frm_listaprecio_Det.php"><i class="far fa-edit fa-2x" title="Editar la lista precio detallada"></i></a>
+                                                <a href="frm_listaprecio_Det.php"><i class="far fa-eye fa-2x" title="Visualizar la lista pregio detallada"></i></a>
+                                            </td>
+                                        </tr>
                                     <?php
-                                    endforeach; 
+                                    endforeach;
                                     ?>
                                 </tbody>
                                 <tfoot>
@@ -959,7 +959,7 @@ if (isset($varMsj)) {
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": [ "excel", "pdf"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
                     "paging": true,

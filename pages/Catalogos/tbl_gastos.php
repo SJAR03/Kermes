@@ -884,8 +884,8 @@ if (isset($varMsj)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach ($dtu->listarGastos() as $r) :
-                                        echo $dtu->listarGastos();
+                                    foreach ($dtu->listarVwGastos() as $r) :
+                                        echo $dtu->listarVwGastos();
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_registro_gastos'); ?></td>

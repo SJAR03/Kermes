@@ -881,21 +881,21 @@ if (isset($varMsj)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtu->listarCategoriaGastos() as $r):
-                                            echo $dtu->listarCategoriaGastos(); 
+                                    foreach ($dtu->listarVwCategoriaGastos() as $r) :
+                                        echo $dtu->listarVwCategoriaGastos();
                                     ?>
-                                    <tr>
-                                        <td><?php echo $r->__GET('id_categoria_gastos');?></td>
-                                        <td><?php echo $r->__GET('nombre_categoria');?></td>
-                                        <td><?php echo $r->__GET('descripcion');?></td>
-                                        <td><?php echo $r->__GET('estado');?></td>
-                                        <td>
-                                            <a href="frm_categoria_gastos.php"><i class="far fa-edit fa-2x" title="Editar la categoría gasto"></i></a>
-                                            <a href="frm_categoria_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar la categoría gasto"></i></a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?php echo $r->__GET('id_categoria_gastos'); ?></td>
+                                            <td><?php echo $r->__GET('nombre_categoria'); ?></td>
+                                            <td><?php echo $r->__GET('descripcion'); ?></td>
+                                            <td><?php echo $r->__GET('Name_exp_4'); ?></td>
+                                            <td>
+                                                <a href="frm_categoria_gastos.php"><i class="far fa-edit fa-2x" title="Editar la categoría gasto"></i></a>
+                                                <a href="frm_categoria_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar la categoría gasto"></i></a>
+                                            </td>
+                                        </tr>
                                     <?php
-                                    endforeach; 
+                                    endforeach;
                                     ?>
                                 </tbody>
                                 <tfoot>
@@ -959,7 +959,7 @@ if (isset($varMsj)) {
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": [ "excel", "pdf"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
                     "paging": true,
