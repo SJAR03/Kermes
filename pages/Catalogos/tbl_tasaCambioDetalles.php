@@ -892,8 +892,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="frm_edit_tasaCambioDetalle.php?editTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_tasaCambioDetalle.php?viewTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

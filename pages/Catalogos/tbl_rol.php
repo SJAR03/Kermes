@@ -886,8 +886,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('rol_descripcion'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="#" title="Editar rol" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="#" title="Visualizar rol" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_rol.php?editRol=<?php echo $r->__GET('id_rol') ?>"><i class="far fa-edit fa-2x" title="Editar rol"></i></a>
+                                                <a href="frm_rol.php?vieRol=<?php echo $r->__GET('id_rol') ?>"><i class="far fa-eye fa-2x" title="Visualizar rol"></i></a>
                                             </td>
                                         </tr>
                                     <?php
