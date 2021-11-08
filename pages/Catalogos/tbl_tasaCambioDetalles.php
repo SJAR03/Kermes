@@ -848,7 +848,7 @@ if (isset($varMsj)) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Monedas</li>
+                                <li class="breadcrumb-item active">Tasas de cambio - detalle</li>
                             </ol>
                         </div>
                     </div>
@@ -879,6 +879,7 @@ if (isset($varMsj)) {
                                         <th>Fecha</th>
                                         <th>Tipo de cambio</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -890,6 +891,10 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('fecha'); ?></td>
                                             <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td>
+                                                <a href="frm_edit_tasaCambioDetalle.php?editTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_tasaCambioDetalle.php?viewTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -901,6 +906,7 @@ if (isset($varMsj)) {
                                         <th>Fecha</th>
                                         <th>Tipo de cambio</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -877,6 +877,7 @@ if (isset($varMsj)) {
                                         <th>Moneda</th>
                                         <th>Símbolo</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -886,6 +887,10 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('nombre'); ?></td>
                                             <td><?php echo $r->__GET('simbolo'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td>
+                                                <a href="frm_edit_moneda.php?editMoneda=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_moneda.php?viewMoneda=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -895,6 +900,7 @@ if (isset($varMsj)) {
                                         <th>Moneda</th>
                                         <th>Símbolo</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

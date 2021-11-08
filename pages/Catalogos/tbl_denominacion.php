@@ -878,6 +878,7 @@ if (isset($varMsj)) {
                                         <th>Valor</th>
                                         <th>Valor en letras</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -888,6 +889,10 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('valor'); ?></td>
                                             <td><?php echo $r->__GET('valor_letras'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td>
+                                                <a href="frm_edit_denominacion.php?editDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_denominacion.php?viewDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -898,6 +903,7 @@ if (isset($varMsj)) {
                                         <th>Valor</th>
                                         <th>Valor en letras</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>
