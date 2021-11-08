@@ -864,11 +864,11 @@ if (isset($varMsj)) {
 
                         <div class="card-body">
 
-                        <div class="form-group col-md-12" style="text-align: right;">
+                            <div class="form-group col-md-12" style="text-align: right;">
                                 <a href="frm_tasaCambioDetalles.php" title="Registrar detalles de la tasa de cambio" target="blank">
                                     <i class="far fa-plus-square fa-2x"></i>
                                 </a>
-                        </div>
+                            </div>
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -885,8 +885,8 @@ if (isset($varMsj)) {
                                     <?php foreach ($dtTasaDet->listarTasaDetalles() as $r) : ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id'); ?></td>
-                                            <td><?php echo $r->__GET('origen'); ?></td>
-                                            <td><?php echo $r->__GET('cambio'); ?></td>
+                                            <td><?php echo $r->__GET('moneda_origen'); ?></td>
+                                            <td><?php echo $r->__GET('moneda_cambio'); ?></td>
                                             <td><?php echo $r->__GET('fecha'); ?></td>
                                             <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
@@ -957,7 +957,7 @@ if (isset($varMsj)) {
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": [ "excel", "pdf"]
+                "buttons": ["excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,

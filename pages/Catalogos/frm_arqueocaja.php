@@ -2,19 +2,15 @@
 
 error_reporting(0);
 
-include '../../Entidades/gastos.php';
-include '../../datos/dt_gastos.php';
-
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
-include '../../entidades/dt_categoria_gastos.php';
-include '../../datos/dt_categoria_gastos.php';
+include '../../Entidades/arqueocaja.php';
+include '../../Datos/dt_arqueocaja.php';
 
 
-$dtICom = new dt_gastos();
 $dtK = new Dt_Kermesse();
-$dtCom = new dt_categoria_gastos();
+$dtCom = new dt_arqueocaja();
 
 
 
@@ -875,7 +871,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar gasto</h3>
+                  <h3 class="card-title">Registrar Arqueo</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -896,30 +892,13 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Seleccione la Categoría del gasto</label>
-                      <select class="form-control" id="$id_categoria_gastos" name="id_categoria_gastos" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtCom->listarCategoriaGastos() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_categoria_gastos'); ?>"><?php echo $r->__GET('nombre_categoria'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
+                      <label>Fecha del Arqueo</label>
+                      <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
                     </div>
 
                     <div class="form-group">
-                      <label>Fecha del Gasto</label>
-                      <input type="date" class="form-control" id="fechaGastos" name="fechaGastos" placeholder="Ingrese fecha del gasto" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Concepto</label>
-                      <input type="int" class="form-control" id="concepto" name="concepto" placeholder="Ingrese el concepto" title="Ingrese concepto" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Monto</label>
-                      <input type="int" class="form-control" id="monto" name="monto" placeholder="Ingrese el monto " title="Ingrese el monto" required>
+                      <label>Total</label>
+                      <input type="int" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" required>
                     </div>
 
                     <div class="form-group">
