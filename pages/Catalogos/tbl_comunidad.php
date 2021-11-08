@@ -31,7 +31,7 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- JAlert -->
-    <link rel= "stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
 
 
     <!-- Theme style -->
@@ -443,21 +443,150 @@ if (isset($varMsj)) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/simple.html" class="nav-link">
+                                    <a href="../Catalogos/tbl_arqueocaja.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Tables</p>
+                                        <p>Arqueo Caja</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Arqueo Caja Detalle</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_categoria_gastos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Categoría Gastos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="../Catalogos/tbl_categoria_producto.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>DataTables</p>
+                                        <p>Categoría Producto</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="../tables/jsgrid.html" class="nav-link">
+                                    <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>jsGrid</p>
+                                        <p>Comunidad</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_control_bonos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Control de Bonos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Denominación</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_gastos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Gastos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_kermesse.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kermesse</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_lista_precio.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_moneda.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Moneda</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_parroquia.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Parroquia</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_productos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Productos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_usuarios.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Usuarios (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_opciones.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Opciones (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_rol.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Rol (Admin Seg)</p>
                                     </a>
                                 </li>
                             </ul>
@@ -938,50 +1067,49 @@ if (isset($varMsj)) {
 
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
-     <!-- Bootstrap 4 -->
-     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<script src="../../plugins/DT/datatables.min.js"></script>
-<script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-<script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-<script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-<script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-<script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-<script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <script src="../../plugins/DT/datatables.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
 
     <!-- JAlert js -->
     <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">//optional!!</script>
- 
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+        //optional!!
+    </script>
+
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
             /////// VARIABLE DE CONTROL MSJ ////////
             var mensaje = 0;
             mensaje = "<?php echo $varMsj ?>";
 
-            if(mensaje == "1")
-            {
+            if (mensaje == "1") {
                 successAlert('Exito', 'Los datos han sido registrado exitosamente!');
-             }
-            if(mensaje == "2")
-            {
+            }
+            if (mensaje == "2") {
                 successAlert('Error', 'Revise los datos e intente nuevamente!!!');
             }
             ////////////////////////////////////////
-        
-          //////////////DATATABLE/////////////////
+
+            //////////////DATATABLE/////////////////
             $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
@@ -989,18 +1117,18 @@ if (isset($varMsj)) {
                 "buttons": ["excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-           /*  $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            }); */
+            /*  $('#example2').DataTable({
+                 "paging": true,
+                 "lengthChange": false,
+                 "searching": false,
+                 "ordering": true,
+                 "info": true,
+                 "autoWidth": false,
+                 "responsive": true,
+             }); */
             ////////////////////////////////////////////
 
-    });  ///FIN DEL $(DOCUMENT).READY ()
+        }); ///FIN DEL $(DOCUMENT).READY ()
     </script>
 
 </body>

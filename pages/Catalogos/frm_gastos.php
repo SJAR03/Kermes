@@ -8,7 +8,7 @@ include '../../datos/dt_gastos.php';
 include '../../Entidades/kermesse.php';
 include '../../Datos/dt_kermesse.php';
 
-include '../../Entidades/dt_categoria_gastos.php';
+include '../../Entidades/categoria_gastos.php';
 include '../../Datos/dt_categoria_gastos.php';
 
 

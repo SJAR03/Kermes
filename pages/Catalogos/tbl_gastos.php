@@ -883,23 +883,23 @@ if (isset($varMsj)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtu->listarGastos() as $r):
-                                            echo $dtu->listarGastos(); 
+                                    foreach ($dtu->listarGastos() as $r) :
+                                        echo $dtu->listarGastos();
                                     ?>
                                         <tr>
-                                            <td><?php echo $r->__GET('$id_registros_gastos');?></td>
-                                            <td><?php echo $r->__GET('idKermesse');?></td>
-                                            <td><?php echo $r->__GET('idCatGastos');?></td>
-                                            <td><?php echo $r->__GET('fechaGastos');?></td>
-                                            <td><?php echo $r->__GET('concepto');?></td>
-                                            <td><?php echo $r->__GET('monto');?></td>
+                                            <td><?php echo $r->__GET('id_registro_gastos'); ?></td>
+                                            <td><?php echo $r->__GET('idKermesse'); ?></td>
+                                            <td><?php echo $r->__GET('idCatGastos'); ?></td>
+                                            <td><?php echo $r->__GET('fechaGasto'); ?></td>
+                                            <td><?php echo $r->__GET('concepto'); ?></td>
+                                            <td><?php echo $r->__GET('monto'); ?></td>
                                             <td>
                                                 <a href="frm_gastos.php"><i class="far fa-edit fa-2x" title="Editar gasto"></i></a>
                                                 <a href="frm_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar gasto"></i></a>
                                             </td>
                                         </tr>
                                     <?php
-                                    endforeach; 
+                                    endforeach;
                                     ?>
                                 </tbody>
                                 <tfoot>
