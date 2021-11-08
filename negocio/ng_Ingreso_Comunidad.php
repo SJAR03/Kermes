@@ -36,6 +36,10 @@ if ($_POST)
             catch (Exception $e) {
                 header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=2");   
             die($e->getMessage());
-        }
+            }
+        case '2':
+            break;
+        
+
     }
 }

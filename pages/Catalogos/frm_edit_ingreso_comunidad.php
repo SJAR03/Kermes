@@ -29,11 +29,11 @@ if (isset($varIdIC)) {
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
 $IC = $dtICom->getIngComunidad($varIdIC);
 
-$varMsj = 0;
+/* $varMsj = 0;
 
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
-}
+} */
 ?>
 
 
@@ -863,7 +863,7 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva Ingreso en la Comunidad</h1>
+            <h1>Editar Ingreso en la Comunidad</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -884,7 +884,7 @@ if (isset($varMsj)) {
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Editar Ingreso en la Comunidad</h3>
+                <h3 class="card-title">Editar Ingreso Comunidad</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -1016,7 +1016,7 @@ if (isset($varMsj)) {
   ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
   function setValores()
   {
-    /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad')?>"); */
+    $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad')?>");
     $("#id_kermesse").val("<?php echo $IC->__GET('id_kermesse')?>");
     $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad')?>");
     $("#id_producto").val("<?php echo $IC->__GET('id_producto')?>");

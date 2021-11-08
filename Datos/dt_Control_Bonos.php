@@ -66,9 +66,9 @@ class Dt_Control_Bonos extends Conexion
                 $cb = new Control_Bonos();
 
                 //_SET(CAMPOBD, atributoEntidad)
-                $cb->__SET('id_bono', $r->id_comunidad);
+                $cb->__SET('id_bono', $r->id_bono);
                 $cb->__SET('nombre', $r->nombre);
-                $cb->__SET('valor', $r->responsable);
+                $cb->__SET('valor', $r->valor);
                 $cb->__SET('estado', $r->estado);
             
 
