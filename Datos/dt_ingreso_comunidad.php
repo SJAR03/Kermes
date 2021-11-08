@@ -70,4 +70,39 @@ class Dt_Ingreso_Comunidad extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function getIngComunidad($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_ingreso_comunidad where id_ingreso_comunidad= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            
+                $ic = new Ingreso_Comunidad();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $ic->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
+                $ic->__SET('id_kermesse', $r->id_kermesse);
+                $ic->__SET('id_comunidad', $r->id_comunidad);
+                $ic->__SET('id_producto', $r->id_producto);
+                $ic->__SET('cant_productos', $r->cant_productos);
+                $ic->__SET('total_bonos', $r->total_bonos);
+                $ic->__SET('usuario_creacion', $r->usuario_creacion);
+                $ic->__SET('fecha_creacion', $r->fecha_creacion);
+                $ic->__SET('usuario_modificacion', $r->usuario_modificacion);
+                $ic->__SET('fecha_modificacion', $r->fecha_modificacion);
+                $ic->__SET('usuario_eliminacion', $r->usuario_eliminacion);
+                $ic->__SET('fecha_eliminacion', $r->fecha_eliminacion);
+                
+            
+
+            $this->myCon = parent::desconectar();
+            return $ic;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

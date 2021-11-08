@@ -52,4 +52,30 @@ class Dt_Control_Bonos extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function getControlBonos($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_control_bonos where id_bono= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            
+                $cb = new Control_Bonos();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $cb->__SET('id_bono', $r->id_comunidad);
+                $cb->__SET('nombre', $r->nombre);
+                $cb->__SET('valor', $r->responsable);
+                $cb->__SET('estado', $r->estado);
+            
+
+            $this->myCon = parent::desconectar();
+            return $cb;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

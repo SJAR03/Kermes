@@ -58,4 +58,33 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function getIngComunidadDet($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_ingreso_comunidad_det where id_ingreso_comunidad_det= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            
+                $icd = new Ingreso_Comunidad();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $icd->__SET('id_ingreso_comunidad_det', $r->id_ingreso_comunidad_det);
+                $icd->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
+                $icd->__SET('id_bono', $r->id_bono);
+                $icd->__SET('denominacion', $r->denominacion);
+                $icd->__SET('cantidad', $r->cantidad);
+                $icd->__SET('subtotal_bono', $r->subtotal_bono);
+                
+                
+
+            $this->myCon = parent::desconectar();
+            return $icd;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
