@@ -5,11 +5,11 @@ error_reporting(0);
 include '../../Entidades/gastos.php';
 include '../../datos/dt_gastos.php';
 
-include '../../entidades/kermesse.php';
-include '../../datos/dt_kermesse.php';
+include '../../Entidades/kermesse.php';
+include '../../Datos/dt_kermesse.php';
 
-include '../../entidades/dt_categoria_gastos.php';
-include '../../datos/dt_categoria_gastos.php';
+include '../../Entidades/dt_categoria_gastos.php';
+include '../../Datos/dt_categoria_gastos.php';
 
 
 $dtICom = new dt_gastos();
@@ -906,7 +906,6 @@ if (isset($varMsj)) {
                         <?php endforeach; ?>
                       </select>
                     </div>
-
                     <div class="form-group">
                       <label>Fecha del Gasto</label>
                       <input type="date" class="form-control" id="fechaGastos" name="fechaGastos" placeholder="Ingrese fecha del gasto" title="Ingrese fecha de modificacion" required>
