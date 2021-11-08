@@ -908,6 +908,7 @@ if (isset($varMsj)) {
                                         <th>Nombre</th>
                                         <th>Valor</th>
                                         <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -898,8 +898,8 @@ if (isset($varMsj)) {
                                                
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
-                                                <a href="frm_edit_ingreso_comunidad.php?editIC_det=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad Detalle"></i></a>
-                                                <a href="frm_edit_ingreso_comunidad.php?viewIC_det=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad Detalle"></i></a>
+                                                <a href="frm_edit_ingreso_comunidad_det.php?editICD=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad Detalle"></i></a>
+                                                <a href="frm_edit_ingreso_comunidad_det.php?viewICD=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad Detalle"></i></a>
                                             </td>
 
 
@@ -914,6 +914,7 @@ if (isset($varMsj)) {
                                         <th>Denominacion</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal Bonos</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -25,7 +25,7 @@ if (isset($varIdICD)) {
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
 $ICD = $dtICD->getIngComunidadDet($varIdICD);
 
-$varMsj = 0;
+/* $varMsj = 0;
 
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
@@ -36,7 +36,7 @@ $varMsj = 0;
 
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
-}
+} */
 
 ?>
 
@@ -867,7 +867,7 @@ if (isset($varMsj)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva Ingreso en la Comunidad Detalle</h1>
+            <h1>Editar en la Comunidad Detalle</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -896,7 +896,7 @@ if (isset($varMsj)) {
                 <div class="card-body">
                 
                 <div class="form-group">
-                    <label>Seleccione el Ingreso Comunidad</label>
+                    <label>Seleccione el Ingreso Comunidad detalle</label>
                     <select class="form-control" id= "id_ingreso_comunidad" name="id_ingreso_comunidad" required>
                       <option value="">Seleccione...</option>
                       <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
@@ -982,7 +982,7 @@ if (isset($varMsj)) {
   ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
   function setValores()
   {
-    $("#id_ingreso_comunidad_det").val("<?php echo $ICD->__GET('id_ingreso_comunidad_det')?>");
+   /*  $("#id_ingreso_comunidad_det").val("<?php echo $ICD->__GET('id_ingreso_comunidad_det')?>"); */
     $("#id_ingreso_comunidad").val("<?php echo $ICD->__GET('id_ingreso_comunidad')?>");
     $("#id_bono").val("<?php echo $ICD->__GET('id_bono')?>");
     $("#denominacion").val("<?php echo $ICD->__GET('denominacion')?>");

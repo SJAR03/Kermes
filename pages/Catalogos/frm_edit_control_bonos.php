@@ -17,11 +17,11 @@ if (isset($varIdCB)) {
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
 $CB = $dtCbono->getControlBonos($varIdCB);
 
-$varMsj = 0;
+/* $varMsj = 0;
 
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
-}
+} */
 ?>
 
 
