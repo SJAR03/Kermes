@@ -860,7 +860,7 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Categoría Gastos</h3>
+                            <h3 class="card-title">Tabla Gastos</h3>
                         </div>
 
                         <div class="card-body">
@@ -894,8 +894,8 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('concepto');?></td>
                                         <td><?php echo $r->__GET('monto');?></td>
                                         <td>
-                                                <a href="#" title="Editar usuario" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="#" title="Visualizar usuario" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                            <a href="#" title="Editar gasto" target="blank"><i class="far fa-edit fa-2x"></i></a>
+                                            <a href="#" title="Visualizar gasto" target="blank"><i class="far fa-eye fa-2x"></i></a>
                                         </td>
                                         
                                     </tr>

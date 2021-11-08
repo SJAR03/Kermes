@@ -876,6 +876,7 @@ if (isset($varMsj)) {
                                         <th>ID Lista Precio</th>
                                         <th>Fecha Arqueo</th>
                                         <th>Gran Total</th>
+                                        <th>Opciones<th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -888,7 +889,10 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('idKermesse');?></td>
                                         <td><?php echo $r->__GET('fechaArqueo');?></td>
                                         <td><?php echo $r->__GET('granTotal');?></td>
-                                        
+                                        <td>
+                                            <a href="#" title="Editar arqueo" target="blank"><i class="far fa-edit fa-2x"></i></a>
+                                            <a href="#" title="Visualizar arqueo" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                        </td>
                                     </tr>
                                     <?php
                                     endforeach; 
@@ -900,6 +904,7 @@ if (isset($varMsj)) {
                                         <th>ID Lista Precio</th>
                                         <th>Fecha Arqueo</th>
                                         <th>Gran Total</th>
+                                        <th>Opciones<th>
                                     </tr>
                                 </tfoot>
                             </table>

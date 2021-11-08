@@ -876,6 +876,7 @@ if (isset($varMsj)) {
                                         <th>Nombre Categoría</th>
                                         <th>Descripción</th>
                                         <th>Estado</th>
+                                        <th>Opciones<th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -888,6 +889,10 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('nombre_categoria');?></td>
                                         <td><?php echo $r->__GET('descripcion');?></td>
                                         <td><?php echo $r->__GET('estado');?></td>
+                                        <td>
+                                            <a href="#" title="Editar categoría gasto" target="blank"><i class="far fa-edit fa-2x"></i></a>
+                                            <a href="#" title="Visualizar categoría gasto" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                        </td>
                                     </tr>
                                     <?php
                                     endforeach; 
@@ -899,6 +904,7 @@ if (isset($varMsj)) {
                                         <th>Nombre Categoría</th>
                                         <th>Descripción</th>
                                         <th>Estado</th>
+                                        <th>Opciones<th>
                                     </tr>
                                 </tfoot>
                             </table>
