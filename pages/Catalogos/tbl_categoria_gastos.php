@@ -864,6 +864,11 @@ if (isset($varMsj)) {
                         </div>
 
                         <div class="card-body">
+                            <div class="form-group col-md-12" style="text-align: right;">
+                                <a href="frm_usuario.php" title="Registrar una nueva categoría de gastos" target="blank">
+                                    <i class="far fa-plus-square fa-2x"></i>
+                                </a>
+                            </div>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>

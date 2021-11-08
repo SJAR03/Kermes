@@ -18,7 +18,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla categoria_gastos</title>
+    <title>KERMESSE | Tabla listaprecio_det</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -860,10 +860,15 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Lista Precios Det</h3>
+                            <h3 class="card-title">Tabla Lista Precio Det</h3>
                         </div>
 
                         <div class="card-body">
+                            <div class="form-group col-md-12" style="text-align: right;">
+                                <a href="frm_usuario.php" title="Registrar una nueva lista precio Det" target="blank">
+                                    <i class="far fa-plus-square fa-2x"></i>
+                                </a>
+                            </div>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
