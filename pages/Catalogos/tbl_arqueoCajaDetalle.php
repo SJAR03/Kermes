@@ -877,6 +877,7 @@
                                         <th>Denominación</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -887,7 +888,10 @@
                                         <td><?php echo $r->__GET('moneda');?></td>
                                         <td><?php echo $r->__GET('valorDenominacion');?></td>
                                         <td><?php echo $r->__GET('cantidad'); ?></td>
-
+                                        <td>
+                                                <a href="frm_edit_arqueoDetalle.php?editArqueoDetalle=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_arqueoDetalle.php?vieArqueoDetall=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -899,6 +903,7 @@
                                         <th>Denominación</th>
                                         <th>Cantidad</th>
                                         <th>Subtotal</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>
