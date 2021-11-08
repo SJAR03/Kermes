@@ -876,24 +876,24 @@ if (isset($varMsj)) {
                                         <th>ID Lista Precio</th>
                                         <th>Fecha Arqueo</th>
                                         <th>Gran Total</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($dtu->listararqueocaja() as $r):
-                                            echo $dtu->listararqueocaja(); 
+                                    foreach($dtu->listararqueocaja() as $r):
+                                        echo $dtu->listararqueocaja(); 
                                     ?>
-                                    <tr>
-                                        <td><?php echo $r->__GET('id_ArqueoCaja');?></td>
-                                        <td><?php echo $r->__GET('idKermesse');?></td>
-                                        <td><?php echo $r->__GET('fechaArqueo');?></td>
-                                        <td><?php echo $r->__GET('granTotal');?></td>
-                                        <td>
-                                            <a href="#" title="Editar arqueo" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                            <a href="#" title="Visualizar arqueo" target="blank"><i class="far fa-eye fa-2x"></i></a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td><?php echo $r->__GET('id_ArqueoCaja');?></td>
+                                            <td><?php echo $r->__GET('idKermesse');?></td>
+                                            <td><?php echo $r->__GET('fechaArqueo');?></td>
+                                            <td><?php echo $r->__GET('granTotal');?></td>
+                                            <td>
+                                            <a href="frm_arqueocaja.php"><i class="far fa-edit fa-2x" title="Editar el arqueo"></i></a>
+                                            <a href="frm_arqueocaja.php"><i class="far fa-eye fa-2x" title="Visualizar el arqueo"></i></a>
+                                            </td>
+                                        </tr>
                                     <?php
                                     endforeach; 
                                     ?>
@@ -904,7 +904,7 @@ if (isset($varMsj)) {
                                         <th>ID Lista Precio</th>
                                         <th>Fecha Arqueo</th>
                                         <th>Gran Total</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

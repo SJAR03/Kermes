@@ -878,7 +878,7 @@ if (isset($varMsj)) {
                                         <th>Fecha Gastos</th>
                                         <th>Concepto</th>
                                         <th>Monto</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -894,10 +894,9 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('concepto');?></td>
                                         <td><?php echo $r->__GET('monto');?></td>
                                         <td>
-                                            <a href="#" title="Editar gasto" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                            <a href="#" title="Visualizar gasto" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                            <a href="frm_gastos.php"><i class="far fa-edit fa-2x" title="Editar gasto"></i></a>
+                                            <a href="frm_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar gasto"></i></a>
                                         </td>
-                                        
                                     </tr>
                                     <?php
                                     endforeach; 
@@ -911,7 +910,7 @@ if (isset($varMsj)) {
                                         <th>Fecha Gastos</th>
                                         <th>Concepto</th>
                                         <th>Monto</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

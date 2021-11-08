@@ -876,7 +876,7 @@ if (isset($varMsj)) {
                                         <th>ID Lista Precio</th>
                                         <th>ID Producto</th>
                                         <th>Precio Venta</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -890,8 +890,8 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('id_producto');?></td>
                                         <td><?php echo $r->__GET('precio_venta');?></td>
                                         <td>
-                                            <a href="#" title="Editar lista precio detallado" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                            <a href="#" title="Visualizar lista precio detallado" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                            <a href="frm_listaprecio_Det.php"><i class="far fa-edit fa-2x" title="Editar la lista precio detallada"></i></a>
+                                            <a href="frm_listaprecio_Det.php"><i class="far fa-eye fa-2x" title="Visualizar la lista pregio detallada"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -904,7 +904,7 @@ if (isset($varMsj)) {
                                         <th>ID Lista Precio</th>
                                         <th>ID Producto</th>
                                         <th>Precio Venta</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>
