@@ -1,15 +1,15 @@
 <?php
-    error_reporting(0);
+error_reporting(0);
 
-    include '../../Entidades/arqueoCajaDetalles.php';
-    include '../../Datos/dt_arqueoDetalle.php';
+include '../../Entidades/arqueoCajaDetalles.php';
+include '../../Datos/dt_arqueoDetalle.php';
 
-    $arq = new Dt_ArqueoDetalle();
+$arq = new Dt_ArqueoDetalle();
 
-    $varMsj = 0;
-    if (isset($varMsj)) {
-        $varMsj = $_GET['msj'];
-    }
+$varMsj = 0;
+if (isset($varMsj)) {
+    $varMsj = $_GET['msj'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -435,21 +435,150 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/simple.html" class="nav-link">
+                                    <a href="../Catalogos/tbl_arqueocaja.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Tables</p>
+                                        <p>Arqueo Caja</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Arqueo Caja Detalle</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_categoria_gastos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Categoría Gastos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="../Catalogos/tbl_categoria_producto.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>DataTables</p>
+                                        <p>Categoría Producto</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="../tables/jsgrid.html" class="nav-link">
+                                    <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>jsGrid</p>
+                                        <p>Comunidad</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_control_bonos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Control de Bonos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Denominación</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_gastos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Gastos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_kermesse.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kermesse</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_lista_precio.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_moneda.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Moneda</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_parroquia.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Parroquia</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_productos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Productos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_usuarios.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Usuarios (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_opciones.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Opciones (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_rol.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Rol (Admin Seg)</p>
                                     </a>
                                 </li>
                             </ul>
@@ -876,23 +1005,22 @@
                                         <th>Moneda</th>
                                         <th>Denominación</th>
                                         <th>Cantidad</th>
-                                        <th>Subtotal</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($arq->listarArqueoDetalle() as $r):?>
-                                    <tr>
-                                        <td><?php echo $r->__GET('idArqueoCajaDet');?></td>
-                                        <td><?php echo $r->__GET('id_ArqueoCaja');?></td>
-                                        <td><?php echo $r->__GET('moneda');?></td>
-                                        <td><?php echo $r->__GET('valorDenominacion');?></td>
-                                        <td><?php echo $r->__GET('cantidad'); ?></td>
-                                        <td>
+                                    <?php foreach ($arq->listarArqueoDetalle() as $r) : ?>
+                                        <tr>
+                                            <td><?php echo $r->__GET('idArqueoCajaDet'); ?></td>
+                                            <td><?php echo $r->__GET('id_ArqueoCaja'); ?></td>
+                                            <td><?php echo $r->__GET('moneda'); ?></td>
+                                            <td><?php echo $r->__GET('valorDenominacion'); ?></td>
+                                            <td><?php echo $r->__GET('cantidad'); ?></td>
+                                            <td>
                                                 <a href="frm_edit_arqueoDetalle.php?editArqueoDetalle=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
                                                 <a href="frm_edit_arqueoDetalle.php?vieArqueoDetall=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                                 <tfoot>
@@ -902,7 +1030,6 @@
                                         <th>Moneda</th>
                                         <th>Denominación</th>
                                         <th>Cantidad</th>
-                                        <th>Subtotal</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -958,7 +1085,7 @@
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
-                    "buttons": [ "excel", "pdf"]
+                    "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
                 $('#example2').DataTable({
                     "paging": true,

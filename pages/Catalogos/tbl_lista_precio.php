@@ -876,7 +876,7 @@ if (isset($varMsj)) {
                                         <th>ID KERMESSE</th>
                                         <th>Nombre</th>
                                         <th>Descripcíon</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -890,8 +890,8 @@ if (isset($varMsj)) {
                                         <td><?php echo $r->__GET('nombre');?></td>
                                         <td><?php echo $r->__GET('descripcion');?></td>
                                         <td>
-                                            <a href="#" title="Editar lista precio" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                            <a href="#" title="Visualizar lista precio" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                            <a href="frm_lista_precio.php"><i class="far fa-edit fa-2x" title="Editar la lista precio"></i></a>
+                                            <a href="frm_lista_precio.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -904,7 +904,7 @@ if (isset($varMsj)) {
                                         <th>ID KERMESSE</th>
                                         <th>Nombre</th>
                                         <th>Descripcíon</th>
-                                        <th>Opciones<th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </tfoot>
                             </table>

@@ -435,21 +435,150 @@ if (isset($varMsj)) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/simple.html" class="nav-link">
+                                    <a href="../Catalogos/tbl_arqueocaja.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Tables</p>
+                                        <p>Arqueo Caja</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Arqueo Caja Detalle</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_categoria_gastos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Categoría Gastos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="../Catalogos/tbl_categoria_producto.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>DataTables</p>
+                                        <p>Categoría Producto</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
-                                    <a href="../tables/jsgrid.html" class="nav-link">
+                                    <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>jsGrid</p>
+                                        <p>Comunidad</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_control_bonos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Control de Bonos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Denominación</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_gastos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Gastos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_kermesse.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Kermesse</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_lista_precio.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_moneda.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Moneda</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_parroquia.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Parroquia</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_productos.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Productos</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_usuarios.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Usuarios (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_opciones.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Opciones (Admin Seg)</p>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_rol.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Rol (Admin Seg)</p>
                                     </a>
                                 </li>
                             </ul>
@@ -864,11 +993,11 @@ if (isset($varMsj)) {
 
                         <div class="card-body">
 
-                        <div class="form-group col-md-12" style="text-align: right;">
+                            <div class="form-group col-md-12" style="text-align: right;">
                                 <a href="frm_tasaCambio.php" title="Registrar tasa de cambio" target="blank">
                                     <i class="far fa-plus-square fa-2x"></i>
                                 </a>
-                        </div>
+                            </div>
 
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -963,7 +1092,7 @@ if (isset($varMsj)) {
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": [ "excel", "pdf"]
+                "buttons": ["excel", "pdf"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
