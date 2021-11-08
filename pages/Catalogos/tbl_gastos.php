@@ -887,7 +887,7 @@ if (isset($varMsj)) {
                                             echo $dtu->listarGastos(); 
                                     ?>
                                         <tr>
-                                            <td><?php echo $r->__GET('id_registros_gastos');?></td>
+                                            <td><?php echo $r->__GET('$id_registros_gastos');?></td>
                                             <td><?php echo $r->__GET('idKermesse');?></td>
                                             <td><?php echo $r->__GET('idCatGastos');?></td>
                                             <td><?php echo $r->__GET('fechaGastos');?></td>
