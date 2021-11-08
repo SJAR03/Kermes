@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/gastos.php';
+include '../../Entidades/vw_gastos.php';
 include '../../Datos/dt_gastos.php';
 
 $dtu = new dt_gastos();
@@ -873,11 +873,12 @@ if (isset($varMsj)) {
                                 <thead>
                                     <tr>
                                         <th>ID Registros Gastos</th>
-                                        <th>ID KERMESSE</th>
-                                        <th>ID Categoría Gastos</th>
+                                        <th>KERMESSE</th>
+                                        <th>Categoría Gastos</th>
                                         <th>Fecha Gastos</th>
                                         <th>Concepto</th>
                                         <th>Monto</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -888,11 +889,12 @@ if (isset($varMsj)) {
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_registro_gastos'); ?></td>
-                                            <td><?php echo $r->__GET('idKermesse'); ?></td>
-                                            <td><?php echo $r->__GET('idCatGastos'); ?></td>
+                                            <td><?php echo $r->__GET('kermesse'); ?></td>
+                                            <td><?php echo $r->__GET('categoria_gastos'); ?></td>
                                             <td><?php echo $r->__GET('fechaGasto'); ?></td>
                                             <td><?php echo $r->__GET('concepto'); ?></td>
                                             <td><?php echo $r->__GET('monto'); ?></td>
+                                            <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
                                                 <a href="frm_gastos.php"><i class="far fa-edit fa-2x" title="Editar gasto"></i></a>
                                                 <a href="frm_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar gasto"></i></a>
@@ -905,11 +907,12 @@ if (isset($varMsj)) {
                                 <tfoot>
                                     <tr>
                                         <th>ID Registros Gastos</th>
-                                        <th>ID KERMESSE</th>
-                                        <th>ID Categoría Gastos</th>
+                                        <th>KERMESSE</th>
+                                        <th>Categoría Gastos</th>
                                         <th>Fecha Gastos</th>
                                         <th>Concepto</th>
                                         <th>Monto</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>

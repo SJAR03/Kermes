@@ -15,10 +15,11 @@ class dt_lista_precio extends Conexion {
             $stm->execute(); 
 
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
-                $us = new lista_precio(); 
+                $us = new Vw_Lista_Precio(); 
 
                 $us->__SET('id_lista_precio', $r->id_lista_precio);
                 $us->__SET('id_kermesse', $r->id_kermesse);
+                $us->__SET('kermess', $r->kermess);
                 $us->__SET('nombre', $r->nombre);
                 $us->__SET('descripcion', $r->descripcion);
                 $us->__SET('estado', $r->estado);

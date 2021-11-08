@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/lista_precio.php';
+include '../../Entidades/vw_lista_precio.php';
 include '../../Datos/dt_lista_precio.php';
 
 $dtu = new dt_lista_precio();
@@ -876,6 +876,7 @@ if (isset($varMsj)) {
                                         <th>ID KERMESSE</th>
                                         <th>Nombre</th>
                                         <th>Descripcíon</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -886,9 +887,10 @@ if (isset($varMsj)) {
                                     ?>
                                     <tr>
                                         <td><?php echo $r->__GET('id_lista_precio');?></td>
-                                        <td><?php echo $r->__GET('id_kermesse');?></td>
+                                        <td><?php echo $r->__GET('kermess');?></td>
                                         <td><?php echo $r->__GET('nombre');?></td>
                                         <td><?php echo $r->__GET('descripcion');?></td>
+                                        <td><?php echo $r->__GET('estado');?></td>
                                         <td>
                                             <a href="frm_lista_precio.php"><i class="far fa-edit fa-2x" title="Editar la lista precio"></i></a>
                                             <a href="frm_lista_precio.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio"></i></a>
@@ -904,6 +906,7 @@ if (isset($varMsj)) {
                                         <th>ID KERMESSE</th>
                                         <th>Nombre</th>
                                         <th>Descripcíon</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>

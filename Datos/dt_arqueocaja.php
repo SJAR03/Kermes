@@ -8,16 +8,17 @@ class dt_arqueocaja extends Conexion {
         try {
             $this->myCon = parent::conectar(); 
             $result = array(); 
-            $querySQL = "SELECT * FROM dbkermesse.tbl_arqueocaja";
+            $querySQL = "SELECT * FROM dbkermesse.vw_arqueocaja";
             
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(); 
 
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
-                $us = new arqueocaja(); 
+                $us = new Vw_Arqueo_Caja(); 
 
                 $us->__SET('id_ArqueoCaja', $r->id_ArqueoCaja);
                 $us->__SET('idKermesse', $r->idKermesse);
+                $us->__SET('kermesse', $r->kermesse);
                 $us->__SET('fechaArqueo', $r->fechaArqueo);
                 $us->__SET('granTotal', $r->granTotal);
                 $us->__SET('usuario_creacion', $r->usuario_creacion);

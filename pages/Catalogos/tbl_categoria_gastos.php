@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/categoria_gastos.php';
+include '../../Entidades/vw_categoria_gastos.php';
 include '../../Datos/dt_categoria_gastos.php';
 
 $dtu = new dt_categoria_gastos();

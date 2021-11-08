@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/arqueocaja.php';
+include '../../Entidades/vw_arqueocaja.php';
 include '../../Datos/dt_arqueocaja.php';
 
 $dtu = new dt_arqueocaja();
@@ -873,9 +873,10 @@ if (isset($varMsj)) {
                                 <thead>
                                     <tr>
                                         <th>ID Arqueo Caja</th>
-                                        <th>ID Lista Precio</th>
+                                        <th>Kermesse</th>
                                         <th>Fecha Arqueo</th>
                                         <th>Gran Total</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -886,9 +887,10 @@ if (isset($varMsj)) {
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_ArqueoCaja');?></td>
-                                            <td><?php echo $r->__GET('idKermesse');?></td>
+                                            <td><?php echo $r->__GET('kermesse');?></td>
                                             <td><?php echo $r->__GET('fechaArqueo');?></td>
                                             <td><?php echo $r->__GET('granTotal');?></td>
+                                            <td><?php echo $r->__GET('estado');?></td>
                                             <td>
                                             <a href="frm_arqueocaja.php"><i class="far fa-edit fa-2x" title="Editar el arqueo"></i></a>
                                             <a href="frm_arqueocaja.php"><i class="far fa-eye fa-2x" title="Visualizar el arqueo"></i></a>
@@ -901,9 +903,10 @@ if (isset($varMsj)) {
                                 <tfoot>
                                     <tr>
                                         <th>ID Arqueo Caja</th>
-                                        <th>ID Lista Precio</th>
+                                        <th>Kermesse</th>
                                         <th>Fecha Arqueo</th>
                                         <th>Gran Total</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>

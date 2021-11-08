@@ -15,7 +15,7 @@ class dt_categoria_gastos extends Conexion {
             $stm->execute(); 
 
             foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
-                $us = new categoria_gastos(); 
+                $us = new Vw_Categoria_gastos(); 
 
                 $us->__SET('id_categoria_gastos', $r->id_categoria_gastos);
                 $us->__SET('nombre_categoria', $r->nombre_categoria);

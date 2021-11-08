@@ -17,11 +17,13 @@ class dt_gastos extends Conexion
             $stm->execute();
 
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-                $us = new gastos();
+                $us = new Vw_Gastos();
 
                 $us->__SET('id_registro_gastos', $r->id_registro_gastos);
                 $us->__SET('idKermesse', $r->idKermesse);
+                $us->__SET('kermesse', $r->kermesse);
                 $us->__SET('idCatGastos', $r->idCatGastos);
+                $us->__SET('categoria_gastos', $r->categoria_gastos);
                 $us->__SET('fechaGasto', $r->fechaGasto);
                 $us->__SET('concepto', $r->concepto);
                 $us->__SET('monto', $r->monto);

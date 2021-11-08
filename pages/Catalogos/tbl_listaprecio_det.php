@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 //IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/listaprecio_det.php';
+include '../../Entidades/vw_listaprecio_Det.php';
 include '../../Datos/dt_listaprecio_det.php';
 
 $dtu = new dt_listaprecioDet();
@@ -872,9 +872,9 @@ if (isset($varMsj)) {
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID Lista Precio Det</th>
-                                        <th>ID Lista Precio</th>
-                                        <th>ID Producto</th>
+                                        <th>ID</th>
+                                        <th>Lista Precio</th>
+                                        <th>Producto</th>
                                         <th>Precio Venta</th>
                                         <th>Opciones</th>
                                     </tr>
@@ -886,8 +886,8 @@ if (isset($varMsj)) {
                                     ?>
                                     <tr>
                                         <td><?php echo $r->__GET('id_listaprecio_det');?></td>
-                                        <td><?php echo $r->__GET('id_lista_precio');?></td>
-                                        <td><?php echo $r->__GET('id_producto');?></td>
+                                        <td><?php echo $r->__GET('lista_precio');?></td>
+                                        <td><?php echo $r->__GET('Producto');?></td>
                                         <td><?php echo $r->__GET('precio_venta');?></td>
                                         <td>
                                             <a href="frm_listaprecio_Det.php"><i class="far fa-edit fa-2x" title="Editar la lista precio detallada"></i></a>
@@ -900,9 +900,9 @@ if (isset($varMsj)) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>ID Lista Precio Det</th>
-                                        <th>ID Lista Precio</th>
-                                        <th>ID Producto</th>
+                                        <th>ID</th>
+                                        <th>Lista Precio</th>
+                                        <th>Producto</th>
                                         <th>Precio Venta</th>
                                         <th>Opciones</th>
                                     </tr>
