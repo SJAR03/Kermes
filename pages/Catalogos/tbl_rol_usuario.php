@@ -883,8 +883,8 @@ if (isset($varMsj)) {
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_rol_usuario'); ?></td>
-                                            <td><?php echo $r->__GET('tbl_usuario_id_usuario'); ?></td>
-                                            <td><?php echo $r->__GET('tbl_rol_id_rol'); ?></td>
+                                            <td><?php echo $r->__GET('usuario'); ?></td>
+                                            <td><?php echo $r->__GET('rol'); ?></td>
                                             <td>
                                                 <a href="frm_rol_usuario.php?editRoUsu=<?php echo $r->__GET('id_rol_usuario') ?>"><i class="far fa-edit fa-2x" title="Editar usuario"></i></a>
                                                 <a href="frm_rol_usuario.php?vieRoUsu=<?php echo $r->__GET('id_rol_usuario') ?>"><i class="far fa-eye fa-2x" title="Visualizar usuario"></i></a>

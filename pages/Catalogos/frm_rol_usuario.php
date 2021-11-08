@@ -879,9 +879,9 @@ if (isset($varMsj)) {
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
-                                                    </tr>
+
+                                                    <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
+
                                                 <?php endforeach; ?>
 
                                             </select>
@@ -893,9 +893,9 @@ if (isset($varMsj)) {
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaUsu() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_usuario'); ?>"><?php echo $r->__GET('usuario'); ?></option>
-                                                    </tr>
+
+                                                    <option value="<?php echo $r->__GET('id_usuario'); ?>"><?php echo $r->__GET('usuario'); ?></option>
+
                                                 <?php endforeach; ?>
 
                                             </select>

@@ -4,8 +4,8 @@ class Vw_Rol_usuario
 {
     //Atributos
     private $id_rol_usuario;
-    private $tbl_usuario_id_usuario;
-    private $tbl_rol_id_rol;
+    private $usuario;
+    private $rol;
 
     //METODOS
     public function __GET($k)

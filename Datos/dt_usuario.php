@@ -41,7 +41,7 @@ class dt_usuario extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_usuarios";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();

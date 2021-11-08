@@ -20,8 +20,8 @@ class dt_rol_usuario extends Conexion
                 $vu = new Vw_rol_usuario();
 
                 $vu->__SET('id_rol_usuario', $r->id_rol_usuario);
-                $vu->__SET('tbl_usuario_id_usuario', $r->tbl_usuario_id_usuario);
-                $vu->__SET('tbl_rol_id_rol', $r->tbl_rol_id_rol);
+                $vu->__SET('usuario', $r->usuario);
+                $vu->__SET('rol', $r->rol);
 
                 $result[] = $vu;
             }
