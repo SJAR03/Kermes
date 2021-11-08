@@ -882,6 +882,7 @@ if (isset($varMsj)) {
                                         <th>Responsable</th>
                                         <th>Descripcion de Contribucion</th>
                                         <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -892,6 +893,13 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('responsable'); ?></td>
                                             <td><?php echo $r->__GET('desc_contribucion'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
+
+                                            <!-- CONFIGURANDO EL BOTON EDIT -->
+                                            <td>
+                                                <a href="frm_edit_comunidad.php?editCom=<?php echo $r->__GET('id_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Comunidad"></i></a>
+                                                <a href="frm_edit_comunidad.php?viewCom=<?php echo $r->__GET('id_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Comunidad"></i></a>
+                                            </td>
+
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

@@ -54,4 +54,35 @@ class Dt_Comunidad extends Conexion
             die($e->getMessage());
         }
     }
+
+
+    public function getComunidad($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad where id_comunidad= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            
+                $com = new Comunidad();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $com->__SET('id_comunidad', $r->id_comunidad);
+                $com->__SET('nombre', $r->nombre);
+                $com->__SET('responsable', $r->responsable);
+                $com->__SET('desc_contribucion', $r->desc_contribucion);
+                $com->__SET('estado', $r->estado);
+            
+
+            $this->myCon = parent::desconectar();
+            return $com;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+
 }

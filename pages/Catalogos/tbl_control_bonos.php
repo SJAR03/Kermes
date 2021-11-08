@@ -881,6 +881,7 @@ if (isset($varMsj)) {
                                         <th>Nombre</th>
                                         <th>Valor</th>
                                         <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -890,6 +891,14 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('nombre'); ?></td>
                                             <td><?php echo $r->__GET('valor'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
+                                            
+                                            <!-- CONFIGURANDO EL BOTON EDIT -->
+                                            <td>
+                                                <a href="frm_edit_control_bonos.php?editCB=<?php echo $r->__GET('id_bono') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Control Bonos"></i></a>
+                                                <a href="frm_edit_control_bonos.php?viewCB=<?php echo $r->__GET('id_bono') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Control Bonos"></i></a>
+                                            </td>
+
+
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
