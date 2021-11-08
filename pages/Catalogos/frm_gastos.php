@@ -914,17 +914,17 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Concepto</label>
-                      <input type="int" class="form-control" id="concepto" name="concepto" placeholder="Ingrese el concepto" title="Ingrese concepto" required>
+                      <input type="number" class="form-control" id="concepto" name="concepto" placeholder="Ingrese el concepto" title="Ingrese concepto" required>
                     </div>
 
                     <div class="form-group">
                       <label>Monto</label>
-                      <input type="int" class="form-control" id="monto" name="monto" placeholder="Ingrese el monto " title="Ingrese el monto" required>
+                      <input type="number" class="form-control" id="monto" name="monto" placeholder="Ingrese el monto " title="Ingrese el monto" required>
                     </div>
 
                     <div class="form-group">
                       <label>Creacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
+                      <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
                     </div>
 
                     <div class="form-group">
@@ -934,7 +934,7 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Modificacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
+                      <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
                     </div>
 
                     <div class="form-group">
@@ -944,7 +944,7 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Eliminacion Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
+                      <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
                     </div>
 
                     <div class="form-group">

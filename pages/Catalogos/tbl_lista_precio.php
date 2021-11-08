@@ -865,7 +865,7 @@ if (isset($varMsj)) {
 
                         <div class="card-body">
                             <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_usuario.php" title="Registrar una nueva Lista precio" target="blank">
+                                <a href="frm_lista_precio.php" title="Registrar una nueva Lista precio" target="blank">
                                     <i class="far fa-plus-square fa-2x"></i>
                                 </a>
                             </div>

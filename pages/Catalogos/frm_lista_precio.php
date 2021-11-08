@@ -5,12 +5,11 @@ error_reporting(0);
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
-include '../../Entidades/arqueocaja.php';
-include '../../Datos/dt_arqueocaja.php';
-
+include '../../Entidades/lista_precio.php';
+include '../../Datos/dt_lista_precio.php';
 
 $dtK = new Dt_Kermesse();
-$dtCom = new dt_arqueocaja();
+$dtCom = new dt_lista_precio();
 
 
 
@@ -850,12 +849,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo ingreso de Arqueo</h1>
+              <h1>Nuevo ingreso de gasto</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Arqueo</li>
+                <li class="breadcrumb-item active">Registrar gasto</li>
               </ol>
             </div>
           </div>
@@ -871,7 +870,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar Arqueo</h3>
+                  <h3 class="card-title">Registrar gasto</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -892,43 +891,13 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Fecha del Arqueo</label>
-                      <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
+                      <label>Nombre</label>
+                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" title="Ingrese nombre" required>
                     </div>
 
                     <div class="form-group">
-                      <label>Total</label>
-                      <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Creacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Modificacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de modificacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Eliminacion Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de eliminacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
+                      <label>Descripción</label>
+                      <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción" title="Ingrese la descripción" required>
                     </div>
 
                   </div>

@@ -877,12 +877,12 @@ if (isset($varMsj)) {
 
                                         <div class="form-group">
                                             <label>Nombre de la Categoría Gasto</label>
-                                            <input type="int" class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Ingrese el nombre de la categoría" title="Ingrese el nombre de la categoría" required>
+                                            <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria" placeholder="Ingrese el nombre de la categoría" title="Ingrese el nombre de la categoría" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="int" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción" title="Ingrese la descripción" required>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción" title="Ingrese la descripción" required>
                                         </div>
 
                                     </div>

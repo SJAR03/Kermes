@@ -2,15 +2,17 @@
 
 error_reporting(0);
 
-include '../../entidades/kermesse.php';
-include '../../datos/dt_kermesse.php';
+include '../../Entidades/productos.php';
+include '../../Datos/dt_productos.php';
 
-include '../../Entidades/arqueocaja.php';
-include '../../Datos/dt_arqueocaja.php';
+include '../../Entidades/lista_precio.php';
+include '../../Datos/dt_lista_precio.php';
 
+include '../../Entidades/listaprecio_det.php';
+include '../../Datos/dt_listaprecio_det.php';
 
-$dtK = new Dt_Kermesse();
-$dtCom = new dt_arqueocaja();
+$dtK = new Dt_Producto();
+$dtCom = new dt_lista_precio();
 
 
 
@@ -850,12 +852,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo ingreso de Arqueo</h1>
+              <h1>Nuevo lista precio detallado</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Arqueo</li>
+                <li class="breadcrumb-item active">Registrar lista precio detallado</li>
               </ol>
             </div>
           </div>
@@ -871,7 +873,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar Arqueo</h3>
+                  <h3 class="card-title">Registrar lista precio detallado</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -879,12 +881,12 @@ if (isset($varMsj)) {
                   <div class="card-body">
 
                     <div class="form-group">
-                      <label>Seleccione la kermesses</label>
-                      <select class="form-control" id="id_kermesse" name="id_kermesse" required>
+                      <label>Seleccione la Lista Precio</label>
+                      <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
                         <option value="">Seleccione...</option>
-                        <?php foreach ($dtK->listaKermT() as $r) : ?>
+                        <?php foreach ($dtCom->listarlistaPrecios() as $r) : ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php endforeach; ?>
                       </select>
@@ -892,43 +894,21 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Fecha del Arqueo</label>
-                      <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
+                      <label>Seleccione el producto</label>
+                      <select class="form-control" id="id_producto" name="id_producto" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtK->listaProdT() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('listaProdT'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
-                      <label>Total</label>
-                      <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Creacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Modificacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de modificacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Eliminacion Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de eliminacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
+                      <label>Precio Venta</label>
+                      <input type="number" class="form-control" id="precio_venta" name="precio_venta" placeholder="Ingrese el precio de la venta" title="Ingrese el precio de la venta" required>
                     </div>
 
                   </div>
