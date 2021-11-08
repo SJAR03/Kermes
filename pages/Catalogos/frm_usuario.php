@@ -901,7 +901,7 @@ if (isset($varMsj)) {
                                             <label>Estado</label>
                                             <select class="form-control" name="user_estado" id="estado" require>
                                                 <option value="1">Activo</option>
-                                                <option value="2">Desativado</option>
+                                                <option value="2">Desactivado</option>
                                             </select>
                                         </div>
                                     </div>
