@@ -1,12 +1,12 @@
 <?php
-include '../../Entidades/usuario.php';
-include '../../Datos/dt_usuario.php';
+include '../../Entidades/opciones.php';
+include '../../Datos/dt_opciones.php';
 
 include '../../Entidades/rol.php';
 include '../../Datos/dt_rol.php';
 
 
-$dtU = new dt_usuario();
+$dtU = new dt_opciones();
 $dtR = new dt_rol();
 
 
@@ -23,7 +23,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Ingreso de Rol Usuario</title>
+    <title>Kermesse | Ingreso de Rol Opciones</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -866,7 +866,7 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Rol a Usuario</h3>
+                                    <h3 class="card-title">Registrar Opción a Rol</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -888,13 +888,13 @@ if (isset($varMsj)) {
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona la opción</label>
+                                            <label>Selecciona el usuario</label>
                                             <select class="form-control" name="usuario" id="id_usuario" required>
                                                 <option value="">Seleccione...</option>
 
-                                                <?php foreach ($dtU->listaUsu() as $r) : ?>
+                                                <?php foreach ($dtU->listaOpc() as $r) : ?>
 
-                                                    <option value="<?php echo $r->__GET('id_usuario'); ?>"><?php echo $r->__GET('usuario'); ?></option>
+                                                    <option value="<?php echo $r->__GET('id_opciones'); ?>"><?php echo $r->__GET('opcion_descripcion'); ?></option>
 
                                                 <?php endforeach; ?>
 

@@ -1,14 +1,10 @@
 <?php
-include '../../Entidades/usuario.php';
-include '../../Datos/dt_usuario.php';
+error_reporting(0);
+//IMPORTAMOS ENTIDADES Y DATOS
+include '../../Entidades/vw_rol_opciones.php';
+include '../../Datos/dt_rol_opciones.php';
 
-include '../../Entidades/rol.php';
-include '../../Datos/dt_rol.php';
-
-
-$dtU = new dt_usuario();
-$dtR = new dt_rol();
-
+$dtu = new dt_rol_opciones();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -16,19 +12,22 @@ if (isset($varMsj)) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Ingreso de Rol Usuario</title>
+    <title>KERMESSE | Tabla Rol de Opciones</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -392,8 +391,8 @@ if (isset($varMsj)) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>
                                     Forms
@@ -402,7 +401,7 @@ if (isset($varMsj)) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link active">
+                                    <a href="../forms/general.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>General Elements</p>
                                     </a>
@@ -427,8 +426,8 @@ if (isset($varMsj)) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Tables
@@ -443,7 +442,7 @@ if (isset($varMsj)) {
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link">
+                                    <a href="../tables/data.html" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>DataTables</p>
                                     </a>
@@ -845,113 +844,129 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manipulación de Datos</h1>
+                            <h1>Rol Opciones</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manipulación de Datos</li>
+                                <li class="breadcrumb-item active">Rol Opciones</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- left column -->
-                        <div class="col-md-12">
-                            <!-- general form elements -->
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Registrar Rol a Usuario</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <form>
-                                    <div class="card-body">
-
-                                        <div class="form-group">
-                                            <label>Selecciona el rol</label>
-                                            <select class="form-control" name="rol" id="id_rol" required>
-                                                <option value="">Seleccione...</option>
-
-                                                <?php foreach ($dtR->listaRol() as $r) : ?>
-
-                                                    <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
-
-                                                <?php endforeach; ?>
-
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Selecciona la opción</label>
-                                            <select class="form-control" name="usuario" id="id_usuario" required>
-                                                <option value="">Seleccione...</option>
-
-                                                <?php foreach ($dtU->listaUsu() as $r) : ?>
-
-                                                    <option value="<?php echo $r->__GET('id_usuario'); ?>"><?php echo $r->__GET('usuario'); ?></option>
-
-                                                <?php endforeach; ?>
-
-                                            </select>
-                                        </div>
-
-                                    </div>
-
-                                    <!-- /.card-body -->
-
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- /.card -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Tabla Rol Opciones</h3>
                         </div>
-                        <!-- /.card -->
+
+                        <div class="card-body">
+                            <div class="form-group col-md-12" style="text-align: right;">
+                                <a href="frm_rol_opciones.php" title="Asingar una nueva opción de rol" target="blank">
+                                    <i class="far fa-plus-square fa-2x"></i>
+                                </a>
+                            </div>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID Rol Opciones</th>
+                                        <th>Rol</th>
+                                        <th>Opciones</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach ($dtu->listarVw_rol_opc() as $r) :
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $r->__GET('id_rol_opciones'); ?></td>
+                                            <td><?php echo $r->__GET('rol'); ?></td>
+                                            <td><?php echo $r->__GET('opciones'); ?></td>
+                                            <td>
+                                                <a href="frm_rol_opciones.php?editRoOpc=<?php echo $r->__GET('id_rol_opciones') ?>"><i class="far fa-edit fa-2x" title="Editar opciones"></i></a>
+                                                <a href="frm_rol_opciones.php?vieRoOpc=<?php echo $r->__GET('id_rol_opciones') ?>"><i class="far fa-eye fa-2x" title="Visualizar opciones"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID Rol Opciones</th>
+                                        <th>Rol</th>
+                                        <th>Opciones</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
-                    <!--/.col (right) -->
                 </div>
-                <!-- /.row -->
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.1.0-rc
             </div>
-            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
+            <!-- /.content-wrapper -->
+            <footer class="main-footer">
+                <div class="float-right d-none d-sm-block">
+                    <b>Version</b> 3.1.0-rc
+                </div>
+                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            </footer>
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- bs-custom-file-input -->
-    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery -->
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="../../plugins/DT/datatables.min.js"></script>
+        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
+
+        <!-- AdminLTE App -->
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../../dist/js/demo.js"></script>
+        <!-- Page specific script -->
+        <script>
+            $(function() {
+                $("#example1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["excel", "pdf"]
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });
+            });
+        </script>
 </body>
 
 </html>
