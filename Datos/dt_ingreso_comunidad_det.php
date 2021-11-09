@@ -4,6 +4,39 @@ include_once("Conexion.php");
 class Dt_Ingreso_Comunidad_Det extends Conexion
 {
     private $myCon;
+
+    public function listaComunidadDet()
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $result = array();
+            $querySQL = "SELECT * FROM dbkermesse.vw_ingcomdet";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute();
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
+                $vicd = new VwIngreso_Comunidad_Det();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $vicd->__SET('id_ingreso_comunidad_det', $r->id_ingreso_comunidad_det);
+                $vicd->__SET('cantproducto', $r->cantproducto);
+                $vicd->__SET('nombono', $r->nombono);
+                $vicd->__SET('denominacion', $r->denominacion);
+                $vicd->__SET('cantidad', $r->cantidad);
+                $vicd->__SET('subtotal_bono', $r->subtotal_bono);
+
+                $result[] = $vicd;
+            }
+
+            $this->myCon = parent::desconectar();
+            return $result;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+    
     public function listaIngresoComunidadDet()
     {
         try {
