@@ -877,10 +877,10 @@ if (isset($varMsj)) {
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>ID Ingreso Kermesse</th>
+                                        <th>ID Ingreso Comunidad</th>
+                                       <!--  <th>ID Ingreso Kermesse</th>
                                         <th>ID Comunidad</th>
-                                        <th>ID Producto</th>
+                                        <th>ID Producto</th> -->
                                         <th>Cantidad Productos</th>
                                         <th>Total Bonos</th>
                                         <th>Usuario Creacion</th>
@@ -896,9 +896,9 @@ if (isset($varMsj)) {
                                     <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_ingreso_comunidad'); ?></td>
-                                            <td><?php echo $r->__GET('id_kermesse'); ?></td>
+                                            <!-- <td><?php echo $r->__GET('id_kermesse'); ?></td>
                                             <td><?php echo $r->__GET('id_comunidad'); ?></td>
-                                            <td><?php echo $r->__GET('id_producto'); ?></td>
+                                            <td><?php echo $r->__GET('id_producto'); ?></td> -->
                                             <td><?php echo $r->__GET('cant_productos'); ?></td>
                                             <td><?php echo $r->__GET('total_bonos'); ?></td>
                                             <td><?php echo $r->__GET('usuario_creacion'); ?></td>
@@ -919,10 +919,10 @@ if (isset($varMsj)) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>ID Ingreso Kermesse</th>
+                                        <th>ID Ingreso Comunidad</th>
+                                        <!-- <th>ID Ingreso Kermesse</th>
                                         <th>ID Comunidad</th>
-                                        <th>ID Producto</th>
+                                        <th>ID Producto</th> -->
                                         <th>Cantidad Productos</th>
                                         <th>Total Bonos</th>
                                         <th>Usuario Creacion</th>

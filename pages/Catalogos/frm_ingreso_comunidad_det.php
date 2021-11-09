@@ -1,6 +1,6 @@
 <?php
 
-//error_reporting(0);
+error_reporting(0);
 
 include '../../entidades/ingreso_comunidad_det.php';
 include '../../datos/dt_ingreso_comunidad_det.php';

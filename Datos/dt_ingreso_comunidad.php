@@ -18,9 +18,9 @@ class Dt_Ingreso_Comunidad extends Conexion
 
                 //_SET(CAMPOBD, atributoEntidad)
                 $ic->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
-                $ic->__SET('id_kermesse', $r->id_kermesse);
+                /* $ic->__SET('id_kermesse', $r->id_kermesse);
                 $ic->__SET('id_comunidad', $r->id_comunidad);
-                $ic->__SET('id_producto', $r->id_producto);
+                $ic->__SET('id_producto', $r->id_producto); */
                 $ic->__SET('cant_productos', $r->cant_productos);
                 $ic->__SET('total_bonos', $r->total_bonos);
                 $ic->__SET('usuario_creacion', $r->usuario_creacion);
