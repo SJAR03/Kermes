@@ -883,7 +883,7 @@
                                           <label>ID de arqueo</label>
                                             <select class="form-control" name="idArqueo" id="idArqueo">
                                               <?php foreach($caja->listararqueocaja() as $r): ?>
-                                                  <option value="1"> <?php echo $r->__GET('id'); ?> </option>
+                                                  <option value="1"> <?php echo $r->__GET('id_ArqueoCaja'); ?> </option>
                                               <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -898,7 +898,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                          <labe>Denominación</label>
+                                          <label>Denominación</label>
                                             <select class="form-control" name="denominacion" id="denominacion">
                                               <?php foreach($dtDenominacion->listarDenominaciones() as $r): ?>
                                                   <option value="1"> <?php echo $r->__GET('valor_letras'); ?> </option>
