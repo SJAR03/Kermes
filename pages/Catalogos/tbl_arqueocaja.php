@@ -499,7 +499,7 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
                                                 <a href="frm_edit_arqueocaja.php"><i class="far fa-edit fa-2x" title="Editar el arqueo"></i></a>
-                                                <a href="frm_arqueocaja.php"><i class="far fa-eye fa-2x" title="Visualizar el arqueo"></i></a>
+                                                <a href="frm_view_arqueocaja.php"><i class="far fa-eye fa-2x" title="Visualizar el arqueo"></i></a>
                                             </td>
                                         </tr>
                                     <?php
