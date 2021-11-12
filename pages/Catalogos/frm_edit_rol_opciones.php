@@ -1,10 +1,14 @@
 <?php
-error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/usuario.php';
-include '../../Datos/dt_usuario.php';
+include '../../Entidades/opciones.php';
+include '../../Datos/dt_opciones.php';
 
-$dtu = new dt_usuario();
+include '../../Entidades/rol.php';
+include '../../Datos/dt_rol.php';
+
+
+$dtU = new dt_opciones();
+$dtR = new dt_rol();
+
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -19,7 +23,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Registrar Usuarios</title>
+    <title>Kermesse | Modificar de Rol Opciones</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -841,12 +845,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Nuevo Usuario</h1>
+                            <h1>Manipulación de Datos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Usuarios</li>
+                                <li class="breadcrumb-item active">Manipulación de Datos</li>
                             </ol>
                         </div>
                     </div>
@@ -862,53 +866,47 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Usuario</h3>
+                                    <h3 class="card-title">Modificar Opción a Rol</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
-
                                     <div class="card-body">
+
                                         <div class="form-group">
-                                            <label>Id Usuario</label>
-                                            <input type="text" class="form-control" id="kerm_umod" name="id_usuario" title="Id Usuario" value="Id Usuario" required disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Usuario:</label>
-                                            <input type="text" class="form-control" id="user_usuario" name="usuario" maxlength="15" placeholder="Ingrese nombre del nuevo Usuario" title="Ingrese nombre del nuevo Usuario" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Nombres: </label>
-                                            <input type="text" class="form-control" id="user_nombres" name="nombres" maxlength="45" placeholder="Ingrese sus nombres" title="Ingrese sus nombres" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Apellidos: </label>
-                                            <input type="text" class="form-control" id="user_apellidos" name="apellidos" maxlength="45" placeholder="Ingrese sus apellidos" title="Ingrese sus apellidos" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Email: </label>
-                                            <input type="text" class="form-control" id="user_email" name="email" maxlength="45" placeholder="Ingrese su correo electrónico" title="Ingrese su correo electrónico" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Contraseña: </label>
-                                            <input type="text" class="form-control" id="user_contra" name="contraseña" maxlength="45" placeholder="Ingrese una contraseña" title="Ingrese una contraseña" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Confirme contraseña: </label>
-                                            <input type="text" class="form-control" id="user_contraAgain" name="repetir_contraseña" maxlength="45" placeholder="Ingrese nuevamente la contraseña" title="Ingrese nuevamente la contraseña" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="user_estado" id="estado" require>
-                                                <option value="1">Activo</option>
-                                                <option value="2">Desactivado</option>
+                                            <label>Selecciona el rol</label>
+                                            <select class="form-control" name="rol" id="id_rol" required>
+                                                <option value="">Seleccione...</option>
+
+                                                <?php foreach ($dtR->listaRol() as $r) : ?>
+
+                                                    <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
+
+                                                <?php endforeach; ?>
+
                                             </select>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label>Selecciona el usuario</label>
+                                            <select class="form-control" name="usuario" id="id_usuario" required>
+                                                <option value="">Seleccione...</option>
+
+                                                <?php foreach ($dtU->listaOpc() as $r) : ?>
+
+                                                    <option value="<?php echo $r->__GET('id_opciones'); ?>"><?php echo $r->__GET('opcion_descripcion'); ?></option>
+
+                                                <?php endforeach; ?>
+
+                                            </select>
+                                        </div>
+
                                     </div>
+
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="submit" class="btn btn-primary">Cambiar</button>
                                     </div>
                                 </form>
                             </div>

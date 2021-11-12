@@ -19,7 +19,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Registrar Usuarios</title>
+    <title>Kermesse | Visualizar Usuarios</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -841,7 +841,7 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Nuevo Usuario</h1>
+                            <h1>Visualizar Usuario</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -862,7 +862,7 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Usuario</h3>
+                                    <h3 class="card-title">Datos Usuario</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -875,31 +875,27 @@ if (isset($varMsj)) {
                                         </div>
                                         <div class="form-group">
                                             <label>Usuario:</label>
-                                            <input type="text" class="form-control" id="user_usuario" name="usuario" maxlength="15" placeholder="Ingrese nombre del nuevo Usuario" title="Ingrese nombre del nuevo Usuario" required>
+                                            <input type="text" class="form-control" id="user_usuario" name="usuario" maxlength="15" placeholder="Ingrese nombre del nuevo Usuario" title="Ingrese nombre del nuevo Usuario" required disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Nombres: </label>
-                                            <input type="text" class="form-control" id="user_nombres" name="nombres" maxlength="45" placeholder="Ingrese sus nombres" title="Ingrese sus nombres" required>
+                                            <input type="text" class="form-control" id="user_nombres" name="nombres" maxlength="45" placeholder="Ingrese sus nombres" title="Ingrese sus nombres" required disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Apellidos: </label>
-                                            <input type="text" class="form-control" id="user_apellidos" name="apellidos" maxlength="45" placeholder="Ingrese sus apellidos" title="Ingrese sus apellidos" required>
+                                            <input type="text" class="form-control" id="user_apellidos" name="apellidos" maxlength="45" placeholder="Ingrese sus apellidos" title="Ingrese sus apellidos" required disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Email: </label>
-                                            <input type="text" class="form-control" id="user_email" name="email" maxlength="45" placeholder="Ingrese su correo electrónico" title="Ingrese su correo electrónico" required>
+                                            <input type="text" class="form-control" id="user_email" name="email" maxlength="45" placeholder="Ingrese su correo electrónico" title="Ingrese su correo electrónico" required disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Contraseña: </label>
-                                            <input type="text" class="form-control" id="user_contra" name="contraseña" maxlength="45" placeholder="Ingrese una contraseña" title="Ingrese una contraseña" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Confirme contraseña: </label>
-                                            <input type="text" class="form-control" id="user_contraAgain" name="repetir_contraseña" maxlength="45" placeholder="Ingrese nuevamente la contraseña" title="Ingrese nuevamente la contraseña" required>
+                                            <input type="text" class="form-control" id="user_contra" name="contraseña" maxlength="45" placeholder="Ingrese una contraseña" title="Ingrese una contraseña" required disabled>
                                         </div>
                                         <div class="form-group">
                                             <label>Estado</label>
-                                            <select class="form-control" name="user_estado" id="estado" require>
+                                            <select class="form-control" name="user_estado" id="estado" require disabled>
                                                 <option value="1">Activo</option>
                                                 <option value="2">Desactivado</option>
                                             </select>
@@ -908,7 +904,7 @@ if (isset($varMsj)) {
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="submit" class="btn btn-primary">Regresar</button>
                                     </div>
                                 </form>
                             </div>

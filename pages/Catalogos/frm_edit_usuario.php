@@ -19,7 +19,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Registrar Usuarios</title>
+    <title>Kermesse | Modificar Usuarios</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -841,7 +841,7 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Nuevo Usuario</h1>
+                            <h1>Modificar Usuario</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -862,7 +862,7 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Usuario</h3>
+                                    <h3 class="card-title">Datos Usuario</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->

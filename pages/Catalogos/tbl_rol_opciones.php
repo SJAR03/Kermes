@@ -492,8 +492,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('rol'); ?></td>
                                             <td><?php echo $r->__GET('opciones'); ?></td>
                                             <td>
-                                                <a href="frm_rol_opciones.php?editRoOpc=<?php echo $r->__GET('id_rol_opciones') ?>"><i class="far fa-edit fa-2x" title="Editar opciones"></i></a>
-                                                <a href="frm_rol_opciones.php?vieRoOpc=<?php echo $r->__GET('id_rol_opciones') ?>"><i class="far fa-eye fa-2x" title="Visualizar opciones"></i></a>
+                                                <a href="frm_edit_rol_opciones.php?editRoOpc=<?php echo $r->__GET('id_rol_opciones') ?>"><i class="far fa-edit fa-2x" title="Editar opciones"></i></a>
+                                                <a href="frm_view_rol_opciones.php?vieRoOpc=<?php echo $r->__GET('id_rol_opciones') ?>"><i class="far fa-eye fa-2x" title="Visualizar opciones"></i></a>
                                             </td>
                                         </tr>
                                     <?php
