@@ -498,8 +498,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('email'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="frm_usuario.php?editUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-edit fa-2x" title="Editar usuario"></i></a>
-                                                <a href="frm_usuario.php?vieUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-eye fa-2x" title="Visualizar usuario"></i></a>
+                                                <a href="frm_edit_usuario.php?editUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-edit fa-2x" title="Editar usuario"></i></a>
+                                                <a href="frm_view_usuario.php?vieUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-eye fa-2x" title="Visualizar usuario"></i></a>
                                             </td>
                                         </tr>
                                     <?php
