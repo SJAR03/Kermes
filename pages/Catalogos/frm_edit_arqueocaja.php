@@ -1,41 +1,21 @@
 <?php
+include '../../Entidades/kermesse.php';
+include '../../Datos/dt_kermesse.php';
 
-error_reporting(0);
+include '../../Entidades/vw_arqueocaja.php';
+include '../../Datos/dt_arqueocaja.php';
 
-include '../../entidades/ingreso_comunidad.php';
-include '../../datos/dt_ingreso_comunidad.php';
 
-include '../../entidades/kermesse.php';
-include '../../datos/dt_kermesse.php';
-
-include '../../entidades/comunidad.php';
-include '../../datos/dt_comunidad.php';
-
-include '../../entidades/productos.php';
-include '../../datos/dt_productos.php';
-
-$dtICom = new Dt_Ingreso_Comunidad();
 $dtK = new Dt_Kermesse();
-$dtCom = new Dt_Comunidad();
-$dtP = new Dt_Producto();
-$IC = new Ingreso_Comunidad();
+$dtP = new dt_arqueocaja();
 
-$varIdIC = 0;
 
-if (isset($varIdIC)) {
-    $varIdIC = $_GET['editIC']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
-}
-
-//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
-$IC = $dtICom->getIngComunidad($varIdIC);
-
-/* $varMsj = 0;
-
+$varMsj = 0;
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
-} */
-?>
+}
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +23,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | General Form Elements</title>
+    <title>Arqueo Caja | Ingreso de Arqueo Caja</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -471,12 +451,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Editar Ingreso en el Arqueo Caja</h1>
+                            <h1>Manipulación de Datos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Editar Ingreso en el Arqueo Caja</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Manipulación de Datos</li>
                             </ol>
                         </div>
                     </div>
@@ -492,15 +472,15 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Editar Ingreso Arqueo Caja</h3>
+                                    <h3 class="card-title">Editar Arqueo Caja</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                                <form>
                                     <div class="card-body">
 
                                         <div class="form-group">
-                                            <label>Seleccione la kermesses</label>
+                                            <label>Seleccione la kermesse</label>
                                             <select class="form-control" id="id_kermesse" name="id_kermesse" required>
                                                 <option value="">Seleccione...</option>
                                                 <?php foreach ($dtK->listaKermT() as $r) : ?>
@@ -509,86 +489,72 @@ if (isset($varMsj)) {
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </select>
-                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Seleccione la Comunidad</label>
-                                            <select class="form-control" id="id_comunidad" name="id_comunidad" required>
-                                                <option value="">Seleccione...</option>
-                                                <?php foreach ($dtCom->listaComunidad() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                                                    </tr>
-                                                <?php endforeach; ?>
+                                            <label>Fecha del Arqueo</label>
+                                            <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Gran total</label>
+                                            <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Usuario Creador</label>
+                                            <input type="text" class="form-control" id="usuario_creacion" name="usuario_creacion" title="Usuario que lo creo" value="Usuario1" required disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de Creación</label>
+                                            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" title="Fecha de creación" required disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Usuario modificador</label>
+                                            <input type="text" class="form-control" id="usuario_modificacion" name="usuario_modificacion" title="Usuario que lo modifico" value="Usuario1" required disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de modificación</label>
+                                            <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" title="Fecha de modificación" required disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Usuario eliminador</label>
+                                            <input type="text" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" title="Usuario que lo elimino" value="Usuario1" required disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de Eliminación</label>
+                                            <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" title="Fecha de eliminación" required disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Estado</label>
+                                            <select class="form-control" name="prod_estado" id="estado" disabled>
+                                                <option value="1">Ingresado</option>
+                                                <option value="2">Modificado</option>
+                                                <option value="3">Eliminado</option>
                                             </select>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label>Seleccione el Producto</label>
-                                            <select class="form-control" id="id_producto" name="id_producto" required>
-                                                <option value="">Seleccione...</option>
-                                                <?php foreach ($dtP->listaProdT() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Catidad de productos</label>
-                                            <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Total de bonos</label>
-                                            <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Creacion de Usuarios</label>
-                                            <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fechas de creacion de Usuarios</label>
-                                            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Modificacion de Usuarios</label>
-                                            <input type="int" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fechas de modificacion de Usuarios</label>
-                                            <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Eliminacion Usuarios</label>
-                                            <input type="int" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fechas de eliminacion de Usuarios</label>
-                                            <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
-                                        </div>
-
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Ingresar</button>
                                     </div>
                                 </form>
-                                </di v>
-                                <!-- /.card -->
                             </div>
+                            <!-- /.card -->
                         </div>
+                        <!-- /.card -->
                     </div>
+                    <!--/.col (right) -->
+                </div>
+                <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>
@@ -619,31 +585,6 @@ if (isset($varMsj)) {
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
-
-    <script>
-        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
-        function setValores() {
-            /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>"); */
-            $("#id_kermesse").val("<?php echo $IC->__GET('id_kermesse') ?>");
-            $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad') ?>");
-            $("#id_producto").val("<?php echo $IC->__GET('id_producto') ?>");
-            $("#cant_productos").val("<?php echo $IC->__GET('cant_productos') ?>");
-            $("#total_bonos").val("<?php echo $IC->__GET('total_bonos') ?>");
-            $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
-            $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>");
-            $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");
-            $("#fecha_modificacion").val("<?php echo $IC->__GET('fecha_modificacion') ?>");
-            $("#usuario_eliminacion").val("<?php echo $IC->__GET('usuario_eliminacion') ?>");
-            $("#fecha_eliminacion").val("<?php echo $IC->__GET('fecha_eliminacion') ?>");
-
-        }
-
-        $(document).ready(function() {
-            ////CARGAMOS LOS VALORES EN LOS CONTROLES
-            setValores();
-        });
-    </script>
-
     <script>
         $(function() {
             bsCustomFileInput.init();
