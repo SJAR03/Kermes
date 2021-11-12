@@ -455,12 +455,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo ingreso de gasto</h1>
+              <h1>Nuevo ingreso de Lista Precio</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar gasto</li>
+                <li class="breadcrumb-item active">Registrar Lista Precio</li>
               </ol>
             </div>
           </div>
@@ -476,7 +476,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar gasto</h3>
+                  <h3 class="card-title">Registrar Lista Precio</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->

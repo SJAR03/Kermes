@@ -3,12 +3,12 @@
 error_reporting(0);
 
 include '../../Entidades/gastos.php';
-include '../../datos/dt_gastos.php';
+include '../../Datos/dt_gastos.php';
 
 include '../../Entidades/kermesse.php';
 include '../../Datos/dt_kermesse.php';
 
-include '../../Entidades/categoria_gastos.php';
+include '../../Entidades/vw_categoria_gastos.php';
 include '../../Datos/dt_categoria_gastos.php';
 
 
@@ -896,8 +896,8 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Seleccione la Categoría del gasto</label>
-                      <select class="form-control" id="$id_categoria_gastos" name="id_categoria_gastos" required>
+                      <label>Seleccione la categoría</label>
+                      <select class="form-control" id="id_categoria_gastos" name="id_categoria_gastos" required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtCom->listarCategoriaGastos() as $r) : ?>
                           <tr>
@@ -905,7 +905,9 @@ if (isset($varMsj)) {
                           </tr>
                         <?php endforeach; ?>
                       </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                     </div>
+
                     <div class="form-group">
                       <label>Fecha del Gasto</label>
                       <input type="date" class="form-control" id="fechaGastos" name="fechaGastos" placeholder="Ingrese fecha del gasto" title="Ingrese fecha de modificacion" required>

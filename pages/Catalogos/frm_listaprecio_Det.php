@@ -5,7 +5,7 @@ error_reporting(0);
 include '../../Entidades/productos.php';
 include '../../Datos/dt_productos.php';
 
-include '../../Entidades/lista_precio.php';
+include '../../Entidades/vw_lista_precio.php';
 include '../../Datos/dt_lista_precio.php';
 
 include '../../Entidades/listaprecio_det.php';
@@ -880,7 +880,7 @@ if (isset($varMsj)) {
                 <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
                   <div class="card-body">
 
-                    <div class="form-group">
+                  <div class="form-group">
                       <label>Seleccione la Lista Precio</label>
                       <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
                         <option value="">Seleccione...</option>

@@ -5,7 +5,7 @@ class categoria_gastos
     private $id_categoria_gastos;
     private $nombre_categoria;
     private $descripcion;
-    private $Name_exp_4;
+    private $estado;
 
     public function __GET($k)
     {
