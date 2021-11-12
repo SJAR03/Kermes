@@ -492,8 +492,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('opcion_descripcion'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="frm_opciones.php?editOpc=<?php echo $r->__GET('id_opciones') ?>"><i class="far fa-edit fa-2x" title="Editar opción"></i></a>
-                                                <a href="frm_opciones.php?vieOpc=<?php echo $r->__GET('id_opciones') ?>"><i class="far fa-eye fa-2x" title="Visualizar opción"></i></a>
+                                                <a href="frm_edit_opciones.php?editOpc=<?php echo $r->__GET('id_opciones') ?>"><i class="far fa-edit fa-2x" title="Editar opción"></i></a>
+                                                <a href="frm_view_opciones.php?vieOpc=<?php echo $r->__GET('id_opciones') ?>"><i class="far fa-eye fa-2x" title="Visualizar opción"></i></a>
                                             </td>
                                         </tr>
                                     <?php
