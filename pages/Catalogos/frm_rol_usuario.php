@@ -494,7 +494,7 @@ if (isset($varMsj)) {
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona la opción</label>
+                                            <label>Selecciona el usuario</label>
                                             <select class="form-control" name="usuario" id="id_usuario" required>
                                                 <option value="">Seleccione...</option>
 

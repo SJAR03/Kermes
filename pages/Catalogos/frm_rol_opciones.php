@@ -494,8 +494,8 @@ if (isset($varMsj)) {
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona el usuario</label>
-                                            <select class="form-control" name="usuario" id="id_usuario" required>
+                                            <label>Selecciona la opción</label>
+                                            <select class="form-control" name="opciones" id="id_opciones" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaOpc() as $r) : ?>
