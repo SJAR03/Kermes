@@ -376,7 +376,7 @@ if (isset($varMsj)) {
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Arqueo Caja Detalle</p>
                                     </a>
