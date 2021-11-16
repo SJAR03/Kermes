@@ -8,10 +8,14 @@ class Vw_Ingreso_Comunidad
     private $comunidad;
     private $producto;
     private $cant_productos;
+    private $nom_bono;
+    private $denominacion;
+    private $cantidad;
+    private $subtotal_bono;
     private $total_bonos;
+    private $usuario_creacion;
     private $fecha_creacion;
-    private $fecha_modificacion;
-    private $fecha_eliminacion;
+    
 
     //METODOS
     public function __GET($k)

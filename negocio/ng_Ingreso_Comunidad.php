@@ -15,6 +15,7 @@ if ($_POST)
         case '1':
             try
             {
+                //GUARDAR DATOS, BOTON INGRESAR
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
                 $ic->__SET('id_kermesse', $_POST['id_kermesse']);

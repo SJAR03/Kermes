@@ -501,9 +501,9 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Estado</label>
                       <select class="form-control" name="estado" id="estado">
-                        <option value="1">Ingresado</option>
-                        <!-- <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option> -->
+                        <option value="1">Activo</option>
+                        <option value="2">Modificado</option>
+                        <option value="3">Eliminado</option>
                       </select>
                     </div>
 

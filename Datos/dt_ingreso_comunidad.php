@@ -23,13 +23,14 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $vic->__SET('comunidad', $r->comunidad);
                 $vic->__SET('producto', $r->producto);
                 $vic->__SET('cant_productos', $r->cant_productos);
+                $vic->__SET('nom_bono', $r->nom_bono);
+                $vic->__SET('denominacion', $r->denominacion);
+                $vic->__SET('cantidad', $r->cantidad);
+                $vic->__SET('subtotal_bono', $r->subtotal_bono);
                 $vic->__SET('total_bonos', $r->total_bonos);
-                /* $ic->__SET('usuario_creacion', $r->usuario_creacion); */
+                $vic->__SET('usuario_creacion', $r->usuario_creacion); 
                 $vic->__SET('fecha_creacion', $r->fecha_creacion);
-                /* $ic->__SET('usuario_modificacion', $r->usuario_modificacion); */
-                $vic->__SET('fecha_modificacion', $r->fecha_modificacion);
-                /* $ic->__SET('usuario_eliminacion', $r->usuario_eliminacion); */
-                $vic->__SET('fecha_eliminacion', $r->fecha_eliminacion);
+               
 
                 $result[] = $vic;
             }
