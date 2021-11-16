@@ -44,9 +44,13 @@ class dt_arqueocaja extends Conexion
     public function regarqueocaja(Vw_Arqueo_Caja $ic)
     {
         try {
+            /* Establecer la hora y fecha actual usando date() de PHP
+            date_default_timezone_set("America/Managua");
+            $fecha = date("Y-m-d: H:i:s"); */
+
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO dbkermesse.tbl_arqueocaja(idKermesse,kermesse, fechaArqueo, granTotal, usuario_creacion, fecha_creacion, usuario_modificacion, fecha_modificacion, usuario_eliminacion, fecha_eliminacion,estado)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
 
             $this->myCon->prepare($sql)
             ->execute(array(
@@ -68,6 +72,18 @@ class dt_arqueocaja extends Conexion
         } 
         catch (Exception $e) {
             die($e->getMessage());
+        }
+    }
+
+    public function eliminarArqueo($ic)
+    {
+        try
+        {
+            this->myCon = parent::conectar();
+            $qSQL = "UPDATE tbl_arqueocaja SET estado = 3, fecha_eliminacion = NOW(), usuario_eliminacion = 1 WHERE id_ArqueoCaja = ?";
+            $stm = $this->myCon->prepare($qSQL);
+            $stm->execute($qSQL);
+            $this->myCon = parent::desconectar();
         }
     }
 
