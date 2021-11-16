@@ -1,13 +1,19 @@
-<?php 
-    class VwTasaCambio {
-        private $id;
-        private $origen;
-        private $cambio;
-        private $mes;
-        private $year;
-        private $estado;
+<?php
+class TasaCambio
+{
+    private $id_tasaCambio;
+    private $id_monedaO;
+    private $id_monedaC;
+    private $mes;
+    private $anio;
+    private $estado;
 
-        public function __GET($k){return $this->$k;}
-        public function __SET($k, $v){return $this->$k = $v;}
+    public function __GET($k)
+    {
+        return $this->$k;
     }
-?>
+    public function __SET($k, $v)
+    {
+        return $this->$k = $v;
+    }
+}

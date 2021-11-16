@@ -2,20 +2,24 @@
 
 error_reporting(0);
 
-
+include '../../entidades/moneda.php';
+include '../../datos/dt_moneda.php';
 include '../../entidades/tasaCambio.php';
 include '../../datos/dt_tasaCambio.php';
 include '../../entidades/tasaCambioDetalles.php';
 include '../../datos/dt_tcd.php';
 
-$dtTasaDet = new Dt_TCD();
 $dtTasa = new Dt_TasaCambio();
+$dtMoneda = new Dt_Moneda();
+$dtTasaDet = new Dt_TCD();
 
 $varMsj = 0;
+
 
 if (isset($varMsj)) {
   $varMsj = $_GET['msj'];
 }
+
 ?>
 
 
@@ -25,7 +29,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Registro de tasas de cambio</title>
+  <title>KERMESSE | Registro de tasas de cambio</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,6 +37,7 @@ if (isset($varMsj)) {
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -405,13 +410,6 @@ if (isset($varMsj)) {
                     <p>Tasa Cambio</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
-                  </a>
-                </li>
               </ul>
             </li>
 
@@ -453,12 +451,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo detalle - Tasa de cambio</h1>
+              <h1>Nueva Tasa de Cambio</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar detalle</li>
+                <li class="breadcrumb-item active">Registrar tasa de cambio</li>
               </ol>
             </div>
           </div>
@@ -474,69 +472,116 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar detalle</h3>
+                  <h3 class="card-title">Registrar tasa de cambio</h3>
+
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_tasaCambio.php">
                   <div class="card-body">
                     <div class="form-group">
-                      <label>ID - Tasa de cambio</label>
-                      <select class="form-control" name="id_tasa" id="id_tasa">
-                        <?php foreach ($dtTasa->listarTasas() as $r) : ?>
-                          <option value="1"> <?php echo $r->__GET('id'); ?> </option>
+                      <label>Moneda origen</label>
+                      <select class="form-control" name="id_monedaO" id="id_monedaO">
+                        <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
+                          <option value="<?php echo $r->__GET('id') ?>"> <?php echo $r->__GET('nombre'); ?> </option>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="text" name="id_tasaCambio" id="id_tasaCambio" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Moneda cambio</label>
+                      <select class="form-control" name="id_monedaC" id="id_monedaC">
+                        <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
+                          <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
                       </select>
                     </div>
 
                     <div class="form-group">
-                      <label>Fecha</label>
-                      <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
-                      </div>
+                      <label>Mes</label>
+                      <input type="text" class="form-control" id="mes" name="mes" maxlength="45" placeholder="Mes" title="Ingrese el mes" required>
                     </div>
 
                     <div class="form-group">
-                      <label>Tipo de cambio</label>
-                      <input type="number" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio required>
-                  </div>
-                  
-                  <div class=" form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado">
-                        <option value="1">Ingresado</option>
-                        <!-- <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option> -->
-                      </select>
+                      <label>Año</label>
+                      <input type="text" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" required>
                     </div>
-
-
                   </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="gen" disabled>Guardar</button>
                   </div>
                 </form>
               </div>
               <!-- /.card -->
             </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Registrar detalle</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="POST" action="">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label>Fecha</label>
+                      <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Tipo de cambio</label>
+                      <input type="number" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio required">
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button id="det" type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </form>
+
+
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Detalles - Tasas de cambio disponibles</h3>
+                </div>
+
+                <div class="card-body">
+
+
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <!-- /.content -->
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 3.1.0-rc
+        </div>
+        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+      </footer>
+
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.1.0-rc
-      </div>
-      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -550,18 +595,80 @@ if (isset($varMsj)) {
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../../plugins/DT/datatables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+  </script>
   <!-- bs-custom-file-input -->
   <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
-  <!-- Select2 -->
+  <!-- Select2-->
   <script src="../../plugins/select2/js/select2.full.min.js"></script>
+
   <!-- Page specific script -->
   <script>
     $(function() {
       bsCustomFileInput.init();
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+      }
+      if (mensaje == "2" || mensaje == "4") {
+        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+      }
+
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+      }
+
+      if (mensaje == "5") {
+        successAlert('Exito', 'El Producto se ha desactivado exitosamente!');
+      }
+
+      if (mensaje == "6") {
+        errorAlert('Error', 'No se logro desactivar la categoria');
+      }
+
+      $("#tasaC_det").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["excel", "pdf"]
+      }).buttons().container().appendTo('#tasaC_det_wrapper .col-md-6:eq(0)');
+      /*
+      $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+      });*/
     });
   </script>
 </body>

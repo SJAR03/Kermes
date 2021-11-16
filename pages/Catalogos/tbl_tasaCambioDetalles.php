@@ -4,6 +4,8 @@ include '../../datos/dt_tcd.php';
 
 $dtTasaDet = new Dt_TCD();
 
+
+
 $varMsj = 0;
 
 if (isset($varMsj)) {
@@ -401,13 +403,6 @@ if (isset($varMsj)) {
                                         <p>Tasa Cambio</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
@@ -484,10 +479,10 @@ if (isset($varMsj)) {
                                         <th>Moneda cambio</th>
                                         <th>Fecha</th>
                                         <th>Tipo de cambio</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     <?php foreach ($dtTasaDet->listarTasaDetalles() as $r) : ?>
                                         <tr>
@@ -496,7 +491,6 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('moneda_cambio'); ?></td>
                                             <td><?php echo $r->__GET('fecha'); ?></td>
                                             <td><?php echo $r->__GET('tipo_cambio'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
                                                 <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
                                                 <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
@@ -504,6 +498,7 @@ if (isset($varMsj)) {
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
+
                                 <tfoot>
                                     <tr>
                                         <th>ID</th>
@@ -511,7 +506,6 @@ if (isset($varMsj)) {
                                         <th>Moneda cambio</th>
                                         <th>Fecha</th>
                                         <th>Tipo de cambio</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>

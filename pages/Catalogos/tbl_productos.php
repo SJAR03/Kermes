@@ -16,7 +16,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla Usuarios</title>
+    <title>KERMESSE | Tabla Productos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -27,6 +27,7 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
@@ -165,7 +166,7 @@ if (isset($varMsj)) {
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Kermesse</span>
             </a>
 
             <!-- Sidebar -->
@@ -400,13 +401,6 @@ if (isset($varMsj)) {
                                         <p>Tasa Cambio</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
@@ -495,7 +489,10 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
                                                 <a href="frm_edit_productos.php?editP=<?php echo $r->__GET('id_producto') ?>" target="blank"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_productos.php?viewP=<?php echo $r->__GET('id_producto') ?>" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_view_productos.php?viewP=<?php echo $r->__GET('id_producto') ?>" target="blank"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="#" title="Eliminar Productos" target="blank">
+                                                    <i class="far fa-trash-alt fa-2x" onclick="deactivateP(<?php echo $r->__GET('id_producto') ?>);"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -551,19 +548,57 @@ if (isset($varMsj)) {
         <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
 
+        <!-- JAlert js -->
+        <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+        <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+        </script>
         <!-- AdminLTE App -->
         <script src="../../dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="../../dist/js/demo.js"></script>
         <!-- Page specific script -->
         <script>
-            $(function() {
+            function deactivateP(p) {
+                confirm(function(e, btn) {
+                        e.preventDefault();
+                        window.location.href = "../../negocio/ng_producto.php?delP=" + p;
+                    },
+                    function(e, btn) {
+                        e.preventDefault();
+                    });
+            }
+
+            $(document).ready(function() {
+                var mensaje = 0;
+                mensaje = "<?php echo $varMsj ?>";
+
+                if (mensaje == "1") {
+                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+                }
+                if (mensaje == "2" || mensaje == "4") {
+                    errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+
+                if (mensaje == "3") {
+                    successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+                }
+
+                if (mensaje == "5") {
+                    successAlert('Exito', 'El Producto se ha desactivado exitosamente!');
+                }
+
+                if (mensaje == "6") {
+                    errorAlert('Error', 'No se logro desactivar la categoria');
+                }
+
                 $("#productos").DataTable({
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
                     "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#productos_wrapper .col-md-6:eq(0)');
+                /*
                 $('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
@@ -572,7 +607,7 @@ if (isset($varMsj)) {
                     "info": true,
                     "autoWidth": false,
                     "responsive": true,
-                });
+                });*/
             });
         </script>
 </body>

@@ -6,9 +6,12 @@ include '../../entidades/moneda.php';
 include '../../datos/dt_moneda.php';
 include '../../entidades/tasaCambio.php';
 include '../../datos/dt_tasaCambio.php';
+include '../../entidades/tasaCambioDetalles.php';
+include '../../datos/dt_tcd.php';
 
 $dtTasa = new Dt_TasaCambio();
 $dtMoneda = new Dt_Moneda();
+$dtTasaDet = new Dt_TCD();
 
 $varMsj = 0;
 
@@ -24,7 +27,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Edición de tasas de cambio</title>
+  <title>AdminLTE 3 | Registro de tasas de cambio</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -404,13 +407,6 @@ if (isset($varMsj)) {
                     <p>Tasa Cambio</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
-                  </a>
-                </li>
               </ul>
             </li>
 
@@ -452,12 +448,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nueva denominación</h1>
+              <h1>Nueva Tasa de Cambio</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar tasa de cambio</li>
+                <li class="breadcrumb-item active">Registrar tasa de cambio</li>
               </ol>
             </div>
           </div>
@@ -473,7 +469,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar tasa de cambio</h3>
+                  <h3 class="card-title">Registrar tasa de cambio</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -528,18 +524,106 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card -->
             </div>
+
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Registrar detalle</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label>Fecha</label>
+                      <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Tipo de cambio</label>
+                      <input type="number" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio required">
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
+                </form>
+
+
+              </div>
+              <!-- /.card -->
+            </div>
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Detalles - Tasas de cambio disponibles</h3>
+                </div>
+
+                <div class="card-body">
+                  <table id="tasaC_det" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <?php foreach ($dtTasaDet->listarTasaDetalles($dtTasa->getLastTasa()) as $r) : ?>
+                        <tr>
+                          <td><?php echo $r->__GET('id'); ?></td>
+                          <td><?php echo $r->__GET('moneda_origen'); ?></td>
+                          <td><?php echo $r->__GET('moneda_cambio'); ?></td>
+                          <td><?php echo $r->__GET('tipo_cambio'); ?></td>
+                          <td>
+                            <a href="frm_edit_tasaCambio.php?editTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                            <a href="frm_edit_tasaCambio.php?viewTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
       <!-- /.content -->
+
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 3.1.0-rc
+        </div>
+        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+      </footer>
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.1.0-rc
-      </div>
-      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -553,16 +637,53 @@ if (isset($varMsj)) {
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../../plugins/DT/datatables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
   <!-- bs-custom-file-input -->
   <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
+  <!-- Select2-->
+  <script src="../../plugins/select2/js/select2.full.min.js"></script>
+
   <!-- Page specific script -->
   <script>
     $(function() {
       bsCustomFileInput.init();
+    });
+  </script>
+
+  <script>
+    $(function() {
+      $("#tasaC_det").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["excel", "pdf"]
+      }).buttons().container().appendTo('#tasaC_det_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
     });
   </script>
 </body>

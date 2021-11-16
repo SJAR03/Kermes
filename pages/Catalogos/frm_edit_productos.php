@@ -8,15 +8,18 @@ include '../../Datos/dt_categoria_producto.php';
 include '../../Entidades/comunidad.php';
 include '../../Datos/dt_Comunidad.php';
 
-$P = new Dt_Producto();
 $dtc = new Dt_CategoriaProducto();
 $dtCo = new Dt_Comunidad();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$P = new Productos();
+$dtP = new Dt_Producto();
+
+$varIdProd = 0;
+if (isset($varIdProd)) {
+    $varIdProd = $_GET['editP'];
 }
 
+$P = $dtP->getProducto($varIdProd);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +28,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | General Form Elements</title>
+    <title>KERMESSE | Tabla Productos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -405,13 +408,6 @@ if (isset($varMsj)) {
                                         <p>Tasa Cambio</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
@@ -474,73 +470,59 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Producto</h3>
+                                    <h3 class="card-title">Modificar Producto</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_producto.php">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Producto</label>
-                                            <input type="text" class="form-control" id="prod_nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de Producto" title="Ingrese el nombre de Producto" required>
+                                            <input type="hidden" id="id_producto" name="id_producto" />
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de Producto" title="Ingrese el nombre de Producto" required>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
                                             <label>Selecciona la Comunidad</label>
-                                            <select class="form-control" name="comunidad" id="id_comunidad" required>
+                                            <select class="form-control" name="id_comunidad" id="id_comunidad" required>
                                                 <option value="">Seleccione...</option>
-
                                                 <?php foreach ($dtCo->listaComunidad() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                                                    </tr>
-
+                                                    <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Selecciona la Categoría</label>
-                                            <select class="form-control" name="categoria" id="id_categoria_producto" required>
+                                            <select class="form-control" name="id_cat_producto" id="id_cat_producto" required>
                                                 <option value="">Seleccione...</option>
-
                                                 <?php foreach ($dtc->listaCat() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_categoria_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                                                    </tr>
-
+                                                    <option value="<?php echo $r->__GET('id_categoria_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="text" class="form-control" id="prod_descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Cantidad</label>
-                                            <input type="text" class="form-control" id="prod_cantidad" name="cantidad" placeholder="Ingrese la cantidad" title="Ingrese la cantidad" required>
+                                            <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad" title="Ingrese la cantidad" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Precio Sugerido</label>
-                                            <input type="text" class="form-control" id="prod_precio" name="precio_sugeridov" placeholder="Ingrese el precio" title="Ingrese el precio" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="prod_estado" id="estado" disabled>
-                                                <option value="1">Ingresado</option>
-                                                <option value="2">Modificado</option>
-                                                <option value="3">Eliminado</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="preciov_sugerido" name="preciov_sugerido" placeholder="Ingrese el precio" title="Ingrese el precio" required>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                        <a href="tbl_productos.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                                     </div>
                                 </form>
                             </div>
@@ -584,6 +566,25 @@ if (isset($varMsj)) {
     <script>
         $(function() {
             bsCustomFileInput.init();
+        });
+    </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_comunidad").val("<?php echo $P->__GET('id_comunidad') ?>");
+            $("#id_cat_producto").val("<?php echo $P->__GET('id_cat_producto') ?>");
+            $("#nombre").val("<?php echo $P->__GET('nombre') ?>");
+            $("#descripcion").val("<?php echo $P->__GET('descripcion') ?>");
+            $("#cantidad").val("<?php echo $P->__GET('cantidad') ?>");
+            $("#preciov_sugerido").val("<?php echo $P->__GET('preciov_sugerido') ?>");
+
+            $("#id_producto").val("<?php echo $P->__GET('id_producto') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
         });
     </script>
 </body>

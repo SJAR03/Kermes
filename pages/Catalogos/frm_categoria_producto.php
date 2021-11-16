@@ -399,13 +399,6 @@ if (isset($varMsj)) {
                                         <p>Tasa Cambio</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
@@ -472,21 +465,23 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_categoria_producto.php">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nombre: </label>
-                                            <input type="text" class="form-control" id="cat_nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre de Categoría" title="Ingrese nombre de Categoría" required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre de Categoría" title="Ingrese nombre de Categoría" required>
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                                         </div>
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="text" class="form-control" id="cat_descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a href="tbl_categoria_producto.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                                     </div>
                                 </form>
                             </div>

@@ -1,37 +1,44 @@
 <?php
-include '../../entidades/vw_tasaCambio.php';
-include '../../datos/dt_tasaCambio.php';
+include '../../Entidades/productos.php';
+include '../../Datos/dt_productos.php';
 
-$dtTasa = new Dt_TasaCambio();
+include '../../Entidades/categoria_producto.php';
+include '../../Datos/dt_categoria_producto.php';
 
-$varMsj = 0;
+include '../../Entidades/comunidad.php';
+include '../../Datos/dt_Comunidad.php';
 
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$dtc = new Dt_CategoriaProducto();
+$dtCo = new Dt_Comunidad();
+
+$P = new Productos();
+$dtP = new Dt_Producto();
+
+$varIdProd = 0;
+if (isset($varIdProd)) {
+    $varIdProd = $_GET['viewP'];
 }
+
+$P = $dtP->getProducto($varIdProd);
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Denominaciones</title>
+    <title>KERMESSE | Productos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
-
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -401,6 +408,13 @@ if (isset($varMsj)) {
                                         <p>Tasa Cambio</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -442,87 +456,100 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Tasas de cambio</h1>
+                            <h1>Manipulación de Datos</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Monedas</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Manipulación de Datos</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Listado de las tasas de cambio disponibles</h3>
-                        </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Visualizar Producto</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form method="POST" action="../../negocio/ng_producto.php">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Producto</label>
+                                            <input type="hidden" id="id_producto" />
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de Producto" title="Ingrese el nombre de Producto" disabled>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
 
-                        <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Selecciona la Comunidad</label>
+                                            <select class="form-control" name="id_comunidad" id="id_comunidad" disabled>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtCo->listaComunidad() as $r) : ?>
+                                                    <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
 
-                            <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_tasaCambio.php" title="Registrar tasa de cambio" target="blank">
-                                    <i class="far fa-plus-square fa-2x"></i>
-                                </a>
+                                        <div class="form-group">
+                                            <label>Selecciona la Categoría</label>
+                                            <select class="form-control" name="id_cat_producto" id="id_cat_producto" disabled>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtc->listaCat() as $r) : ?>
+                                                    <option value="<?php echo $r->__GET('id_categoria_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Cantidad</label>
+                                            <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad" title="Ingrese la cantidad" disabled>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Precio Sugerido</label>
+                                            <input type="text" class="form-control" id="preciov_sugerido" name="preciov_sugerido" placeholder="Ingrese el precio" title="Ingrese el precio" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <a href="tbl_productos.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
+                                    </div>
+                                </form>
                             </div>
-
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Moneda origen</th>
-                                        <th>Moneda cambio</th>
-                                        <th>Mes</th>
-                                        <th>Año</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($dtTasa->listarvwTasas() as $r) : ?>
-                                        <tr>
-                                            <td><?php echo $r->__GET('id'); ?></td>
-                                            <td><?php echo $r->__GET('origen'); ?></td>
-                                            <td><?php echo $r->__GET('cambio'); ?></td>
-                                            <td><?php echo $r->__GET('mes'); ?></td>
-                                            <td><?php echo $r->__GET('year'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
-                                            <td>
-                                                <a href="frm_edit_tasaCambio.php?editTasaCambio=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_tasaCambio.php?viewTasaCambio=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Moneda origen</th>
-                                        <th>Moneda cambio</th>
-                                        <th>Mes</th>
-                                        <th>Año</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <!-- /.card -->
                         </div>
+                        <!-- /.card -->
                     </div>
+                    <!--/.col (right) -->
                 </div>
-            </div>
-
-
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
-
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
         </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
+
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -535,22 +562,8 @@ if (isset($varMsj)) {
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/DT/DataTables-1.11.2/css/dataTables.dataTables.min.css"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
-
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -558,24 +571,28 @@ if (isset($varMsj)) {
     <!-- Page specific script -->
     <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["excel", "pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+            bsCustomFileInput.init();
         });
     </script>
 
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_comunidad").val("<?php echo $P->__GET('id_comunidad') ?>");
+            $("#id_cat_producto").val("<?php echo $P->__GET('id_cat_producto') ?>");
+            $("#nombre").val("<?php echo $P->__GET('nombre') ?>");
+            $("#descripcion").val("<?php echo $P->__GET('descripcion') ?>");
+            $("#cantidad").val("<?php echo $P->__GET('cantidad') ?>");
+            $("#preciov_sugerido").val("<?php echo $P->__GET('preciov_sugerido') ?>");
+
+            $("#id_producto").val("<?php echo $P->__GET('id_producto') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
 </body>
 
 </html>

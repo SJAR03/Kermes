@@ -5,12 +5,13 @@ include '../../Entidades/categoria_producto.php';
 include '../../Datos/dt_categoria_producto.php';
 
 $dtCP = new Dt_CategoriaProducto();
+$cp = new Categoria_Producto();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdCP = 0;
+if (isset($varIdCP)) {
+    $varIdCP = $_GET['editCP'];
 }
-
+$cp = $dtCP->getCatProducto($varIdCP);
 ?>
 
 <!DOCTYPE html>
@@ -399,13 +400,6 @@ if (isset($varMsj)) {
                                         <p>Tasa Cambio</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
 
@@ -468,25 +462,28 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Categorías de Producto</h3>
+                                    <h3 class="card-title">Modificar Categorías de Producto</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_categoria_producto.php">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nombre: </label>
-                                            <input type="text" class="form-control" id="cat_nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre de Categoría" title="Ingrese nombre de Categoría" required>
+                                            <input type="hidden" value="<?php echo $varIdCP ?>" id="id_cat" />
+                                            <input type="text" value="<?php echo $cp->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre de Categoría" title="Ingrese nombre de Categoría" required>
+                                            <input type="hidden" value="2" name="txtaccion" />
                                         </div>
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="text" class="form-control" id="cat_descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
+                                            <input type="text" value="<?php echo $cp->__GET('descripcion') ?>" class="form-control" id="descripcion" name="descripcion" maxlength="100" placeholder="Ingrese su Descripción" title="Ingrese su Descripción" required>
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                        <a href="tbl_categoria_producto.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                                     </div>
                                 </form>
                             </div>
@@ -527,11 +524,26 @@ if (isset($varMsj)) {
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+
     <script>
         $(function() {
             bsCustomFileInput.init();
         });
     </script>
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#nombre").val("<?php echo $cp->__GET('nombre') ?>");
+            $("#descripcion").val("<?php echo $cp->__GET('descripcion') ?>");
+            $("#id_cat").val("<?php echo $cp->__GET('id_categoria_producto') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
 </body>
 
 </html>
