@@ -1,10 +1,12 @@
 <?php
-include '../../entidades/tasaCambioDetalles.php';
-include '../../datos/dt_tcd.php';
+include '../../Entidades/vwtasacambiodet.php';
+include '../../Datos/dt_tasaCambio_detalle.php';
 
-$dtTasaDet = new Dt_TCD();
+include '../../Entidades/tasaCambio.php';
+include '../../Datos/dt_tasaCambio.php';
 
-
+$dtTasaDet = new Dt_TasaCambioDet;
+$dtTasa = new Dt_TasaCambio;
 
 $varMsj = 0;
 
@@ -464,13 +466,6 @@ if (isset($varMsj)) {
                         </div>
 
                         <div class="card-body">
-
-                            <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_tasaCambioDetalles.php" title="Registrar detalles de la tasa de cambio" target="blank">
-                                    <i class="far fa-plus-square fa-2x"></i>
-                                </a>
-                            </div>
-
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -484,16 +479,16 @@ if (isset($varMsj)) {
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($dtTasaDet->listarTasaDetalles() as $r) : ?>
+                                    <?php foreach ($dtTasaDet->listarTasaDetalles($dtTasa->getIdTasa()) as $r) : ?>
                                         <tr>
-                                            <td><?php echo $r->__GET('id'); ?></td>
+                                            <td><?php echo $r->__GET('id_tasaCambio_det'); ?></td>
                                             <td><?php echo $r->__GET('moneda_origen'); ?></td>
                                             <td><?php echo $r->__GET('moneda_cambio'); ?></td>
                                             <td><?php echo $r->__GET('fecha'); ?></td>
-                                            <td><?php echo $r->__GET('tipo_cambio'); ?></td>
+                                            <td><?php echo $r->__GET('tipoCambio'); ?></td>
                                             <td>
-                                                <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -1,9 +1,9 @@
 <?php
-include_once("../Entidades/tasaCambio.php");
-include_once("../Datos/dt_tasaCambio.php");
+include_once("../Entidades/tasaCambioDetalles.php");
+include_once("../Datos/dt_tasaCambio_detalle.php");
 
-$tc = new TasaCambio;
-$dtTc = new Dt_TasaCambio;
+$tcd = new TasaCambioDetalle;
+$dtTcd = new Dt_TasaCambioDet;
 
 if ($_POST) {
     $varAccion = $_POST['txtaccion'];
@@ -13,12 +13,12 @@ if ($_POST) {
             try {
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
-                $tc->__SET('id_monedaO', $_POST['id_monedaO']);
-                $tc->__SET('id_monedaC', $_POST['id_monedaC']);
-                $tc->__SET('mes', $_POST['mes']);
-                $tc->__SET('anio', $_POST['anio']);
+                $tcd->__SET('id_monedaO', $_POST['id_monedaO']);
+                $tcd->__SET('id_monedaC', $_POST['id_monedaC']);
+                $tcd->__SET('mes', $_POST['mes']);
+                $tcd->__SET('anio', $_POST['anio']);
 
-                $dtTc->regTasas($tc);
+                $dtTcd->regTasasDet($tc);
                 //var_dump($emp);
                 header("Location: /Kermes/pages/Catalogos/frm_tasaCambioDetalles.php?msj=1");
             } catch (Exception $e) {

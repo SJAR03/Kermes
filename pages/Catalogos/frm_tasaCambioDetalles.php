@@ -2,23 +2,29 @@
 
 error_reporting(0);
 
-include '../../entidades/moneda.php';
-include '../../datos/dt_moneda.php';
-include '../../entidades/tasaCambio.php';
-include '../../datos/dt_tasaCambio.php';
-include '../../entidades/tasaCambioDetalles.php';
-include '../../datos/dt_tcd.php';
+include '../../Entidades/moneda.php';
+include '../../Datos/dt_moneda.php';
 
-$dtTasa = new Dt_TasaCambio();
+include '../../Entidades/vwtasacambiodet.php';
+include '../../Datos/dt_tasaCambio_detalle.php';
+
+include '../../Entidades/tasaCambio.php';
+include '../../Datos/dt_tasaCambio.php';
+
+
+$dtTasaDet = new Dt_TasaCambioDet;
+$dtTasa = new Dt_TasaCambio;
 $dtMoneda = new Dt_Moneda();
-$dtTasaDet = new Dt_TCD();
 
+$tc = new TasaCambio;
+$tc = $dtTasa->getTasa();
 $varMsj = 0;
 
 
 if (isset($varMsj)) {
   $varMsj = $_GET['msj'];
 }
+
 
 ?>
 
@@ -481,18 +487,18 @@ if (isset($varMsj)) {
                   <div class="card-body">
                     <div class="form-group">
                       <label>Moneda origen</label>
-                      <select class="form-control" name="id_monedaO" id="id_monedaO">
+                      <select class="form-control" name="id_monedaO" id="id_monedaO" disabled>
                         <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
                           <option value="<?php echo $r->__GET('id') ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
                       </select>
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                      <input type="text" name="id_tasaCambio" id="id_tasaCambio" />
+                      <input type="hidden" name="id_tasaCambio" id="id_tasaCambio" />
                     </div>
 
                     <div class="form-group">
                       <label>Moneda cambio</label>
-                      <select class="form-control" name="id_monedaC" id="id_monedaC">
+                      <select class="form-control" name="id_monedaC" id="id_monedaC" disabled>
                         <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
                           <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
@@ -501,12 +507,12 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Mes</label>
-                      <input type="text" class="form-control" id="mes" name="mes" maxlength="45" placeholder="Mes" title="Ingrese el mes" required>
+                      <input type="text" class="form-control" id="mes" name="mes" maxlength="45" placeholder="Mes" title="Ingrese el mes" disabled>
                     </div>
 
                     <div class="form-group">
                       <label>Año</label>
-                      <input type="text" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" required>
+                      <input type="text" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" disabled>
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -535,6 +541,7 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Fecha</label>
                       <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                      <input type="hidden" name="id_tasaCambio2" id="id_tasaCambio2" />
                     </div>
 
                     <div class="form-group">
@@ -563,10 +570,46 @@ if (isset($varMsj)) {
                 </div>
 
                 <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Fecha</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
 
+                    <tbody>
+                      <?php foreach ($dtTasaDet->listarTasaDetalles($dtTasa->getIdTasa()) as $r) : ?>
+                        <tr>
+                          <td><?php echo $r->__GET('id_tasaCambio_det'); ?></td>
+                          <td><?php echo $r->__GET('moneda_origen'); ?></td>
+                          <td><?php echo $r->__GET('moneda_cambio'); ?></td>
+                          <td><?php echo $r->__GET('fecha'); ?></td>
+                          <td><?php echo $r->__GET('tipoCambio'); ?></td>
+                          <td>
+                            <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
+                            <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
 
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Fecha</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
-
               </div>
             </div>
           </div>
@@ -633,6 +676,7 @@ if (isset($varMsj)) {
     $(document).ready(function() {
       var mensaje = 0;
       mensaje = "<?php echo $varMsj ?>";
+      setValores();
 
       if (mensaje == "1") {
         successAlert('Exito', 'Los datos han sido registrado exitosamente!');
@@ -670,6 +714,16 @@ if (isset($varMsj)) {
           "responsive": true,
       });*/
     });
+
+    function setValores() {
+      $("#id_monedaO").val("<?php echo $tc->__GET('id_monedaO') ?>");
+      $("#id_monedaC").val("<?php echo $tc->__GET('id_monedaC') ?>");
+      $("#mes").val("<?php echo $tc->__GET('mes') ?>");
+      $("#anio").val("<?php echo $tc->__GET('anio') ?>");
+
+      $("#id_tasaCambio").val("<?php echo $tc->__GET('id_tasaCambio') ?>")
+      $("#id_tasaCambio2").val("<?php echo $tc->__GET('id_tasaCambio') ?>");
+    }
   </script>
 </body>
 

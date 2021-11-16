@@ -59,6 +59,27 @@ class Dt_TasaCambio extends Conexion
         }
     }
 
+    public function getIdTasa()
+    {
+        try {
+            $this->myCon = parent::conectar();
+
+            $querySQL = "SELECT id_tasaCambio from dbkermesse.tbl_tasacambio Order by id_tasaCambio DESC Limit 1";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute();
+
+            $tc = new TasaCambio;
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $tc->__SET('id_tasaCambio', $r->id_tasaCambio);
+            $this->myCon = parent::desconectar();
+
+            return $tc->__GET('id_tasaCambio');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getTasa()
     {
         try {
@@ -66,9 +87,10 @@ class Dt_TasaCambio extends Conexion
 
             $querySQL = "SELECT * from dbkermesse.tbl_tasacambio Order by id_tasaCambio DESC Limit 1";
 
-            $stm = $this->myCon->prepare($querySQL)->execute();
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute();
 
-            $tc = new TasaCambioDetalle;
+            $tc = new TasaCambio;
             $r = $stm->fetch(PDO::FETCH_OBJ);
 
             $tc->__SET('id_tasaCambio', $r->id_tasaCambio);
@@ -77,6 +99,7 @@ class Dt_TasaCambio extends Conexion
             $tc->__SET('mes', $r->mes);
             $tc->__SET('anio', $r->anio);
             $tc->__SET('estado', $r->estado);
+
 
             $this->myCon = parent::desconectar();
 

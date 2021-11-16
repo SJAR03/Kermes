@@ -2,16 +2,18 @@
 
 error_reporting(0);
 
-include '../../entidades/moneda.php';
-include '../../datos/dt_moneda.php';
-include '../../entidades/tasaCambio.php';
-include '../../datos/dt_tasaCambio.php';
-include '../../entidades/tasaCambioDetalles.php';
-include '../../datos/dt_tcd.php';
+include '../../Entidades/moneda.php';
+include '../../Datos/dt_moneda.php';
 
-$dtTasa = new Dt_TasaCambio();
+include '../../Entidades/vwtasacambiodet.php';
+include '../../Datos/dt_tasaCambio_detalle.php';
+
+include '../../Entidades/tasaCambio.php';
+include '../../Datos/dt_tasaCambio.php';
+
+$dtTasaDet = new Dt_TasaCambioDet;
+$dtTasa = new Dt_TasaCambio;
 $dtMoneda = new Dt_Moneda();
-$dtTasaDet = new Dt_TCD();
 
 $varMsj = 0;
 
@@ -487,7 +489,7 @@ if (isset($varMsj)) {
                         <?php endforeach; ?>
                       </select>
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                      <input type="text" name="id_tasaCambio" id="id_tasaCambio" />
+                      <input type="hidden" name="id_tasaCambio" id="id_tasaCambio" />
                     </div>
 
                     <div class="form-group">
@@ -563,8 +565,45 @@ if (isset($varMsj)) {
                 </div>
 
                 <div class="card-body">
+                  <table id="tasaC_det" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Fecha</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
 
+                    <tbody>
+                      <?php foreach ($dtTasaDet->listarTasaDetalles($dtTasa->getIdTasa() + 1) as $r) : ?>
+                        <tr>
+                          <td><?php echo $r->__GET('id_tasaCambio_det'); ?></td>
+                          <td><?php echo $r->__GET('moneda_origen'); ?></td>
+                          <td><?php echo $r->__GET('moneda_cambio'); ?></td>
+                          <td><?php echo $r->__GET('fecha'); ?></td>
+                          <td><?php echo $r->__GET('tipoCambio'); ?></td>
+                          <td>
+                            <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
+                            <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
 
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Fecha</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
 
               </div>

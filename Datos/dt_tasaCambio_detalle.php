@@ -1,30 +1,29 @@
 <?php
 include_once("Conexion.php");
 
-class TasaCambioDet extends Conexion
+class Dt_TasaCambioDet extends Conexion
 {
     public function listarTasaDetalles($id)
     {
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_tasacambiodet ;";
-
+            $querySQL = "SELECT * FROM dbkermesse.vwtasacambiodet Where id_tasaCambio = {$id}";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
 
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-                $tc = new TasaCambio;
+                $tasaD = new VwTasaCambioDetalle();
 
-                $tc->__SET('id_tasaCambio_det', $r->id_tasaCambio_det);
-                $tc->__SET('moneda_origen', $r->moneda_origen);
-                $tc->__SET('moneda_cambio', $r->moneda_cambio);
-                $tc->__SET('fecha', $r->fecha);
-                $tc->__SET('tipoCambio', $r->tipoCambio);
-                $tc->__SET('estado', $r->estado);
+                $tasaD->__SET('id_tasaCambio_det', $r->id_tasaCambio_det);
+                $tasaD->__SET('moneda_origen', $r->moneda_origen);
+                $tasaD->__SET('moneda_cambio', $r->moneda_cambio);
+                $tasaD->__SET('fecha', $r->fecha);
+                $tasaD->__SET('tipoCambio', $r->tipoCambio);
+                $tasaD->__SET('estado', $r->estado);
 
 
-                $result[] = $tc;
+                $result[] = $tasaD;
             }
 
             $this->myCon = parent::desconectar();
@@ -32,5 +31,9 @@ class TasaCambioDet extends Conexion
         } catch (Exception $e) {
             die($e->getMessage());
         }
+    }
+
+    public function regTasasDet(TasaCambioDetalle $tc)
+    {
     }
 }
