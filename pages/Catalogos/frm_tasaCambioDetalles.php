@@ -536,17 +536,18 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="">
+                <form method="POST" action="../../negocio/ng_tasaCambio_det.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Fecha</label>
-                      <input type="date" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                      <input type="date" name="fecha" id="fecha" class="form-control datetimepicker-input" data-target="#reservationdate" />
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                       <input type="hidden" name="id_tasaCambio2" id="id_tasaCambio2" />
                     </div>
 
                     <div class="form-group">
                       <label>Tipo de cambio</label>
-                      <input type="number" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio required">
+                      <input type="number" step="any" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio required">
                     </div>
                   </div>
                   <!-- /.card-body -->
@@ -570,7 +571,7 @@ if (isset($varMsj)) {
                 </div>
 
                 <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tasaC_det" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>ID</th>
@@ -589,7 +590,7 @@ if (isset($varMsj)) {
                           <td><?php echo $r->__GET('moneda_origen'); ?></td>
                           <td><?php echo $r->__GET('moneda_cambio'); ?></td>
                           <td><?php echo $r->__GET('fecha'); ?></td>
-                          <td><?php echo $r->__GET('tipoCambio'); ?></td>
+                          <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                           <td>
                             <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
                             <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>

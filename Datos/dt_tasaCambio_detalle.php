@@ -19,7 +19,7 @@ class Dt_TasaCambioDet extends Conexion
                 $tasaD->__SET('moneda_origen', $r->moneda_origen);
                 $tasaD->__SET('moneda_cambio', $r->moneda_cambio);
                 $tasaD->__SET('fecha', $r->fecha);
-                $tasaD->__SET('tipoCambio', $r->tipoCambio);
+                $tasaD->__SET('tipo_cambio', $r->tipoCambio);
                 $tasaD->__SET('estado', $r->estado);
 
 
@@ -33,7 +33,27 @@ class Dt_TasaCambioDet extends Conexion
         }
     }
 
-    public function regTasasDet(TasaCambioDetalle $tc)
+    public function regTasasDet(TasaCambioDetalle $tcd)
     {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tasaCambio_det(
+                        id_tasaCambio, 
+                        fecha,
+                        tipoCambio,
+                        estado)
+                    VALUES (?, ?, ?, 1)";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $tcd->__GET('id_tasaCambio'),
+                    $tcd->__GET('fecha'),
+                    $tcd->__GET('tipo_cambio')
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 }

@@ -13,12 +13,11 @@ if ($_POST) {
             try {
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
-                $tcd->__SET('id_monedaO', $_POST['id_monedaO']);
-                $tcd->__SET('id_monedaC', $_POST['id_monedaC']);
-                $tcd->__SET('mes', $_POST['mes']);
-                $tcd->__SET('anio', $_POST['anio']);
+                $tcd->__SET('id_tasaCambio', $_POST['id_tasaCambio2']);
+                $tcd->__SET('fecha', $_POST['fecha']);
+                $tcd->__SET('tipo_cambio', $_POST['tipoCambio']);
 
-                $dtTcd->regTasasDet($tc);
+                $dtTcd->regTasasDet($tcd);
                 //var_dump($emp);
                 header("Location: /Kermes/pages/Catalogos/frm_tasaCambioDetalles.php?msj=1");
             } catch (Exception $e) {
