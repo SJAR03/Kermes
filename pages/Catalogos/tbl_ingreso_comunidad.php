@@ -488,13 +488,13 @@ if (isset($varMsj)) {
                                         <th>Comunidad</th>
                                         <th>Producto</th>
                                         <th>Cantidad Productos</th>
+                                        <th>Nombre Bono</th>
+                                        <th>Denominacion</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal Bono</th>
                                         <th>Total Bonos</th>
-                                        <!-- <th>Usuario Creacion</th> -->
+                                        <th>Usuario Creacion</th>
                                         <th>Fecha Creacion</th>
-                                        <!-- <th>Usuario Modificacion</th> -->
-                                        <th>Fecha Modificacion</th>
-                                        <!--  <th>Usuario Eliminacion</th> -->
-                                        <th>Fecha Eliminacion</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -506,13 +506,14 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('comunidad'); ?></td>
                                             <td><?php echo $r->__GET('producto'); ?></td>
                                             <td><?php echo $r->__GET('cant_productos'); ?></td>
+                                            <td><?php echo $r->__GET('nom_bono'); ?></td>
+                                            <td><?php echo $r->__GET('denominacion'); ?></td>
+                                            <td><?php echo $r->__GET('cantidad'); ?></td>
+                                            <td><?php echo $r->__GET('subtotal_bono'); ?></td>
                                             <td><?php echo $r->__GET('total_bonos'); ?></td>
-                                            <!-- <td><?php echo $r->__GET('usuario_creacion'); ?></td> -->
+                                            <td><?php echo $r->__GET('usuario_creacion'); ?></td> 
                                             <td><?php echo $r->__GET('fecha_creacion'); ?></td>
-                                            <!-- <td><?php echo $r->__GET('usuario_modificacion'); ?></td> -->
-                                            <td><?php echo $r->__GET('fecha_modificacion'); ?></td>
-                                            <!-- <td><?php echo $r->__GET('usuario_eliminacion'); ?></td> -->
-                                            <td><?php echo $r->__GET('fecha_eliminacion'); ?></td>
+                                           
 
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
@@ -530,13 +531,13 @@ if (isset($varMsj)) {
                                         <th>Comunidad</th>
                                         <th>Producto</th>
                                         <th>Cantidad Productos</th>
+                                        <th>Nombre Bono</th>
+                                        <th>Denominacion</th>
+                                        <th>Cantidad</th>
+                                        <th>Subtotal Bono</th>
                                         <th>Total Bonos</th>
-                                        <!-- <th>Usuario Creacion</th> -->
+                                        <th>Usuario Creacion</th>
                                         <th>Fecha Creacion</th>
-                                        <!-- <th>Usuario Modificacion</th> -->
-                                        <th>Fecha Modificacion</th>
-                                        <!-- <th>Usuario Eliminacion</th> -->
-                                        <th>Fecha Eliminacion</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
