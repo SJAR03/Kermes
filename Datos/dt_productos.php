@@ -8,7 +8,7 @@ class Dt_Producto extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_productos";
+            $querySQL = "SELECT * FROM dbkermesse.vw_productos where estado =3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -42,7 +42,7 @@ class Dt_Producto extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_productos";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_productos where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -51,9 +51,7 @@ class Dt_Producto extends Conexion
 
                 $p->__SET('id_producto', $r->id_producto);
                 $p->__SET('id_comunidad', $r->id_comunidad);
-                $p->__SET('comunidad', $r->comunidad);
                 $p->__SET('id_cat_producto', $r->id_cat_producto);
-                $p->__SET('categoria', $r->categoria);
                 $p->__SET('nombre', $r->nombre);
                 $p->__SET('descripcion', $r->descripcion);
                 $p->__SET('cantidad', $r->cantidad);
