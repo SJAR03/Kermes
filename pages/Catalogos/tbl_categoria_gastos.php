@@ -496,7 +496,7 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('descripcion'); ?></td>
                                             <td><?php echo $r->__GET('Name_exp_4'); ?></td>
                                             <td>
-                                                <a href="frm_categoria_gastos.php"><i class="far fa-edit fa-2x" title="Editar la categoría gasto"></i></a>
+                                                <a href="frm_edit_categoria_gastos.php?editCom=<?php echo $r->__GET('id_categoria_gastos') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Categoría Gastos"></i></a>
                                                 <a href="frm_categoria_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar la categoría gasto"></i></a>
                                             </td>
                                         </tr>
@@ -559,24 +559,41 @@ if (isset($varMsj)) {
         <!-- AdminLTE for demo purposes -->
         <script src="../../dist/js/demo.js"></script>
         <!-- Page specific script -->
+
         <script>
-            $(function() {
+            $(document).ready(function() {
+                /////// VARIABLE DE CONTROL MSJ ////////
+                var mensaje = 0;
+                mensaje = "<?php echo $varMsj ?>";
+
+                if (mensaje == "1") {
+                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+                }
+                if (mensaje == "2") {
+                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+                ////////////////////////////////////////
+
+                //////////////DATATABLE/////////////////
                 $("#example1").DataTable({
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
                     "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
+
+                /*  $('#example2').DataTable({
+                     "paging": true,
+                     "lengthChange": false,
+                     "searching": false,
+                     "ordering": true,
+                     "info": true,
+                     "autoWidth": false,
+                     "responsive": true,
+                 }); */
+                ////////////////////////////////////////////
+
+            }); ///FIN DEL $(DOCUMENT).READY ()
         </script>
 </body>
 

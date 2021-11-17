@@ -1,5 +1,4 @@
 <?php
-
 include_once("conexion.php");
 
 class dt_gastos extends Conexion
@@ -15,9 +14,9 @@ class dt_gastos extends Conexion
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
-
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $us = new Vw_Gastos();
+
 
                 $us->__SET('id_registro_gastos', $r->id_registro_gastos);
                 $us->__SET('idKermesse', $r->idKermesse);
@@ -52,10 +51,10 @@ class dt_gastos extends Conexion
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
-
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $us = new Vw_Gastos();
 
+                
                 $us->__SET('id_registro_gastos', $r->id_registro_gastos);
                 $us->__SET('idKermesse', $r->idKermesse);
                 $us->__SET('kermesse', $r->kermesse);

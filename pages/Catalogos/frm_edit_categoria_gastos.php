@@ -2,11 +2,11 @@
 
 error_reporting(0);
 
-include '../../Entidades/parroquia.php';
-include '../../Datos/dt_parroquia.php';
+include '../../Entidades/categoria_gastos.php';
+include '../../Datos/dt_categoria_gastos.php';
 
-$dtComu = new Dt_Parroquia();
-$Comu = new Parroquia();
+$dtComu = new dt_categoria_gastos();
+$Comu = new categoria_gastos();
 
 $varIdComu = 0;
 
@@ -15,7 +15,7 @@ if (isset($varIdComu)) {
 }
 
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
-$Comu = $dtComu->getParroquia($varIdComu);
+$Comu = $dtComu->getCategoriaGastos($varIdComu);
 
 ?>
 
@@ -26,7 +26,7 @@ $Comu = $dtComu->getParroquia($varIdComu);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Parroquia</title>
+  <title>AdminLTE 3 | Categoría Gastos</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -454,12 +454,12 @@ $Comu = $dtComu->getParroquia($varIdComu);
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Editar Parroquia</h1>
+              <h1>Editar Categoría Gastos</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar Parroquia</li>
+                <li class="breadcrumb-item active">Editar Categoría Gastos</li>
               </ol>
             </div>
           </div>
@@ -475,43 +475,32 @@ $Comu = $dtComu->getParroquia($varIdComu);
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar Parroquia</h3>
+                  <h3 class="card-title">Editar Categoría Gastos</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_parroquia.php">
+                <form method="POST" action="../../negocio/ng_categoria_gastos.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" value="<?php echo $Comu->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
+                      <input type="text" value="<?php echo $Comu->__GET('nombre_categoria') ?>" class="form-control" id="nombre_categoria" name="nombre_categoria" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
-                      <label>Dirección</label>
-                      <input type="text" class="form-control" id="direccion" name="direccion" maxlength="45" placeholder="Ingrese una dirección" title="Ingrese la dirección" required>
+                      <label>Descripción</label>
+                      <input type="text" class="form-control" id="descripcion" name="responsable" maxlength="45" placeholder="Ingrese una descripción" title="Ingrese el nombre del responsable" required>
                     </div>
 
                     <div class="form-group">
-                      <label>Teléfono</label>
-                      <input type="text" class="form-control" id="telefono" name="telefono" maxlength="45" placeholder="Ingrese el numero de teléfono" title="Ingrese la dirección" required>
+                      <label>Estado</label>
+                      <select class="form-control" name="Name_exp_4" id="Name_exp_4">
+                        <option value="1">Activado</option>
+                        <option value="2">Modificado</option>
+                        <option value="3">Eliminado</option>
+                      </select>
                     </div>
 
-                    <div class="form-group">
-                      <label>Párroco</label>
-                      <input type="text" class="form-control" id="parroco" name="parroco" maxlength="45" placeholder="Ingrese el párroco" title="Ingrese el  párroco" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Logo</label>
-                      <input type="text" class="form-control" id="logo" name="logo" maxlength="45" placeholder="Ingrese el logo" title="Ingrese el logo" required>
-                    </div>
-
-
-                    <div class="form-group">
-                      <label>Sitio Web</label>
-                      <input type="text" class="form-control" id="sitio_web" name="sitio_web" maxlength="45" placeholder="Ingrese un sitio web" title="Ingrese un sitio web" required>
-                    </div>
 
                   </div>
                   <!-- /.card-body -->
@@ -560,12 +549,9 @@ $Comu = $dtComu->getParroquia($varIdComu);
   <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
-      $("#nombre").val("<?php echo $Comu->__GET('nombre') ?>");
-      $("#direccion").val("<?php echo $Comu->__GET('direccion') ?>");
-      $("#telefono").val("<?php echo $Comu->__GET('telefono') ?>");
-      $("#parroco").val("<?php echo $Comu->__GET('parroco') ?>");
-      $("#logo").val("<?php echo $Comu->__GET('logo') ?>");
-      $("#sitio_web").val("<?php echo $Comu->__GET('sitio_web') ?>");
+      $("#nombre_categoria").val("<?php echo $Comu->__GET('nombre_categoria') ?>");
+      $("#descripcion").val("<?php echo $Comu->__GET('descripcion') ?>");
+      $("#Name_exp_4").val("<?php echo $Comu->__GET('Name_exp_4') ?>");
 
     }
 

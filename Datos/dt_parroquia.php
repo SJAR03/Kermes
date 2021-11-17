@@ -32,4 +32,55 @@ class Dt_Parroquia extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function regParroquia(Parroquia $com)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_parroquia(nombre, direccion, telefono, parroco, logo, sitio_web)
+                VALUES (?, ?, ?, ?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                $com->__GET('nombre'),
+                $com->__GET('direccion'),
+                $com->__GET('telefono'),
+                $com->__GET('parroco'),
+                $com->__GET('logo'),
+                $com->__GET('sitio_web')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getParroquia($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_parroquia where idParroquia= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            
+                $ic = new Parroquia();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $ic->__SET('idParroquia', $r->idParroquia);
+                $ic->__SET('nombre', $r->nombre);
+                $ic->__SET('direccion', $r->direccion);
+                $ic->__SET('telefono', $r->telefono);
+                $ic->__SET('parroco', $r->parroco);
+                $ic->__SET('logo', $r->logo);
+                $ic->__SET('sitio_web', $r->sitio_web);
+            $this->myCon = parent::desconectar();
+            return $ic;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

@@ -75,18 +75,17 @@ class dt_arqueocaja extends Conexion
         }
     }
 
-    public function eliminarArqueo($ic)
+    /*public function eliminarArqueo($ic)
     {
-        try
-        {
-            this->myCon = parent::conectar();
+        try{
+            $this->myCon = parent::conectar();
             $qSQL = "UPDATE tbl_arqueocaja SET estado = 3, fecha_eliminacion = NOW(), usuario_eliminacion = 1 WHERE id_ArqueoCaja = ?";
             $stm = $this->myCon->prepare($qSQL);
             $stm->execute($qSQL);
             $this->myCon = parent::desconectar();
         }
     }
-
+*/
     public function getarqueocaja($id)
     {
         try {
