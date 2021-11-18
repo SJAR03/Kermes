@@ -1,7 +1,9 @@
-<?php 
+<?php
 
     include_once("Conexion.php");
+
     class Dt_Denominacion extends Conexion {
+
         public function listarDenominaciones() {
             try {
                 $this->myCon = parent::conectar();
@@ -29,6 +31,25 @@
                 die($e->getMessage());
             }
         }
+
+        public function registrarDenominacion(VwDenominacion $d)
+        {
+            try
+            {
+                $this->myCon = parent::conectar();
+                $query = "INSERT INTO tbl_denominacion (idMoneda, valor, valor_letras, estado) VALUES (?, ?, ?, 1)";
+                $this->myCon->prepare($query)->execute(array(
+                    $d->__GET('idMoneda'),
+                    $d->__GET('valor'),
+                    $d->__GET('valor_letras'),
+                ));
+                $this->myCon = parent::desconectar();
+            } catch (Exception $e)
+            {
+                die($e->getMessage());
+            }
+        }
+
     }
 
 ?>

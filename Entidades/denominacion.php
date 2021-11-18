@@ -1,6 +1,7 @@
-<?php 
+<?php
     class VwDenominacion {
         private $id;
+        private $idMoneda;
         private $nombre;
         private $valor;
         private $valor_letras;

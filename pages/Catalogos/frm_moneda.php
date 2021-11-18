@@ -474,27 +474,18 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_moneda.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Nombre</label>
                       <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                     </div>
 
                     <div class="form-group">
                       <label>Símbolo</label>
                       <input type="text" class="form-control" id="responsable" name="simbolo" maxlength="45" placeholder="Ingrese el símbolo de la moneda" title="Ingrese el símbolo de la moneda" required>
                     </div>
-
-                    <div class="form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado">
-                        <option value="1">Ingresado</option>
-                        <!-- <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option> -->
-                      </select>
-                    </div>
-
 
                   </div>
                   <!-- /.card-body -->
