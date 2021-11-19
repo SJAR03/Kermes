@@ -27,6 +27,7 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
@@ -483,7 +484,6 @@ if (isset($varMsj)) {
                                         <th>Nombe</th>
                                         <th>Valor</th>
                                         <th>Valor en letras</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -494,10 +494,9 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('nombre'); ?></td>
                                             <td><?php echo $r->__GET('valor'); ?></td>
                                             <td><?php echo $r->__GET('valor_letras'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
                                                 <a href="frm_edit_denominacion.php?editDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_denominacion.php?viewDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_view_denominacion.php?viewDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -508,7 +507,6 @@ if (isset($varMsj)) {
                                         <th>Nombe</th>
                                         <th>Valor</th>
                                         <th>Valor en letras</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -540,12 +538,10 @@ if (isset($varMsj)) {
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/DT/DataTables-1.11.2/css/dataTables.dataTables.min.css"></script>
+    <script src="../../plugins/DT/datatables.min.js"></script>
     <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
     <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
     <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
@@ -555,12 +551,43 @@ if (isset($varMsj)) {
     <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
     <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
+
+    <!-- JAlert js -->
+    <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+    </script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+
+    $(document).ready(function () {
+        // Mensajes de Control
+        var mensaje = 0;
+        mensaje = "<?php echo $varMsj ?>";
+
+        switch (mensaje) {
+            case "1":
+                successAlert('Éxito', 'Se ha registro exitosamente la denominación');
+                break;
+
+            case "3":
+                successAlert('Éxito', 'Se ha editado exitosamente la denominación');
+                break;
+
+            case "2":
+            case "4":
+                errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
+                break;
+            default:
+
+        }
+
+    });
+
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,

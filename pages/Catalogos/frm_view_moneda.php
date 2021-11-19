@@ -2,22 +2,21 @@
 
     error_reporting(0);
 
-    include '../../entidades/denominacion.php';
-    include '../../datos/dt_denominacion.php';
     include '../../entidades/moneda.php';
     include '../../datos/dt_moneda.php';
 
-    $dtDenominacion = new Dt_Denominacion();
-    $den = new VwDenominacion();
-    $dtMoneda = new Dt_Moneda();
+    $dtMoneda = new dt_Moneda();
+    $moneda = new Moneda();
 
-    $varIdDenominacion = 0;
+    $varIdMoneda = 0;
 
-    if (isset($varIdDenominacion)) {
-      $varIdDenominacion = $_GET['editDenominacion'];
+    if (isset($varIdMoneda)) {
+      $varIdMoneda = $_GET['viewMoneda'];
     }
 
-    $den = $dtDenominacion->getDenominacion($varIdDenominacion);
+    // Datos del país para ver
+    $moneda = $dtMoneda->getMoneda($varIdMoneda);
+
 ?>
 
 
@@ -27,7 +26,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kermesse | Editar Denominación</title>
+  <title>Kermesse | Ver <?php echo $moneda->__GET('nombre');  ?> </title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -455,12 +454,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Editar denominación</h1>
+              <h1>Monedas - <?php echo $moneda->__GET('nombre');  ?></h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar denominación</li>
+                <li class="breadcrumb-item active"><?php echo $moneda->__GET('nombre');  ?></li>
               </ol>
             </div>
           </div>
@@ -476,46 +475,34 @@
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar denominación</h3>
+                  <h3 class="card-title"><?php echo $moneda->__GET('nombre');  ?></h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_denominacion.php">
+                <form method="POST" action="../../negocio/ng_moneda.php">
                   <div class="card-body">
 
                       <div class="form-group">
                         <label>ID</label>
-                        <input type="text" value="<?php echo $den->__GET('id'); ?>" class="form-control" id="id_Denominacion" name="id_Denominacion" maxlength="45" placeholder="Valor" title="Ingrese el valor de la moneda" readonly>
+                        <input type="text" value="<?php echo $moneda->__GET('id'); ?>" class="form-control" id="moneda_ID" name="moneda_ID" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" disabled>
                         <input type="hidden" name="txtaccion" value="2" id="txtaccion"/>
                       </div>
 
                     <div class="form-group">
-                      <label>Moneda</label>
-                      <select class="form-control" name="moneda" id="moneda">
-                          <option value="">Seleccione...</option>
-                        <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
-                          <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
-                        <?php endforeach; ?>
-                      </select>
+                      <label>Nombre</label>
+                      <input type="text" value="<?php echo $moneda->__GET('nombre'); ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" disabled>
                     </div>
 
                     <div class="form-group">
-                      <label>Valor</label>
-                      <input type="text" value="<?php echo $den->__GET('valor'); ?>" class="form-control" id="valor" name="valor" maxlength="45" placeholder="Valor" title="Ingrese el valor de la moneda" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Valor en letras</label>
-                      <input type="text" value="<?php echo $den->__GET('valor_letras'); ?>" class="form-control" id="valor_letras" name="valor_letras" maxlength="45" placeholder="Valor en letras" title="Ingrese el valor en letras de la moneda" required>
+                      <label>Símbolo</label>
+                      <input type="text" value="<?php echo $moneda->__GET('simbolo'); ?>" class="form-control" id="simbolo" name="simbolo" maxlength="45" placeholder="Ingrese el símbolo de la moneda" title="Ingrese el símbolo de la moneda" disabled>
                     </div>
 
                   </div>
                   <!-- /.card-body -->
 
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
-                    <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                  <div class="card-footer" style="text-align: center;">
+                    <a href="tbl_moneda.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>
@@ -553,18 +540,6 @@
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
-
-  <script>
-    function setValores()
-    {
-        $("#moneda").val("<?php echo $den->__GET('idMoneda'); ?>");
-    }
-
-    $(document).ready(function() {
-        setValores();
-    });
-  </script>
-
   <script>
     $(function() {
       bsCustomFileInput.init();

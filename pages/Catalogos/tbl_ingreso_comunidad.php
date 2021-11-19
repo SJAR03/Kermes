@@ -1,11 +1,15 @@
 <?php
 
-//error_reporting(0);
+error_reporting(0);
 
 include '../../entidades/vw_ingreso_comunidad.php';
 include '../../datos/dt_ingreso_comunidad.php';
 
+include '../../entidades/ingreso_comunidad_det.php';
+include '../../datos/dt_ingreso_comunidad_det.php';
+
 $dtICom = new Dt_Ingreso_Comunidad();
+$dtICD = new Dt_Ingreso_Comunidad_Det();
 
 $varMsj = 0;
 
@@ -517,9 +521,9 @@ if (isset($varMsj)) {
 
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
-                                                <a href="frm_edit_ingreso_comunidad.php?editIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad"></i></a>
+                                                <a href="frm_edit_ingreso_comunidad.php?editIC=<?php echo $r->__GET('id_ingreso_comunidad') ?> ?editICD=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad"></i></a>
                                                 <a href="frm_edit_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
-                                            </td>
+                                            </td> 
 
                                         </tr>
                                     <?php endforeach; ?>

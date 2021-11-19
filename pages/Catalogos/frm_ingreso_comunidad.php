@@ -14,10 +14,14 @@ include '../../datos/dt_comunidad.php';
 include '../../entidades/productos.php';
 include '../../datos/dt_productos.php';
 
+include '../../entidades/control_bonos.php';
+include '../../datos/dt_Control_Bonos.php';
+
 $dtICom = new Dt_Ingreso_Comunidad();
 $dtK = new Dt_Kermesse();
 $dtCom = new Dt_Comunidad();
 $dtP = new Dt_Producto();
+$dtCb = new Dt_Control_Bonos();
 
 
 $varMsj = 0;
@@ -533,6 +537,46 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
+                      <label>Seleccione el Ingreso Comunidad</label>
+                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('cant_productos'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Seleccione bono</label>
+                      <select class="form-control" id="id_bono" name="id_bono" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtCb->listaControlBonos() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_bono'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Escriba la denominacion del bono</label>
+                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Cantidad de bonos</label>
+                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Subtotal de Bonos</label>
+                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
+                    </div>
+
+                    <div class="form-group">
                       <label>Total de bonos</label>
                       <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
                     </div>
@@ -547,7 +591,7 @@ if (isset($varMsj)) {
                       <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Modificacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
                     </div>
@@ -565,7 +609,7 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Fechas de eliminacion de Usuarios</label>
                       <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
-                    </div>
+                    </div> -->
 
                   </div>
                   <!-- /.card-body -->

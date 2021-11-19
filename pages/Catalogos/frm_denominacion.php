@@ -477,16 +477,17 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_denominacion.php">
                   <div class="card-body">
                     <div class="form-group">
                       <label>Moneda</label>
-                      <select class="form-control" name="estado" id="estado">
+                      <select class="form-control" name="moneda" id="moneda">
+                          <option value="">Seleccione...</option>
                         <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
-                          <option value="1"> <?php echo $r->__GET('nombre'); ?> </option>
-
+                          <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
                       </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion"/>
                     </div>
 
                     <div class="form-group">
@@ -498,23 +499,13 @@ if (isset($varMsj)) {
                       <label>Valor en letras</label>
                       <input type="text" class="form-control" id="valor_letras" name="valor_letras" maxlength="45" placeholder="Valor en letras" title="Ingrese el valor en letras de la moneda" required>
                     </div>
-
-                    <div class="form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado">
-                        <option value="1">Ingresado</option>
-                        <!-- <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option> -->
-                      </select>
-                    </div>
-
-
                   </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>

@@ -28,7 +28,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>AdminLTE 3 | Arqueo</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -507,36 +507,6 @@ if (isset($varMsj)) {
                       <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" required>
                     </div>
 
-                    <div class="form-group">
-                      <label>Creacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Modificacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de modificacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Eliminacion Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de eliminacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
-                    </div>
-
                   </div>
                   <!-- /.card-body -->
 
@@ -545,7 +515,7 @@ if (isset($varMsj)) {
                     <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
                 </form>
-                </di v>
+                </div>
                 <!-- /.card -->
               </div>
             </div>

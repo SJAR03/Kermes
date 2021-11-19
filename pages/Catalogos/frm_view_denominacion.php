@@ -14,7 +14,7 @@
     $varIdDenominacion = 0;
 
     if (isset($varIdDenominacion)) {
-      $varIdDenominacion = $_GET['editDenominacion'];
+      $varIdDenominacion = $_GET['viewDenominacion'];
     }
 
     $den = $dtDenominacion->getDenominacion($varIdDenominacion);
@@ -27,7 +27,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kermesse | Editar Denominación</title>
+  <title>Kermesse | Ver denominación</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -455,12 +455,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Editar denominación</h1>
+              <h1>Ver denominación</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Editar denominación</li>
+                <li class="breadcrumb-item active">Ver denominación</li>
               </ol>
             </div>
           </div>
@@ -476,23 +476,15 @@
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar denominación</h3>
+                  <h3 class="card-title">Ver denominación</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_denominacion.php">
+                <form>
                   <div class="card-body">
-
-                      <div class="form-group">
-                        <label>ID</label>
-                        <input type="text" value="<?php echo $den->__GET('id'); ?>" class="form-control" id="id_Denominacion" name="id_Denominacion" maxlength="45" placeholder="Valor" title="Ingrese el valor de la moneda" readonly>
-                        <input type="hidden" name="txtaccion" value="2" id="txtaccion"/>
-                      </div>
-
                     <div class="form-group">
                       <label>Moneda</label>
-                      <select class="form-control" name="moneda" id="moneda">
-                          <option value="">Seleccione...</option>
+                      <select class="form-control" name="moneda" id="moneda" disabled>
                         <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
                           <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
@@ -501,21 +493,19 @@
 
                     <div class="form-group">
                       <label>Valor</label>
-                      <input type="text" value="<?php echo $den->__GET('valor'); ?>" class="form-control" id="valor" name="valor" maxlength="45" placeholder="Valor" title="Ingrese el valor de la moneda" required>
+                      <input type="text" value="<?php echo $den->__GET('valor'); ?>" class="form-control" id="valor" name="valor" maxlength="45" placeholder="Valor" title="Ingrese el valor de la moneda" disabled>
                     </div>
 
                     <div class="form-group">
                       <label>Valor en letras</label>
-                      <input type="text" value="<?php echo $den->__GET('valor_letras'); ?>" class="form-control" id="valor_letras" name="valor_letras" maxlength="45" placeholder="Valor en letras" title="Ingrese el valor en letras de la moneda" required>
+                      <input type="text" value="<?php echo $den->__GET('valor_letras'); ?>" class="form-control" id="valor_letras" name="valor_letras" maxlength="45" placeholder="Valor en letras" title="Ingrese el valor en letras de la moneda" disabled>
                     </div>
 
                   </div>
                   <!-- /.card-body -->
 
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
-                    <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                  <div class="card-footer" style="text-align: center;">
+                      <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>

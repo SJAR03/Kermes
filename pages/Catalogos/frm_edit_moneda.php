@@ -1,17 +1,22 @@
 <?php
 
-error_reporting(0);
+    error_reporting(0);
 
-include '../../entidades/moneda.php';
-include '../../datos/dt_moneda.php';
+    include '../../entidades/moneda.php';
+    include '../../datos/dt_moneda.php';
 
-$dtMoneda = new dt_Moneda();
+    $dtMoneda = new dt_Moneda();
+    $moneda = new Moneda();
 
-$varMsj = 0;
+    $varIdMoneda = 0;
 
-if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
-}
+    if (isset($varIdMoneda)) {
+      $varIdMoneda = $_GET['editMoneda'];
+    }
+
+    // Datos del país para Editar
+    $moneda = $dtMoneda->getMoneda($varIdMoneda);
+
 ?>
 
 
@@ -474,27 +479,24 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_moneda.php">
                   <div class="card-body">
+
+                      <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" value="<?php echo $moneda->__GET('id'); ?>" class="form-control" id="moneda_ID" name="moneda_ID" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" readonly>
+                        <input type="hidden" name="txtaccion" value="2" id="txtaccion"/>
+                      </div>
+
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
+                      <input type="text" value="<?php echo $moneda->__GET('nombre'); ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
                     </div>
 
                     <div class="form-group">
                       <label>Símbolo</label>
-                      <input type="text" class="form-control" id="responsable" name="simbolo" maxlength="45" placeholder="Ingrese el símbolo de la moneda" title="Ingrese el símbolo de la moneda" required>
+                      <input type="text" value="<?php echo $moneda->__GET('simbolo'); ?>" class="form-control" id="simbolo" name="simbolo" maxlength="45" placeholder="Ingrese el símbolo de la moneda" title="Ingrese el símbolo de la moneda" required>
                     </div>
-
-                    <div class="form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado">
-                        <option value="1">Ingresado</option>
-                        <!-- <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option> -->
-                      </select>
-                    </div>
-
 
                   </div>
                   <!-- /.card-body -->
@@ -502,6 +504,7 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <a href="tbl_moneda.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>
