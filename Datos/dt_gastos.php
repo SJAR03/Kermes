@@ -80,4 +80,59 @@ class dt_gastos extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function regGastos(gastos $icd)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_gastos(idKermesse, idCatGastos, fechaGasto, concepto, monto, estado)
+                VALUES (?, ?, ?, ?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                $icd->__GET('idKermesse'),
+                $icd->__GET('idCatGastos'),
+                $icd->__GET('fechaGasto'),
+                $icd->__GET('concepto'),
+                $icd->__GET('monto'),
+                $icd->__GET('estado')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getGastos($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_gastos where id_registro_gastos= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            
+                $icd = new gastos();
+
+                //_SET(CAMPOBD, atributoEntidad)
+                $icd->__SET('id_registro_gastos', $r->id_registro_gastos);
+                $icd->__SET('idKermesse', $r->idKermesse);
+                $icd->__SET('idCatGastos', $r->idCatGastos);
+                $icd->__SET('fechaGasto', $r->fechaGasto);
+                $icd->__SET('concepto', $r->concepto);
+                $icd->__SET('monto', $r->monto);
+                $icd->__SET('estado', $r->estado);
+
+                
+                
+
+            $this->myCon = parent::desconectar();
+            return $icd;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
