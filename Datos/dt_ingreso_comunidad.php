@@ -120,6 +120,7 @@ class Dt_Ingreso_Comunidad extends Conexion
             $r = $stm->fetch(PDO::FETCH_OBJ);
             
                 $ic = new Ingreso_Comunidad();
+                $icd = new Ingreso_Comunidad_Det();
 
                 //_SET(CAMPOBD, atributoEntidad)
                 $ic->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
@@ -127,13 +128,19 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__SET('id_comunidad', $r->id_comunidad);
                 $ic->__SET('id_producto', $r->id_producto);
                 $ic->__SET('cant_productos', $r->cant_productos);
+                $icd->__SET('id_ingreso_comunidad_det', $r->id_ingreso_comunidad_det);
+                $icd->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
+                $icd->__SET('id_bono', $r->id_bono);
+                $icd->__SET('denominacion', $r->denominacion);
+                $icd->__SET('cantidad', $r->cantidad);
+                $icd->__SET('subtotal_bono', $r->subtotal_bono);
                 $ic->__SET('total_bonos', $r->total_bonos);
                 $ic->__SET('usuario_creacion', $r->usuario_creacion);
                 $ic->__SET('fecha_creacion', $r->fecha_creacion);
-                $ic->__SET('usuario_modificacion', $r->usuario_modificacion);
+                /* $ic->__SET('usuario_modificacion', $r->usuario_modificacion);
                 $ic->__SET('fecha_modificacion', $r->fecha_modificacion);
                 $ic->__SET('usuario_eliminacion', $r->usuario_eliminacion);
-                $ic->__SET('fecha_eliminacion', $r->fecha_eliminacion);
+                $ic->__SET('fecha_eliminacion', $r->fecha_eliminacion); */
                 
             
 
