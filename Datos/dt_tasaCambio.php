@@ -8,7 +8,7 @@ class Dt_TasaCambio extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM vwTasaCambio";
+            $querySQL = "SELECT * FROM vwTasaCambio where estado <>3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -64,7 +64,7 @@ class Dt_TasaCambio extends Conexion
         try {
             $this->myCon = parent::conectar();
 
-            $querySQL = "SELECT id_tasaCambio from dbkermesse.tbl_tasacambio Order by id_tasaCambio DESC Limit 1";
+            $querySQL = "SELECT id_tasaCambio from dbkermesse.tbl_tasacambio where estado != 3 Order by id_tasaCambio DESC Limit 1";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -85,7 +85,7 @@ class Dt_TasaCambio extends Conexion
         try {
             $this->myCon = parent::conectar();
 
-            $querySQL = "SELECT * from dbkermesse.tbl_tasacambio Order by id_tasaCambio DESC Limit 1";
+            $querySQL = "SELECT * from dbkermesse.tbl_tasacambio where estado != 3 Order by id_tasaCambio DESC Limit 1";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -104,6 +104,82 @@ class Dt_TasaCambio extends Conexion
             $this->myCon = parent::desconectar();
 
             return $tc;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getTasaById($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+
+            $querySQL = "SELECT * from dbkermesse.tbl_tasacambio where id_tasaCambio = ?";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $tc = new TasaCambio;
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $tc->__SET('id_tasaCambio', $r->id_tasaCambio);
+            $tc->__SET('id_monedaO', $r->id_monedaO);
+            $tc->__SET('id_monedaC', $r->id_monedaC);
+            $tc->__SET('mes', $r->mes);
+            $tc->__SET('anio', $r->anio);
+            $tc->__SET('estado', $r->estado);
+
+            $this->myCon = parent::desconectar();
+
+            return $tc;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editTasa(TasaCambio $tc)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_tasacambio SET 
+                        id_monedaO = ?,
+                        id_monedaC=?,
+                        mes = ?, 
+                        anio=?,
+                        estado=2 
+                    WHERE id_tasaCambio =?";
+
+            $this->myCon->prepare($sql)
+                ->execute(
+                    array(
+                        $tc->__GET('id_monedaO'),
+                        $tc->__GET('id_monedaC'),
+                        $tc->__GET('mes'),
+                        $tc->__GET('anio'),
+                        $tc->__GET('id_tasaCambio')
+                    )
+                );
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function desactivarTasa($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_tasacambio SET 
+                        estado=3 
+                    WHERE id_tasaCambio =?";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $id
+                ));
+
+            $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());
         }

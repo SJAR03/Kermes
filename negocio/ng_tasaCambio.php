@@ -26,7 +26,7 @@ if ($_POST) {
                 die($e->getMessage());
             }
             break;
-            /*
+
         case '2':
             try {
                 //CONSTRUIMOS EL OBJETO
@@ -36,26 +36,27 @@ if ($_POST) {
                 $tc->__SET('mes', $_POST['mes']);
                 $tc->__SET('anio', $_POST['anio']);
 
-                $p->__SET('id_producto', $_POST['id_producto']);
-                //$dtP->editProducto($p);
+                $tc->__SET('id_tasaCambio', $_POST['id_tasaCambio']);
+
+                $dtTc->editTasa($tc);
                 //var_dump($emp);
-                header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=3");
+                header("Location: /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=3");
             } catch (Exception $e) {
-                header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=4");
+                header("Location:  /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=4");
                 die($e->getMessage());
             }
-            break;*/
+            break;
     }
 }
 
 if ($_GET) {
     try {
-        $p->__SET('id_producto', $_GET['delP']);
-        $dtP->desactivarProducto($p->__GET('id_producto'));
+        $tc->__SET('id_tasaCambio', $_GET['delTC']);
+        $dtTc->desactivarTasa($tc->__GET('id_tasaCambio'));
 
-        header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=5");
+        header("Location: /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=5");
     } catch (Exception $e) {
-        header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=6");
+        header("Location: /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=6");
         die($e->getMessage());
     }
 }

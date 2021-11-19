@@ -44,6 +44,24 @@ if ($_POST) {
                 die($e->getMessage());
             }
             break;*/
+
+            //Ingresar dentro de tasa existente
+        case '3':
+            try {
+                //CONSTRUIMOS EL OBJETO
+                //ATRIBUTO ENTIDAD //NAME DEL CONTROL
+                $tcd->__SET('id_tasaCambio', $_POST['id_tasaCambio2']);
+                $tcd->__SET('fecha', $_POST['fecha']);
+                $tcd->__SET('tipo_cambio', $_POST['tipoCambio']);
+
+                $dtTcd->regTasasDet($tcd);
+                //var_dump($emp);
+                header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=1");
+            } catch (Exception $e) {
+                header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=2");
+                die($e->getMessage());
+            }
+            break;
     }
 }
 

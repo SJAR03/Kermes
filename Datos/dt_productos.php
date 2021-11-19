@@ -8,8 +8,7 @@ class Dt_Producto extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_productos where estado =3";
-
+            $querySQL = "SELECT * FROM dbkermesse.vw_productos where estado != 'Eliminado'";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {

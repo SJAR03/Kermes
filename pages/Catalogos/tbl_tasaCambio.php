@@ -1,6 +1,6 @@
 <?php
-include '../../entidades/vw_tasaCambio.php';
-include '../../datos/dt_tasaCambio.php';
+include '../../Entidades/vw_tasaCambio.php';
+include '../../Datos/dt_tasaCambio.php';
 
 $dtTasa = new Dt_TasaCambio();
 
@@ -10,13 +10,13 @@ if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
 ?>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Denominaciones</title>
+    <title>KERMESSE | Tasa Cambio</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -27,11 +27,11 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
-
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -166,7 +166,7 @@ if (isset($varMsj)) {
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Kermesse</span>
             </a>
 
             <!-- Sidebar -->
@@ -442,12 +442,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Tasas de cambio</h1>
+                            <h1>Productos registrados</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Monedas</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Productos</li>
                             </ol>
                         </div>
                     </div>
@@ -458,18 +458,17 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Listado de las tasas de cambio disponibles</h3>
+                            <h3 class="card-title">Tabla Productos</h3>
                         </div>
 
                         <div class="card-body">
-
                             <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_tasaCambio.php" title="Registrar tasa de cambio" target="blank">
+                                <a href="frm_tasaCambio.php" title="Registrar un nuevo producto" target="blank">
                                     <i class="far fa-plus-square fa-2x"></i>
                                 </a>
                             </div>
 
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="tasaC" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -477,7 +476,6 @@ if (isset($varMsj)) {
                                         <th>Moneda cambio</th>
                                         <th>Mes</th>
                                         <th>Año</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -489,10 +487,12 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('cambio'); ?></td>
                                             <td><?php echo $r->__GET('mes'); ?></td>
                                             <td><?php echo $r->__GET('year'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
-                                                <a href="frm_edit_tasaCambio.php?editTasaCambio=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_tasaCambio.php?viewTasaCambio=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_edit_tasaCambio.php?editTC=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
+                                                <a href="frm_view_tasaCambio.php?viewTC=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="#" title="Eliminar Productos" target="blank">
+                                                    <i class="far fa-trash-alt fa-2x" onclick="deactivateTC(<?php echo $r->__GET('id') ?>)"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -504,7 +504,6 @@ if (isset($varMsj)) {
                                         <th>Moneda cambio</th>
                                         <th>Mes</th>
                                         <th>Año</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -514,7 +513,6 @@ if (isset($varMsj)) {
                 </div>
             </div>
 
-
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block">
                     <b>Version</b> 3.1.0-rc
@@ -522,60 +520,83 @@ if (isset($varMsj)) {
                 <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
             </footer>
 
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
         </div>
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
+        <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- jQuery -->
+        <script src="../../plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="../../plugins/DT/datatables.min.js"></script>
+        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
 
-    <!-- DataTables  & Plugins -->
-    <script src="../../plugins/DT/DataTables-1.11.2/css/dataTables.dataTables.min.css"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+        <!-- JAlert js -->
+        <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+        <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
 
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["excel", "pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+        </script>
+        <!-- AdminLTE App -->
+        <script src="../../dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="../../dist/js/demo.js"></script>
+        <!-- Page specific script -->
+        <script>
+            function deactivateTC(tc) {
+                confirm(function(e, btn) {
+                        e.preventDefault();
+                        window.location.href = "../../negocio/ng_tasaCambio.php?delTC=" + tc;
+                    },
+                    function(e, btn) {
+                        e.preventDefault();
+                    });
+            }
+
+            $(document).ready(function() {
+                var mensaje = 0;
+                mensaje = "<?php echo $varMsj ?>";
+
+                if (mensaje == "4") {
+                    errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+
+                if (mensaje == "3") {
+                    successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+                }
+                $("#tasaC").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "buttons": ["excel", "pdf"]
+                }).buttons().container().appendTo('#tasaC_wrapper .col-md-6:eq(0)');
+                /*
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": false,
+                    "searching": false,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "responsive": true,
+                });*/
             });
-        });
-    </script>
-
+        </script>
 </body>
 
 </html>
