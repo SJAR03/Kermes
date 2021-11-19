@@ -28,6 +28,24 @@
                 }
                 break;
 
+            case '2':
+                try
+                {
+                    // Construir el objeto moneda
+                    $m->__SET('id', $_POST['moneda_ID']);
+                    $m->__SET('nombre', $_POST['nombre']);
+                    $m->__SET('simbolo', $_POST['simbolo']);
+
+                    $dtM->editarMoneda($m);
+                    header("Location: /Kermes/pages/Catalogos/tbl_moneda.php?msj=3");
+                }
+                catch (Exception $e)
+                {
+                    header("Location: /Kermes/pages/Catalogos/tbl_moneda.php?msj=4");
+                    die($e->getMessage());
+                }
+                break;
+
             default:
                 // code...
                 break;

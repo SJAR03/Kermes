@@ -30,26 +30,26 @@
             }
         }
 
-        public function listarMonedaId()
+        public function getMoneda($id)
         {
-            try {
+            try
+            {
                 $this->myCon = parent::conectar();
-                $result = array();
-                $querySQL = "SELECT id_moneda FROM tbl_moneda";
-
+                $querySQL = "SELECT * FROM tbl_moneda WHERE id_moneda = ?";
                 $stm = $this->myCon->prepare($querySQL);
-                $stm->execute();
+                $stm->execute(array($id));
 
-                foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-                    $moneda = new Moneda();
+                $r = $stm->fetch(PDO::FETCH_OBJ);
+                $m = new Moneda();
 
-                    $moneda->__SET('id', $r->id_moneda);
-                    
-                    $result[] = $r;
-                }
+                $m->__SET('id', $r->id_moneda);
+                $m->__SET('nombre', $r->nombre);
+                $m->__SET('simbolo', $r->simbolo);
+                $m->__SET('estado', $r->estado);
 
                 $this->myCon = parent::desconectar();
-                return $result;
+                return $m;
+
             } catch (Exception $e) {
                 die($e->getMessage());
             }
@@ -72,5 +72,24 @@
             }
 
         }
+
+        public function editarMoneda(Moneda $m)
+        {
+            try {
+                $this->myCon = parent::conectar();
+                $sql = "UPDATE tbl_moneda SET nombre = ?, simbolo = ?, estado = 2 WHERE id_moneda = ?";
+
+                $this->myCon->prepare($sql)->execute(array(
+                    $m->__GET('nombre'),
+                    $m->__GET('simbolo'),
+                    $m->__GET('id')
+                ));
+                $this->myCon = parent::desconectar();
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+
+        }
+
     }
 ?>

@@ -482,6 +482,7 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Moneda</label>
                       <select class="form-control" name="moneda" id="moneda">
+                          <option value="">Seleccione...</option>
                         <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
                           <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
@@ -504,6 +505,7 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>

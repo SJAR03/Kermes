@@ -496,7 +496,7 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('valor_letras'); ?></td>
                                             <td>
                                                 <a href="frm_edit_denominacion.php?editDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_denominacion.php?viewDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_view_denominacion.php?viewDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -571,11 +571,16 @@ if (isset($varMsj)) {
 
         switch (mensaje) {
             case "1":
-                successAlert('Éxito', 'Se ha registro exitosamente los datos');
+                successAlert('Éxito', 'Se ha registro exitosamente la denominación');
+                break;
+
+            case "3":
+                successAlert('Éxito', 'Se ha editado exitosamente la denominación');
                 break;
 
             case "2":
-                successAlert('Fallo', 'Hubo un error al registrar los datos');
+            case "4":
+                errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
                 break;
             default:
 

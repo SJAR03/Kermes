@@ -29,6 +29,23 @@
                 }
                 break;
 
+            case '2':
+                // Construir el objeto
+                try {
+                    $d->__SET('id', $_POST['id_Denominacion']);
+                    $d->__SET('idMoneda', $_POST['moneda']);
+                    $d->__SET('valor', $_POST['valor']);
+                    $d->__SET('valor_letras', $_POST['valor_letras']);
+
+                    $dtD->editarDenominacion($d);
+                    header("Location: /Kermes/pages/Catalogos/tbl_denominacion.php?msj=3");
+                } catch (\Exception $e) {
+                    header("Location: /Kermes/pages/Catalogos/tbl_denominacion.php?msj=4");
+                    die($e->getMessage());
+                }
+
+                break;
+
             default:
                 // code...
                 break;
