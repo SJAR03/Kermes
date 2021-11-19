@@ -5,6 +5,9 @@ error_reporting(0);
 include '../../entidades/ingreso_comunidad.php';
 include '../../datos/dt_ingreso_comunidad.php';
 
+include '../../entidades/ingreso_comunidad_det.php';
+include '../../datos/dt_ingreso_comunidad_det.php';
+
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
@@ -14,20 +17,34 @@ include '../../datos/dt_comunidad.php';
 include '../../entidades/productos.php';
 include '../../datos/dt_productos.php';
 
+include '../../entidades/control_bonos.php';
+include '../../datos/dt_Control_Bonos.php';
+
 $dtICom = new Dt_Ingreso_Comunidad();
+$dtICD = new Dt_Ingreso_Comunidad_Det();
 $dtK = new Dt_Kermesse();
 $dtCom = new Dt_Comunidad();
 $dtP = new Dt_Producto();
-$IC = new Ingreso_Comunidad();
+$IC = new Ingreso_Comunidad(); 
+$ICD = new Ingreso_Comunidad_Det();
+$dtCb = new Dt_Control_Bonos();
 
 $varIdIC = 0;
 
 if (isset($varIdIC)) {
   $varIdIC = $_GET['editIC']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
+
+}
+
+$varIdICD = 0;
+
+if (isset($varIdICD)) {
+  $varIdICD = $_GET['editICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
 }
 
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
 $IC = $dtICom->getIngComunidad($varIdIC);
+$ICD = $dtICD->getIngComunidadDet($varIdICD);
 
 /* $varMsj = 0;
 
@@ -542,6 +559,47 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
+                      <label>Seleccione el Ingreso Comunidad</label>
+                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('cant_productos'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Seleccione bono</label>
+                      <select class="form-control" id="id_bono" name="id_bono" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtCb->listaControlBonos() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_bono'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Escriba la denominacion del bono</label>
+                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Cantidad de bonos</label>
+                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Subtotal de Bonos</label>
+                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
+                    </div>
+
+
+                    <div class="form-group">
                       <label>Total de bonos</label>
                       <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
                     </div>
@@ -556,7 +614,7 @@ if (isset($varMsj)) {
                       <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Modificacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
                     </div>
@@ -574,7 +632,7 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Fechas de eliminacion de Usuarios</label>
                       <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
-                    </div>
+                    </div> -->
 
                   </div>
                   <!-- /.card-body -->
@@ -628,14 +686,19 @@ if (isset($varMsj)) {
       $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad') ?>");
       $("#id_producto").val("<?php echo $IC->__GET('id_producto') ?>");
       $("#cant_productos").val("<?php echo $IC->__GET('cant_productos') ?>");
+      $("#id_ingreso_comunidad").val("<?php echo $ICD->__GET('id_ingreso_comunidad') ?>");
+      $("#id_bono").val("<?php echo $ICD->__GET('id_bono') ?>");
+      $("#denominacion").val("<?php echo $ICD->__GET('denominacion') ?>");
+      $("#cantidad").val("<?php echo $ICD->__GET('cantidad') ?>");
+      $("#subtotal_bono").val("<?php echo $ICD->__GET('subtotal_bono') ?>");
       $("#total_bonos").val("<?php echo $IC->__GET('total_bonos') ?>");
       $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
       $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>");
-      $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");
+     /*  $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");
       $("#fecha_modificacion").val("<?php echo $IC->__GET('fecha_modificacion') ?>");
       $("#usuario_eliminacion").val("<?php echo $IC->__GET('usuario_eliminacion') ?>");
       $("#fecha_eliminacion").val("<?php echo $IC->__GET('fecha_eliminacion') ?>");
-
+ */
     }
 
     $(document).ready(function() {
