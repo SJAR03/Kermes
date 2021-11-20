@@ -7,18 +7,19 @@ include '../../Datos/dt_usuario.php';
 $dtu = new dt_usuario();
 
 $varMsj = 0;
+
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla Usuarios</title>
+    <title>Kermesse | Usuarios</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -29,10 +30,12 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
+
     <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -454,13 +457,14 @@ if (isset($varMsj)) {
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                                 <li class="breadcrumb-item active">Usuarios</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
+
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -482,7 +486,6 @@ if (isset($varMsj)) {
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Email</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -496,7 +499,6 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('nombres'); ?></td>
                                             <td><?php echo $r->__GET('apellidos'); ?></td>
                                             <td><?php echo $r->__GET('email'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
                                             <td>
                                                 <a href="frm_edit_usuario.php?editUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-edit fa-2x" title="Editar usuario"></i></a>
                                                 <a href="frm_view_usuario.php?vieUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-eye fa-2x" title="Visualizar usuario"></i></a>
@@ -513,7 +515,6 @@ if (isset($varMsj)) {
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Email</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>
@@ -523,7 +524,7 @@ if (isset($varMsj)) {
                 </div>
             </div>
 
-            <!-- /.content-wrapper -->
+
             <footer class="main-footer">
                 <div class="float-right d-none d-sm-block">
                     <b>Version</b> 3.1.0-rc
@@ -531,57 +532,87 @@ if (isset($varMsj)) {
                 <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
             </footer>
 
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
         </div>
-        <!-- ./wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <script src="../../plugins/DT/datatables.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+    <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+    <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+    <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
+    <!-- JAlert js -->
+    <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+    </script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(document).ready(function() {
+            // Mensajes de Control
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+
+            switch (mensaje) {
+                case "1":
+                    successAlert('Éxito', 'Se han registrado exitosamente los datos.');
+                    break;
+
+                case "2":
+                case "4":
+                    errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
+                    break;
+
+                case "3":
+                    successAlert('Éxito', 'Se modificó exitosamente la moneda.');
+                default:
+
+            }
+
+        });
+
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["excel", "pdf"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
-        </script>
+        });
+    </script>
+
 </body>
 
 </html>
