@@ -442,12 +442,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Productos registrados</h1>
+                            <h1>Tabla Tasas de Cambio</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Productos</li>
+                                <li class="breadcrumb-item active">Tasas de Cambio</li>
                             </ol>
                         </div>
                     </div>
@@ -458,7 +458,7 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tabla Productos</h3>
+                            <h3 class="card-title">Tasas de Cambio</h3>
                         </div>
 
                         <div class="card-body">

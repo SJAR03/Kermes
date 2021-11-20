@@ -13,9 +13,9 @@ if ($_POST) {
             try {
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
-                $tcd->__SET('id_tasaCambio', $_POST['id_tasaCambio2']);
                 $tcd->__SET('fecha', $_POST['fecha']);
                 $tcd->__SET('tipo_cambio', $_POST['tipoCambio']);
+                $tcd->__SET('id_tasaCambio', $_POST['id_tasaCambio2']);
 
                 $dtTcd->regTasasDet($tcd);
                 //var_dump($emp);
@@ -25,25 +25,24 @@ if ($_POST) {
                 die($e->getMessage());
             }
             break;
-            /*
+
         case '2':
             try {
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
-                $tc->__SET('id_monedaO', $_POST['id_monedaO']);
-                $tc->__SET('id_monedaC', $_POST['id_monedaC']);
-                $tc->__SET('mes', $_POST['mes']);
-                $tc->__SET('anio', $_POST['anio']);
+                $tcd->__SET('id_tasaCambio', $_POST['id_tasaCambio1']);
+                $tcd->__SET('id_tasaCambio_det', $_POST['id_tasaCambio2']);
+                $tcd->__SET('fecha', $_POST['fecha']);
+                $tcd->__SET('tipo_cambio', $_POST['tipoCambio']);
+                $dtTcd->editTasaDetalle($tcd);
 
-                $p->__SET('id_producto', $_POST['id_producto']);
-                //$dtP->editProducto($p);
                 //var_dump($emp);
-                header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=3");
+                header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=3");
             } catch (Exception $e) {
-                header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=4");
+                header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=4");
                 die($e->getMessage());
             }
-            break;*/
+            break;
 
             //Ingresar dentro de tasa existente
         case '3':
@@ -67,12 +66,13 @@ if ($_POST) {
 
 if ($_GET) {
     try {
-        $p->__SET('id_producto', $_GET['delP']);
-        $dtP->desactivarProducto($p->__GET('id_producto'));
+        $tcd->__SET('id_tasaCambio_det', $_GET['delTCD']);
+        $tcd->__SET('id_tasaCambio', $_GET['TC']);
+        $dtTcd->desactivarTasaDet($tcd->__GET('id_tasaCambio_det'));
 
-        header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=5");
+        header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=5");
     } catch (Exception $e) {
-        header("Location: /Kermes/pages/Catalogos/tbl_productos.php?msj=6");
+        header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=6");
         die($e->getMessage());
     }
 }

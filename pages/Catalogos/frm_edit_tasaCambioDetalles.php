@@ -2,20 +2,41 @@
 
 error_reporting(0);
 
+include '../../Entidades/moneda.php';
+include '../../Datos/dt_moneda.php';
 
-include '../../entidades/tasaCambio.php';
-include '../../datos/dt_tasaCambio.php';
-include '../../entidades/tasaCambioDetalles.php';
-include '../../datos/dt_tcd.php';
+include '../../Entidades/vwtasacambiodet.php';
+include '../../Datos/dt_tasaCambio_detalle.php';
 
-$dtTasaDet = new Dt_TCD();
-$dtTasa = new Dt_TasaCambio();
+include '../../Entidades/tasaCambio.php';
+include '../../Datos/dt_tasaCambio.php';
 
-$varMsj = 0;
+include '../../Entidades/tasaCambioDetalles.php';
 
-if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
+$dtTasaDet = new Dt_TasaCambioDet;
+
+$tasa = new TasaCambio;
+$tasaD = new TasaCambioDetalle;
+
+$dtTasa = new Dt_TasaCambio;
+$dtTasaDet = new Dt_TasaCambioDet;
+
+$dtMoneda = new Dt_Moneda();
+
+$varIdTc = 0;
+$varIdTcd = 0;
+
+
+if (isset($varIdTc)) {
+  $varIdTc = $_GET['editTC'];
 }
+$tasa = $dtTasa->getTasaById($varIdTc);
+
+
+if (isset($varIdTcd)) {
+  $varIdTcd = $_GET['editTCD'];
+}
+$tasaD = $dtTasaDet->getTasaDetById($varIdTcd);
 ?>
 
 
@@ -25,7 +46,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Editar detalles de tasas de cambio</title>
+  <title>KERMESSE | Registro de tasas de cambio</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -33,6 +54,7 @@ if (isset($varMsj)) {
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -405,13 +427,6 @@ if (isset($varMsj)) {
                     <p>Tasa Cambio</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
-                  </a>
-                </li>
               </ul>
             </li>
 
@@ -453,12 +468,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Editar detalle - Tasa de cambio</h1>
+              <h1>Tasas de Cambio</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar detalle</li>
+                <li class="breadcrumb-item active">Visualizar tasa de cambio</li>
               </ol>
             </div>
           </div>
@@ -474,69 +489,154 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Editar detalle</h3>
+                  <h3 class="card-title">Visualizar tasa de cambio</h3>
+
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form>
+                <form method="POST" action="../../negocio/ng_tasaCambio.php">
                   <div class="card-body">
                     <div class="form-group">
-                      <label>ID - Tasa de cambio</label>
-                      <select class="form-control" name="id_tasa" id="id_tasa">
-                        <?php foreach ($dtTasa->listarTasas() as $r) : ?>
-                          <option value="1"> <?php echo $r->__GET('id'); ?> </option>
+                      <label>Moneda origen</label>
+                      <select class="form-control" name="id_monedaO" id="id_monedaO" disabled>
+                        <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
+                          <option value="<?php echo $r->__GET('id') ?>"> <?php echo $r->__GET('nombre'); ?> </option>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                      <input type="hidden" name="id_tasaCambio" id="id_tasaCambio" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Moneda cambio</label>
+                      <select class="form-control" name="id_monedaC" id="id_monedaC" disabled>
+                        <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
+                          <option value="<?php echo $r->__GET('id'); ?>"> <?php echo $r->__GET('nombre'); ?> </option>
                         <?php endforeach; ?>
                       </select>
                     </div>
 
                     <div class="form-group">
-                      <label>Fecha</label>
-                      <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
-                      </div>
+                      <label>Mes</label>
+                      <input type="text" class="form-control" id="mes" name="mes" maxlength="45" placeholder="Mes" title="Ingrese el mes" disabled>
                     </div>
 
                     <div class="form-group">
-                      <label>Tipo de cambio</label>
-                      <input type="number" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio required>
-                  </div>
-
-                  <div class=" form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado">
-                        <option value="1">Ingresado</option>
-                        <!-- <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option> -->
-                      </select>
+                      <label>Año</label>
+                      <input type="text" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" disabled>
                     </div>
-
-
+                  </div>
+                  <div class="card-footer">
+                    <a href="tbl_tasaCambio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                   </div>
                   <!-- /.card-body -->
-
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
-                  </div>
                 </form>
               </div>
               <!-- /.card -->
             </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Registrar detalle</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="POST" action="../../negocio/ng_tasaCambio_det.php">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label>Fecha</label>
+                      <input type="date" value="<?php echo $tasaD->__GET('fecha') ?>" class="form-control datetimepicker-input" data-target="#reservationdate" name="fecha" required />
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                      <input type="hidden" name="id_tasaCambio2" id="id_tasaCambio2" />
+                      <input type="text" name="id_tasaCambio1" id="id_tasaCambio1" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Tipo de cambio</label>
+                      <input type="number" step="any" class="form-control" id="tipoCambio" name="tipoCambio" maxlength="45" placeholder="Cambio" title="Ingrese el tipo de cambio" required>
+                    </div>
+
+                  </div>
+                  <div class="card-footer">
+                    <button id="det" type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                  <!-- /.card-body -->
+                </form>
+
+
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Detalles - Tasas de cambio disponibles</h3>
+                </div>
+
+                <div class="card-body">
+                  <table id="tasaC_det" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Fecha</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <?php foreach ($dtTasaDet->listarTasaDetalles($tasa->__GET('id_tasaCambio')) as $r) : ?>
+                        <tr>
+                          <td><?php echo $r->__GET('id_tasaCambio_det'); ?></td>
+                          <td><?php echo $r->__GET('moneda_origen'); ?></td>
+                          <td><?php echo $r->__GET('moneda_cambio'); ?></td>
+                          <td><?php echo $r->__GET('fecha'); ?></td>
+                          <td><?php echo $r->__GET('tipo_cambio'); ?></td>
+                          <td>
+                            <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
+                            <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Moneda origen</th>
+                        <th>Moneda cambio</th>
+                        <th>Fecha</th>
+                        <th>Tipo de cambio</th>
+                        <th>Opciones</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </section>
+      <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 3.1.0-rc
+        </div>
+        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+      </footer>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.1.0-rc
-      </div>
-      <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -550,18 +650,97 @@ if (isset($varMsj)) {
   <script src="../../plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../../plugins/DT/datatables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+  </script>
   <!-- bs-custom-file-input -->
   <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
-  <!-- Select2 -->
+  <!-- Select2-->
   <script src="../../plugins/select2/js/select2.full.min.js"></script>
+
   <!-- Page specific script -->
   <script>
     $(function() {
       bsCustomFileInput.init();
+    });
+  </script>
+
+  <script>
+    function setValores() {
+      $("#id_monedaO").val("<?php echo $tasa->__GET('id_monedaO') ?>");
+      $("#id_monedaC").val("<?php echo $tasa->__GET('id_monedaC') ?>");
+      $("#mes").val("<?php echo $tasa->__GET('mes') ?>");
+      $("#anio").val("<?php echo $tasa->__GET('anio') ?>");
+
+    }
+
+    function setValoresDet() {
+      $("#tipoCambio").val("<?php echo $tasaD->__GET('tipo_cambio') ?>");
+      $("#id_tasaCambio2").val("<?php echo $tasaD->__GET('id_tasaCambio_det') ?>");
+      $("#id_tasaCambio1").val("<?php echo $tasa->__GET('id_tasaCambio') ?>");
+    }
+
+    $(document).ready(function() {
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+
+      setValores();
+      setValoresDet();
+
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+      }
+      if (mensaje == "2" || mensaje == "4") {
+        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+      }
+
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido modificados exitosamente!');
+      }
+
+      if (mensaje == "5") {
+        successAlert('Exito', 'El Producto se ha desactivado exitosamente!');
+      }
+
+      if (mensaje == "6") {
+        errorAlert('Error', 'No se logro desactivar la categoria');
+      }
+
+      $("#tasaC_det").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["excel", "pdf"]
+      }).buttons().container().appendTo('#tasaC_det_wrapper .col-md-6:eq(0)');
+      /*
+      $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+      });*/
     });
   </script>
 </body>

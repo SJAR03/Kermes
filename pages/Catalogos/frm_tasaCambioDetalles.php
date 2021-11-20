@@ -542,7 +542,7 @@ if (isset($varMsj)) {
                       <label>Fecha</label>
                       <input type="date" name="fecha" id="fecha" class="form-control datetimepicker-input" data-target="#reservationdate" />
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                      <input type="hidden" name="id_tasaCambio2" id="id_tasaCambio2" />
+                      <input type="text" name="id_tasaCambio2" id="id_tasaCambio2" />
                     </div>
 
                     <div class="form-group">
@@ -592,8 +592,11 @@ if (isset($varMsj)) {
                           <td><?php echo $r->__GET('fecha'); ?></td>
                           <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                           <td>
-                            <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
-                            <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                            <a href="frm_edit_tasaCambioDetalle.php?editTC=<?php echo $r->__GET('id_tasaCambio') ?>&editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
+                            <a href="frm_view_tasaCambioDetalle.php?viewTC=<?php echo $r->__GET('id_tasaCambio') ?>&viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                            <a href="#" title="Eliminar Detalle" target="blank">
+                              <i class="far fa-trash-alt fa-2x" onclick="deactivateP(<?php echo $r->__GET('id_tasaCambio_det') ?>,<?php echo $r->__GET('id_tasaCambio') ?> );"></i>
+                            </a>
                           </td>
                         </tr>
                       <?php endforeach; ?>
@@ -674,6 +677,16 @@ if (isset($varMsj)) {
   </script>
 
   <script>
+    function deactivateP(tcd, tc) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_tasaCambio_det.php?delTCD=" + tcd + "&TC=" + tc;
+        },
+        function(e, btn) {
+          e.preventDefault();
+        });
+    }
+
     $(document).ready(function() {
       var mensaje = 0;
       mensaje = "<?php echo $varMsj ?>";
@@ -691,11 +704,11 @@ if (isset($varMsj)) {
       }
 
       if (mensaje == "5") {
-        successAlert('Exito', 'El Producto se ha desactivado exitosamente!');
+        successAlert('Exito', 'La Tasa de Cambio se ha eliminado exitosamente!');
       }
 
       if (mensaje == "6") {
-        errorAlert('Error', 'No se logro desactivar la categoria');
+        errorAlert('Error', 'No se logro desactivar la tasa de cambio');
       }
 
       $("#tasaC_det").DataTable({

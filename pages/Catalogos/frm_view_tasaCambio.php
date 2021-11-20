@@ -518,7 +518,7 @@ $tasa = $dtTasa->getTasaById($varIdTc);
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary" id="gen" disabled>Guardar</button>
+                    <a href="tbl_tasaCambio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                   </div>
                 </form>
               </div>
@@ -557,7 +557,10 @@ $tasa = $dtTasa->getTasaById($varIdTc);
                           <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                           <td>
                             <a href="frm_edit_tasaCambioDetalles.php?editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
-                            <a href="frm_edit_tasaCambioDetalles.php?viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                            <a href="frm_view_tasaCambioDetalle.php?viewTC=<?php echo $tasa->__GET('id_tasaCambio') ?>&viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
+                            <a href="#" title="Eliminar Detalle" target="blank">
+                              <i class="far fa-trash-alt fa-2x" onclick="deactivateP(<?php echo $r->__GET('id_tasaCambio_det') ?>,<?php echo $r->__GET('id_tasaCambio') ?> );"></i>
+                            </a>
                           </td>
                         </tr>
                       <?php endforeach; ?>
@@ -639,6 +642,16 @@ $tasa = $dtTasa->getTasaById($varIdTc);
   </script>
 
   <script>
+    function deactivateP(tcd, tc) {
+      confirm(function(e, btn) {
+          e.preventDefault();
+          window.location.href = "../../negocio/ng_tasaCambio_det.php?delTCD=" + tcd + "&TC=" + tc;
+        },
+        function(e, btn) {
+          e.preventDefault();
+        });
+    }
+
     function setValores() {
       $("#id_monedaO").val("<?php echo $tasa->__GET('id_monedaO') ?>");
       $("#id_monedaC").val("<?php echo $tasa->__GET('id_monedaC') ?>");

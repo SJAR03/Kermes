@@ -7,7 +7,8 @@ class VwTasaCambioDetalle
     private $moneda_cambio;
     private $fecha;
     private $tipoCambio;
-    private $estado;
+    private $estadoDet;
+    private $estadoGen;
 
     public function __GET($k)
     {
