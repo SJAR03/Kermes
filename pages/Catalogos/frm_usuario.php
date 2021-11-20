@@ -1,17 +1,19 @@
 <?php
+
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
+
 include '../../Entidades/usuario.php';
 include '../../Datos/dt_usuario.php';
 
-$dtu = new dt_usuario();
+$dtU = new dt_usuario();
 
 $varMsj = 0;
+
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Registrar Usuarios</title>
+    <title>AdminLTE 3 | Registro de Usuarios</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -447,12 +449,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Nuevo Usuario</h1>
+                            <h1>Nuevo usuario</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Usuarios</li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                <li class="breadcrumb-item active">Registrar usuario</li>
                             </ol>
                         </div>
                     </div>
@@ -468,63 +470,49 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Usuario</h3>
+                                    <h3 class="card-title">Registrar usuario</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
-
+                                <form method="POST" action="../../negocio/ng_usuario.php">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Id Usuario</label>
-                                            <input type="text" class="form-control" id="kerm_umod" name="id_usuario" title="Id Usuario" value="Id Usuario" required disabled>
+                                            <label>Usuario</label>
+                                            <input type="text" class="form-control" id="usuario" name="usuario" maxlength="45" placeholder="Ingrese nombre de usuario" title="Ingrese nombre de usuario" required>
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nombres</label>
+                                            <input type="text" class="form-control" id="nombres" name="nombres" maxlength="45" placeholder="Ingrese los nombres" title="Ingrese los nombre" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Usuario:</label>
-                                            <input type="text" class="form-control" id="user_usuario" name="usuario" maxlength="15" placeholder="Ingrese nombre del nuevo Usuario" title="Ingrese nombre del nuevo Usuario" required>
+                                            <label>Apellidos</label>
+                                            <input type="text" class="form-control" id="apellidos" name="apellidos" maxlength="45" placeholder="Ingrese los apellidos" title="Ingrese los apellidos" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Nombres: </label>
-                                            <input type="text" class="form-control" id="user_nombres" name="nombres" maxlength="45" placeholder="Ingrese sus nombres" title="Ingrese sus nombres" required>
+                                            <label>Email</label>
+                                            <input type="text" class="form-control" id="email" name="email" maxlength="45" placeholder="Ingrese el correo eléctronico" title="Ingrese el correo eléctronico" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>Apellidos: </label>
-                                            <input type="text" class="form-control" id="user_apellidos" name="apellidos" maxlength="45" placeholder="Ingrese sus apellidos" title="Ingrese sus apellidos" required>
+                                            <label>Contraseña</label>
+                                            <input type="password" class="form-control" id="pwd" name="pwd" maxlength="45" placeholder="Ingrese la contraseña" title="Ingrese la contraseña" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Email: </label>
-                                            <input type="text" class="form-control" id="user_email" name="email" maxlength="45" placeholder="Ingrese su correo electrónico" title="Ingrese su correo electrónico" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Contraseña: </label>
-                                            <input type="text" class="form-control" id="user_contra" name="contraseña" maxlength="45" placeholder="Ingrese una contraseña" title="Ingrese una contraseña" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Confirme contraseña: </label>
-                                            <input type="text" class="form-control" id="user_contraAgain" name="repetir_contraseña" maxlength="45" placeholder="Ingrese nuevamente la contraseña" title="Ingrese nuevamente la contraseña" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="user_estado" id="estado" require>
-                                                <option value="1">Activo</option>
-                                                <option value="2">Desactivado</option>
-                                            </select>
-                                        </div>
+
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <a href="tbl_moneda.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
                             <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!--/.col (right) -->
                 </div>
-                <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>

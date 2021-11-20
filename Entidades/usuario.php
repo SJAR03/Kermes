@@ -5,6 +5,7 @@ class usuario
     private $id_usuario;
     private $usuario;
     private $password;
+    private $pwd;
     private $nombre;
     private $apellido;
     private $email;

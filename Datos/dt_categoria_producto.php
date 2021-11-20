@@ -8,7 +8,7 @@ class Dt_CategoriaProducto extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_categoria_producto";
+            $querySQL = "SELECT * FROM dbkermesse.vw_categoria_producto where estado != 'Eliminado'";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -35,7 +35,7 @@ class Dt_CategoriaProducto extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_categoria_producto";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_categoria_producto where estado <>3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();

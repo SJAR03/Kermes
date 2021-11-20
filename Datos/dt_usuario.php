@@ -65,4 +65,69 @@ class dt_usuario extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function getUsuario($iu)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM tbl_usuario WHERE id_usuario = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($iu));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $gu = new Usuario();
+
+            $gu->__SET('id_usuario', $r->id_usuario);
+            $gu->__SET('usuario', $r->usuario);
+            $gu->__SET('pwd', $r->pwd);
+            $gu->__SET('nombres', $r->nombres);
+            $gu->__SET('apellidos', $r->apellidos);
+            $gu->__SET('email', $r->email);
+            $gu->__SET('estado', $r->estado);
+
+            $this->myCon = parent::desconectar();
+            return $gu;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function registrarUsuario(usuario $ru)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $query = "INSERT INTO tbl_usuario (usuario, pwd, nombres, apellidos, email, estado) VALUES (?, ?, ?, ?, ?, 1)";
+            $this->myCon->prepare($query)->execute(array(
+                $ru->__GET('usuario'),
+                $ru->__GET('pwd'),
+                $ru->__GET('nombres'),
+                $ru->__GET('apellidos'),
+                $ru->__GET('email')
+            ));
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editarUsuario(Usuario $eu)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE tbl_usuario SET usuario = ?, pwd = ?, nombres = ?, apellidos = ?, email = ?, estado = 2 WHERE id_usuario = ?";
+
+            $this->myCon->prepare($sql)->execute(array(
+
+                $eu->__GET('usuario'),
+                $eu->__GET('pwd'),
+                $eu->__GET('nombres'),
+                $eu->__GET('apellidos'),
+                $eu->__GET('email'),
+                $eu->__GET('id_usuario')
+            ));
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
