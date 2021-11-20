@@ -72,15 +72,14 @@ class dt_lista_precio extends Conexion
         try {
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO dbkermesse.tbl_lista_precio(id_kermesse, nombre, descripcion, estado)
-                VALUES (?, ?, ?, ?)";
+                VALUES (?, ?, ?, 1)";
 
             $this->myCon->prepare($sql)
             ->execute(array(
                 /* $com->__GET('id_comunidad'), */
                 $icd->__GET('id_kermesse'),
                 $icd->__GET('nombre'),
-                $icd->__GET('descripcion'),
-                $icd->__GET('estado')));
+                $icd->__GET('descripcion')));
 
                 $this->myCon = parent::desconectar();
 
@@ -115,6 +114,31 @@ class dt_lista_precio extends Conexion
             $this->myCon = parent::desconectar();
             return $icd;
         } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function UpdateListaPrecio(lista_precio $p){
+        try{
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_lista_precio SET
+            id_kermesse = ?,
+            nombre = ?,
+            descripcion = ?,
+            estado=2
+            WHERE id_lista_precio = ?";
+
+
+            $this->myCon->prepare($querySQL)
+            ->execute(array(
+                $p->__GET('id_kermesse'),
+                $p->__GET('nombre'),
+                $p->__GET('descripcion'),
+                $p->__GET('id_lista_precio')
+            ));
+
+            $this->myCon = parent::desconectar();
+        }catch(Exception $e){
             die($e->getMessage());
         }
     }

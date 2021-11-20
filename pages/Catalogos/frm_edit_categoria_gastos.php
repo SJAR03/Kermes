@@ -7,7 +7,6 @@ include '../../Datos/dt_categoria_gastos.php';
 
 $dtComu = new dt_categoria_gastos();
 $Comu = new categoria_gastos();
-
 $varIdComu = 0;
 
 if (isset($varIdComu)) {
@@ -481,34 +480,35 @@ $Comu = $dtComu->getCategoriaGastos($varIdComu);
                 <!-- form start -->
                 <form method="POST" action="../../negocio/ng_categoria_gastos.php">
                   <div class="card-body">
+                    <label>ID Categoría Gastos: </label>
+                    <input type="text" class="form-control" id="id_categoria_gastos" name="id_categoria_gastos" placeholder="ID" readonly require>
+
                     <div class="form-group">
                       <label>Nombre</label>
                       <input type="text" value="<?php echo $Comu->__GET('nombre_categoria') ?>" class="form-control" id="nombre_categoria" name="nombre_categoria" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
-                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                      <input type="hidden" value=2 name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
                       <label>Descripción</label>
-                      <input type="text" class="form-control" id="descripcion" name="responsable" maxlength="45" placeholder="Ingrese una descripción" title="Ingrese el nombre del responsable" required>
+                      <input type="text" class="form-control" id="descripcion" name="descripcion" maxlength="45" placeholder="Ingrese una descripción" title="Ingrese el nombre del responsable" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                       <label>Estado</label>
-                      <select class="form-control" name="Name_exp_4" id="Name_exp_4">
-                        <option value="1">Activado</option>
-                        <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option>
-                      </select>
+                      <input type="text" class="form-control" id="estado" placeholder="Modificado" name="estado" value=2>
                     </div>
 
+                    <div class="form-group" hidden>
+                      <label>Estado</label>
+                      <input type="text" class="form-control" id=estado name="estado" hidden>
+                    </div>
+                    <!-- /.card-body -->
 
-                  </div>
-                  <!-- /.card-body -->
-
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
-                  </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Guardar</button>
+                      <button type="reset" class="btn btn-danger">Cancelar</button>
+                    </div>
                 </form>
               </div>
               <!-- /.card -->
@@ -549,9 +549,10 @@ $Comu = $dtComu->getCategoriaGastos($varIdComu);
   <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
+      $("#id_categoria_gastos").val("<?php echo $Comu->__GET('id_categoria_gastos') ?>");
       $("#nombre_categoria").val("<?php echo $Comu->__GET('nombre_categoria') ?>");
       $("#descripcion").val("<?php echo $Comu->__GET('descripcion') ?>");
-      $("#Name_exp_4").val("<?php echo $Comu->__GET('Name_exp_4') ?>");
+      $("#estado").val("<?php echo $Comu->__GET('estado') ?>");
 
     }
 

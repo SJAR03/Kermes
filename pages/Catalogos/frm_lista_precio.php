@@ -480,7 +480,7 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_lista_precio.php">
                   <div class="card-body">
 
                     <div class="form-group">
@@ -505,7 +505,12 @@ if (isset($varMsj)) {
                       <label>Descripción</label>
                       <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción" title="Ingrese la descripción" required>
                     </div>
-
+                    
+                    <div class="form-group" hidden>
+                      <label>Estado</label>
+                      <input type="text" class="form-control" id="estado" name="estado" placeholder="Registrado" title="Ingrese la descripción" value = 1 required>
+                    </div>
+                    
                   </div>
                   <!-- /.card-body -->
 

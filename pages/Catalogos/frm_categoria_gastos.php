@@ -2,8 +2,8 @@
 
 error_reporting(0);
 
-include '../../Entidades/dt_categoria_gastos.php';
-include '../../datos/dt_categoria_gastos.php';
+include '../../Entidades/categoria_gastos.php';
+include '../../Datos/dt_categoria_gastos.php';
 
 
 
@@ -25,7 +25,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | General Form Elements</title>
+    <title>AdminLTE 3 | Ingresar categoría Gastos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -478,7 +478,7 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                                <form method="POST" action="../../negocio/ng_categoria_gastos.php">
                                     <div class="card-body">
 
                                         <div class="form-group">
@@ -489,6 +489,15 @@ if (isset($varMsj)) {
                                         <div class="form-group">
                                             <label>Descripción</label>
                                             <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción" title="Ingrese la descripción" required>
+                                        </div>
+
+                                        <div class="form-group" hidden>
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Registrado" title="Ingrese la descripción" value=1 required>
+                                        </div>
+
+                                        <div class="form-group" hidden>
+                                            <input type="text" class="form-control" id="txtaccion" name="txtaccion" placeholder="Registrado" title="Ingrese la descripción" value=1 required>
                                         </div>
 
                                     </div>

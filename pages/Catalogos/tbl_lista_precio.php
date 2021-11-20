@@ -28,6 +28,8 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+    <!-- JAlert -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -556,6 +558,11 @@ if (isset($varMsj)) {
         <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
         <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
+        <!--JAlert js-->
+        <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+            //Opcional!!
+        </script>
+        <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
 
         <!-- AdminLTE App -->
         <script src="../../dist/js/adminlte.min.js"></script>
@@ -573,6 +580,9 @@ if (isset($varMsj)) {
                 }
                 if (mensaje == "2") {
                     successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+                if (mensaje == "3") {
+                    successAlert('Exito', 'Los datos han sido editados exitosamente.')
                 }
                 ////////////////////////////////////////
 

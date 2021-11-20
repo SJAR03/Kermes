@@ -57,6 +57,36 @@ class Dt_Parroquia extends Conexion
         }
     }
 
+    public function UpdateParroquia(Parroquia $p){
+        try{
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_parroquia SET
+            nombre = ?,
+            direccion = ?,
+            telefono = ?,
+            parroco = ?,
+            logo = ?,
+            sitio_web = ?
+            WHERE idParroquia = ?";
+
+
+            $this->myCon->prepare($querySQL)
+            ->execute(array(
+                $p->__GET('nombre'),
+                $p->__GET('direccion'),
+                $p->__GET('telefono'),
+                $p->__GET('parroco'),
+                $p->__GET('logo'),
+                $p->__GET('sitio_web'),
+                $p->__GET('idParroquia')
+            ));
+
+            $this->myCon = parent::desconectar();
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
     public function getParroquia($id)
     {
         try {

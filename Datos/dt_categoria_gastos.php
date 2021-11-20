@@ -10,7 +10,6 @@ class dt_categoria_gastos extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $result = array();
             $querySQL = "SELECT * FROM dbkermesse.tbl_categoria_gastos";
 
             $stm = $this->myCon->prepare($querySQL);
@@ -38,7 +37,6 @@ class dt_categoria_gastos extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $result = array();
             $querySQL = "SELECT * FROM dbkermesse.vw_categoria_gastos";
 
             $stm = $this->myCon->prepare($querySQL);
@@ -50,7 +48,7 @@ class dt_categoria_gastos extends Conexion
                 $us->__SET('id_categoria_gastos', $r->id_categoria_gastos);
                 $us->__SET('nombre_categoria', $r->nombre_categoria);
                 $us->__SET('descripcion', $r->descripcion);
-                $us->__SET('Name_exp_4', $r->Name_exp_4);
+                $us->__SET('estado', $r->estado);
 
                 $result[] = $us;
             }
@@ -67,13 +65,12 @@ class dt_categoria_gastos extends Conexion
         try {
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO dbkermesse.tbl_categoria_gastos(nombre_categoria, descripcion, estado)
-                VALUES (?, ?, ?)";
+                VALUES (?, ?, 1)";
 
             $this->myCon->prepare($sql)
             ->execute(array(
                 $com->__GET('nombre_categoria'),
-                $com->__GET('descripcion'),
-                $com->__GET('estado')));
+                $com->__GET('descripcion')));
 
                 $this->myCon = parent::desconectar();
 
@@ -103,6 +100,29 @@ class dt_categoria_gastos extends Conexion
             $this->myCon = parent::desconectar();
             return $ic;
         } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function UpdateCategoriaGastos(categoria_gastos $p){
+        try{
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_categoria_gastos SET
+            nombre_categoria = ?,
+            descripcion = ?,
+            estado = 2
+            WHERE id_categoria_gastos = ?";
+
+
+            $this->myCon->prepare($querySQL)
+            ->execute(array(
+                $p->__GET('nombre_categoria'),
+                $p->__GET('descripcion'),
+                $p->__GET('id_categoria_gastos')
+            ));
+
+            $this->myCon = parent::desconectar();
+        }catch(Exception $e){
             die($e->getMessage());
         }
     }

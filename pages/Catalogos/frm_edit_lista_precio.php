@@ -30,7 +30,7 @@ $ICD = $dtICD->getListaPrecio($varIdICD);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | General Form Elements</title>
+    <title>AdminLTE 3 | Editar Lista Precio</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -485,7 +485,9 @@ $ICD = $dtICD->getListaPrecio($varIdICD);
                                 <!-- form start -->
                                 <form method="POST" action="../../negocio/ng_lista_precio.php">
                                     <div class="card-body">
-
+                                        <label>ID Lista Precio: </label>
+                                        <input type="text" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="ID" readonly require>
+                                        
                                         <div class="form-group">
                                             <label>Seleccione la Kermesse</label>
                                             <select class="form-control" id="id_kermesse" name="id_kermesse" required>
@@ -509,13 +511,9 @@ $ICD = $dtICD->getListaPrecio($varIdICD);
                                             <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese una descripción" title="Ingrese una descripción" required>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <label>Estado</label>
-                                            <select class="form-control" name="estado" id="estado">
-                                                <option value="1">Activado</option>
-                                                <option value="2">Modificado</option>
-                                                <option value="3">Eliminado</option>
-                                            </select>
+                                            <input type="text" class="form-control" id=estado name="estado" value="2" hidden>
                                         </div>
                                         <!-- /.card-body -->
 
@@ -561,14 +559,19 @@ $ICD = $dtICD->getListaPrecio($varIdICD);
     <!-- Page specific script -->
 
     <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+    <script>
         ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
         function setValores() {
+            $("#id_lista_precio").val("<?php echo $ICD->__GET('id_lista_precio') ?>");
             $("#id_kermesse").val("<?php echo $ICD->__GET('id_kermesse') ?>");
             $("#nombre").val("<?php echo $ICD->__GET('nombre') ?>");
             $("#descripcion").val("<?php echo $ICD->__GET('descripcion') ?>");
             $("#estado").val("<?php echo $ICD->__GET('estado') ?>");
-
-
         }
 
         $(document).ready(function() {

@@ -26,7 +26,7 @@ $Comu = $dtComu->getParroquia($varIdComu);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Parroquia</title>
+  <title>AdminLTE 3 | Editar Parroquia</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -482,6 +482,9 @@ $Comu = $dtComu->getParroquia($varIdComu);
                 <form method="POST" action="../../negocio/ng_parroquia.php">
                   <div class="card-body">
                     <div class="form-group">
+                    <label>ID Parroquia: </label>
+                      <input type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID" readonly require>
+                      
                       <label>Nombre</label>
                       <input type="text" value="<?php echo $Comu->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
@@ -517,7 +520,7 @@ $Comu = $dtComu->getParroquia($varIdComu);
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
                 </form>
@@ -558,8 +561,15 @@ $Comu = $dtComu->getParroquia($varIdComu);
   <!-- Page specific script -->
 
   <script>
+    $(function() {
+      bsCustomFileInput.init();
+    });
+  </script>
+
+  <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
+      $("#idParroquia").val("<?php echo $Comu->__GET('idParroquia')?>");
       $("#nombre").val("<?php echo $Comu->__GET('nombre') ?>");
       $("#direccion").val("<?php echo $Comu->__GET('direccion') ?>");
       $("#telefono").val("<?php echo $Comu->__GET('telefono') ?>");
@@ -572,13 +582,6 @@ $Comu = $dtComu->getParroquia($varIdComu);
     $(document).ready(function() {
       ////CARGAMOS LOS VALORES EN LOS CONTROLES
       setValores();
-    });
-  </script>
-
-
-  <script>
-    $(function() {
-      bsCustomFileInput.init();
     });
   </script>
 </body>
