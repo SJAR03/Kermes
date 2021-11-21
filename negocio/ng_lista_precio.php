@@ -24,10 +24,10 @@ if ($_POST)
 
                 $dtICD-> regListaPrecio($icd);
                 //var_dump($emp);
-                header("Location: /AdminLTE/pages/Catalogos/tbl_lista_precio.php?msj=1");
+                header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=1");
             }
             catch (Exception $e) {
-                header("Location: /AdminLTE/pages/Catalogos/tbl_lista_precio.php?msj=2");   
+                header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=2");   
             die($e->getMessage());
         }
 
@@ -39,9 +39,9 @@ if ($_POST)
                 $icd->__SET('descripcion', $_POST['descripcion']);
                 $icd->__SET('estado', $_POST['estado']);
                 $dtICD->UpdateListaPrecio($icd);
-                header("Location: /AdminLTE/pages/Catalogos/tbl_lista_precio.php?msj=3");
+                header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=3");
             } catch (Exception $e) {
-                header("Location: /AdminLTE/pages/Catalogos/tbl_lista_precio.php?msj=4");
+                header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=4");
                 die($e->getMessage());
             }
             break;

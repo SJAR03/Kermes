@@ -23,10 +23,10 @@ if ($_POST)
 
                 $dtComu-> regCategoriaGastos($com);
                 //var_dump($emp);
-                header("Location: /AdminLTE/pages/Catalogos/tbl_categoria_gastos.php?msj=1");
+                header("Location: /Kermes/pages/Catalogos/tbl_categoria_gastos.php?msj=1");
             }
             catch (Exception $e) {
-                header("Location: /AdminLTE/pages/Catalogos/tbl_categoria_gastos.php?msj=2");   
+                header("Location: /Kermes/pages/Catalogos/tbl_categoria_gastos.php?msj=2");   
             die($e->getMessage());
             }
         case '2':
@@ -36,9 +36,9 @@ if ($_POST)
                 $com->__SET('descripcion', $_POST['descripcion']);
                 $com->__SET('estado', $_POST['estado']);
                 $dtComu->UpdateCategoriaGastos($com);
-                header("Location: /AdminLTE/pages/Catalogos/tbl_categoria_gastos.php?msj=3");
+                header("Location: /Kermes/pages/Catalogos/tbl_categoria_gastos.php?msj=3");
             } catch (Exception $e) {
-                header("Location: /AdminLTE/pages/Catalogos/tbl_categoria_gastos.php?msj=4");
+                header("Location: /Kermes/pages/Catalogos/tbl_categoria_gastos.php?msj=4");
                 die($e->getMessage());
             }
             break;
