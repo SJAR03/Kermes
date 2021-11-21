@@ -8,7 +8,7 @@
             try {
                 $this->myCon = parent::conectar();
                 $result = array();
-                $querySQL = "SELECT * FROM vwDenominacion";
+                $querySQL = "SELECT * FROM vwDenominacion WHERE estado != 3";
 
                 $stm = $this->myCon->prepare($querySQL);
                 $stm->execute();
@@ -89,6 +89,21 @@
                 ));
                 $this->myCon = parent::desconectar();
             } catch (Exception $e)
+            {
+                die($e->getMessage());
+            }
+        }
+
+        public function eliminarDenominacion($idDenominacion)
+        {
+            try
+            {
+                $this->myCon = parent::conectar();
+                $query = "UPDATE tbl_denominacion SET estado = 3 WHERE id_Denominacion = ?";
+                $this->myCon->prepare($query)->execute(array($idDenominacion));
+                $this->myCon = parent::desconectar();
+            }
+            catch (Exception $e)
             {
                 die($e->getMessage());
             }

@@ -51,4 +51,19 @@
                 break;
         }
     }
+
+    if ($_GET)
+    {
+        try
+        {
+            $d->__SET('id', $_GET['delDenominacion']);
+            $dtD->eliminarDenominacion($d->__GET('id'));
+            header("Location: /Kermes/pages/Catalogos/tbl_denominacion.php?msj=5");
+        }
+        catch (Exception $e) 
+        {
+            header("Location: /Kermes/pages/Catalogos/tbl_denominacion.php?msj=4");
+            die($e->getMessage());
+        }
+    }
 ?>

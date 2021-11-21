@@ -495,6 +495,7 @@ if (isset($varMsj)) {
                                             <td>
                                                 <a href="frm_edit_moneda.php?editMoneda=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x" title="Editar moneda"></i></a>
                                                 <a href="frm_view_moneda.php?viewMoneda=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x" title="Ver moneda"></i></a>
+                                                <a href="#" onClick="eliminarMoneda('<?php echo $r->__GET('id') ?>');"><i class="far fa-2x fa-trash-alt" title="Eliminar moneda"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -561,6 +562,19 @@ if (isset($varMsj)) {
     <!-- Page specific script -->
     <script>
 
+        function eliminarMoneda(id_m)
+        {
+            confirm(function(e, btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_moneda.php?delMoneda=" + id_m;
+            },
+            function(e, btn)
+            {
+                e.preventDefault();
+            });
+        }
+
         $(document).ready(function () {
             // Mensajes de Control
             var mensaje = 0;
@@ -578,7 +592,17 @@ if (isset($varMsj)) {
 
                 case "3":
                     successAlert('Éxito', 'Se modificó exitosamente la moneda.');
+                    break;
+
+                case "5":
+                    successAlert('Éxito', 'Se borraron los datos exitosamente.')
+                    break;
+
+                case "6":
+                    backAlert("Error", "Error al eliminar la moneda.");
+                    break;
                 default:
+                    break;
 
             }
 

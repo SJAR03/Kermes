@@ -47,8 +47,22 @@
                 break;
 
             default:
-                // code...
                 break;
+        }
+    }
+
+    if ($_GET)
+    {
+        try
+        {
+            $m->__SET('id', $_GET['delMoneda']);
+            $dtM->eliminarMoneda($m->__GET('id'));
+            header("Location: /Kermes/pages/Catalogos/tbl_moneda.php?msj=5");
+        }
+        catch (Exception $e)
+        {
+            header("Location: /Kermes/pages/Catalogos/tbl_moneda.php?msj=6");
+            die($e->getMessage());
         }
     }
 ?>
