@@ -487,6 +487,13 @@ if (isset($varMsj)) {
                 <!-- form start -->
                 <form method="POST" action="../../negocio/ng_Control_Bonos.php">
                   <div class="card-body">
+
+                  <div class="form-group">
+                      <label>ID</label>
+                      <input type="int" value="<?php echo $CB->__GET('id_bono') ?>" class="form-control" id="id_bono" name="id_bono" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
+                      <!-- <input type="hidden" value="2" name="txtaccion" id="txtaccion" /> -->
+                  </div>
+
                     <div class="form-group">
                       <label>Nombre</label>
                       <input type="text" value="<?php echo $CB->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
@@ -555,6 +562,7 @@ if (isset($varMsj)) {
   <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
+      $("#id_bono").css("background-color", "#E3E4E5")
       $("#valor").val("<?php echo $CB->__GET('valor') ?>");
       $("#estado").val("<?php echo $CB->__GET('estado') ?>");
 

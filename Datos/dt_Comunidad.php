@@ -9,7 +9,7 @@ class Dt_Comunidad extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad order by nombre";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_comunidad where estado <> 3;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -79,6 +79,53 @@ class Dt_Comunidad extends Conexion
             $this->myCon = parent::desconectar();
             return $com;
         } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editComunidad(Comunidad $com)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_comunidad SET
+                    nombre= ?,
+                    responsable= ?,
+                    desc_contribucion=?,
+                    estado=?
+                WHERE id_comunidad = ?";
+
+            $this->myCon->prepare($sql)
+            ->execute(
+            array(
+                $com->__GET('nombre'),
+                $com->__GET('responsable'),
+                $com->__GET('desc_contribucion'),
+                $com->__GET('estado'),
+                $com->__GET('id_comunidad')          
+            ));
+            
+
+            $this->myCon = parent::desconectar();
+            
+        } catch (Exception $e) {
+            var_dump($e);
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteComunidad($idCom)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE FROM dbkermesse.tbl_comunidad WHERE id_comunidad = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idCom));
+            $this->myCon = parent::desconectar();
+            
+        } 
+        catch (Exception $e) 
+        {
+            var_dump($e);
             die($e->getMessage());
         }
     }

@@ -28,11 +28,11 @@ if ($_POST)
                 $ic->__SET('id_comunidad', $_POST['id_comunidad']);
                 $ic->__SET('id_producto', $_POST['id_producto']);
                 $ic->__SET('cant_productos', $_POST['cant_productos']);
-                $icd->__SET('id_ingreso_comunidad', $_POST['id_ingreso_comunidad']);
-                $icd->__SET('id_bono', $_POST['id_bono']);
-                $icd->__SET('denominacion', $_POST['denominacion']);
-                $icd->__SET('cantidad', $_POST['cantidad']);
-                $icd->__SET('subtotal_bono', $_POST['subtotal_bono']);
+                $ic->__SET('id_ingreso_comunidad', $_POST['id_ingreso_comunidad']);
+                $ic->__SET('id_bono', $_POST['id_bono']);
+                $ic->__SET('denominacion', $_POST['denominacion']);
+                $ic->__SET('cantidad', $_POST['cantidad']);
+                $ic->__SET('subtotal_bono', $_POST['subtotal_bono']);
                 $ic->__SET('total_bonos', $_POST['total_bonos']);
                 $ic->__SET('usuario_creacion', $_POST['usuario_creacion']);
                 $ic->__SET('fecha_creacion', $_POST['fecha_creacion']);
@@ -42,7 +42,7 @@ if ($_POST)
                 $ic->__SET('fecha_eliminacion', $_POST['fecha_eliminacion']); */
 
                 $dtIC-> regIngComunidad($ic);
-                $dtICD-> regIngComunidadDet($icd);
+                /* $dtICD-> regIngComunidadDet($icd); */
                 //var_dump($emp);
                 header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=1");
                 header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=1");
@@ -52,9 +52,57 @@ if ($_POST)
                 header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=2");   
             die($e->getMessage());
             }
-        case '2':
             break;
+            
+        
+            case '2':
+                try
+                {
+                    //CONSTRUIMOS OBJETOS
+                    //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
+                    $ic->__SET('id_ingreso_comunidad', $_POST['id_ingreso_comunidad']); 
+                    $ic->__SET('id_kermesse', $_POST['id_kermesse']);
+                    $ic->__SET('id_comunidad', $_POST['id_comunidad']);
+                    $ic->__SET('id_producto', $_POST['id_producto']);
+                    $ic->__SET('cant_productos', $_POST['cant_productos']);
+                    /* $ic->__SET('id_ingreso_comunidad', $_POST['id_ingreso_comunidad']); */
+                   /*  $ic->__SET('id_bono', $_POST['id_bono']);
+                    $ic->__SET('denominacion', $_POST['denominacion']);
+                    $ic->__SET('cantidad', $_POST['cantidad']);
+                    $ic->__SET('subtotal_bono', $_POST['subtotal_bono']); */
+                    $ic->__SET('total_bonos', $_POST['total_bonos']);
+                    $ic->__SET('usuario_creacion', $_POST['usuario_creacion']);
+                    $ic->__SET('fecha_creacion', $_POST['fecha_creacion']);
+                    
+    
+                    $dtIC ->editIngComunidad($ic);
+                    //var_dump($emp);
+                    header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=3");
+                }
+                catch(Exception $e)
+                {
+                    header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=4");
+                    die($e -> getMessage());
+                }
+                break;
         
 
     }
+}
+
+if($_GET)
+{
+    try
+    {
+        $ic->__SET('id_ingreso_comunidad', $_GET['delIC']);
+        $dtIC->deliteIngComunidad($ic->__GET('id_ingreso_comunidad'));
+        header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=5");
+    }
+    catch(Exception $e)
+    {
+        header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=6");
+        die($e->getMessage());
+    }
+        
+    
 }

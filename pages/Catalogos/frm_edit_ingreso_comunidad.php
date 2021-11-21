@@ -25,21 +25,22 @@ $dtICD = new Dt_Ingreso_Comunidad_Det();
 $dtK = new Dt_Kermesse();
 $dtCom = new Dt_Comunidad();
 $dtP = new Dt_Producto();
-$IC = new Ingreso_Comunidad(); 
-$ICD = new Ingreso_Comunidad_Det();
 $dtCb = new Dt_Control_Bonos();
+$IC = new Ingreso_Comunidad(); 
+/* $ICD = new Ingreso_Comunidad_Det(); */
+
 
 $varIdIC = 0;
 
 if (isset($varIdIC)) {
-  $varIdIC = $_GET['editIC']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
+  $varIdIC = $_GET['editIC']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR INGRESO COMUNIDAD
 
 }
 
 $varIdICD = 0;
 
 if (isset($varIdICD)) {
-  $varIdICD = $_GET['editICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
+  $varIdICD = $_GET['editICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR INGRESO COMUNIDAD DETALLE
 }
 
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
@@ -516,6 +517,12 @@ if (isset($varMsj)) {
                 <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
                   <div class="card-body">
 
+                  <div class="form-group">
+                      <label>ID</label>
+                      <input type="int" value="<?php echo $IC->__GET('id_ingreso_comunidad') ?>" class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
+                      <!-- <input type="hidden" value="2" name="txtaccion" id="txtaccion" /> -->
+                  </div>
+
                     <div class="form-group">
                       <label>Seleccione la kermesses</label>
                       <select class="form-control" id="id_kermesse" name="id_kermesse" required>
@@ -558,7 +565,7 @@ if (isset($varMsj)) {
                       <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Seleccione el Ingreso Comunidad</label>
                       <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
                         <option value="">Seleccione...</option>
@@ -569,11 +576,11 @@ if (isset($varMsj)) {
                         <?php endforeach; ?>
                       </select>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                       <label>Seleccione bono</label>
-                      <select class="form-control" id="id_bono" name="id_bono" required>
+                      <select class="form-control" id="id_bono" name="id_bono" readonly required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtCb->listaControlBonos() as $r) : ?>
                           <tr>
@@ -585,17 +592,17 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Escriba la denominacion del bono</label>
-                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
+                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" readonly required>
                     </div>
 
                     <div class="form-group">
                       <label>Cantidad de bonos</label>
-                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
+                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" readonly required>
                     </div>
 
                     <div class="form-group">
                       <label>Subtotal de Bonos</label>
-                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
+                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" readonly required>
                     </div>
 
 
@@ -610,7 +617,7 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
+                      <label>Fecha de creacion de Usuario</label>
                       <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
                     </div>
 
@@ -681,16 +688,16 @@ if (isset($varMsj)) {
   <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
-      /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>"); */
+      $("#id_ingreso_comunidad").css("background-color", "#E3E4E5")
       $("#id_kermesse").val("<?php echo $IC->__GET('id_kermesse') ?>");
       $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad') ?>");
       $("#id_producto").val("<?php echo $IC->__GET('id_producto') ?>");
       $("#cant_productos").val("<?php echo $IC->__GET('cant_productos') ?>");
-      $("#id_ingreso_comunidad").val("<?php echo $ICD->__GET('id_ingreso_comunidad') ?>");
-      $("#id_bono").val("<?php echo $ICD->__GET('id_bono') ?>");
-      $("#denominacion").val("<?php echo $ICD->__GET('denominacion') ?>");
-      $("#cantidad").val("<?php echo $ICD->__GET('cantidad') ?>");
-      $("#subtotal_bono").val("<?php echo $ICD->__GET('subtotal_bono') ?>");
+      /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>"); */
+      $("#id_bono").val("<?php echo $IC->__GET('id_bono') ?>");
+      $("#denominacion").val("<?php echo $IC->__GET('denominacion') ?>");
+      $("#cantidad").val("<?php echo $IC->__GET('cantidad') ?>");
+      $("#subtotal_bono").val("<?php echo $IC->__GET('subtotal_bono') ?>");
       $("#total_bonos").val("<?php echo $IC->__GET('total_bonos') ?>");
       $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
       $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>");

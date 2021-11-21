@@ -454,7 +454,7 @@ $Comu = $dtComu->getComunidad($varIdComu);
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Editar Comunidad</h1>
+              <h1>Editar datos de la Comunidad</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -481,9 +481,17 @@ $Comu = $dtComu->getComunidad($varIdComu);
                 <!-- form start -->
                 <form method="POST" action="../../negocio/ng_Comunidad.php">
                   <div class="card-body">
+                   
+                  <div class="form-group">
+                      <label>ID</label>
+                      <input type="int" value="<?php echo $Comu->__GET('id_comunidad') ?>" class="form-control" id="id_comunidad" name="id_comunidad" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
+                      <!-- <input type="hidden" value="2" name="txtaccion" id="txtaccion" /> -->
+                  </div>
+
                     <div class="form-group">
                       <label>Nombre</label>
-                      <input type="text" value="<?php echo $Comu->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
+                      <!-- <input type="text" value="<?php echo $Comu->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required> -->
+                      <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
 
@@ -498,14 +506,13 @@ $Comu = $dtComu->getComunidad($varIdComu);
                     </div>
 
                     <div class="form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado">
+                       <label>Estado</label>
+                      <select class="form-control" name="estado" id="estado"  required>
                         <option value="1">Activado</option>
                         <option value="2">Modificado</option>
                         <option value="3">Eliminado</option>
                       </select>
                     </div>
-
 
                   </div>
                   <!-- /.card-body -->
@@ -514,6 +521,7 @@ $Comu = $dtComu->getComunidad($varIdComu);
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
+
                 </form>
               </div>
               <!-- /.card -->
@@ -554,6 +562,8 @@ $Comu = $dtComu->getComunidad($varIdComu);
   <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
+      $("#id_comunidad").css("background-color", "#E3E4E5")
+      $("#nombre").val("<?php echo $Comu->__GET('nombre') ?>");
       $("#responsable").val("<?php echo $Comu->__GET('responsable') ?>");
       $("#desc_contribucion").val("<?php echo $Comu->__GET('desc_contribucion') ?>");
       $("#estado").val("<?php echo $Comu->__GET('estado') ?>");
