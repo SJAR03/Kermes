@@ -455,7 +455,7 @@ if (isset($varMsj)) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Monedas</li>
+                                <li class="breadcrumb-item active">Denominaciones</li>
                             </ol>
                         </div>
                     </div>
@@ -497,6 +497,7 @@ if (isset($varMsj)) {
                                             <td>
                                                 <a href="frm_edit_denominacion.php?editDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
                                                 <a href="frm_view_denominacion.php?viewDenominacion=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="#" onClick="eliminarDnominacion('<?php echo $r->__GET('id') ?>');"><i class="far fa-trash-alt fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -564,29 +565,50 @@ if (isset($varMsj)) {
     <!-- Page specific script -->
     <script>
 
-    $(document).ready(function () {
-        // Mensajes de Control
-        var mensaje = 0;
-        mensaje = "<?php echo $varMsj ?>";
-
-        switch (mensaje) {
-            case "1":
-                successAlert('Éxito', 'Se ha registro exitosamente la denominación');
-                break;
-
-            case "3":
-                successAlert('Éxito', 'Se ha editado exitosamente la denominación');
-                break;
-
-            case "2":
-            case "4":
-                errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
-                break;
-            default:
-
+        function eliminarDnominacion (idD) { 
+            confirm(function(e, btn)
+            {
+                e.preventDefault();
+                window.location.href = "../../negocio/ng_denominacion.php?delDenominacion=" + idD;
+            },
+            function(e, btn)
+            {
+                e.preventDefault();
+            });
         }
 
-    });
+        $(document).ready(function () {
+            // Mensajes de Control
+            var mensaje = 0;
+            mensaje = "<?php echo $varMsj ?>";
+
+            switch (mensaje) {
+                case "1":
+                    successAlert('Éxito', 'Se ha registro exitosamente la denominación');
+                    break;
+
+                case "3":
+                    successAlert('Éxito', 'Se ha editado exitosamente la denominación');
+                    break;
+
+                case "2":
+                case "4":
+                    errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
+                    break;
+
+                case "5":
+                    blackAlert('Éxito', 'Se borró la denominación exitosamente');
+                    break;
+
+                case "6":
+                    errorAlert('Fallo', 'Ocurrió un error al eliminar la denominación. Intente de nuevo.');
+                    break;
+
+                default:
+                    break;
+            }
+
+        });
 
         $(function() {
             $("#example1").DataTable({

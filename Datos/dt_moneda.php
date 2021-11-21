@@ -7,7 +7,7 @@
             try {
                 $this->myCon = parent::conectar();
                 $result = array();
-                $querySQL = "SELECT * FROM tbl_moneda";
+                $querySQL = "SELECT * FROM tbl_moneda WHERE estado != 3";
 
                 $stm = $this->myCon->prepare($querySQL);
                 $stm->execute();
@@ -89,6 +89,22 @@
                 die($e->getMessage());
             }
 
+        }
+
+        public function eliminarMoneda($id_m)
+        {
+            try 
+            {
+                $this->myCon = parent::conectar();
+                $sentencia = "UPDATE tbl_moneda SET estado = 3 WHERE id_moneda = ?";
+                $stm = $this->myCon->prepare($sentencia);
+                $stm->execute(array($id_m));
+                $this->myCon = parent::desconectar();
+            }
+            catch (Exception $e)
+            {
+                die($e->getMessage());
+            }
         }
 
     }
