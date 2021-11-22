@@ -19,7 +19,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Roles</title>
+    <title>Kermesse | Registro de Roles</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -472,29 +472,21 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_rol.php">
 
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Id Rol</label>
-                                            <input type="text" class="form-control" id="kerm_umod" name="id_usuario" title="Id Usuario" value="Id Rol" required disabled>
-                                        </div>
-                                        <div class="form-group">
                                             <label>Descripción del Rol</label>
-                                            <input type="text" class="form-control" id="user_usuario" name="usuario" maxlength="70" placeholder="Ingrese la descripción del Rol" title="Ingrese nombre del nuevo Usuario" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="user_estado" id="estado" require>
-                                                <option value="1">Activo</option>
-                                                <option value="2">Desactivado</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="rol_descripcion" name="rol_descripcion" maxlength="70" placeholder="Ingrese la descripción del rol" title="Ingrese la descripción del rol" required>
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <a href="tbl_rol.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>

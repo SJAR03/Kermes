@@ -83,9 +83,16 @@ class Dt_Ingreso_Comunidad extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
+
+            /* PRIMERA FORMA DE ESTABLECER LA FECHA COMO FECHA ACTUAL*/
+            /* date_default_timezone_set("America/Managua");
             $fecha = date("Y-m-d H:i:s");
             $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, total_bonos, usuario_creacion, fecha_creacion)
-                VALUES (?, ?, ?, ?, ?, 1, {$fecha})";
+                VALUES (?, ?, ?, ?, ?, 1, '$fecha')"; */
+
+            /* SEGUNDA FORMA DE ESTABLECER LA FECHA COMO FECHA ACTUAL */
+            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, total_bonos, usuario_creacion, fecha_creacion)
+            VALUES (?, ?, ?, ?, ?, 1, now())";
 
             $this->myCon->prepare($sql)
             ->execute(array(
@@ -169,11 +176,11 @@ class Dt_Ingreso_Comunidad extends Conexion
                     id_producto= ?,
                     cant_productos= ?,
                     /* id_ingreso_comunidad= ?, */
-                    /* id_bono= ?,
+                   /*  id_bono= ?,
                     denominacion= ?,
                     cantidad= ?,
-                    subtotal_bono= ?, */
-                    total_bonos= ?,
+                    subtotal_bono= ?,
+                    total_bonos= ?, */
                     usuario_creacion=?,
                     fecha_creacion=?
                 WHERE id_ingreso_comunidad = ?";
@@ -186,10 +193,10 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__GET('id_producto'),
                 $ic->__GET('cant_productos'),
                 /* $ic->__GET('id_ingreso_comunidad'), */
-               /*  $ic->__GET('id_bono'),
+                $ic->__GET('id_bono'),
                 $ic->__GET('denominacion'),
                 $ic->__GET('cantidad'),
-                $ic->__GET('subtotal_bono'), */
+                $ic->__GET('subtotal_bono'),
                 $ic->__GET('total_bonos'),
                 $ic->__GET('usuario_creacion'),
                 $ic->__GET('fecha_creacion'),
@@ -215,6 +222,7 @@ class Dt_Ingreso_Comunidad extends Conexion
         try {
             $this->myCon = parent::conectar();
             $querySQL = "DELETE FROM dbkermesse.tbl_ingreso_comunidad WHERE id_ingreso_comunidad = ?";
+           /*  $querySQL = "UPDATE dbkermesse.tbl_ingreso_comunidad SET estado = 3 WHERE id_ingreso_comunidad = ?"; */
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($idIC));
             $this->myCon = parent::desconectar();

@@ -536,7 +536,7 @@ if (isset($varMsj)) {
                       <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Seleccione el Ingreso Comunidad</label>
                       <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
                         <option value="">Seleccione...</option>
@@ -547,7 +547,7 @@ if (isset($varMsj)) {
                         <?php endforeach; ?>
                       </select>
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                       <label>Seleccione bono</label>
@@ -566,10 +566,10 @@ if (isset($varMsj)) {
                       <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Cantidad de bonos</label>
                       <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                       <label>Subtotal de Bonos</label>
@@ -581,7 +581,7 @@ if (isset($varMsj)) {
                       <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
                     </div>
 
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Creacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
                     </div>
@@ -589,7 +589,7 @@ if (isset($varMsj)) {
                     <div class="form-group">
                       <label>Fechas de creacion de Usuarios</label>
                       <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
+                    </div> -->
 
                     <!-- <div class="form-group">
                       <label>Modificacion de Usuarios</label>

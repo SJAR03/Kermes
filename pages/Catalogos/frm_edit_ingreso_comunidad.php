@@ -693,7 +693,7 @@ if (isset($varMsj)) {
       $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad') ?>");
       $("#id_producto").val("<?php echo $IC->__GET('id_producto') ?>");
       $("#cant_productos").val("<?php echo $IC->__GET('cant_productos') ?>");
-      /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>"); */
+      $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>");
       $("#id_bono").val("<?php echo $IC->__GET('id_bono') ?>");
       $("#denominacion").val("<?php echo $IC->__GET('denominacion') ?>");
       $("#cantidad").val("<?php echo $IC->__GET('cantidad') ?>");

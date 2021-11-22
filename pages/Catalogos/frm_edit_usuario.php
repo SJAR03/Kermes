@@ -510,8 +510,13 @@ $usuario = $dtUsuario->getUsuario($varIdUsuario);
 
                                         <div class="form-group">
                                             <label>Contraseña</label>
-                                            <input type="text" value="<?php echo $usuario->__GET('pwd'); ?>" class="form-control" id="pwd" name="pwd" maxlength="45" required>
+                                            <input type="password" value="<?php echo $usuario->__GET('pwd'); ?>" class="form-control" id="pwd" name="pwd" maxlength="45" required>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Confirmar contraseña</label>
+                                            <input type="password" value="<?php echo $usuario->__GET('pwd'); ?>" class="form-control" id="pwd_confirmar" name="pwd_confirmar" maxlength="45" required>
+                                        </div>
+                                        <span id="espacio" name="espacio"></span>
 
                                     </div>
                                     <!-- /.card-body -->
@@ -558,6 +563,41 @@ $usuario = $dtUsuario->getUsuario($varIdUsuario);
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        $(document).ready(function() {
+            //variables
+            var pass1 = $('[name=pwd]');
+            var pass2 = $('[name=pwd_confirmar]');
+            var espacio = $('[name=espacio]');
+            var confirmacion = "Las contraseñas coinciden";
+            var negacion = "Las contraseñas no coinciden";
+            var vacio = "El campo no puede quedar vacio";
+
+            //oculto por defecto el elemento span
+            var span = $('<span></span>').insertAfter(espacio);
+            span.hide();
+            //función que comprueba las dos contraseñas
+            function coincidePassword() {
+                var valor1 = pass1.val();
+                var valor2 = pass2.val();
+                //muestro el span
+                span.show().removeClass();
+                //condiciones dentro de la función
+                if (valor1 != valor2) {
+                    span.text(negacion).addClass('alert alert-danger');
+                }
+                if (valor1.length == 0 || valor1 == "") {
+                    span.text(vacio).addClass('alert alert-danger');
+                }
+                if (valor1.length != 0 && valor1 == valor2) {
+                    span.text(confirmacion).removeClass("alert alert-danger").addClass('alert alert-success');
+                }
+            }
+            //ejecuto la función al soltar la tecla
+            pass2.keyup(function() {
+                coincidePassword();
+            });
+        });
+
         $(function() {
             bsCustomFileInput.init();
         });
