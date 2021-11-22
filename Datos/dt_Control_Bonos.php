@@ -9,7 +9,7 @@ class Dt_Control_Bonos extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_control_bonos";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_control_bonos where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -111,7 +111,7 @@ class Dt_Control_Bonos extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM dbkermesse.tbl_control_bonos WHERE id_bono = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_control_bonos SET estado = 3 WHERE id_bono = ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($idCb));
             $this->myCon = parent::desconectar();

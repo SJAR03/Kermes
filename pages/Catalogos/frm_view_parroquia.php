@@ -1,35 +1,37 @@
 <?php
+
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/vw_categoria_gastos.php';
-include '../../Datos/dt_categoria_gastos.php';
 
-$dtu = new dt_categoria_gastos();
+include '../../Entidades/parroquia.php';
+include '../../Datos/dt_parroquia.php';
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$dtComu = new Dt_Parroquia();
+$Comu = new Parroquia();
+
+$varIdComu = 0;
+
+if (isset($varIdComu)) {
+    $varIdComu = $_GET['viewPa']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
 }
 
+//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
+$Comu = $dtComu->getParroquia($varIdComu);
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla categoria_gastos</title>
+    <title>AdminLTE 3 | Ver Parroquia</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
-    <!-- JAlert -->
-    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -452,160 +454,135 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1>Ver Parroquia</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                <li class="breadcrumb-item active">Ver Parroquia</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Tabla Categoría Gastos</h3>
-                        </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Ver Parroquia</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form method="POST" action="../../negocio/ng_parroquia.php">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>ID Parroquia: </label>
+                                            <input type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID" readonly require>
 
-                        <div class="card-body">
-                            <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_categoria_gastos.php" title="Registrar una nueva categoría de gastos" target="blank">
-                                    <i class="far fa-plus-square fa-2x"></i>
-                                </a>
+                                            <label>Nombre</label>
+                                            <input type="text" value="<?php echo $Comu->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required readonly>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Dirección</label>
+                                            <input type="text" class="form-control" id="direccion" name="direccion" maxlength="45" placeholder="Ingrese una dirección" title="Ingrese la dirección" required readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Teléfono</label>
+                                            <input type="text" class="form-control" id="telefono" name="telefono" maxlength="45" placeholder="Ingrese el numero de teléfono" title="Ingrese la dirección" required readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Párroco</label>
+                                            <input type="text" class="form-control" id="parroco" name="parroco" maxlength="45" placeholder="Ingrese el párroco" title="Ingrese el  párroco" required readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Logo</label>
+                                            <input type="text" class="form-control" id="logo" name="logo" maxlength="45" placeholder="Ingrese el logo" title="Ingrese el logo" required readonly>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Sitio Web</label>
+                                            <input type="text" class="form-control" id="sitio_web" name="sitio_web" maxlength="45" placeholder="Ingrese un sitio web" title="Ingrese un sitio web" required readonly>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <a href="tbl_parroquia.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
+                                    </div>
+                                </form>
                             </div>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID Categoría Gastos</th>
-                                        <th>Nombre Categoría</th>
-                                        <th>Descripción</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($dtu->listarVwCategoriaGastos() as $r) :
-                                        echo $dtu->listarVwCategoriaGastos();
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $r->__GET('id_categoria_gastos'); ?></td>
-                                            <td><?php echo $r->__GET('nombre_categoria'); ?></td>
-                                            <td><?php echo $r->__GET('descripcion'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
-                                            <td>
-                                                <a href="frm_edit_categoria_gastos.php?editCom=<?php echo $r->__GET('id_categoria_gastos') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Categoría Gastos"></i></a>
-                                                <a href="frm_view_categoria_gastos.php?viewCom=<?php echo $r->__GET('id_categoria_gastos')?>"><i class="far fa-eye fa-2x" title="Visualizar la categoría gasto"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    endforeach;
-                                    ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre Categoría</th>
-                                        <th>Descripción</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <!-- /.card -->
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
 
-        <!--JAlert js-->
-        <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
-            //Opcional!!
-        </script>
-        <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#idParroquia").val("<?php echo $Comu->__GET('idParroquia') ?>");
+            $("#nombre").val("<?php echo $Comu->__GET('nombre') ?>");
+            $("#direccion").val("<?php echo $Comu->__GET('direccion') ?>");
+            $("#telefono").val("<?php echo $Comu->__GET('telefono') ?>");
+            $("#parroco").val("<?php echo $Comu->__GET('parroco') ?>");
+            $("#logo").val("<?php echo $Comu->__GET('logo') ?>");
+            $("#sitio_web").val("<?php echo $Comu->__GET('sitio_web') ?>");
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
+        }
 
-        <script>
-            $(document).ready(function() {
-                /////// VARIABLE DE CONTROL MSJ ////////
-                var mensaje = 0;
-                mensaje = "<?php echo $varMsj ?>";
-
-                if (mensaje == "1") {
-                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
-                }
-                if (mensaje == "2") {
-                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
-                }
-                if (mensaje == "3") {
-                    successAlert('Exito', 'Los datos han sido editados exitosamente.')
-                }
-                ////////////////////////////////////////
-
-                //////////////DATATABLE/////////////////
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-                /*  $('#example2').DataTable({
-                     "paging": true,
-                     "lengthChange": false,
-                     "searching": false,
-                     "ordering": true,
-                     "info": true,
-                     "autoWidth": false,
-                     "responsive": true,
-                 }); */
-                ////////////////////////////////////////////
-
-            }); ///FIN DEL $(DOCUMENT).READY ()
-        </script>
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
 </body>
 
 </html>

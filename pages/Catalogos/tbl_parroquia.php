@@ -499,7 +499,7 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('parroco'); ?></td>
                                             <td>
                                                 <a href="frm_edit_parroquia.php?editCom=<?php echo $r->__GET('idParroquia') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Parroquia"></i></a>
-                                                <a href="frm_edit_parroquia.php?viewPa=<?php echo $r->__GET('idParroquia') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="frm_view_parroquia.php?viewPa=<?php echo $r->__GET('idParroquia') ?>"><i class="far fa-eye fa-2x"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

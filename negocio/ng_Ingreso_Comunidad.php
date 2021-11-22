@@ -66,10 +66,10 @@ if ($_POST)
                     $ic->__SET('id_producto', $_POST['id_producto']);
                     $ic->__SET('cant_productos', $_POST['cant_productos']);
                     /* $ic->__SET('id_ingreso_comunidad', $_POST['id_ingreso_comunidad']); */
-                   /*  $ic->__SET('id_bono', $_POST['id_bono']);
+                    $ic->__SET('id_bono', $_POST['id_bono']);
                     $ic->__SET('denominacion', $_POST['denominacion']);
                     $ic->__SET('cantidad', $_POST['cantidad']);
-                    $ic->__SET('subtotal_bono', $_POST['subtotal_bono']); */
+                    $ic->__SET('subtotal_bono', $_POST['subtotal_bono']);
                     $ic->__SET('total_bonos', $_POST['total_bonos']);
                     $ic->__SET('usuario_creacion', $_POST['usuario_creacion']);
                     $ic->__SET('fecha_creacion', $_POST['fecha_creacion']);

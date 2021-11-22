@@ -28,6 +28,8 @@ if (isset($varMsj)) {
     <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
+    <!-- JAlert -->
+    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -491,7 +493,6 @@ if (isset($varMsj)) {
                                 <tbody>
                                     <?php
                                     foreach ($dtu->listarVwGastos() as $r) :
-                                        echo $dtu->listarVwGastos();
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_registro_gastos'); ?></td>
@@ -500,10 +501,20 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('fechaGasto'); ?></td>
                                             <td><?php echo $r->__GET('concepto'); ?></td>
                                             <td><?php echo $r->__GET('monto'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td><?php
+                                            if($r->__GET('estado') == '1'){
+                                                    echo 'Registrado';
+                                                } elseif($r->__GET('estado') == '2'){
+                                                    echo 'Editado';
+                                                }elseif($r->__GET('estado') == '3'){
+                                                    echo 'Eliminado';
+                                                }
+                                                ?>
+                                            </td>
                                             <td>
-                                                <a href="frm_gastos.php"><i class="far fa-edit fa-2x" title="Editar gasto"></i></a>
-                                                <a href="frm_gastos.php"><i class="far fa-eye fa-2x" title="Visualizar gasto"></i></a>
+                                                <a href="frm_edit_gastos.php?editICD=<?php echo $r->__GET('id_registro_gastos'); ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Gastos"></i></a>
+                                                <a href="frm_view_gastos.php?viewGa=<?php echo $r->__GET('id_registro_gastos'); ?>" target="blank"><i class="far fa-eye fa-2x" title="Visualizar gasto"></i></a>
+                                                <a href="../../negocio/ng_gastos.php?delG=<?php echo $r->__GET('id_registro_gastos'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Gasto"></i></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -561,6 +572,12 @@ if (isset($varMsj)) {
         <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
         <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
 
+        <!--JAlert js-->
+        <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+            //Opcional!!
+        </script>
+        <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+
 
         <!-- AdminLTE App -->
         <script src="../../dist/js/adminlte.min.js"></script>
@@ -568,14 +585,39 @@ if (isset($varMsj)) {
         <script src="../../dist/js/demo.js"></script>
         <!-- Page specific script -->
         <script>
-            $(function() {
+            $(document).ready(function() {
+                /////// VARIABLE DE CONTROL MSJ ////////
+                var mensaje = 0;
+                mensaje = "<?php echo $varMsj ?>";
+
+                if (mensaje == "1") {
+                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+                }
+                if (mensaje == "2") {
+                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+                if (mensaje == "3") {
+                    successAlert('Exito', 'Los datos han sido editados exitosamente.');
+                }
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+                }
+
+                if (mensaje == "6") {
+                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+                }
+
+                ////////////////////////////////////////
+
+                //////////////DATATABLE/////////////////
                 $("#example1").DataTable({
                     "responsive": true,
                     "lengthChange": false,
                     "autoWidth": false,
                     "buttons": ["excel", "pdf"]
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
+
+                /*$('#example2').DataTable({
                     "paging": true,
                     "lengthChange": false,
                     "searching": false,
@@ -583,7 +625,7 @@ if (isset($varMsj)) {
                     "info": true,
                     "autoWidth": false,
                     "responsive": true,
-                });
+                });*/
             });
         </script>
 </body>

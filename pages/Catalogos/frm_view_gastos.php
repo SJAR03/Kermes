@@ -1,35 +1,44 @@
 <?php
+
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
-include '../../Entidades/vw_categoria_gastos.php';
+
+include '../../Entidades/gastos.php';
+include '../../Datos/dt_gastos.php';
+
+include '../../Entidades/kermesse.php';
+include '../../Datos/dt_kermesse.php';
+
+include '../../Entidades/categoria_gastos.php';
 include '../../Datos/dt_categoria_gastos.php';
 
-$dtu = new dt_categoria_gastos();
+$dtICD = new dt_gastos();
+$dtICom = new Dt_Kermesse();
+$ICD = new gastos();
+$dtCatG = new dt_categoria_gastos();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdICD = 0;
+
+if (isset($varIdICD)) {
+    $varIdICD = $_GET['viewGa'];
 }
 
+$ICD = $dtICD->getGastos($varIdICD);
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla categoria_gastos</title>
+    <title>AdminLTE 3 | Ver Gastos</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
-    <!-- JAlert -->
-    <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -452,160 +461,148 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1>Ver Gasto</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                <li class="breadcrumb-item active">Ver Gasto</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Tabla Categoría Gastos</h3>
-                        </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Ver Gasto</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form method="POST" action="../../negocio/ng_gastos.php">
+                                    <div class="card-body">
+                                        <label>ID Gasto: </label>
+                                        <input type="text" class="form-control" id="id_registro_gastos" name="id_registro_gastos" placeholder="ID" readonly require>
 
-                        <div class="card-body">
-                            <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_categoria_gastos.php" title="Registrar una nueva categoría de gastos" target="blank">
-                                    <i class="far fa-plus-square fa-2x"></i>
-                                </a>
+                                        <div class="form-group">
+                                            <label>Kermesse</label>
+                                            <select class="form-control" id="idKermesse" name="idKermesse" disabled required>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtICom->listaKermT() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Categoría Gasto</label>
+                                            <select class="form-control" id="idCatGastos" name="idCatGastos" disabled required>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtCatG->listarCategoriaGastos() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_categoria_gastos'); ?>"><?php echo $r->__GET('nombre_categoria'); ?></option>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha del Gasto</label>
+                                            <input type="Date" class="form-control" id="fechaGasto" name="fechaGasto" maxlength="45" placeholder="Ingrese la Fecha del Gasto" title="Ingrese la Fecha del Gasto" readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Concepto</label>
+                                            <input type="text" class="form-control" id="concepto" name="concepto" placeholder="Ingrese el concepto" title="Ingrese el concepto" readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Monto</label>
+                                            <input type="float" class="form-control" id="monto" name="monto" placeholder="Ingrese el monto" title="Ingrese el monto" readonly>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <a href="tbl_gastos.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
+                                        </div>
+                                </form>
+                                </di v>
+                                <!-- /.card -->
                             </div>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID Categoría Gastos</th>
-                                        <th>Nombre Categoría</th>
-                                        <th>Descripción</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($dtu->listarVwCategoriaGastos() as $r) :
-                                        echo $dtu->listarVwCategoriaGastos();
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $r->__GET('id_categoria_gastos'); ?></td>
-                                            <td><?php echo $r->__GET('nombre_categoria'); ?></td>
-                                            <td><?php echo $r->__GET('descripcion'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
-                                            <td>
-                                                <a href="frm_edit_categoria_gastos.php?editCom=<?php echo $r->__GET('id_categoria_gastos') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Categoría Gastos"></i></a>
-                                                <a href="frm_view_categoria_gastos.php?viewCom=<?php echo $r->__GET('id_categoria_gastos')?>"><i class="far fa-eye fa-2x" title="Visualizar la categoría gasto"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    endforeach;
-                                    ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre Categoría</th>
-                                        <th>Descripción</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
 
-        <!--JAlert js-->
-        <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
-            //Opcional!!
-        </script>
-        <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_registro_gastos").val("<?php echo $ICD->__GET('id_registro_gastos') ?>");
+            $("#idKermesse").val("<?php echo $ICD->__GET('idKermesse') ?>");
+            $("#idCatGastos").val("<?php echo $ICD->__GET('idCatGastos') ?>");
+            $("#fechaGasto").val("<?php echo $ICD->__GET('fechaGasto') ?>");
+            $("#concepto").val("<?php echo $ICD->__GET('concepto') ?>");
+            $("#monto").val("<?php echo $ICD->__GET('monto') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
 
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
 
-        <script>
-            $(document).ready(function() {
-                /////// VARIABLE DE CONTROL MSJ ////////
-                var mensaje = 0;
-                mensaje = "<?php echo $varMsj ?>";
-
-                if (mensaje == "1") {
-                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
-                }
-                if (mensaje == "2") {
-                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
-                }
-                if (mensaje == "3") {
-                    successAlert('Exito', 'Los datos han sido editados exitosamente.')
-                }
-                ////////////////////////////////////////
-
-                //////////////DATATABLE/////////////////
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-                /*  $('#example2').DataTable({
-                     "paging": true,
-                     "lengthChange": false,
-                     "searching": false,
-                     "ordering": true,
-                     "info": true,
-                     "autoWidth": false,
-                     "responsive": true,
-                 }); */
-                ////////////////////////////////////////////
-
-            }); ///FIN DEL $(DOCUMENT).READY ()
-        </script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 </body>
 
 </html>
