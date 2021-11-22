@@ -11,7 +11,7 @@ class dt_usuario extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_usuario";
+            $querySQL = "SELECT * FROM dbkermesse.vw_usuario where estado <> 'Eliminado';";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -41,7 +41,7 @@ class dt_usuario extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario where estado <> 3;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -125,6 +125,19 @@ class dt_usuario extends Conexion
                 $eu->__GET('email'),
                 $eu->__GET('id_usuario')
             ));
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteUser($idU)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_usuario SET estado = 3 WHERE id_usuario = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idU));
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());

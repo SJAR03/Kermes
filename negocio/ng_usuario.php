@@ -49,3 +49,14 @@ if ($_POST) {
             break;
     }
 }
+
+if ($_GET) {
+    try {
+        $u->__SET('id_usuario', $_GET['delUsu']);
+        $dtU->deleteUser($u->__GET('id_usuario'));
+        header("Location: /Kermes/pages/Catalogos/tbl_usuarios.php?msj=5");
+    } catch (Exception $e) {
+        header("Location: /Kermes/pages/Catalogos/tbl_usuarios.php?msj=6");
+        die($e->getMessage());
+    }
+}

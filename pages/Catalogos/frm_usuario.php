@@ -473,6 +473,7 @@ if (isset($varMsj)) {
                                     <h3 class="card-title">Registrar usuario</h3>
                                 </div>
                                 <!-- /.card-header -->
+
                                 <!-- form start -->
                                 <form method="POST" action="../../negocio/ng_usuario.php">
                                     <div class="card-body">
@@ -498,6 +499,11 @@ if (isset($varMsj)) {
                                             <label>Contraseña</label>
                                             <input type="password" class="form-control" id="pwd" name="pwd" maxlength="45" placeholder="Ingrese la contraseña" title="Ingrese la contraseña" required>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Confirmar contraseña</label>
+                                            <input type="password" class="form-control" id="pwd_confirmar" name="pwd_confirmar" maxlength="45" placeholder="Ingrese la contraseña" title="Ingrese la contraseña" required>
+                                        </div>
+                                        <span id="espacio" name="espacio"></span>
 
                                     </div>
                                     <!-- /.card-body -->
@@ -505,7 +511,7 @@ if (isset($varMsj)) {
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Ingresar</button>
                                         <button type="reset" class="btn btn-danger">Cancelar</button>
-                                        <a href="tbl_moneda.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                                        <a href="tbl_usuarios.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
@@ -543,7 +549,43 @@ if (isset($varMsj)) {
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+
     <script>
+        $(document).ready(function() {
+            //variables
+            var pass1 = $('[name=pwd]');
+            var pass2 = $('[name=pwd_confirmar]');
+            var espacio = $('[name=espacio]');
+            var confirmacion = "Las contraseñas coinciden";
+            var negacion = "Las contraseñas no coinciden";
+            var vacio = "El campo no puede quedar vacio";
+
+            //oculto por defecto el elemento span
+            var span = $('<span></span>').insertAfter(espacio);
+            span.hide();
+            //función que comprueba las dos contraseñas
+            function coincidePassword() {
+                var valor1 = pass1.val();
+                var valor2 = pass2.val();
+                //muestro el span
+                span.show().removeClass();
+                //condiciones dentro de la función
+                if (valor1 != valor2) {
+                    span.text(negacion).addClass('alert alert-danger');
+                }
+                if (valor1.length == 0 || valor1 == "") {
+                    span.text(vacio).addClass('alert alert-danger');
+                }
+                if (valor1.length != 0 && valor1 == valor2) {
+                    span.text(confirmacion).removeClass("alert alert-danger").addClass('alert alert-success');
+                }
+            }
+            //ejecuto la función al soltar la tecla
+            pass2.keyup(function() {
+                coincidePassword();
+            });
+        });
+
         $(function() {
             bsCustomFileInput.init();
         });

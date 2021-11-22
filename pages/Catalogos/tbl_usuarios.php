@@ -502,6 +502,7 @@ if (isset($varMsj)) {
                                             <td>
                                                 <a href="frm_edit_usuario.php?editUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-edit fa-2x" title="Editar usuario"></i></a>
                                                 <a href="frm_view_usuario.php?vieUsu=<?php echo $r->__GET('id_usuario') ?>"><i class="far fa-eye fa-2x" title="Visualizar usuario"></i></a>
+                                                <a href="#" onclick="deleteUser(<?php echo $r->__GET('id_usuario') ?>);"><i class="far fa-2x fa-trash-alt" title="Eliminar usuario"></i></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -571,6 +572,16 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+        function deleteUser(idU) {
+            confirm(function(e, btn) {
+                    e.preventDefault();
+                    window.location.href = "../../negocio/ng_usuario.php?delUsu=" + idU;
+                },
+                function(e, btn) {
+                    e.preventDefault();
+                });
+        }
+
         $(document).ready(function() {
             // Mensajes de Control
             var mensaje = 0;
@@ -587,7 +598,7 @@ if (isset($varMsj)) {
                     break;
 
                 case "3":
-                    successAlert('Éxito', 'Se modificó exitosamente la moneda.');
+                    successAlert('Éxito', 'Se modificó exitosamente el usuario.');
                 default:
 
             }
