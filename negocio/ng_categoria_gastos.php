@@ -44,3 +44,14 @@ if ($_POST)
             break;
     }
 }
+
+if($_GET){
+    try{
+        $com->__SET('id_categoria_gastos', $_GET['delG']);
+        $dtComu->eliminarCategoriaGasto($com->__GET('id_categoria_gastos'));
+        header("Location: /Kermes/pages/Catalogos/tbl_categoria_gastos.php?msj=5");
+    }catch(Exception $e){
+        header("Location: /Kermes/pages/Catalogos/tbl_categoria_gastos.php?msj=6");
+        die($e->getMessage()); 
+    }  
+}

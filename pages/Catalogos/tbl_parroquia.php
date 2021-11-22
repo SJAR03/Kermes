@@ -500,6 +500,7 @@ if (isset($varMsj)) {
                                             <td>
                                                 <a href="frm_edit_parroquia.php?editCom=<?php echo $r->__GET('idParroquia') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Parroquia"></i></a>
                                                 <a href="frm_view_parroquia.php?viewPa=<?php echo $r->__GET('idParroquia') ?>"><i class="far fa-eye fa-2x"></i></a>
+                                                <a href="../../negocio/ng_parroquia.php?delP=<?php echo $r->__GET('idParroquia'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Parroquia"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -581,6 +582,14 @@ if (isset($varMsj)) {
                 if(mensaje == "3"){
                     successAlert('Exito', 'Los datos han sido editados exitosamente.')
                 }
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+                }
+
+                if (mensaje == "6") {
+                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+                }
+
                 ////////////////////////////////////////
 
                 //////////////DATATABLE/////////////////

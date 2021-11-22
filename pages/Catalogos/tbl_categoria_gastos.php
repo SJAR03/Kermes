@@ -496,10 +496,20 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('id_categoria_gastos'); ?></td>
                                             <td><?php echo $r->__GET('nombre_categoria'); ?></td>
                                             <td><?php echo $r->__GET('descripcion'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td><?php
+                                            if($r->__GET('estado') == '1'){
+                                                    echo 'Registrado';
+                                                } elseif($r->__GET('estado') == '2'){
+                                                    echo 'Editado';
+                                                }elseif($r->__GET('estado') == '3'){
+                                                    echo 'Eliminado';
+                                                }
+                                                ?>
+                                            </td>
                                             <td>
                                                 <a href="frm_edit_categoria_gastos.php?editCom=<?php echo $r->__GET('id_categoria_gastos') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Categoría Gastos"></i></a>
                                                 <a href="frm_view_categoria_gastos.php?viewCom=<?php echo $r->__GET('id_categoria_gastos')?>"><i class="far fa-eye fa-2x" title="Visualizar la categoría gasto"></i></a>
+                                                <a href="../../negocio/ng_categoria_gastos.php?delG=<?php echo $r->__GET('id_categoria_gastos'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Categoría Gasto"></i></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -583,6 +593,14 @@ if (isset($varMsj)) {
                 if (mensaje == "3") {
                     successAlert('Exito', 'Los datos han sido editados exitosamente.')
                 }
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+                }
+
+                if (mensaje == "6") {
+                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+                }
+
                 ////////////////////////////////////////
 
                 //////////////DATATABLE/////////////////

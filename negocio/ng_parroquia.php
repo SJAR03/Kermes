@@ -46,3 +46,13 @@ if ($_POST) {
             break;
     }
 }
+if($_GET){
+    try{
+        $com->__SET('idParroquia', $_GET['delP']);
+        $dtComu->eliminarParroquia($com->__GET('idParroquia'));
+        header("Location: /Kermes/pages/Catalogos/tbl_parroquia.php?msj=5");
+    }catch(Exception $e){
+        header("Location: /Kermes/pages/Catalogos/tbl_parroquia.php?msj=6");
+        die($e->getMessage()); 
+    }  
+}

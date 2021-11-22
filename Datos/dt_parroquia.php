@@ -113,4 +113,21 @@ class Dt_Parroquia extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function eliminarParroquia($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "DELETE FROM dbkermesse.tbl_parroquia WHERE idParroquia = ?";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $id
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

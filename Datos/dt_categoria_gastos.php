@@ -126,4 +126,23 @@ class dt_categoria_gastos extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function eliminarCategoriaGasto($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_categoria_gastos SET 
+                        estado=3 
+                    WHERE id_categoria_gastos =?";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $id
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
