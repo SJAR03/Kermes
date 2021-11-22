@@ -24,7 +24,7 @@ if ($_POST) {
 
         case '2':
             try {
-                // Construir el objeto usuario
+                // Construir el objeto rol
                 $r->__SET('id_rol', $_POST['id_rol']);
                 $r->__SET('rol_descripcion', $_POST['rol_descripcion']);
 
