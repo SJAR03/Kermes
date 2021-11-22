@@ -117,7 +117,7 @@ class Dt_Comunidad extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM dbkermesse.tbl_comunidad WHERE id_comunidad = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_comunidad SET estado = 3 WHERE id_comunidad = ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($idCom));
             $this->myCon = parent::desconectar();
