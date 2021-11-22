@@ -472,29 +472,21 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_opciones.php">
 
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Id Opción</label>
-                                            <input type="text" class="form-control" id="opc_id" name="id_opcion" title="Id Opcion" value="Id Opcion" required disabled>
-                                        </div>
-                                        <div class="form-group">
                                             <label>Descripción de la Opción</label>
-                                            <input type="text" class="form-control" id="opc_descripcion" name="opcion_descripcion" maxlength="70" placeholder="Ingrese la descripción de la Opción" title="Ingrese nombre del nuevo Usuario" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="opc_estado" id="estado" require>
-                                                <option value="1">Activo</option>
-                                                <option value="2">Desactivado</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="opcion_descripcion" name="opcion_descripcion" maxlength="70" placeholder="Ingrese la descripción de la opción" title="Ingrese la descripción de la opción" required>
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                                         </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <a href="tbl_opciones.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
