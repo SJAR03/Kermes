@@ -2,34 +2,28 @@
 
 error_reporting(0);
 
-include '../../entidades/ingreso_comunidad.php';
-include '../../datos/dt_ingreso_comunidad.php';
-
-include '../../entidades/kermesse.php';
-include '../../datos/dt_kermesse.php';
-
-include '../../entidades/comunidad.php';
-include '../../datos/dt_comunidad.php';
-
-include '../../entidades/productos.php';
-include '../../datos/dt_productos.php';
-
 include '../../entidades/control_bonos.php';
 include '../../datos/dt_Control_Bonos.php';
 
-$dtICom = new Dt_Ingreso_Comunidad();
-$dtK = new Dt_Kermesse();
-$dtCom = new Dt_Comunidad();
-$dtP = new Dt_Producto();
-$dtCb = new Dt_Control_Bonos();
+$dtCbono = new Dt_Control_Bonos();
+$CB = new Control_Bonos();
 
+$varIdCB = 0;
 
-$varMsj = 0;
+if (isset($varIdCB)) {
+  $varIdCB = $_GET['viewCB']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA VISUALIZAR LA COMUNIDAD
+}
+
+//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
+$CB = $dtCbono->getControlBonos($varIdCB);
+
+/* $varMsj = 0;
 
 if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
-}
+    $varMsj = $_GET['msj'];
+} */
 ?>
+
 
 
 <!DOCTYPE html>
@@ -38,7 +32,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>AdminLTE 3 | Control Bonos</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -466,12 +460,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo Ingreso en la Comunidad</h1>
+              <h1>Visualizar Datos Control de Bonos</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Ingreso en la Comunidad</li>
+                <li class="breadcrumb-item active">Visualizar Control de Bonos</li>
               </ol>
             </div>
           </div>
@@ -487,143 +481,47 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar Ingreso en la Comunidad</h3>
+                  <h3 class="card-title">Visualizar Control de Bonos</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_Control_Bonos.php">
                   <div class="card-body">
-
                     <div class="form-group">
-                      <label>Seleccione la kermesses</label>
-                      <select class="form-control" id="id_kermesse" name="id_kermesse" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtK->listaKermT() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <label>Nombre</label>
+                      <input type="text" value="<?php echo $CB->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" disabled>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
-                      <label>Seleccione la Comunidad</label>
-                      <select class="form-control" id="id_comunidad" name="id_comunidad" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtCom->listaComunidad() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_comunidad'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
+                      <label>Valor</label>
+                      <input type="float" class="form-control" id="valor" name="valor" placeholder="Ingrese el valor" title="Ingrese el valor" disabled>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Estado</label>
+                      <select class="form-control" name="estado" id="estado" disabled>
+                        <option value="1">Activo</option>
+                        <option value="2">Modificado</option>
+                        <option value="3">Eliminado</option>
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label>Seleccione el Producto</label>
-                      <select class="form-control" id="id_producto" name="id_producto" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtP->listaProdT() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Catidad de productos</label>
-                      <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Seleccione el Ingreso Comunidad</label>
-                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('cant_productos'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                    </div>
-
-                    <div class="form-group">
-                      <label>Seleccione bono</label>
-                      <select class="form-control" id="id_bono" name="id_bono" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtCb->listaControlBonos() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_bono'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Escriba la denominacion del bono</label>
-                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Cantidad de bonos</label>
-                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Subtotal de Bonos</label>
-                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Total de bonos</label>
-                      <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Creacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
-
-                    <!-- <div class="form-group">
-                      <label>Modificacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de modificacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Eliminacion Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de eliminacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
-                    </div> -->
 
                   </div>
                   <!-- /.card-body -->
 
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  <div class="card-footer" style="text-align: center;">
+                    <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+                    <a href="tbl_control_bonos.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                    <!-- <button type="reset" class="btn btn-danger">Cancelar</button> -->
                   </div>
                 </form>
-                </di v>
-                <!-- /.card -->
               </div>
+              <!-- /.card -->
             </div>
           </div>
+        </div>
       </section>
       <!-- /.content -->
     </div>
@@ -654,6 +552,21 @@ if (isset($varMsj)) {
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
+
+  <script>
+    ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+    function setValores() {
+      $("#valor").val("<?php echo $CB->__GET('valor') ?>");
+      $("#estado").val("<?php echo $CB->__GET('estado') ?>");
+
+    }
+
+    $(document).ready(function() {
+      ////CARGAMOS LOS VALORES EN LOS CONTROLES
+      setValores();
+    });
+  </script>
+
   <script>
     $(function() {
       bsCustomFileInput.init();

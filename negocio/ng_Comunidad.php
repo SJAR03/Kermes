@@ -28,9 +28,52 @@ if ($_POST)
             }
             catch (Exception $e) {
                 header("Location: /Kermes/pages/Catalogos/tbl_comunidad.php?msj=2");   
-            die($e->getMessage());
+                die($e->getMessage());
             }
-        case '2':
             break;
+
+        case '2':
+            try
+            {
+                //CONSTRUIMOS OBJETOS
+                //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
+                $com->__SET('id_comunidad', $_POST['id_comunidad']); 
+                $com->__SET('nombre', $_POST['nombre']);
+                $com->__SET('responsable', $_POST['responsable']);
+                $com->__SET('desc_contribucion', $_POST['desc_contribucion']);
+                $com->__SET('estado', $_POST['estado']);
+                
+                
+
+                $dtComu ->editComunidad($com);
+                //var_dump($emp);
+                header("Location: /Kermes/pages/Catalogos/tbl_comunidad.php?msj=3");
+            }
+            catch(Exception $e)
+            {
+                header("Location: /Kermes/pages/Catalogos/tbl_comunidad.php?msj=4");
+                die($e -> getMessage());
+            }
+            break;
+      /*   default:
+            # code...
+            break; */
     }
+}
+
+if($_GET)
+{
+    try
+    {
+        $com->__SET('id_comunidad', $_GET['delCom']);
+        $dtComu->deleteComunidad($com->__GET('id_comunidad'));
+        header("Location: /Kermes/pages/Catalogos/tbl_comunidad.php?msj=5");
+    }
+    catch(Exception $e)
+    {
+        header("Location: /Kermes/pages/Catalogos/tbl_comunidad.php?msj=6");
+        die($e->getMessage());
+    }
+        
+    
 }

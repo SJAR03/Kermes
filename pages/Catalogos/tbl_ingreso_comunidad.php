@@ -497,8 +497,8 @@ if (isset($varMsj)) {
                                         <th>Cantidad</th>
                                         <th>Subtotal Bono</th>
                                         <th>Total Bonos</th>
-                                        <th>Usuario Creacion</th>
-                                        <th>Fecha Creacion</th>
+                                        <!-- <th>Usuario Creacion</th>
+                                        <th>Fecha Creacion</th> -->
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -515,14 +515,21 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('cantidad'); ?></td>
                                             <td><?php echo $r->__GET('subtotal_bono'); ?></td>
                                             <td><?php echo $r->__GET('total_bonos'); ?></td>
-                                            <td><?php echo $r->__GET('usuario_creacion'); ?></td> 
-                                            <td><?php echo $r->__GET('fecha_creacion'); ?></td>
+                                            <!-- <td><?php echo $r->__GET('usuario_creacion'); ?></td> 
+                                            <td><?php echo $r->__GET('fecha_creacion'); ?></td> -->
                                            
 
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
-                                                <a href="frm_edit_ingreso_comunidad.php?editIC=<?php echo $r->__GET('id_ingreso_comunidad') ?> ?editICD=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad"></i></a>
-                                                <a href="frm_edit_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
+                                                <a href="frm_edit_ingreso_comunidad.php?editIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad"></i></a>
+                                                <a href="frm_view_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
+
+                                                <!-- PRIMERA FORMA  -->
+                                                <!-- <a href="../../negocio/ng_Ingreso_Comunidad.php?delIC=<?php echo $r->__GET('id_ingreso_comunidad'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a> -->
+
+                                                <!-- SEGUNDA FORMA -->
+                                                <a href="#" onclick="deleteIngComunidad('<?php echo $r->__GET('id_ingreso_comunidad'); ?>');">
+                                                <i class="far fa-2x fa-trash-alt" title="Eliminar Ingreso Comunidad"></i></a>
                                             </td> 
 
                                         </tr>
@@ -540,8 +547,8 @@ if (isset($varMsj)) {
                                         <th>Cantidad</th>
                                         <th>Subtotal Bono</th>
                                         <th>Total Bonos</th>
-                                        <th>Usuario Creacion</th>
-                                        <th>Fecha Creacion</th>
+                                        <!-- <th>Usuario Creacion</th>
+                                        <th>Fecha Creacion</th> -->
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -600,6 +607,23 @@ if (isset($varMsj)) {
     <!-- Page specific script -->
 
     <script>
+
+    function deleteIngComunidad(idIC)    
+    {
+        //SEGUNDA FORMA / INCLUYE EL API DE JALERT
+        confirm(function(e,btn)
+                { //event + button clicked
+                    e.preventDefault();
+                    window.location.href= "../../negocio/ng_Ingreso_Comunidad.php?delIC="+idIC;
+
+                },
+
+                function(e,btn)
+                {
+                    e.preventDefault();
+                });
+    }
+
         $(document).ready(function() {
             /////// VARIABLE DE CONTROL MSJ ////////
             var mensaje = 0;
@@ -608,8 +632,20 @@ if (isset($varMsj)) {
             if (mensaje == "1") {
                 successAlert('Exito', 'Los datos han sido registrado exitosamente!');
             }
-            if (mensaje == "2") {
+            if (mensaje == "2" || mensaje == "4") {
                 successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+            }
+
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editados exitosamente!');
+            }
+
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+            }
+
+            if (mensaje == "6") {
+                successAlert('Error', 'Verifique que la comunidad no tenga registro asociado!');
             }
             ////////////////////////////////////////
 

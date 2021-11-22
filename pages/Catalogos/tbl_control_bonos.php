@@ -491,17 +491,33 @@ if (isset($varMsj)) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($dtCbono->listaControlBonos() as $r) : ?>
+                                    <?php foreach ($dtCbono->listaControlBonos() as $r) : 
+                                        $estadoCb = "";
+                                        if($r->__GET('estado') == 1){
+                                            $estadoCb = 'Activo';
+                                        }
+                                        else {
+                                            $estadoCb = 'Inactivo';
+                                        }
+                                        ?>
+
                                         <tr>
                                             <td><?php echo $r->__GET('id_bono'); ?></td>
                                             <td><?php echo $r->__GET('nombre'); ?></td>
                                             <td><?php echo $r->__GET('valor'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td><?php echo $estadoCb ?></td>
 
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
                                                 <a href="frm_edit_control_bonos.php?editCB=<?php echo $r->__GET('id_bono') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Control Bonos"></i></a>
-                                                <a href="frm_edit_control_bonos.php?viewCB=<?php echo $r->__GET('id_bono') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Control Bonos"></i></a>
+                                                <a href="frm_view_control_bonos.php?viewCB=<?php echo $r->__GET('id_bono') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Control Bonos"></i></a>
+
+                                                 <!-- PRIMERA FORMA  -->
+                                                <!-- <a href="../../negocio/ng_Control_Bonos.php?delCb=<?php echo $r->__GET('id_bono'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Control Bonos"></i></a> -->
+
+                                                <!-- SEGUNDA FORMA -->
+                                                <a href="#" onclick="deleteControlBonos('<?php echo $r->__GET('id_bono'); ?>');">
+                                                <i class="far fa-2x fa-trash-alt" title="Eliminar Control Bonos"></i></a>
                                             </td>
 
 
@@ -571,6 +587,23 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+
+    function deleteControlBonos(idCb)
+        {
+            //SEGUNDA FORMA / INCLUYE EL API DE JALERT
+            confirm(function(e,btn)
+                    { //event + button clicked
+                        e.preventDefault();
+                        window.location.href= "../../negocio/ng_Control_Bonos.php?delCb="+idCb;
+
+                    },
+
+                    function(e,btn)
+                    {
+                        e.preventDefault();
+                    });
+        }
+
         $(document).ready(function() {
             /////// VARIABLE DE CONTROL MSJ ////////
             var mensaje = 0;
@@ -579,8 +612,12 @@ if (isset($varMsj)) {
             if (mensaje == "1") {
                 successAlert('Exito', 'Los datos han sido registrado exitosamente!');
             }
-            if (mensaje == "2") {
+            if (mensaje == "2" || mensaje == "4") {
                 successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+            }
+
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editados exitosamente!');
             }
             ////////////////////////////////////////
 

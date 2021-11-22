@@ -5,6 +5,9 @@ error_reporting(0);
 include '../../entidades/ingreso_comunidad.php';
 include '../../datos/dt_ingreso_comunidad.php';
 
+include '../../entidades/ingreso_comunidad_det.php';
+include '../../datos/dt_ingreso_comunidad_det.php';
+
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
@@ -18,17 +21,37 @@ include '../../entidades/control_bonos.php';
 include '../../datos/dt_Control_Bonos.php';
 
 $dtICom = new Dt_Ingreso_Comunidad();
+$dtICD = new Dt_Ingreso_Comunidad_Det();
 $dtK = new Dt_Kermesse();
 $dtCom = new Dt_Comunidad();
 $dtP = new Dt_Producto();
 $dtCb = new Dt_Control_Bonos();
+$IC = new Ingreso_Comunidad(); 
+/* $ICD = new Ingreso_Comunidad_Det(); */
 
 
-$varMsj = 0;
+$varIdIC = 0;
+
+if (isset($varIdIC)) {
+  $varIdIC = $_GET['viewIC']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA VISUALIZAR INGRESO COMUNIDAD
+
+}
+
+$varIdICD = 0;
+
+if (isset($varIdICD)) {
+  $varIdICD = $_GET['viewICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA VISUALIZAR INGRESO COMUNIDAD DETALLE
+}
+
+//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
+$IC = $dtICom->getIngComunidad($varIdIC);
+$ICD = $dtICD->getIngComunidadDet($varIdICD);
+
+/* $varMsj = 0;
 
 if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
-}
+    $varMsj = $_GET['msj'];
+} */
 ?>
 
 
@@ -466,12 +489,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo Ingreso en la Comunidad</h1>
+              <h1>Visualizar Datos de Ingreso en la Comunidad</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Ingreso en la Comunidad</li>
+                <li class="breadcrumb-item active">Visualizar Ingreso en la Comunidad</li>
               </ol>
             </div>
           </div>
@@ -487,7 +510,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar Ingreso en la Comunidad</h3>
+                  <h3 class="card-title">Visualizar Ingreso Comunidad</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -496,7 +519,7 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Seleccione la kermesses</label>
-                      <select class="form-control" id="id_kermesse" name="id_kermesse" required>
+                      <select class="form-control" id="id_kermesse" name="id_kermesse" disabled>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtK->listaKermT() as $r) : ?>
                           <tr>
@@ -504,12 +527,12 @@ if (isset($varMsj)) {
                           </tr>
                         <?php endforeach; ?>
                       </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
                       <label>Seleccione la Comunidad</label>
-                      <select class="form-control" id="id_comunidad" name="id_comunidad" required>
+                      <select class="form-control" id="id_comunidad" name="id_comunidad" disabled>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtCom->listaComunidad() as $r) : ?>
                           <tr>
@@ -521,7 +544,7 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Seleccione el Producto</label>
-                      <select class="form-control" id="id_producto" name="id_producto" required>
+                      <select class="form-control" id="id_producto" name="id_producto" disabled>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtP->listaProdT() as $r) : ?>
                           <tr>
@@ -533,12 +556,12 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Catidad de productos</label>
-                      <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
+                      <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" disabled>
                     </div>
 
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Seleccione el Ingreso Comunidad</label>
-                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
+                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" disabled>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
                           <tr>
@@ -546,12 +569,12 @@ if (isset($varMsj)) {
                           </tr>
                         <?php endforeach; ?>
                       </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                    </div>
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                    </div> -->
 
                     <div class="form-group">
                       <label>Seleccione bono</label>
-                      <select class="form-control" id="id_bono" name="id_bono" required>
+                      <select class="form-control" id="id_bono" name="id_bono" disabled>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtCb->listaControlBonos() as $r) : ?>
                           <tr>
@@ -563,32 +586,33 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Escriba la denominacion del bono</label>
-                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
+                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" disabled>
                     </div>
 
                     <div class="form-group">
                       <label>Cantidad de bonos</label>
-                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
+                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" disabled>
                     </div>
 
                     <div class="form-group">
                       <label>Subtotal de Bonos</label>
-                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
+                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" disabled>
                     </div>
+
 
                     <div class="form-group">
                       <label>Total de bonos</label>
-                      <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
+                      <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" disabled>
                     </div>
 
                     <div class="form-group">
                       <label>Creacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
+                      <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" disabled>
                     </div>
 
                     <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
+                      <label>Fecha de creacion de Usuario</label>
+                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" disabled>
                     </div>
 
                     <!-- <div class="form-group">
@@ -614,9 +638,10 @@ if (isset($varMsj)) {
                   </div>
                   <!-- /.card-body -->
 
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  <div class="card-footer" style="text-align: center;">
+                    <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+                    <a href="tbl_ingreso_comunidad.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                    <!-- <button type="reset" class="btn btn-danger">Cancelar</button> -->
                   </div>
                 </form>
                 </di v>
@@ -654,6 +679,36 @@ if (isset($varMsj)) {
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
+
+  <script>
+    ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+    function setValores() {
+      /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>"); */
+      $("#id_kermesse").val("<?php echo $IC->__GET('id_kermesse') ?>");
+      $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad') ?>");
+      $("#id_producto").val("<?php echo $IC->__GET('id_producto') ?>");
+      $("#cant_productos").val("<?php echo $IC->__GET('cant_productos') ?>");
+      $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>");
+      $("#id_bono").val("<?php echo $IC->__GET('id_bono') ?>");
+      $("#denominacion").val("<?php echo $IC->__GET('denominacion') ?>");
+      $("#cantidad").val("<?php echo $IC->__GET('cantidad') ?>");
+      $("#subtotal_bono").val("<?php echo $IC->__GET('subtotal_bono') ?>");
+      $("#total_bonos").val("<?php echo $IC->__GET('total_bonos') ?>");
+      $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
+      $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>");
+     /*  $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");
+      $("#fecha_modificacion").val("<?php echo $IC->__GET('fecha_modificacion') ?>");
+      $("#usuario_eliminacion").val("<?php echo $IC->__GET('usuario_eliminacion') ?>");
+      $("#fecha_eliminacion").val("<?php echo $IC->__GET('fecha_eliminacion') ?>");
+ */
+    }
+
+    $(document).ready(function() {
+      ////CARGAMOS LOS VALORES EN LOS CONTROLES
+      setValores();
+    });
+  </script>
+
   <script>
     $(function() {
       bsCustomFileInput.init();
