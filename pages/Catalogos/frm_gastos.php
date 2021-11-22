@@ -8,7 +8,7 @@ include '../../Datos/dt_gastos.php';
 include '../../Entidades/kermesse.php';
 include '../../Datos/dt_kermesse.php';
 
-include '../../Entidades/vw_categoria_gastos.php';
+include '../../Entidades/categoria_gastos.php';
 include '../../Datos/dt_categoria_gastos.php';
 
 
@@ -879,12 +879,12 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_gastos.php">
                   <div class="card-body">
 
                     <div class="form-group">
                       <label>Seleccione la kermesses</label>
-                      <select class="form-control" id="id_kermesse" name="id_kermesse" required>
+                      <select class="form-control" id="idKermesse" name="idKermesse" required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtK->listaKermT() as $r) : ?>
                           <tr>
@@ -896,8 +896,8 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Seleccione la categoría</label>
-                      <select class="form-control" id="id_categoria_gastos" name="id_categoria_gastos" required>
+                      <label>Seleccione la Categoría Gasto</label>
+                      <select class="form-control" id="idCatGastos " name="idCatGastos" required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtCom->listarCategoriaGastos() as $r) : ?>
                           <tr>
@@ -910,47 +910,17 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Fecha del Gasto</label>
-                      <input type="date" class="form-control" id="fechaGastos" name="fechaGastos" placeholder="Ingrese fecha del gasto" title="Ingrese fecha de modificacion" required>
+                      <input type="date" class="form-control" id="fechaGasto" name="fechaGasto" placeholder="Ingrese fecha del gasto" title="Ingrese fecha de modificacion" required>
                     </div>
 
                     <div class="form-group">
                       <label>Concepto</label>
-                      <input type="number" class="form-control" id="concepto" name="concepto" placeholder="Ingrese el concepto" title="Ingrese concepto" required>
+                      <input type="text" class="form-control" id="concepto" name="concepto" placeholder="Ingrese el concepto" title="Ingrese concepto" required>
                     </div>
 
                     <div class="form-group">
                       <label>Monto</label>
-                      <input type="number" class="form-control" id="monto" name="monto" placeholder="Ingrese el monto " title="Ingrese el monto" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Creacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Modificacion de Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de modificacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Eliminacion Usuarios</label>
-                      <input type="number" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de eliminacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
+                      <input type="float" class="form-control" id="monto" name="monto" placeholder="Ingrese el monto " title="Ingrese el monto" required>
                     </div>
 
                   </div>
@@ -961,7 +931,7 @@ if (isset($varMsj)) {
                     <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
                 </form>
-                </di v>
+                </div>
                 <!-- /.card -->
               </div>
             </div>

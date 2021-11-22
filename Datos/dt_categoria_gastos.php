@@ -10,13 +10,13 @@ class dt_categoria_gastos extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_categoria_gastos";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_categoria_gastos where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
 
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
-                $us = new Vw_Categoria_gastos();
+                $us = new categoria_gastos();
 
                 $us->__SET('id_categoria_gastos', $r->id_categoria_gastos);
                 $us->__SET('nombre_categoria', $r->nombre_categoria);
@@ -37,7 +37,7 @@ class dt_categoria_gastos extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM dbkermesse.vw_categoria_gastos";
+            $querySQL = "SELECT * FROM dbkermesse.vw_categoria_gastos where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();

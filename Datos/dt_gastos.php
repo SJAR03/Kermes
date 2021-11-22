@@ -10,7 +10,7 @@ class dt_gastos extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_gastos";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_gastos where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -47,7 +47,7 @@ class dt_gastos extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_gastos";
+            $querySQL = "SELECT * FROM dbkermesse.vw_gastos where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -63,12 +63,6 @@ class dt_gastos extends Conexion
                 $us->__SET('fechaGasto', $r->fechaGasto);
                 $us->__SET('concepto', $r->concepto);
                 $us->__SET('monto', $r->monto);
-                $us->__SET('usuario_creacion', $r->usuario_creacion);
-                $us->__SET('fecha_creacion', $r->fecha_creacion);
-                $us->__SET('usuario_modificacion', $r->usuario_modificacion);
-                $us->__SET('fecha_modificacion', $r->fecha_modificacion);
-                $us->__SET('usuario_eliminacion', $r->usuario_eliminacion);
-                $us->__SET('fecha_eliminacion', $r->fecha_eliminacion);
                 $us->__SET('estado', $r->estado);
 
                 $result[] = $us;
@@ -84,9 +78,10 @@ class dt_gastos extends Conexion
     public function regGastos(gastos $icd)
     {
         try {
+            $fecha = date('Y-m-d');
             $this->myCon = parent::conectar();
-            $sql = "INSERT INTO dbkermesse.tbl_gastos(idKermesse, idCatGastos, fechaGasto, concepto, monto, estado)
-                VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO dbkermesse.tbl_gastos(idKermesse, idCatGastos, fechaGasto, concepto, monto, usuario_creacion, fecha_creacion, estado)
+                VALUES (?, ?, ?, ?, ?, 1, '$fecha', 1)";
 
             $this->myCon->prepare($sql)
             ->execute(array(
@@ -94,8 +89,8 @@ class dt_gastos extends Conexion
                 $icd->__GET('idCatGastos'),
                 $icd->__GET('fechaGasto'),
                 $icd->__GET('concepto'),
-                $icd->__GET('monto'),
-                $icd->__GET('estado')));
+                $icd->__GET('monto')
+            ));
 
                 $this->myCon = parent::desconectar();
 
@@ -124,13 +119,64 @@ class dt_gastos extends Conexion
                 $icd->__SET('fechaGasto', $r->fechaGasto);
                 $icd->__SET('concepto', $r->concepto);
                 $icd->__SET('monto', $r->monto);
-                $icd->__SET('estado', $r->estado);
+                $icd->__SET('estado', $r->estado);  
 
                 
                 
 
             $this->myCon = parent::desconectar();
             return $icd;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function UpdateGastos(gastos $p){
+        try{
+            $fecha = date('Y/m/d');
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_gastos SET
+            idKermesse = ?,
+            idCatGastos = ?,
+            fechaGasto = ?,
+            concepto = ?,
+            monto = ?,
+            usuario_modificacion = 1,
+            fecha_modificacion = '$fecha',
+            estado = 2
+            WHERE id_registro_gastos = ?";
+
+
+            $this->myCon->prepare($querySQL)
+            ->execute(array(
+                $p->__GET('idKermesse'),
+                $p->__GET('idCatGastos'),
+                $p->__GET('fechaGasto'),
+                $p->__GET('concepto'),
+                $p->__GET('monto'),
+                $p->__GET('id_registro_gastos')
+            ));
+
+            $this->myCon = parent::desconectar();
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function eliminarGasto($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_gastos SET 
+                        estado=3 
+                    WHERE id_registro_gastos =?";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $id
+                ));
+
+            $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());
         }
