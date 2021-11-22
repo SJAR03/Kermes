@@ -492,18 +492,32 @@ if (isset($varMsj)) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($dtComu->listaComunidad() as $r) : ?>
+                                    <?php foreach ($dtComu->listaComunidad() as $r) :
+                                        $estadoCom = "";
+                                        if($r->__GET('estado') == 1){
+                                            $estadoCom = 'Activo';
+                                        }
+                                        else {
+                                            $estadoCom = 'Inactivo';
+                                        }                                                                      
+                                    ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_comunidad'); ?></td>
                                             <td><?php echo $r->__GET('nombre'); ?></td>
                                             <td><?php echo $r->__GET('responsable'); ?></td>
                                             <td><?php echo $r->__GET('desc_contribucion'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td><?php echo $estadoCom ?></td>
 
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
-                                                <a href="frm_edit_comunidad.php?editCom=<?php echo $r->__GET('id_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Comunidad"></i></a>
-                                                <a href="frm_edit_comunidad.php?viewCom=<?php echo $r->__GET('id_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Comunidad"></i></a>
+                                                <a href="frm_edit_comunidad.php?editCom=<?php echo $r->__GET('id_comunidad'); ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Comunidad"></i></a>
+                                                <a href="frm_view_comunidad.php?viewCom=<?php echo $r->__GET('id_comunidad'); ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Comunidad"></i></a>
+                                                <!-- PRIMERA FORMA  -->
+                                                <!-- <a href="../../negocio/ng_Comunidad.php?delCom=<?php echo $r->__GET('id_comunidad'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a> -->
+
+                                                <!-- SEGUNDA FORMA -->
+                                                <a href="#" onclick="deleteComunidad('<?php echo $r->__GET('id_comunidad'); ?>');">
+                                                <i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a>
                                             </td>
 
                                         </tr>
@@ -573,6 +587,24 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+
+    function deleteComunidad(idCom)
+    {
+        //SEGUNDA FORMA / INCLUYE EL API DE JALERT
+        confirm(function(e,btn)
+                { //event + button clicked
+                    e.preventDefault();
+                    window.location.href= "../../negocio/ng_Comunidad.php?delCom="+idCom;
+
+                },
+
+                function(e,btn)
+                {
+                    e.preventDefault();
+                });
+    }
+
+
         $(document).ready(function() {
             /////// VARIABLE DE CONTROL MSJ ////////
             var mensaje = 0;
@@ -581,8 +613,20 @@ if (isset($varMsj)) {
             if (mensaje == "1") {
                 successAlert('Exito', 'Los datos han sido registrado exitosamente!');
             }
-            if (mensaje == "2") {
+            if (mensaje == "2" || mensaje == "4") {
                 successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+            }
+
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editados exitosamente!');
+            }
+
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+            }
+
+            if (mensaje == "6") {
+                successAlert('Error', 'Verifique que la comunidad no tenga registro asociado!');
             }
             ////////////////////////////////////////
 

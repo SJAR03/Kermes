@@ -78,4 +78,49 @@ class Dt_Control_Bonos extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function editControlBonos(Control_Bonos $bon)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_control_bonos SET
+                    nombre= ?,
+                    valor= ?,
+                    estado=?
+                WHERE id_bono = ?";
+
+            $this->myCon->prepare($sql)
+            ->execute(
+            array(
+                $bon->__GET('nombre'),
+                $bon->__GET('valor'),
+                $bon->__GET('estado'),
+                $bon->__GET('id_bono')          
+            ));
+            
+
+            $this->myCon = parent::desconectar();
+            
+        } catch (Exception $e) {
+            var_dump($e);
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteControlBono($idCb)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE FROM dbkermesse.tbl_control_bonos WHERE id_bono = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idCb));
+            $this->myCon = parent::desconectar();
+            
+        } 
+        catch (Exception $e) 
+        {
+            var_dump($e);
+            die($e->getMessage());
+        }
+    }
 }
