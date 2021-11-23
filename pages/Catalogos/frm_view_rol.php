@@ -199,8 +199,7 @@ $rol = $dtr->getRol($varIdRol);
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                        <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -288,12 +287,7 @@ $rol = $dtr->getRol($varIdRol);
                                         <p>Lista Precios</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista Precios Detalles</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -339,12 +333,6 @@ $rol = $dtr->getRol($varIdRol);
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ingreso Comunidad Detalles</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Comunidad</p>
@@ -376,14 +364,6 @@ $rol = $dtr->getRol($varIdRol);
                                         <p>Arqueo Caja</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Arqueo Caja Detalle</p>
-                                    </a>
-                                </li>
-
                                 <li class="nav-item">
                                     <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
@@ -402,13 +382,6 @@ $rol = $dtr->getRol($varIdRol);
                                     <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tasa Cambio</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
                                     </a>
                                 </li>
                             </ul>

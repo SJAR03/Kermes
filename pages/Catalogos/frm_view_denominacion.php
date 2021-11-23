@@ -1,23 +1,23 @@
 <?php
 
-    error_reporting(0);
+error_reporting(0);
 
-    include '../../entidades/denominacion.php';
-    include '../../datos/dt_denominacion.php';
-    include '../../entidades/moneda.php';
-    include '../../datos/dt_moneda.php';
+include '../../entidades/denominacion.php';
+include '../../datos/dt_denominacion.php';
+include '../../entidades/moneda.php';
+include '../../datos/dt_moneda.php';
 
-    $dtDenominacion = new Dt_Denominacion();
-    $den = new VwDenominacion();
-    $dtMoneda = new Dt_Moneda();
+$dtDenominacion = new Dt_Denominacion();
+$den = new VwDenominacion();
+$dtMoneda = new Dt_Moneda();
 
-    $varIdDenominacion = 0;
+$varIdDenominacion = 0;
 
-    if (isset($varIdDenominacion)) {
-      $varIdDenominacion = $_GET['viewDenominacion'];
-    }
+if (isset($varIdDenominacion)) {
+  $varIdDenominacion = $_GET['viewDenominacion'];
+}
 
-    $den = $dtDenominacion->getDenominacion($varIdDenominacion);
+$den = $dtDenominacion->getDenominacion($varIdDenominacion);
 ?>
 
 
@@ -202,8 +202,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -291,12 +290,7 @@
                     <p>Lista Precios</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista Precios Detalles</p>
-                  </a>
-                </li>
+
               </ul>
             </li>
 
@@ -342,12 +336,6 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ingreso Comunidad Detalles</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -379,14 +367,6 @@
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Arqueo Caja Detalle</p>
-                  </a>
-                </li>
-
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -405,13 +385,6 @@
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -505,7 +478,7 @@
                   <!-- /.card-body -->
 
                   <div class="card-footer" style="text-align: center;">
-                      <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                    <a href="tbl_denominacion.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>
@@ -545,13 +518,12 @@
   <!-- Page specific script -->
 
   <script>
-    function setValores()
-    {
-        $("#moneda").val("<?php echo $den->__GET('idMoneda'); ?>");
+    function setValores() {
+      $("#moneda").val("<?php echo $den->__GET('idMoneda'); ?>");
     }
 
     $(document).ready(function() {
-        setValores();
+      setValores();
     });
   </script>
 

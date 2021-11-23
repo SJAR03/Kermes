@@ -201,8 +201,7 @@ $Comu = $dtComu->getParroquia($varIdComu);
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -290,12 +289,7 @@ $Comu = $dtComu->getParroquia($varIdComu);
                     <p>Lista Precios</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista Precios Detalles</p>
-                  </a>
-                </li>
+
               </ul>
             </li>
 
@@ -341,12 +335,6 @@ $Comu = $dtComu->getParroquia($varIdComu);
                 </li>
 
                 <li class="nav-item">
-                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ingreso Comunidad Detalles</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -378,14 +366,6 @@ $Comu = $dtComu->getParroquia($varIdComu);
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Arqueo Caja Detalle</p>
-                  </a>
-                </li>
-
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -404,13 +384,6 @@ $Comu = $dtComu->getParroquia($varIdComu);
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -482,9 +455,9 @@ $Comu = $dtComu->getParroquia($varIdComu);
                 <form method="POST" action="../../negocio/ng_parroquia.php">
                   <div class="card-body">
                     <div class="form-group">
-                    <label>ID Parroquia: </label>
+                      <label>ID Parroquia: </label>
                       <input type="text" class="form-control" id="idParroquia" name="idParroquia" placeholder="ID" readonly require>
-                      
+
                       <label>Nombre</label>
                       <input type="text" value="<?php echo $Comu->__GET('nombre') ?>" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" required>
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
@@ -569,7 +542,7 @@ $Comu = $dtComu->getParroquia($varIdComu);
   <script>
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
-      $("#idParroquia").val("<?php echo $Comu->__GET('idParroquia')?>");
+      $("#idParroquia").val("<?php echo $Comu->__GET('idParroquia') ?>");
       $("#nombre").val("<?php echo $Comu->__GET('nombre') ?>");
       $("#direccion").val("<?php echo $Comu->__GET('direccion') ?>");
       $("#telefono").val("<?php echo $Comu->__GET('telefono') ?>");

@@ -204,8 +204,7 @@ if (isset($varMsj)) {
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                        <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -293,12 +292,7 @@ if (isset($varMsj)) {
                                         <p>Lista Precios</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista Precios Detalles</p>
-                                    </a>
-                                </li>
+
                             </ul>
                         </li>
 
@@ -344,12 +338,6 @@ if (isset($varMsj)) {
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ingreso Comunidad Detalles</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Comunidad</p>
@@ -381,14 +369,6 @@ if (isset($varMsj)) {
                                         <p>Arqueo Caja</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Arqueo Caja Detalle</p>
-                                    </a>
-                                </li>
-
                                 <li class="nav-item">
                                     <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
@@ -407,13 +387,6 @@ if (isset($varMsj)) {
                                     <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tasa Cambio</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tasa Cambio Detalles</p>
                                     </a>
                                 </li>
                             </ul>
@@ -494,17 +467,14 @@ if (isset($varMsj)) {
                                 <tbody>
                                     <?php foreach ($dtComu->listaComunidad() as $r) :
                                         $estadoCom = "";
-                                        if($r->__GET('estado') == 1){
+                                        if ($r->__GET('estado') == 1) {
                                             $estadoCom = 'Activo';
-                                        }
-                                        else 
-                                        if($r->__GET('estado') == 2){
+                                        } else 
+                                        if ($r->__GET('estado') == 2) {
                                             $estadoCom = 'Modificado';
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             $estadoCom = 'Inactivo';
-                                        }                                                                      
+                                        }
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_comunidad'); ?></td>
@@ -522,7 +492,7 @@ if (isset($varMsj)) {
 
                                                 <!-- SEGUNDA FORMA -->
                                                 <a href="#" onclick="deleteComunidad('<?php echo $r->__GET('id_comunidad'); ?>');">
-                                                <i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a>
+                                                    <i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a>
                                             </td>
 
                                         </tr>
@@ -592,22 +562,18 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-
-    function deleteComunidad(idCom)
-    {
-        //SEGUNDA FORMA / INCLUYE EL API DE JALERT
-        confirm(function(e,btn)
-                { //event + button clicked
+        function deleteComunidad(idCom) {
+            //SEGUNDA FORMA / INCLUYE EL API DE JALERT
+            confirm(function(e, btn) { //event + button clicked
                     e.preventDefault();
-                    window.location.href= "../../negocio/ng_Comunidad.php?delCom="+idCom;
+                    window.location.href = "../../negocio/ng_Comunidad.php?delCom=" + idCom;
 
                 },
 
-                function(e,btn)
-                {
+                function(e, btn) {
                     e.preventDefault();
                 });
-    }
+        }
 
 
         $(document).ready(function() {

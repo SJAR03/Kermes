@@ -201,8 +201,7 @@ $Comu = $dtComu->getComunidad($varIdComu);
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -290,12 +289,7 @@ $Comu = $dtComu->getComunidad($varIdComu);
                     <p>Lista Precios</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista Precios Detalles</p>
-                  </a>
-                </li>
+
               </ul>
             </li>
 
@@ -341,12 +335,6 @@ $Comu = $dtComu->getComunidad($varIdComu);
                 </li>
 
                 <li class="nav-item">
-                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ingreso Comunidad Detalles</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -378,14 +366,6 @@ $Comu = $dtComu->getComunidad($varIdComu);
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Arqueo Caja Detalle</p>
-                  </a>
-                </li>
-
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -404,13 +384,6 @@ $Comu = $dtComu->getComunidad($varIdComu);
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -481,12 +454,12 @@ $Comu = $dtComu->getComunidad($varIdComu);
                 <!-- form start -->
                 <form method="POST" action="../../negocio/ng_Comunidad.php">
                   <div class="card-body">
-                   
-                  <div class="form-group">
+
+                    <div class="form-group">
                       <label>ID</label>
                       <input type="int" value="<?php echo $Comu->__GET('id_comunidad') ?>" class="form-control" id="id_comunidad" name="id_comunidad" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
                       <!-- <input type="hidden" value="2" name="txtaccion" id="txtaccion" /> -->
-                  </div>
+                    </div>
 
                     <div class="form-group">
                       <label>Nombre</label>
@@ -506,8 +479,8 @@ $Comu = $dtComu->getComunidad($varIdComu);
                     </div>
 
                     <div class="form-group">
-                       <label>Estado</label>
-                      <select class="form-control"  name="estado" id="estado"  required>
+                      <label>Estado</label>
+                      <select class="form-control" name="estado" id="estado" required>
                         <!--  <option value="1">Activado</option> -->
                         <option value="2">Modificado</option>
                         <!-- <option value="3">Eliminado</option> -->

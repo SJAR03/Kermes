@@ -1,21 +1,21 @@
 <?php
 
-    error_reporting(0);
+error_reporting(0);
 
-    include '../../entidades/moneda.php';
-    include '../../datos/dt_moneda.php';
+include '../../entidades/moneda.php';
+include '../../datos/dt_moneda.php';
 
-    $dtMoneda = new dt_Moneda();
-    $moneda = new Moneda();
+$dtMoneda = new dt_Moneda();
+$moneda = new Moneda();
 
-    $varIdMoneda = 0;
+$varIdMoneda = 0;
 
-    if (isset($varIdMoneda)) {
-      $varIdMoneda = $_GET['viewMoneda'];
-    }
+if (isset($varIdMoneda)) {
+  $varIdMoneda = $_GET['viewMoneda'];
+}
 
-    // Datos del país para ver
-    $moneda = $dtMoneda->getMoneda($varIdMoneda);
+// Datos del país para ver
+$moneda = $dtMoneda->getMoneda($varIdMoneda);
 
 ?>
 
@@ -201,8 +201,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -290,12 +289,7 @@
                     <p>Lista Precios</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lista Precios Detalles</p>
-                  </a>
-                </li>
+
               </ul>
             </li>
 
@@ -341,12 +335,6 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ingreso Comunidad Detalles</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -378,14 +366,6 @@
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Arqueo Caja Detalle</p>
-                  </a>
-                </li>
-
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -404,13 +384,6 @@
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -482,11 +455,11 @@
                 <form method="POST" action="../../negocio/ng_moneda.php">
                   <div class="card-body">
 
-                      <div class="form-group">
-                        <label>ID</label>
-                        <input type="text" value="<?php echo $moneda->__GET('id'); ?>" class="form-control" id="moneda_ID" name="moneda_ID" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" disabled>
-                        <input type="hidden" name="txtaccion" value="2" id="txtaccion"/>
-                      </div>
+                    <div class="form-group">
+                      <label>ID</label>
+                      <input type="text" value="<?php echo $moneda->__GET('id'); ?>" class="form-control" id="moneda_ID" name="moneda_ID" maxlength="45" placeholder="Ingrese nombre" title="Ingrese nombre" disabled>
+                      <input type="hidden" name="txtaccion" value="2" id="txtaccion" />
+                    </div>
 
                     <div class="form-group">
                       <label>Nombre</label>
