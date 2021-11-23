@@ -14,7 +14,7 @@ if (isset($varIdUsuario)) {
     $varIdUsuario = $_GET['editUsu'];
 }
 
-// Datos del país para Editar
+// Datos del usuario para Editar
 $usuario = $dtUsuario->getUsuario($varIdUsuario);
 
 ?>
@@ -26,7 +26,7 @@ $usuario = $dtUsuario->getUsuario($varIdUsuario);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Modificar Usuario</title>
+    <title>Kermesse | Modificar Usuario</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -484,7 +484,7 @@ $usuario = $dtUsuario->getUsuario($varIdUsuario);
 
                                         <div class="form-group">
                                             <label>ID</label>
-                                            <input type="text" value="<?php echo $usuario->__GET('id_usuario'); ?>" class="form-control" id="id_usuario" name="id_usuario" maxlength="45" readonly>
+                                            <input type="int" value="<?php echo $usuario->__GET('id_usuario'); ?>" class="form-control" id="id_usuario" name="id_usuario" maxlength="45" readonly>
                                             <input type="hidden" name="txtaccion" value="2" id="txtaccion" />
                                         </div>
 

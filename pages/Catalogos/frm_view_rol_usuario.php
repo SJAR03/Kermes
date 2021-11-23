@@ -1,19 +1,28 @@
 <?php
+
+include '../../Entidades/rol_usuario.php';
+include '../../Datos/dt_rol_usuario.php';
+
 include '../../Entidades/usuario.php';
 include '../../Datos/dt_usuario.php';
 
 include '../../Entidades/rol.php';
 include '../../Datos/dt_rol.php';
 
-
 $dtU = new dt_usuario();
 $dtR = new dt_rol();
+$dtRU = new dt_rol_usuario();
+$RU = new rol_usuario();
 
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$varIdRU = 0;
+
+if (isset($varIdRU)) {
+    $varIdRU = $_GET['vieRoUsu'];
 }
+
+$RU = $dtRU->getRolUsuario($varIdRU);
+
 
 ?>
 
@@ -845,12 +854,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manipulación de Datos</h1>
+                            <h1>Visualizar Rol de Usuario</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manipulación de Datos</li>
+                                <li class="breadcrumb-item active">Visualizar Rol de Usuario</li>
                             </ol>
                         </div>
                     </div>
@@ -866,16 +875,22 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Visualizar Rol a Usuario</h3>
+                                    <h3 class="card-title">Visualizar Rol de Usuario</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_rol_usuario.php">
                                     <div class="card-body">
 
                                         <div class="form-group">
+                                            <label>ID</label>
+                                            <input type="int" value="<?php echo $RU->__GET('id_rol_usuario') ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
+
+                                        </div>
+
+                                        <div class="form-group">
                                             <label>Selecciona el rol</label>
-                                            <select class="form-control" name="rol" id="id_rol" required disabled>
+                                            <select class="form-control" name="rol" id="rol" required disabled>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
@@ -888,8 +903,8 @@ if (isset($varMsj)) {
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona la opción</label>
-                                            <select class="form-control" name="usuario" id="id_usuario" required disabled>
+                                            <label>Selecciona el usuario</label>
+                                            <select class="form-control" name="usuario" id="usuario" required disabled>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaUsu() as $r) : ?>
@@ -905,8 +920,8 @@ if (isset($varMsj)) {
 
                                     <!-- /.card-body -->
 
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Regresar</button>
+                                    <div class="card-footer" style="text-align: center;">
+                                        <a href="tbl_ingreso_comunidad.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
