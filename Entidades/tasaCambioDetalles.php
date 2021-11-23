@@ -5,7 +5,6 @@ class TasaCambioDetalle
     private $id_tasaCambio;
     private $fecha;
     private $tipo_cambio;
-    private $estado;
 
     public function __GET($k)
     {

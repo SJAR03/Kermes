@@ -8,7 +8,7 @@ class Dt_TasaCambioDet extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vwtasacambiodet Where id_tasaCambio = {$id} AND estadoGen<>3 AND estadoDet<>3";
+            $querySQL = "SELECT * FROM dbkermesse.vwtasacambiodet Where id_tasaCambio = {$id} AND estadoGen<>3";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
 
@@ -21,7 +21,6 @@ class Dt_TasaCambioDet extends Conexion
                 $tasaD->__SET('moneda_cambio', $r->moneda_cambio);
                 $tasaD->__SET('fecha', $r->fecha);
                 $tasaD->__SET('tipo_cambio', $r->tipoCambio);
-                $tasaD->__SET('estadoDet', $r->estadoDet);
                 $tasaD->__SET('estadoGen', $r->estadoGen);
 
 
@@ -42,9 +41,8 @@ class Dt_TasaCambioDet extends Conexion
             $sql = "INSERT INTO dbkermesse.tasaCambio_det(
                         id_tasaCambio, 
                         fecha,
-                        tipoCambio,
-                        estado)
-                    VALUES (?, ?, ?, 1)";
+                        tipoCambio)
+                    VALUES (?, ?, ?)";
 
             $this->myCon->prepare($sql)
                 ->execute(array(
@@ -92,8 +90,7 @@ class Dt_TasaCambioDet extends Conexion
             $this->myCon = parent::conectar();
             $sql = "UPDATE dbkermesse.tasacambio_det SET 
                         fecha = ?,
-                        tipoCambio=?,
-                        estado=2 
+                        tipoCambio=?
                     WHERE id_tasaCambio_det =?";
 
             $this->myCon->prepare($sql)
@@ -117,14 +114,48 @@ class Dt_TasaCambioDet extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $sql = "UPDATE dbkermesse.tasacambio_det SET 
-                        estado=3 
+            $sql = "DELETE FROM dbkermesse.tasacambio_det 
                     WHERE id_tasaCambio_det =$id";
 
             $this->myCon->prepare($sql)
                 ->execute();
 
             $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function delByTasa($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "DELETE FROM dbkermesse.tasacambio_det 
+                    WHERE id_tasaCambio =$id";
+
+            $this->myCon->prepare($sql)
+                ->execute();
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function countTasas($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "SELECT count(*) FROM dbkermesse.tasacambio_det where id_tasaCambio=$id";
+
+            $stm = $this->myCon->prepare($sql);
+            $stm->execute();
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $this->myCon = parent::desconectar();
+
+            return $r;
         } catch (Exception $e) {
             die($e->getMessage());
         }

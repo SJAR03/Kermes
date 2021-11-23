@@ -559,6 +559,14 @@ if (isset($varMsj)) {
                 if (mensaje == "3") {
                     successAlert('Exito', 'Los datos han sido modificados exitosamente!');
                 }
+
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Se han eliminado los datos correctamente');
+                }
+
+                if (mensaje == "6") {
+                    errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
                 $("#tasaC").DataTable({
                     "responsive": true,
                     "lengthChange": false,

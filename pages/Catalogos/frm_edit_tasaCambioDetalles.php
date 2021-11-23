@@ -533,7 +533,7 @@ $tasaD = $dtTasaDet->getTasaDetById($varIdTcd);
                       <input type="date" value="<?php echo $tasaD->__GET('fecha') ?>" class="form-control datetimepicker-input" data-target="#reservationdate" name="fecha" required />
                       <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                       <input type="hidden" name="id_tasaCambio2" id="id_tasaCambio2" />
-                      <input type="text" name="id_tasaCambio1" id="id_tasaCambio1" />
+                      <input type="hidden" name="id_tasaCambio1" id="id_tasaCambio1" />
                     </div>
 
                     <div class="form-group">

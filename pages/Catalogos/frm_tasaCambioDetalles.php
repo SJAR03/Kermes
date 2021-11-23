@@ -522,7 +522,7 @@ if (isset($varMsj)) {
                       <label>Fecha</label>
                       <input type="date" name="fecha" id="fecha" class="form-control datetimepicker-input" data-target="#reservationdate" />
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                      <input type="text" name="id_tasaCambio2" id="id_tasaCambio2" />
+                      <input type="hidden" name="id_tasaCambio2" id="id_tasaCambio2" />
                     </div>
 
                     <div class="form-group">

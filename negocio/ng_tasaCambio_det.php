@@ -1,6 +1,12 @@
 <?php
+include_once("../Entidades/tasaCambio.php");
+include_once("../Datos/dt_tasaCambio.php");
+
 include_once("../Entidades/tasaCambioDetalles.php");
 include_once("../Datos/dt_tasaCambio_detalle.php");
+
+$tc = new TasaCambio;
+$dtTc = new Dt_TasaCambio;
 
 $tcd = new TasaCambioDetalle;
 $dtTcd = new Dt_TasaCambioDet;
@@ -68,9 +74,19 @@ if ($_GET) {
     try {
         $tcd->__SET('id_tasaCambio_det', $_GET['delTCD']);
         $tcd->__SET('id_tasaCambio', $_GET['TC']);
-        $dtTcd->desactivarTasaDet($tcd->__GET('id_tasaCambio_det'));
 
-        header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=5");
+        $count = $dtTcd->countTasas($tcd->__GET('id_tasaCambio'));
+        if ($count <= 1) {
+            $dtTcd->desactivarTasaDet($tcd->__GET('id_tasaCambio_det'));
+            $dtTc->desactivarTasa($tcd->__GET('id_tasaCambio'));
+            header("Location: /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=5");
+        } else {
+            //Borra Detalle
+            $dtTcd->desactivarTasaDet($tcd->__GET('id_tasaCambio_det'));
+            //Cambia estado de Master a 2
+            $dtTc->editForDelDet($tcd->__GET('id_tasaCambio'));
+            header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=5");
+        }
     } catch (Exception $e) {
         header("Location: /Kermes/pages/Catalogos/frm_edit_tasaCambio.php?editTC={$tcd->__GET('id_tasaCambio')}&msj=6");
         die($e->getMessage());

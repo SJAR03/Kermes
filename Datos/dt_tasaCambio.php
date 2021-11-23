@@ -184,4 +184,21 @@ class Dt_TasaCambio extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function editForDelDet($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_tasacambio SET 
+                        estado=2 
+                    WHERE id_tasaCambio =$id";
+
+            $this->myCon->prepare($sql)
+                ->execute(array());
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

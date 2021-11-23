@@ -2,8 +2,14 @@
 include_once("../Entidades/tasaCambio.php");
 include_once("../Datos/dt_tasaCambio.php");
 
+include_once("../Entidades/tasaCambioDetalles.php");
+include_once("../Datos/dt_tasaCambio_detalle.php");
+
 $tc = new TasaCambio;
 $dtTc = new Dt_TasaCambio;
+
+$tcd = new TasaCambioDetalle;
+$dtTcd = new Dt_TasaCambioDet;
 
 if ($_POST) {
     $varAccion = $_POST['txtaccion'];
@@ -52,7 +58,11 @@ if ($_POST) {
 if ($_GET) {
     try {
         $tc->__SET('id_tasaCambio', $_GET['delTC']);
+
+        //Borra Generales
         $dtTc->desactivarTasa($tc->__GET('id_tasaCambio'));
+        //Borra Detalles
+        $dtTcd->delByTasa($tc->__GET('id_tasaCambio'));
 
         header("Location: /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=5");
     } catch (Exception $e) {
