@@ -612,6 +612,15 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
+                       <label>Estado</label>
+                      <select class="form-control" name="estado" id="estado"  required>
+                        <!-- <option value="1">Activado</option> -->
+                        <option value="2">Modificado</option>
+                        <!-- <option value="3">Eliminado</option> -->
+                      </select>
+                    </div>
+
+                    <div class="form-group">
                       <label>Creacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
                     </div>
@@ -699,6 +708,7 @@ if (isset($varMsj)) {
       $("#cantidad").val("<?php echo $IC->__GET('cantidad') ?>");
       $("#subtotal_bono").val("<?php echo $IC->__GET('subtotal_bono') ?>");
       $("#total_bonos").val("<?php echo $IC->__GET('total_bonos') ?>");
+      $("#estado").val("<?php echo $IC->__GET('estado') ?>");
       $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
       $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>");
      /*  $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");

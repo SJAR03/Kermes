@@ -497,13 +497,27 @@ if (isset($varMsj)) {
                                         <th>Cantidad</th>
                                         <th>Subtotal Bono</th>
                                         <th>Total Bonos</th>
+                                        <th>Estado</th>
                                         <!-- <th>Usuario Creacion</th>
                                         <th>Fecha Creacion</th> -->
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($dtICom->listaComunidad() as $r) : ?>
+                                    <?php foreach ($dtICom->listaComunidad() as $r) : 
+                                        $estadoIC = "";
+                                        if($r->__GET('estado') == 1){
+                                            $estadoIC = 'Activo';
+                                        }
+                                        else 
+                                        if($r->__GET('estado') == 2){
+                                            $estadoIC = 'Modificado';
+                                        }
+                                        else
+                                        {
+                                            $estadoIC = 'Inactivo';
+                                        } 
+                                    ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_ingreso_comunidad'); ?></td>
                                             <td><?php echo $r->__GET('kermesse'); ?></td>
@@ -515,6 +529,7 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('cantidad'); ?></td>
                                             <td><?php echo $r->__GET('subtotal_bono'); ?></td>
                                             <td><?php echo $r->__GET('total_bonos'); ?></td>
+                                            <td><?php echo $estadoIC ?></td>
                                             <!-- <td><?php echo $r->__GET('usuario_creacion'); ?></td> 
                                             <td><?php echo $r->__GET('fecha_creacion'); ?></td> -->
                                            
@@ -547,6 +562,7 @@ if (isset($varMsj)) {
                                         <th>Cantidad</th>
                                         <th>Subtotal Bono</th>
                                         <th>Total Bonos</th>
+                                        <th>Estado</th>
                                         <!-- <th>Usuario Creacion</th>
                                         <th>Fecha Creacion</th> -->
                                         <th>Acciones</th>

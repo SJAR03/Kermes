@@ -13,6 +13,7 @@ class Vw_Ingreso_Comunidad
     private $cantidad;
     private $subtotal_bono;
     private $total_bonos;
+    private $estado;
     private $usuario_creacion;
     private $fecha_creacion;
     
