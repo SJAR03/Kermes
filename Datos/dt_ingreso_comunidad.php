@@ -28,6 +28,7 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $vic->__SET('cantidad', $r->cantidad);
                 $vic->__SET('subtotal_bono', $r->subtotal_bono);
                 $vic->__SET('total_bonos', $r->total_bonos);
+                $vic->__SET('estado', $r->estado);
                 $vic->__SET('usuario_creacion', $r->usuario_creacion); 
                 $vic->__SET('fecha_creacion', $r->fecha_creacion);
                
@@ -61,6 +62,7 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__SET('id_producto', $r->id_producto);
                 $ic->__SET('cant_productos', $r->cant_productos);
                 $ic->__SET('total_bonos', $r->total_bonos);
+                $ic->__SET('estado', $r->estado);
                 $ic->__SET('usuario_creacion', $r->usuario_creacion);
                 $ic->__SET('fecha_creacion', $r->fecha_creacion);
                /*  $ic->__SET('usuario_modificacion', $r->usuario_modificacion);
@@ -91,8 +93,9 @@ class Dt_Ingreso_Comunidad extends Conexion
                 VALUES (?, ?, ?, ?, ?, 1, '$fecha')"; */
 
             /* SEGUNDA FORMA DE ESTABLECER LA FECHA COMO FECHA ACTUAL */
-            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, total_bonos, usuario_creacion, fecha_creacion)
-            VALUES (?, ?, ?, ?, ?, 1, now())";
+            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, 
+            total_bonos, estado, usuario_creacion, fecha_creacion)
+            VALUES (?, ?, ?, ?, ?,1, 1, now())";
 
             $this->myCon->prepare($sql)
             ->execute(array(
@@ -102,6 +105,7 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__GET('id_producto'),
                 $ic->__GET('cant_productos'),
                 $ic->__GET('total_bonos'),
+                $ic->__GET('estado'),
                /*  $ic->__GET('usuario_creacion'),
                 $ic->__GET('fecha_creacion'), */
                 /* $ic->__GET('usuario_modificacion'),
@@ -150,6 +154,7 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__SET('cantidad', $r->cantidad);
                 $ic->__SET('subtotal_bono', $r->subtotal_bono);
                 $ic->__SET('total_bonos', $r->total_bonos);
+                $ic->__SET('estado', $r->estado);
                 $ic->__SET('usuario_creacion', $r->usuario_creacion);
                 $ic->__SET('fecha_creacion', $r->fecha_creacion);
                 /* $ic->__SET('usuario_modificacion', $r->usuario_modificacion);
@@ -176,11 +181,12 @@ class Dt_Ingreso_Comunidad extends Conexion
                     id_producto= ?,
                     cant_productos= ?,
                     /* id_ingreso_comunidad= ?, */
-                   /*  id_bono= ?,
+                    id_bono= ?,
                     denominacion= ?,
                     cantidad= ?,
                     subtotal_bono= ?,
-                    total_bonos= ?, */
+                    total_bonos= ?,
+                    estado=?,
                     usuario_creacion=?,
                     fecha_creacion=?
                 WHERE id_ingreso_comunidad = ?";
@@ -198,6 +204,7 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__GET('cantidad'),
                 $ic->__GET('subtotal_bono'),
                 $ic->__GET('total_bonos'),
+                $ic->__GET('estado'),
                 $ic->__GET('usuario_creacion'),
                 $ic->__GET('fecha_creacion'),
                 $ic->__GET('id_ingreso_comunidad') 
@@ -217,12 +224,11 @@ class Dt_Ingreso_Comunidad extends Conexion
         }
     }
 
-    public function deliteIngComunidad($idIC)
+    public function deleteIngComunidad($idIC)
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "DELETE FROM dbkermesse.tbl_ingreso_comunidad WHERE id_ingreso_comunidad = ?";
-           /*  $querySQL = "UPDATE dbkermesse.tbl_ingreso_comunidad SET estado = 3 WHERE id_ingreso_comunidad = ?"; */
+            $querySQL = "UPDATE dbkermesse.tbl_ingreso_comunidad SET estado = 3 WHERE id_ingreso_comunidad = ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($idIC));
             $this->myCon = parent::desconectar();

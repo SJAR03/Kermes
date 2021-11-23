@@ -606,6 +606,15 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
+                       <label>Estado</label>
+                      <select class="form-control" name="estado" id="estado"  required>
+                        <option value="1">Activado</option>
+                        <option value="2">Modificado</option>
+                        <option value="3">Eliminado</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
                       <label>Creacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" disabled>
                     </div>

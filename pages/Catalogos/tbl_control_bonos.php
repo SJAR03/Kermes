@@ -496,6 +496,9 @@ if (isset($varMsj)) {
                                         if($r->__GET('estado') == 1){
                                             $estadoCb = 'Activo';
                                         }
+                                        if($r->__GET('estado') == 2){
+                                            $estadoCb = 'Modificado';
+                                        }
                                         else {
                                             $estadoCb = 'Inactivo';
                                         }

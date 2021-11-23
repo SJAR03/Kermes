@@ -499,7 +499,7 @@ if (isset($varMsj)) {
                                         }
                                         else 
                                         if($r->__GET('estado') == 2){
-                                            $estadoCom = 'Activo';
+                                            $estadoCom = 'Modificado';
                                         }
                                         else
                                         {
