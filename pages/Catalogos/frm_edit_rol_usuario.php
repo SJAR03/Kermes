@@ -14,7 +14,7 @@ include '../../Datos/dt_rol.php';
 $dtU = new dt_usuario();
 $dtR = new dt_rol();
 $dtRU = new dt_rol_usuario();
-$RU = new rol_usuario();
+$RO = new rol_usuario();
 
 
 $varIdRU = 0;
@@ -23,22 +23,8 @@ if (isset($varIdRU)) {
     $varIdRU = $_GET['editRoUsu'];
 }
 
-$varIdR = 0;
-
-if (isset($varIdR)) {
-    $varIdR = $_GET['editRol'];
-}
-
-$varIdU = 0;
-
-if (isset($varIdu)) {
-    $varIdu = $_GET['editUsu'];
-}
-
 
 $RU = $dtRU->getRolUsuario($varIdRU);
-$R = $dtR->getRol($varIdR);
-$U = $dtU->getUsuario($varIdU);
 
 /* $varMsj = 0;
 
@@ -553,11 +539,11 @@ if (isset($varMsj)) {
                                         <a href="tbl_rol_usuarios.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
-                                </di v>
-                                <!-- /.card -->
                             </div>
+                            <!-- /.card -->
                         </div>
                     </div>
+                </div>
             </section>
             <!-- /.content -->
         </div>

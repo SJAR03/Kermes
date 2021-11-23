@@ -43,8 +43,8 @@ if ($_POST) {
             try {
                 //CONSTRUIMOS OBJETOS
                 //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
-                $rou->__SET('tbl_rol_id_rol', $_POST['rol']);
-                $rou->__SET('tbl_usuario_id_usuario', $_POST['usuario']);
+                $rou->__SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
+                $rou->__SET('tbl_usuario_id_usuario', $_POST['tbl_usuario_id_usuario']);
                 $rou->__SET('id_rol_usuario', $_POST['id_rol_usuario']);
 
 

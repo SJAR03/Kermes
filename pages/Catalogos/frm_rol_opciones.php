@@ -5,10 +5,12 @@ include '../../Datos/dt_opciones.php';
 include '../../Entidades/rol.php';
 include '../../Datos/dt_rol.php';
 
+include '../../Entidades/rol_opciones.php';
+include '../../Datos/dt_rol_opciones.php';
 
 $dtU = new dt_opciones();
 $dtR = new dt_rol();
-
+$dtRO = new dt_rol_opciones();
 
 $varMsj = 0;
 if (isset($varMsj)) {
@@ -451,12 +453,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manipulación de Datos</h1>
+                            <h1>Nueva Opción a Rol</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manipulación de Datos</li>
+                                <li class="breadcrumb-item active">Nueva Opción a Rol</li>
                             </ol>
                         </div>
                     </div>
@@ -476,32 +478,33 @@ if (isset($varMsj)) {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_rol_opciones.php">
                                     <div class="card-body">
 
                                         <div class="form-group">
                                             <label>Selecciona el rol</label>
-                                            <select class="form-control" name="rol" id="id_rol" required>
+                                            <select class="form-control" name="id_rol" id="id_rol" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
-
-                                                    <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
-
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
+                                                    </tr>
                                                 <?php endforeach; ?>
 
                                             </select>
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
                                             <label>Selecciona la opción</label>
-                                            <select class="form-control" name="opciones" id="id_opciones" required>
+                                            <select class="form-control" name="id_opciones" id="id_opciones" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaOpc() as $r) : ?>
-
-                                                    <option value="<?php echo $r->__GET('id_opciones'); ?>"><?php echo $r->__GET('opcion_descripcion'); ?></option>
-
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_opciones'); ?>"><?php echo $r->__GET('opcion_descripcion'); ?></option>
+                                                    </tr>
                                                 <?php endforeach; ?>
 
                                             </select>
@@ -513,6 +516,8 @@ if (isset($varMsj)) {
 
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <a href="tbl_rol_opciones.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
