@@ -208,7 +208,8 @@ if (isset($varMsj)) {
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -296,7 +297,12 @@ if (isset($varMsj)) {
                                         <p>Lista Precios</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios Detalles</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -342,6 +348,12 @@ if (isset($varMsj)) {
                                 </li>
 
                                 <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad Detalles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Comunidad</p>
@@ -373,6 +385,14 @@ if (isset($varMsj)) {
                                         <p>Arqueo Caja</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Arqueo Caja Detalle</p>
+                                    </a>
+                                </li>
+
                                 <li class="nav-item">
                                     <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
@@ -391,6 +411,13 @@ if (isset($varMsj)) {
                                     <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tasa Cambio</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
                                     </a>
                                 </li>
                             </ul>
@@ -477,16 +504,19 @@ if (isset($varMsj)) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($dtICom->listaComunidad() as $r) :
+                                    <?php foreach ($dtICom->listaComunidad() as $r) : 
                                         $estadoIC = "";
-                                        if ($r->__GET('estado') == 1) {
+                                        if($r->__GET('estado') == 1){
                                             $estadoIC = 'Activo';
-                                        } else 
-                                        if ($r->__GET('estado') == 2) {
-                                            $estadoIC = 'Modificado';
-                                        } else {
-                                            $estadoIC = 'Inactivo';
                                         }
+                                        else 
+                                        if($r->__GET('estado') == 2){
+                                            $estadoIC = 'Modificado';
+                                        }
+                                        else
+                                        {
+                                            $estadoIC = 'Inactivo';
+                                        } 
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_ingreso_comunidad'); ?></td>
@@ -502,20 +532,20 @@ if (isset($varMsj)) {
                                             <td><?php echo $estadoIC ?></td>
                                             <!-- <td><?php echo $r->__GET('usuario_creacion'); ?></td> 
                                             <td><?php echo $r->__GET('fecha_creacion'); ?></td> -->
-
+                                           
 
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
                                                 <a href="frm_edit_ingreso_comunidad.php?editIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad"></i></a>
-                                                <a href="frm_view_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
+                                                <a href="frm_view_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?> ?viewICD=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
 
                                                 <!-- PRIMERA FORMA  -->
                                                 <!-- <a href="../../negocio/ng_Ingreso_Comunidad.php?delIC=<?php echo $r->__GET('id_ingreso_comunidad'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a> -->
 
                                                 <!-- SEGUNDA FORMA -->
                                                 <a href="#" onclick="deleteIngComunidad('<?php echo $r->__GET('id_ingreso_comunidad'); ?>');">
-                                                    <i class="far fa-2x fa-trash-alt" title="Eliminar Ingreso Comunidad"></i></a>
-                                            </td>
+                                                <i class="far fa-2x fa-trash-alt" title="Eliminar Ingreso Comunidad"></i></a>
+                                            </td> 
 
                                         </tr>
                                     <?php endforeach; ?>
@@ -593,18 +623,22 @@ if (isset($varMsj)) {
     <!-- Page specific script -->
 
     <script>
-        function deleteIngComunidad(idIC) {
-            //SEGUNDA FORMA / INCLUYE EL API DE JALERT
-            confirm(function(e, btn) { //event + button clicked
+
+    function deleteIngComunidad(idIC)    
+    {
+        //SEGUNDA FORMA / INCLUYE EL API DE JALERT
+        confirm(function(e,btn)
+                { //event + button clicked
                     e.preventDefault();
-                    window.location.href = "../../negocio/ng_Ingreso_Comunidad.php?delIC=" + idIC;
+                    window.location.href= "../../negocio/ng_Ingreso_Comunidad.php?delIC="+idIC;
 
                 },
 
-                function(e, btn) {
+                function(e,btn)
+                {
                     e.preventDefault();
                 });
-        }
+    }
 
         $(document).ready(function() {
             /////// VARIABLE DE CONTROL MSJ ////////

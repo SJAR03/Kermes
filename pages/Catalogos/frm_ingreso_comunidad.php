@@ -213,7 +213,8 @@ if (isset($varMsj)) {
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -301,7 +302,12 @@ if (isset($varMsj)) {
                     <p>Lista Precios</p>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lista Precios Detalles</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
@@ -347,6 +353,12 @@ if (isset($varMsj)) {
                 </li>
 
                 <li class="nav-item">
+                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ingreso Comunidad Detalles</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -378,6 +390,14 @@ if (isset($varMsj)) {
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Arqueo Caja Detalle</p>
+                  </a>
+                </li>
+
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -396,6 +416,13 @@ if (isset($varMsj)) {
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -509,7 +536,7 @@ if (isset($varMsj)) {
                       <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
                     </div>
 
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                       <label>Seleccione el Ingreso Comunidad</label>
                       <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
                         <option value="">Seleccione...</option>
@@ -520,7 +547,7 @@ if (isset($varMsj)) {
                         <?php endforeach; ?>
                       </select>
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                    </div> -->
+                    </div>
 
                     <div class="form-group">
                       <label>Seleccione bono</label>
@@ -539,10 +566,10 @@ if (isset($varMsj)) {
                       <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
                     </div>
 
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                       <label>Cantidad de bonos</label>
                       <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
-                    </div> -->
+                    </div>
 
                     <div class="form-group">
                       <label>Subtotal de Bonos</label>
@@ -554,16 +581,16 @@ if (isset($varMsj)) {
                       <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
                     </div>
 
-                    <!--  <div class="form-group">
+                    <!-- <div class="form-group">
                        <label>Estado</label>
                       <select class="form-control" name="estado" id="estado"  required>
-                        <option value="1">Activado</option>
-                        <option value="2">Modificado</option>
+                        <option value="1">Activado</option> --> -->
+                       <!--  <option value="2">Modificado</option>
                         <option value="3">Eliminado</option>
                       </select>
-                    </div> -->
+                    </div>
 
-                    <!--  <div class="form-group">
+                    <div class="form-group">
                       <label>Creacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
                     </div>

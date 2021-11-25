@@ -15,6 +15,7 @@ if ($_POST)
         case '1':
             try
             {
+                //GUARDAR DATOS, BOTON INGRESAR
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
                 $com->__SET('nombre', $_POST['nombre']);
@@ -35,6 +36,7 @@ if ($_POST)
         case '2':
             try
             {
+                //EDITAR DATOS, BOTON EDITAR
                 //CONSTRUIMOS OBJETOS
                 //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
                 $com->__SET('id_comunidad', $_POST['id_comunidad']); 
@@ -65,6 +67,7 @@ if($_GET)
 {
     try
     {
+        //ELIMINAR DATOS, BOTON ELIMINAR
         $com->__SET('id_comunidad', $_GET['delCom']);
         $dtComu->deleteComunidad($com->__GET('id_comunidad'));
         header("Location: /Kermes/pages/Catalogos/tbl_comunidad.php?msj=5");

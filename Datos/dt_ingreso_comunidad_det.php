@@ -96,7 +96,10 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_ingreso_comunidad_det where id_ingreso_comunidad_det= ?";
+            $querySQL = "INSERT INTO dbkermesse.tbl_ingreso_comunidad_det(id_ingreso_comunidad_det, id_ingreso_comunidad, id_bono, 
+            denominacion, cantidad, subtotal_bono)
+            VALUES (?, ?, ?, ?, ?, ?)";
+
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
 

@@ -9,7 +9,7 @@ class Ingreso_Comunidad
     private $id_producto;
     private $cant_productos;
     private $id_ingreso_comunidad_det;
-    /* private $id_ingreso_comunidad; */
+    /* private $id_ingreso_comunidad;  */
     private $id_bono;
     private $denominacion;
     private $cantidad;

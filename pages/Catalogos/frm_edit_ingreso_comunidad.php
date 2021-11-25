@@ -26,8 +26,8 @@ $dtK = new Dt_Kermesse();
 $dtCom = new Dt_Comunidad();
 $dtP = new Dt_Producto();
 $dtCb = new Dt_Control_Bonos();
-$IC = new Ingreso_Comunidad();
-/* $ICD = new Ingreso_Comunidad_Det(); */
+$IC = new Ingreso_Comunidad(); 
+/* $ICD = new Ingreso_Comunidad_Det();  */
 
 
 $varIdIC = 0;
@@ -45,7 +45,7 @@ if (isset($varIdICD)) {
 
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
 $IC = $dtICom->getIngComunidad($varIdIC);
-$ICD = $dtICD->getIngComunidadDet($varIdICD);
+/* $ICD = $dtICD->getIngComunidadDet($varIdICD); */
 
 /* $varMsj = 0;
 
@@ -236,7 +236,8 @@ if (isset($varMsj)) {
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -324,7 +325,12 @@ if (isset($varMsj)) {
                     <p>Lista Precios</p>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lista Precios Detalles</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
@@ -370,6 +376,12 @@ if (isset($varMsj)) {
                 </li>
 
                 <li class="nav-item">
+                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ingreso Comunidad Detalles</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -401,6 +413,14 @@ if (isset($varMsj)) {
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Arqueo Caja Detalle</p>
+                  </a>
+                </li>
+
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -419,6 +439,13 @@ if (isset($varMsj)) {
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -490,11 +517,11 @@ if (isset($varMsj)) {
                 <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
                   <div class="card-body">
 
-                    <div class="form-group">
+                  <div class="form-group">
                       <label>ID</label>
                       <input type="int" value="<?php echo $IC->__GET('id_ingreso_comunidad') ?>" class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
                       <!-- <input type="hidden" value="2" name="txtaccion" id="txtaccion" /> -->
-                    </div>
+                  </div>
 
                     <div class="form-group">
                       <label>Seleccione la kermesses</label>
@@ -538,9 +565,9 @@ if (isset($varMsj)) {
                       <input type="int" class="form-control" id="cant_productos" name="cant_productos" placeholder="Ingrese la cantidad del producto" title="Ingrese la cantidad del producto" required>
                     </div>
 
-                    <!-- <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Seleccione el Ingreso Comunidad</label>
-                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
+                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" readonly required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
                           <tr>
@@ -585,23 +612,23 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado" required>
+                       <label>Estado</label>
+                      <select class="form-control" name="estado" id="estado"  required>
+                      <option value="2">Modificado</option>
                         <!-- <option value="1">Activado</option> -->
-                        <option value="2">Modificado</option>
                         <!-- <option value="3">Eliminado</option> -->
                       </select>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Creacion de Usuarios</label>
                       <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
                     </div>
 
                     <div class="form-group">
                       <label>Fecha de creacion de Usuario</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div>
+                      <input type="datetime" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
+                    </div> -->
 
                     <!-- <div class="form-group">
                       <label>Modificacion de Usuarios</label>
@@ -675,16 +702,16 @@ if (isset($varMsj)) {
       $("#id_comunidad").val("<?php echo $IC->__GET('id_comunidad') ?>");
       $("#id_producto").val("<?php echo $IC->__GET('id_producto') ?>");
       $("#cant_productos").val("<?php echo $IC->__GET('cant_productos') ?>");
-      $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>");
+     /*  /* $("#id_ingreso_comunidad").val("<?php echo $IC->__GET('id_ingreso_comunidad') ?>"); */
       $("#id_bono").val("<?php echo $IC->__GET('id_bono') ?>");
       $("#denominacion").val("<?php echo $IC->__GET('denominacion') ?>");
       $("#cantidad").val("<?php echo $IC->__GET('cantidad') ?>");
-      $("#subtotal_bono").val("<?php echo $IC->__GET('subtotal_bono') ?>");
+      $("#subtotal_bono").val("<?php echo $IC->__GET('subtotal_bono') ?>"); 
       $("#total_bonos").val("<?php echo $IC->__GET('total_bonos') ?>");
       $("#estado").val("<?php echo $IC->__GET('estado') ?>");
-      $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
-      $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>");
-      /*  $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");
+    /*   $("#usuario_creacion").val("<?php echo $IC->__GET('usuario_creacion') ?>");
+      $("#fecha_creacion").val("<?php echo $IC->__GET('fecha_creacion') ?>"); */
+     /*  $("#usuario_modificacion").val("<?php echo $IC->__GET('usuario_modificacion') ?>");
       $("#fecha_modificacion").val("<?php echo $IC->__GET('fecha_modificacion') ?>");
       $("#usuario_eliminacion").val("<?php echo $IC->__GET('usuario_eliminacion') ?>");
       $("#fecha_eliminacion").val("<?php echo $IC->__GET('fecha_eliminacion') ?>");

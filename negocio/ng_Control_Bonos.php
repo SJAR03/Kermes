@@ -15,6 +15,7 @@ if ($_POST)
         case '1':
             try
             {
+                //GUARDAR DATOS, BOTON INGRESAR
                 //CONSTRUIMOS EL OBJETO
                 //ATRIBUTO ENTIDAD //NAME DEL CONTROL
                 $cb->__SET('nombre', $_POST['nombre']);
@@ -34,6 +35,7 @@ if ($_POST)
             case '2':
                 try
                 {
+                    //EDITAR DATOS, BOTON EDITAR
                     //CONSTRUIMOS OBJETOS
                     //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
                     $cb->__SET('id_bono', $_POST['id_bono']); 
@@ -60,6 +62,7 @@ if($_GET)
 {
     try
     {
+        //ELIMINAR DATOS, BOTON ELIMINAR
         $cb->__SET('id_bono', $_GET['delCb']);
         $dtCB->deleteControlBono($cb->__GET('id_bono'));
         header("Location: /Kermes/pages/Catalogos/tbl_control_bonos.php?msj=5");

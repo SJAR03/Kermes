@@ -10,7 +10,7 @@ class Dt_Ingreso_Comunidad extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_ingcom";
+            $querySQL = "SELECT * FROM dbkermesse.vw_ingcom where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -48,7 +48,7 @@ class Dt_Ingreso_Comunidad extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_ingreso_comunidad";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_ingreso_comunidad where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -95,7 +95,7 @@ class Dt_Ingreso_Comunidad extends Conexion
             /* SEGUNDA FORMA DE ESTABLECER LA FECHA COMO FECHA ACTUAL */
             $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, 
             total_bonos, estado, usuario_creacion, fecha_creacion)
-            VALUES (?, ?, ?, ?, ?,1, 1, now())";
+            VALUES (?, ?, ?, ?, ?, 1, 1, now())";
 
             $this->myCon->prepare($sql)
             ->execute(array(
@@ -105,9 +105,9 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__GET('id_producto'),
                 $ic->__GET('cant_productos'),
                 $ic->__GET('total_bonos'),
-                $ic->__GET('estado'),
-               /*  $ic->__GET('usuario_creacion'),
-                $ic->__GET('fecha_creacion'), */
+                /* $ic->__GET('estado'), 
+                $ic->__GET('usuario_creacion'),
+                $ic->__GET('fecha_creacion') */
                 /* $ic->__GET('usuario_modificacion'),
                 $ic->__GET('fecha_modificacion'),
                 $ic->__GET('usuario_eliminacion'),
@@ -181,15 +181,15 @@ class Dt_Ingreso_Comunidad extends Conexion
                     id_producto= ?,
                     cant_productos= ?,
                     /* id_ingreso_comunidad= ?, */
-                    id_bono= ?,
+                    /* id_bono= ?,
                     denominacion= ?,
                     cantidad= ?,
-                    subtotal_bono= ?,
+                    subtotal_bono= ?, */
                     total_bonos= ?,
-                    estado=?,
-                    usuario_creacion=?,
-                    fecha_creacion=?
-                WHERE id_ingreso_comunidad = ?";
+                    estado=?
+                    /* usuario_modificacion= 1,
+                    fecha_modificacion= now(), */
+                    WHERE id_ingreso_comunidad = ?";
 
             $this->myCon->prepare($sql)
             ->execute(
@@ -199,20 +199,20 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__GET('id_producto'),
                 $ic->__GET('cant_productos'),
                 /* $ic->__GET('id_ingreso_comunidad'), */
-                $ic->__GET('id_bono'),
+                /* $ic->__GET('id_bono'),
                 $ic->__GET('denominacion'),
                 $ic->__GET('cantidad'),
-                $ic->__GET('subtotal_bono'),
+                $ic->__GET('subtotal_bono'), */
                 $ic->__GET('total_bonos'),
                 $ic->__GET('estado'),
-                $ic->__GET('usuario_creacion'),
-                $ic->__GET('fecha_creacion'),
-                $ic->__GET('id_ingreso_comunidad') 
+                /* $ic->__GET('usuario_creacion'),
+                $ic->__GET('fecha_creacion'), */
                 /* $ic->__GET('usuario_modificacion'),
-                $ic->__GET('fecha_modificacion'),
-                $ic->__GET('usuario_eliminacion'),
+                $ic->__GET('fecha_modificacion'), */
+                /*$ic->__GET('usuario_eliminacion'),
                 $ic->__GET('fecha_eliminacion')));
                 */         
+                $ic->__GET('id_ingreso_comunidad'),
             ));
             
 
