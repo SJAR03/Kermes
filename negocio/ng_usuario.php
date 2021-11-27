@@ -44,6 +44,36 @@ if ($_POST) {
             }
             break;
 
+        case '3':
+            //obtenemos los valores ingresados por el usuario 
+            $usuario = $_POST["user"];
+            $password = $_POST["pwd"];
+
+            if (empty($usuario) and empty($password)) {
+                //nos envía al inicio
+                header("Location: ../login.php?msj=403");
+            } else {
+                $u = $dtU->validarUser($usuario, $password);
+                if (empty($u)) {
+                    header("Location: ../login.php?msj=401");
+                } else {
+                    //Iniciamos la sesion
+                    session_start();
+                    //Asignamos la sesion
+                    $_SESSION['acceso'] = $u;
+                    //Si la variable de sesión está correctamente definida
+                    if (!isset($_SESSION['acceso'])) {
+                        //nos envía al inicio
+                        header("Location: ../login.php?msj=400");
+                    } else {
+                        //nos envía al inicio
+                        //var_dump($_SESSION['acceso']);
+                        header("Location: ../sistema-hr.php?msj=1");
+                    }
+                }
+            }
+            break;
+
         default:
             // code...
             break;

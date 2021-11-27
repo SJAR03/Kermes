@@ -34,7 +34,7 @@ class Dt_Kermesse extends Conexion
                 $result[] = $p;
             }
 
-            
+
             $this->myCon = parent::desconectar();
             return $result;
         } catch (Exception $e) {
@@ -73,9 +73,63 @@ class Dt_Kermesse extends Conexion
                 $result[] = $p;
             }
 
-            
+
             $this->myCon = parent::desconectar();
             return $result;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function regKermesse(Kermesse $rk)
+    {
+        try {
+            $fecha = date('Y-m-d');
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_kermesse(idParroquia, nombre, fInicio, fFinal, descripcion, usuario_creacion, fecha_creacion, estado)
+                VALUES (?, ?, ?, ?, ?, 1, '$fecha', 1)";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $rk->__GET('idParroquia'),
+                    $rk->__GET('nombre'),
+                    $rk->__GET('fInicio'),
+                    $rk->__GET('fFinal'),
+                    $rk->__GET('descripcion')
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getGastos($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "SELECT * FROM dbkermesse.tbl_gastos where id_registro_gastos= ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($id));
+
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $icd = new gastos();
+
+            //_SET(CAMPOBD, atributoEntidad)
+            $icd->__SET('id_registro_gastos', $r->id_registro_gastos);
+            $icd->__SET('idKermesse', $r->idKermesse);
+            $icd->__SET('idCatGastos', $r->idCatGastos);
+            $icd->__SET('fechaGasto', $r->fechaGasto);
+            $icd->__SET('concepto', $r->concepto);
+            $icd->__SET('monto', $r->monto);
+            $icd->__SET('estado', $r->estado);
+
+
+
+
+            $this->myCon = parent::desconectar();
+            return $icd;
         } catch (Exception $e) {
             die($e->getMessage());
         }

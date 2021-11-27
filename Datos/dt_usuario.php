@@ -143,4 +143,23 @@ class dt_usuario extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function validarUser($user, $pwd)
+    {
+        try {
+            $this->myCon = parent::conectar();
+
+            $querySQL = "SELECT * FROM dbkermesse.tbl_usuario WHERE usuario=? AND pwd=? AND estado<>3;";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($user, $pwd));
+
+            $resultado = $stm->fetchAll(PDO::FETCH_CLASS, "Usuario");
+
+            $this->myCon = parent::desconectar();
+            return $resultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

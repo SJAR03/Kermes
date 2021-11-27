@@ -123,4 +123,29 @@ class dt_opciones extends Conexion
             die($e->getMessage());
         }
     }
+
+    public function getOpcion($rol)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $result = array();
+            $querySQL = "SELECT opciones FROM dbkermesse.vw_rol_opciones WHERE rol= :rol;";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->bindParam(':rol', $rol, PDO::PARAM_INT);
+            $stm->execute();
+
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
+                $opc = new Opciones();
+                //_SET(CAMPOBD, atributoEntidad)			
+                $opc->__SET('opciones', $r->opciones);
+                $result[] = $opc;
+                //var_dump($result);
+            }
+            $this->myCon = parent::desconectar();
+            return $result;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
