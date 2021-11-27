@@ -1,26 +1,36 @@
 <?php
 
-error_reporting(0);
-
-include '../../entidades/ingreso_comunidad_det.php';
-include '../../datos/dt_ingreso_comunidad_det.php';
+//error_reporting(0);
 
 include '../../entidades/ingreso_comunidad.php';
 include '../../datos/dt_ingreso_comunidad.php';
 
+include '../../entidades/ingreso_comunidad_det.php';
+include '../../datos/dt_ingreso_comunidad_det.php';
+
 include '../../entidades/control_bonos.php';
 include '../../datos/dt_Control_Bonos.php';
 
-$dtICD = new Dt_Ingreso_Comunidad_Det();
 $dtICom = new Dt_Ingreso_Comunidad();
-$dtCB = new Dt_Control_Bonos();
+$dtICD = new Dt_Ingreso_Comunidad_Det();
+$dtCb = new Dt_Control_Bonos();
+$ICD = new Ingreso_Comunidad_Det();
 
 
-$varMsj = 0;
+$varIdICD = 0;
+
+if (isset($varIdICD)) {
+  $varIdICD = $_GET['viewICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA VISUALIZAR INGRESO COMUNIDAD DETALLE
+
+}
+
+$ICD = $dtICD->getIngComunidadDet($varIdICD); 
+
+/* $varMsj = 0;
 
 if (isset($varMsj)) {
-  $varMsj = $_GET['msj'];
-}
+    $varMsj = $_GET['msj'];
+} */
 ?>
 
 
@@ -205,7 +215,8 @@ if (isset($varMsj)) {
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -293,7 +304,12 @@ if (isset($varMsj)) {
                     <p>Lista Precios</p>
                   </a>
                 </li>
-
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Lista Precios Detalles</p>
+                  </a>
+                </li>
               </ul>
             </li>
 
@@ -339,6 +355,12 @@ if (isset($varMsj)) {
                 </li>
 
                 <li class="nav-item">
+                  <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ingreso Comunidad Detalles</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Comunidad</p>
@@ -370,6 +392,14 @@ if (isset($varMsj)) {
                     <p>Arqueo Caja</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Arqueo Caja Detalle</p>
+                  </a>
+                </li>
+
                 <li class="nav-item">
                   <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
@@ -388,6 +418,13 @@ if (isset($varMsj)) {
                   <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tasa Cambio</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tasa Cambio Detalles</p>
                   </a>
                 </li>
               </ul>
@@ -431,12 +468,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo Ingreso en la Comunidad Detalle</h1>
+              <h1>Visualizar Datos de Ingreso Comunidad Detalle</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar Ingreso en la Comunidad Detalle</li>
+                <li class="breadcrumb-item active">Visualizar Ingreso Comunidad Detalle</li>
               </ol>
             </div>
           </div>
@@ -452,7 +489,7 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar Ingreso en la Comunidad Detalle</h3>
+                  <h3 class="card-title">Visualizar Ingreso Comunidad Detalle</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -460,8 +497,8 @@ if (isset($varMsj)) {
                   <div class="card-body">
 
                     <div class="form-group">
-                      <label>Seleccione el Ingreso Comunidad</label>
-                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
+                      <label>Ingreso Comunidad</label>
+                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" disabled>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
                           <tr>
@@ -469,14 +506,14 @@ if (isset($varMsj)) {
                           </tr>
                         <?php endforeach; ?>
                       </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
-                      <label>Seleccione el Bono</label>
-                      <select class="form-control" id="id_bono" name="id_bono" required>
+                      <label>Bono</label>
+                      <select class="form-control" id="id_bono" name="id_bono" disabled>
                         <option value="">Seleccione...</option>
-                        <?php foreach ($dtCB->listaControlBonos() as $r) : ?>
+                        <?php foreach ($dtCb->listaControlBonos() as $r) : ?>
                           <tr>
                             <option value="<?php echo $r->__GET('id_bono'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
@@ -485,25 +522,28 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
-                      <label>Escriba la denominacion</label>
-                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
+                      <label>denominacion del bono</label>
+                      <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" disabled>
                     </div>
 
                     <div class="form-group">
-                      <label>Cantidad de bonos</label>
-                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" required>
+                      <label>Cantidad</label>
+                      <input type="int" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad de bonos" title="Ingrese la cantidad de bonos" disabled>
                     </div>
 
                     <div class="form-group">
                       <label>Subtotal de Bonos</label>
-                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
-                    </div>
+                      <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" disabled>
+                    </div>             
+                    
+
                   </div>
                   <!-- /.card-body -->
 
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  <div class="card-footer" style="text-align: center;">
+                    <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
+                    <a href="tbl_ingreso_comunidad_det.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                    <!-- <button type="reset" class="btn btn-danger">Cancelar</button> -->
                   </div>
                 </form>
                 </di v>
@@ -541,6 +581,25 @@ if (isset($varMsj)) {
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
+
+  <script>
+    ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+    function setValores() {
+     /*  $("#id_ingreso_comunidad_det").val("<?php echo $ICD->__GET('id_ingreso_comunidad_det') ?>");  */
+      $("#id_ingreso_comunidad").val("<?php echo $ICD->__GET('id_ingreso_comunidad') ?>");
+      $("#id_bono").val("<?php echo $ICD->__GET('id_bono') ?>");
+      $("#denominacion").val("<?php echo $ICD->__GET('denominacion') ?>");
+      $("#cantidad").val("<?php echo $ICD->__GET('cantidad') ?>");
+      $("#subtotal_bono").val("<?php echo $ICD->__GET('subtotal_bono') ?>");
+      
+    }
+
+    $(document).ready(function() {
+      ////CARGAMOS LOS VALORES EN LOS CONTROLES
+      setValores();
+    });
+  </script>
+
   <script>
     $(function() {
       bsCustomFileInput.init();

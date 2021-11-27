@@ -463,13 +463,20 @@ $ICD = $dtICD->getIngComunidadDet($varIdICD);
                 <form method="POST" action="../../negocio/ng_Ingreso_Comunidad_Det.php">
                   <div class="card-body">
 
-                    <div class="form-group">
-                      <label>Seleccione el Ingreso Comunidad detalle</label>
-                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
+                  <div class="form-group">
+                      <label>ID</label>
+                      <input type="int" value="<?php echo $ICD->__GET('id_ingreso_comunidad_det') ?>" class="form-control" id="id_ingreso_comunidad_det" name="id_ingreso_comunidad_det" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
+                      <!-- <input type="hidden" value="2" name="txtaccion" id="txtaccion" /> -->
+                  </div>  
+                  
+                  
+                  <div class="form-group">
+                      <label>Seleccione el Ingreso Comunidad</label>
+                      <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" readonly required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('cant_productos'); ?></option>
+                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('id_ingreso_comunidad'); ?></option>
                           </tr>
                         <?php endforeach; ?>
                       </select>
@@ -489,7 +496,7 @@ $ICD = $dtICD->getIngComunidadDet($varIdICD);
                     </div>
 
                     <div class="form-group">
-                      <label>Escriba la denominacion</label>
+                      <label>Denominacion</label>
                       <input type="text" class="form-control" id="denominacion" name="denominacion" maxlength="45" placeholder="Ingrese la denominacion de los Bonos" title="Ingrese la denominacion de los Bonos" required>
                     </div>
 
@@ -550,6 +557,7 @@ $ICD = $dtICD->getIngComunidadDet($varIdICD);
     ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
     function setValores() {
       /* $("#id_ingreso_comunidad_det").val("<?php echo $ICD->__GET('id_ingreso_comunidad_det') ?>");  */
+      $("#id_ingreso_comunidad_det").css("background-color", "#E3E4E5")
       $("#id_ingreso_comunidad").val("<?php echo $ICD->__GET('id_ingreso_comunidad') ?>");
       $("#id_bono").val("<?php echo $ICD->__GET('id_bono') ?>");
       $("#denominacion").val("<?php echo $ICD->__GET('denominacion') ?>");

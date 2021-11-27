@@ -42,15 +42,15 @@ if ($_POST)
                 $ic->__SET('usuario_eliminacion', $_POST['usuario_eliminacion']);
                 $ic->__SET('fecha_eliminacion', $_POST['fecha_eliminacion']); */
 
-                $dtIC-> regIngComunidad($ic);
-                $dtICD-> regIngComunidadDet($icd); 
+                $dtIC-> regIngComunidad($ic,$icd);
+                /* $dtICD-> regIngComunidadDet($icd);  */
                 //var_dump($emp);
                 header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=1");
-                header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=1"); 
+                /* header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=1");  */
             }
             catch (Exception $e) {
                 header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=2");
-                header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=2");   
+                /* header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=2");   */ 
             die($e->getMessage());
             }
             break;

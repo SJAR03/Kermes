@@ -19,7 +19,7 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
 
                 //_SET(CAMPOBD, atributoEntidad)
                 $vicd->__SET('id_ingreso_comunidad_det', $r->id_ingreso_comunidad_det);
-                $vicd->__SET('cantproducto', $r->cantproducto);
+                $vicd->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
                 $vicd->__SET('nombono', $r->nombono);
                 $vicd->__SET('denominacion', $r->denominacion);
                 $vicd->__SET('cantidad', $r->cantidad);
@@ -77,7 +77,6 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
 
             $this->myCon->prepare($sql)
             ->execute(array(
-                /* $com->__GET('id_comunidad'), */
                 $icd->__GET('id_ingreso_comunidad'),
                 $icd->__GET('id_bono'),
                 $icd->__GET('denominacion'),
@@ -96,9 +95,8 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "INSERT INTO dbkermesse.tbl_ingreso_comunidad_det(id_ingreso_comunidad_det, id_ingreso_comunidad, id_bono, 
-            denominacion, cantidad, subtotal_bono)
-            VALUES (?, ?, ?, ?, ?, ?)";
+           
+            $querySQL = "SELECT * FROM dbkermesse.tbl_ingreso_comunidad_det where id_ingreso_comunidad_det= ?";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($id));
@@ -120,6 +118,55 @@ class Dt_Ingreso_Comunidad_Det extends Conexion
             $this->myCon = parent::desconectar();
             return $icd;
         } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function editIngComunidadDet(Ingreso_Comunidad_Det $icd)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_ingreso_comunidad_det SET
+                    id_ingreso_comunidad= ?, 
+                    id_bono= ?,
+                    denominacion= ?,
+                    cantidad= ?,
+                    subtotal_bono= ?
+                    WHERE id_ingreso_comunidad_det = ?";
+
+            $this->myCon->prepare($sql)
+            ->execute(
+            array(
+                $icd->__GET('id_ingreso_comunidad'), 
+                $icd->__GET('id_bono'),
+                $icd->__GET('denominacion'),
+                $icd->__GET('cantidad'),
+                $icd->__GET('subtotal_bono'),                 
+                $icd->__GET('id_ingreso_comunidad_det'),
+            ));
+            
+
+            $this->myCon = parent::desconectar();
+            
+        } catch (Exception $e) {
+            var_dump($e);
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteIngComunidadDet($idICD)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "DELETE dbkermesse.tbl_ingreso_comunidad_det WHERE id_ingreso_comunidad_det = ?";
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($idICD));
+            $this->myCon = parent::desconectar();
+            
+        } 
+        catch (Exception $e) 
+        {
+            var_dump($e);
             die($e->getMessage());
         }
     }

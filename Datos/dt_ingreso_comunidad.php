@@ -81,7 +81,7 @@ class Dt_Ingreso_Comunidad extends Conexion
     }
 
 
-    public function regIngComunidad(Ingreso_Comunidad $ic)
+    public function regIngComunidad(Ingreso_Comunidad $ic, Ingreso_Comunidad_Det $icd)
     {
         try {
             $this->myCon = parent::conectar();
@@ -119,7 +119,29 @@ class Dt_Ingreso_Comunidad extends Conexion
         } 
         catch (Exception $e) {
             die($e->getMessage());
+        }        
+        
+        
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad_det(id_ingreso_comunidad,id_bono, denominacion, cantidad, subtotal_bono)
+                VALUES (?, ?, ?, ?, ?)";
+
+            $this->myCon->prepare($sql)
+            ->execute(array(
+                $icd->__GET('id_ingreso_comunidad'),
+                $icd->__GET('id_bono'),
+                $icd->__GET('denominacion'),
+                $icd->__GET('cantidad'),
+                $icd->__GET('subtotal_bono')));
+
+                $this->myCon = parent::desconectar();
+
+        } 
+        catch (Exception $e) {
+            die($e->getMessage());
         }
+        
     }
 
     public function getIngComunidad($id)
@@ -186,9 +208,9 @@ class Dt_Ingreso_Comunidad extends Conexion
                     cantidad= ?,
                     subtotal_bono= ?, */
                     total_bonos= ?,
-                    estado=?
-                    /* usuario_modificacion= 1,
-                    fecha_modificacion= now(), */
+                    estado=?,
+                    usuario_modificacion= 1,
+                    fecha_modificacion= now() 
                     WHERE id_ingreso_comunidad = ?";
 
             $this->myCon->prepare($sql)
@@ -207,8 +229,8 @@ class Dt_Ingreso_Comunidad extends Conexion
                 $ic->__GET('estado'),
                 /* $ic->__GET('usuario_creacion'),
                 $ic->__GET('fecha_creacion'), */
-                /* $ic->__GET('usuario_modificacion'),
-                $ic->__GET('fecha_modificacion'), */
+                /* $ic->__GET('usuario_modificacion'), */
+                /* $ic->__GET('fecha_modificacion'),  */
                 /*$ic->__GET('usuario_eliminacion'),
                 $ic->__GET('fecha_eliminacion')));
                 */         
@@ -228,7 +250,7 @@ class Dt_Ingreso_Comunidad extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "UPDATE dbkermesse.tbl_ingreso_comunidad SET estado = 3 WHERE id_ingreso_comunidad = ?";
+            $querySQL = "UPDATE dbkermesse.tbl_ingreso_comunidad SET estado = 3, usuario_eliminacion = 1, fecha_eliminacion= now() WHERE id_ingreso_comunidad = ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($idIC));
             $this->myCon = parent::desconectar();

@@ -559,6 +559,7 @@ if (isset($varMsj)) {
                           </tr>
                         <?php endforeach; ?>
                       </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">

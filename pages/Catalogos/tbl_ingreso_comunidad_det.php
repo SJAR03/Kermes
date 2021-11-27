@@ -1,6 +1,6 @@
 <?php
 
-/* error_reporting(0);  */
+error_reporting(0);  
 
 include '../../entidades/vw_ingreso_comunidad_det.php';
 include '../../datos/dt_ingreso_comunidad_det.php';
@@ -446,7 +446,7 @@ if (isset($varMsj)) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Comunidad Detalle registradas</h3>
+                            <h3 class="card-title">Comunidad Detalle Registradas</h3>
                         </div>
 
                         <div class="card-body">
@@ -456,8 +456,8 @@ if (isset($varMsj)) {
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Cantidad de Producto</th>
+                                        <th>ID Detalle</th>
+                                        <th>ID Ingreso Comunidad</th>
                                         <th>Nombre Bono</th>
                                         <th>Denominacion</th>
                                         <th>Cantidad</th>
@@ -469,7 +469,7 @@ if (isset($varMsj)) {
                                     <?php foreach ($dtICD->listaComunidadDet() as $r) : ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_ingreso_comunidad_det'); ?></td>
-                                            <td><?php echo $r->__GET('cantproducto'); ?></td>
+                                            <td><?php echo $r->__GET('id_ingreso_comunidad'); ?></td>
                                             <td><?php echo $r->__GET('nombono'); ?></td>
                                             <td><?php echo $r->__GET('denominacion'); ?></td>
                                             <td><?php echo $r->__GET('cantidad'); ?></td>
@@ -478,7 +478,14 @@ if (isset($varMsj)) {
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
                                                 <a href="frm_edit_ingreso_comunidad_det.php?editICD=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad Detalle"></i></a>
-                                                <a href="frm_edit_ingreso_comunidad_det.php?viewICD=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad Detalle"></i></a>
+                                                <a href="frm_view_ingreso_comunidad_det.php?viewICD=<?php echo $r->__GET('id_ingreso_comunidad_det') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad Detalle"></i></a>
+
+                                                 <!-- PRIMERA FORMA  -->
+                                                <!-- <a href="../../negocio/ng_Ingreso_Comunidad.php?delIC=<?php echo $r->__GET('id_ingreso_comunidad_det'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a> -->
+
+                                                <!-- SEGUNDA FORMA -->
+                                                <a href="#" onclick="deleteIngComunidadDet('<?php echo $r->__GET('id_ingreso_comunidad_det'); ?>');">
+                                                <i class="far fa-2x fa-trash-alt" title="Eliminar Ingreso Comunidad Detalle"></i></a>
                                             </td>
 
 
@@ -487,8 +494,8 @@ if (isset($varMsj)) {
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>ID Ingreso Comunidad Det</th>
-                                        <th>Cantidad de Producto</th>
+                                        <th>ID Detalle</th>
+                                        <th>ID Ingreso Comunidad</th>
                                         <th>Nombre Bono</th>
                                         <th>Denominacion</th>
                                         <th>Cantidad</th>
@@ -549,6 +556,23 @@ if (isset($varMsj)) {
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
+
+    function deleteIngComunidadDet(idICD)    
+    {
+        //SEGUNDA FORMA / INCLUYE EL API DE JALERT
+        confirm(function(e,btn)
+                { //event + button clicked
+                    e.preventDefault();
+                    window.location.href= "../../negocio/ng_Ingreso_Comunidad_Det.php?delICD="+idICD;
+
+                },
+
+                function(e,btn)
+                {
+                    e.preventDefault();
+                });
+    }
+
         $(document).ready(function() {
             /////// VARIABLE DE CONTROL MSJ ////////
             var mensaje = 0;
@@ -557,8 +581,20 @@ if (isset($varMsj)) {
             if (mensaje == "1") {
                 successAlert('Exito', 'Los datos han sido registrado exitosamente!');
             }
-            if (mensaje == "2") {
+            if (mensaje == "2" || mensaje == "4") {
                 successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+            }
+
+            if (mensaje == "3") {
+                successAlert('Exito', 'Los datos han sido editados exitosamente!');
+            }
+
+            if (mensaje == "5") {
+                successAlert('Exito', 'Los datos han sido eliminados exitosamente!');
+            }
+
+            if (mensaje == "6") {
+                successAlert('Error', 'Verifique que la comunidad no tenga registro asociado!');
             }
             ////////////////////////////////////////
 

@@ -4,7 +4,7 @@ class VwIngreso_Comunidad_Det
 {
     //Atributos
     private $id_ingreso_comunidad_det;
-    private $cantproducto;
+    private $id_ingreso_comunidad;
     private $nombono;
     private $denominacion;
     private $cantidad;
