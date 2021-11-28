@@ -130,7 +130,7 @@ class dt_rol extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT id_rol_usuario FROM dbkermesse.vw_rol_usuario WHERE usuario= :usuario;";
+            $querySQL = "SELECT id_rol FROM dbkermesse.vw_rol_usuario WHERE usuario= :usuario;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->bindParam(':usuario', $user, PDO::PARAM_STR, 40);

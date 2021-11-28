@@ -9,7 +9,7 @@ if (session_destroy()) {
   //var_dump($miPagina);
   echo "La sesión ha sido cerrada correctamente";
 } else {
-  echo "Error al destruir la sesión";
+  echo "Error al cerrar la sesión";
 }
 
 ?>
@@ -45,7 +45,7 @@ if (session_destroy()) {
         <form action="./negocio/ng_usuario.php" method="post">
           <div class="input-group mb-3">
             <input type="hidden" name="txtaccion" value="3">
-            <input type="text" name="user" class="form-control" placeholder="usuario" required>
+            <input type="text" name="user" class="form-control" placeholder="Usuario" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>

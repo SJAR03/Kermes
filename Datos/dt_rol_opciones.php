@@ -20,8 +20,8 @@ class dt_rol_opciones extends Conexion
                 $vu = new Vw_rol_opciones();
 
                 $vu->__SET('id_rol_opciones', $r->id_rol_opciones);
-                $vu->__SET('rol', $r->rol);
-                $vu->__SET('opciones', $r->opciones);
+                $vu->__SET('rol_descripcion', $r->rol_descripcion);
+                $vu->__SET('opcion_descripcion', $r->opcion_descripcion);
 
                 $result[] = $vu;
             }

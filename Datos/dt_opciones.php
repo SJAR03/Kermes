@@ -58,7 +58,7 @@ class dt_opciones extends Conexion
         }
     }
 
-    public function getOpciones($io)
+    public function getOpcion($io)
     {
         try {
             $this->myCon = parent::conectar();
@@ -124,21 +124,21 @@ class dt_opciones extends Conexion
         }
     }
 
-    public function getOpcion($rol)
+    public function getOpciones($rol)
     {
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT opciones FROM dbkermesse.vw_rol_opciones WHERE rol= :rol;";
+            $querySQL = "SELECT opcion_descripcion FROM dbkermesse.vw_rol_opciones WHERE id_rol= :id_rol;";
 
             $stm = $this->myCon->prepare($querySQL);
-            $stm->bindParam(':rol', $rol, PDO::PARAM_INT);
+            $stm->bindParam(':id_rol', $rol, PDO::PARAM_INT);
             $stm->execute();
 
             foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
                 $opc = new Opciones();
                 //_SET(CAMPOBD, atributoEntidad)			
-                $opc->__SET('opciones', $r->opciones);
+                $opc->__SET('opcion_descripcion', $r->opcion_descripcion);
                 $result[] = $opc;
                 //var_dump($result);
             }

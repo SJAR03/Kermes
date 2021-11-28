@@ -68,7 +68,7 @@ if ($_POST) {
                     } else {
                         //nos envía al inicio
                         //var_dump($_SESSION['acceso']);
-                        header("Location: ../sistema-hr.php?msj=1");
+                        header("Location: ../index.php?msj=1");
                     }
                 }
             }

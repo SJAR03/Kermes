@@ -16,7 +16,7 @@ class Conexion
         $serverName = 'localhost';
         $dbName = 'dbkermesse';
         $userName = 'root';
-        $pwd = 'Enero212003.';
+        $pwd = '12345';
 
         try {
 
