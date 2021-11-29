@@ -557,7 +557,7 @@ if (isset($varMsj)) {
                           <td><?php echo $r->__GET('fecha'); ?></td>
                           <td><?php echo $r->__GET('tipo_cambio'); ?></td>
                           <td>
-                            <a href="frm_edit_tasaCambioDetalle.php?editTC=<?php echo $r->__GET('id_tasaCambio') ?>&editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
+                            <a href="frm_edit_tasaCambioDetalles.php?editTC=<?php echo $r->__GET('id_tasaCambio') ?>&editTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-edit fa-2x"></i></a>
                             <a href="frm_view_tasaCambioDetalle.php?viewTC=<?php echo $r->__GET('id_tasaCambio') ?>&viewTCD=<?php echo $r->__GET('id_tasaCambio_det') ?>"><i class="far fa-eye fa-2x"></i></a>
                             <a href="#" title="Eliminar Detalle" target="blank">
                               <i class="far fa-trash-alt fa-2x" onclick="deactivateP(<?php echo $r->__GET('id_tasaCambio_det') ?>,<?php echo $r->__GET('id_tasaCambio') ?> );"></i>

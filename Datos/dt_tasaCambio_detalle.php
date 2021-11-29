@@ -151,7 +151,7 @@ class Dt_TasaCambioDet extends Conexion
             $stm = $this->myCon->prepare($sql);
             $stm->execute();
 
-            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $r = $stm->fetch(PDO::FETCH_COLUMN);
 
             $this->myCon = parent::desconectar();
 

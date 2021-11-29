@@ -40,6 +40,7 @@ if ($_POST) {
                 $tcd->__SET('id_tasaCambio_det', $_POST['id_tasaCambio2']);
                 $tcd->__SET('fecha', $_POST['fecha']);
                 $tcd->__SET('tipo_cambio', $_POST['tipoCambio']);
+                $dtTc->editForDelDet($tcd->__GET('id_tasaCambio'));
                 $dtTcd->editTasaDetalle($tcd);
 
                 //var_dump($emp);
@@ -76,7 +77,9 @@ if ($_GET) {
         $tcd->__SET('id_tasaCambio', $_GET['TC']);
 
         $count = $dtTcd->countTasas($tcd->__GET('id_tasaCambio'));
-        if ($count <= 1) {
+        // echo $count;
+
+        if ($count == 1) {
             $dtTcd->desactivarTasaDet($tcd->__GET('id_tasaCambio_det'));
             $dtTc->desactivarTasa($tcd->__GET('id_tasaCambio'));
             header("Location: /Kermes/pages/Catalogos/tbl_tasaCambio.php?msj=5");

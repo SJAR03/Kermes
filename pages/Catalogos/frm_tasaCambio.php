@@ -474,13 +474,16 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Año</label>
-                      <input type="text" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" required>
+                      <input type="number" step="1" class="form-control" id="anio" name="anio" maxlength="45" placeholder="Año" title="Ingrese el año" required>
                     </div>
                   </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary" id="gen">Guardar</button>
+                  </div>
+                  <div class="card-footer">
+                    <a href="tbl_tasaCambio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                   </div>
                 </form>
               </div>

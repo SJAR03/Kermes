@@ -491,6 +491,9 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary" id="gen">Guardar</button>
                   </div>
+                  <div class="card-footer">
+                    <a href="tbl_tasaCambio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
+                  </div>
                 </form>
               </div>
               <!-- /.card -->
