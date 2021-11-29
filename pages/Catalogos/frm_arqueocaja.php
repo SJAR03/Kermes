@@ -4,15 +4,19 @@ error_reporting(0);
 
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
-
 include '../../Entidades/arqueocaja.php';
 include '../../Datos/dt_arqueocaja.php';
-
+include '../../Entidades/arqueocajaCajaDetalles.php';
+include '../../Datos/dt_arqueocajaDetalle.php';
+include '../../Entidades/moneda.php';
+include '../../Datos/dt_moneda.php';
+include '../../Entidades/denominacion.php';
+include '../../Datos/dt_denominacion.php';
 
 $dtK = new Dt_Kermesse();
 $dtCom = new dt_arqueocaja();
-
-
+$dtMoneda = new Dt_Moneda();
+$dtDenominacion = new Dt_Denominacion();
 
 $varMsj = 0;
 
@@ -28,7 +32,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Arqueo</title>
+  <title>Kermesse | Arqueo</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -447,7 +451,7 @@ if (isset($varMsj)) {
           <div class="row">
             <!-- left column -->
             <div class="col-md-12">
-              <!-- general form elements -->
+              <!-- Maestro del arqueo -->
               <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">Registrar Arqueo</h3>
@@ -474,6 +478,93 @@ if (isset($varMsj)) {
                       <label>Fecha del Arqueo</label>
                       <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
                     </div>
+
+              <!-- Detalles del arqueo -->
+              <div class="card card-info">
+                <div class="card-header">
+                  <h3 class="card-title">Detalles</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                  <div class="card-body">
+
+                    <div class="form-group">
+                      <label>Moneda</label>
+                      <select class="form-control" id="id_moneda" name="id_moneda" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                    </div>
+
+                    <div class="form-group">
+                      <label>Denominación</label>
+                      <select class="form-control" id="id_denominacion" name="id_denominacion" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtDenominacion->listarDenominaciones() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Cantidad</label>
+                      <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese cantidad" title="Ingrese cantidad" required>
+                    </div>
+
+                    <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Fixed Header Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Moneda</th>
+                      <th>Denominacion</th>
+                      <th>Cantidad</th>
+                      <th>Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr></tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
 
                     <div class="form-group">
                       <label>Total</label>
