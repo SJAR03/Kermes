@@ -521,7 +521,7 @@ if (isset($varMsj)) {
 
                     <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Fixed Header Table</h3>
+                <h3 class="card-title">Detalles del arqueo</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -537,7 +537,7 @@ if (isset($varMsj)) {
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0" style="height: 300px;">
-                <table class="table table-head-fixed text-nowrap">
+                <table class="table table-head-fixed text-nowrap" id="tablaDetalles">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -559,7 +559,7 @@ if (isset($varMsj)) {
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregarDetalle()">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
                 </form>
@@ -613,12 +613,42 @@ if (isset($varMsj)) {
   <script src="../../dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
+  
   <!-- Page specific script -->
-  <script>
+<script>
     $(function() {
       bsCustomFileInput.init();
     });
-  </script>
+</script>
+
+<script>
+  function agregarDetalle() {
+        $("#tablaDetalles tbody").append("<tr>" + 
+          "<td>1</td>" +
+          "<td>Córdoba</td>" +
+          "<td>12</td>" +
+          "<td>10</td>" +
+          "<td>120</td>" +
+          "</tr>");
+          calcularTotal();
+  }
+
+  function calcularTotal() {
+    var inputTotal = document.getElementById('granTotal');
+    var tabla = document.getElementById('tablaDetalles');
+    var total = 0;
+
+    for(var i = 1; i < tabla.rows.length; i++) {
+      var celda = tabla.rows.item(i).cells;
+
+      for (var j = 4; j < celda.length; j++) {
+        total += parseInt(celda.item(j).innerHTML);
+      }
+    }
+    inputTotal.value = total;
+  }
+</script>
+
 </body>
 
 </html>
