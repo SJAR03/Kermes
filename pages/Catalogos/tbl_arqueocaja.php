@@ -18,7 +18,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla arqueocaja</title>
+    <title>KERMESSE | Arqueo de caja</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -423,12 +423,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1>Arqueo de caja</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li>
+                                <li class="breadcrumb-item active">Arqueo</li>
                             </ol>
                         </div>
                     </div>
@@ -461,12 +461,12 @@ if (isset($varMsj)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    foreach ($dtu->listararqueocaja() as $r) :
-                                        echo $dtu->listararqueocaja();
+                                    foreach ($dtu->listarArqueo() as $r) :
+                                        echo $dtu->listarArqueo();
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_ArqueoCaja'); ?></td>
-                                            <td><?php echo $r->__GET('kermesse'); ?></td>
+                                            <td><?php echo $r->__GET('nombreKermesse'); ?></td>
                                             <td><?php echo $r->__GET('fechaArqueo'); ?></td>
                                             <td><?php echo $r->__GET('granTotal'); ?></td>
                                             <td><?php echo $r->__GET('estado'); ?></td>
