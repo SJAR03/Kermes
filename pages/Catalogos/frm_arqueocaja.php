@@ -560,7 +560,6 @@ if (isset($varMsj)) {
 
                   <div class="card-footer">
                     <button type="button" class="btn btn-primary" onclick="agregarDetalle()">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
                   </div>
                 </form>
               </div>
@@ -568,7 +567,7 @@ if (isset($varMsj)) {
 
                     <div class="form-group">
                       <label>Total</label>
-                      <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" required>
+                      <input type="number" class="form-control" id="granTotal" name="granTotal" placeholder="Ingrese el total" title="Ingrese total" disabled>
                     </div>
 
                   </div>
