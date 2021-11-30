@@ -7,7 +7,7 @@ session_unset(); // Borrar las variables de sesión
 // Destruir la sesión
 if (session_destroy()) {
   //var_dump($miPagina);
-  echo "La sesión ha sido cerrada correctamente";
+  echo "Inicia Sesión";
 } else {
   echo "Error al cerrar la sesión";
 }
