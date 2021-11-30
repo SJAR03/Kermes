@@ -20,6 +20,7 @@ include '../../datos/dt_productos.php';
 include '../../entidades/control_bonos.php';
 include '../../datos/dt_Control_Bonos.php';
 
+
 //IMPORTAMOS ENTIDADES
 include '../../Entidades/usuario.php';
 include '../../Entidades/rol.php';
@@ -90,6 +91,7 @@ if (!$acceso) {
   //ACCESO NO CONCEDIDO 
   header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
 }
+
 
 $dtICom = new Dt_Ingreso_Comunidad();
 $dtICD = new Dt_Ingreso_Comunidad_Det();

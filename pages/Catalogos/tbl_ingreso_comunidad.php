@@ -608,7 +608,7 @@ if (isset($varMsj)) {
                                             <!-- CONFIGURANDO EL BOTON EDIT -->
                                             <td>
                                                 <a href="frm_edit_ingreso_comunidad.php?editIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-edit" title="Editar Ingreso Comunidad"></i></a>
-                                                <a href="frm_view_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?> ?viewICD=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
+                                                <a href="frm_view_ingreso_comunidad.php?viewIC=<?php echo $r->__GET('id_ingreso_comunidad') ?>" target="blank"><i class="far fa-2x fa-eye" title="Visualizar Ingreso Comunidad"></i></a>
 
                                                 <!-- PRIMERA FORMA  -->
                                                 <!-- <a href="../../negocio/ng_Ingreso_Comunidad.php?delIC=<?php echo $r->__GET('id_ingreso_comunidad'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Comunidad"></i></a> -->
