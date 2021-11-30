@@ -1,32 +1,39 @@
 <?php
-error_reporting(0);
+include '../../Entidades/kermesse.php';
+include '../../Datos/dt_kermesse.php';
 
-include '../../Entidades/arqueoCajaDetalles.php';
-include '../../Datos/dt_arqueoDetalle.php';
+include '../../Entidades/parroquia.php';
+include '../../Datos/dt_parroquia.php';
 
-$arq = new Dt_ArqueoDetalle();
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$dtK = new Dt_Kermesse();
+$dtP = new Dt_Parroquia();
+$k = new Kermesse();
+$p = new Parroquia();
+
+
+$varIdKermesse = 0;
+
+if (isset($varIdKermesse)) {
+    $varIdKermesse = $_GET['viewKe'];
 }
+
+$k = $dtK->getKermesse($varIdKermesse);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Detalles de arqueo de caja</title>
+    <title>Kermesse | Visualizar Kermesse</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -63,15 +70,15 @@ if (isset($varMsj)) {
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge">3</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
+                            <!-Message Start -->
+                <!-- <div class="media">
                                 <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -81,13 +88,13 @@ if (isset($varMsj)) {
                                     <p class="text-sm">Call me whenever you can...</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
+                            </div> -->
+                <!-- Message End -->
+                <!-- </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
+                        <a href="#" class="dropdown-item">-->
+                <!-- Message Start -->
+                <!-- <div class="media">
                                 <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -97,13 +104,13 @@ if (isset($varMsj)) {
                                     <p class="text-sm">I got your message bro</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
+                            </div> -->
+                <!-- Message End -->
+                <!--  </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
+                        <a href="#" class="dropdown-item"> -->
+                <!-- Message Start -->
+                <!-- <div class="media">
                                 <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -113,15 +120,15 @@ if (isset($varMsj)) {
                                     <p class="text-sm">The subject goes here</p>
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
+                            </div> -->
+                <!-- Message End -->
+                <!-- </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
+                </li> -->
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
@@ -151,10 +158,15 @@ if (isset($varMsj)) {
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
-                </li>
+                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
+                    </a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="../../login.php" title="Cerrar Sesión">
+                        <i class="fas fa-power-off"></i>&nbsp;Cerrar Sesión
                     </a>
                 </li>
             </ul>
@@ -196,7 +208,8 @@ if (isset($varMsj)) {
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -284,7 +297,12 @@ if (isset($varMsj)) {
                                         <p>Lista Precios</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios Detalles</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -330,6 +348,12 @@ if (isset($varMsj)) {
                                 </li>
 
                                 <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad Detalles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Comunidad</p>
@@ -361,6 +385,14 @@ if (isset($varMsj)) {
                                         <p>Arqueo Caja</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Arqueo Caja Detalle</p>
+                                    </a>
+                                </li>
+
                                 <li class="nav-item">
                                     <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
@@ -379,6 +411,13 @@ if (isset($varMsj)) {
                                     <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tasa Cambio</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
                                     </a>
                                 </li>
                             </ul>
@@ -422,132 +461,139 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Detalles de arqueo</h1>
+                            <h1>Visualizar Kermesse</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Arqueo detalle</li>
+                                <li class="breadcrumb-item active">Visualizar Kermesse</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Tabla - Detalles de arqueo de caja</h3>
-                        </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Visualizar Kermesse</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form method="POST" action="../../negocio/ng_kermesse.php">
+                                    <div class="card-body">
+                                        <label>ID Kermesse</label>
+                                        <input type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="ID" readonly require>
 
-                        <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Selecciona la Parroquia</label>
+                                            <select class="form-control" name="idParroquia" id="idParroquia" disabled required>
+                                                <option value="">Seleccione...</option>
 
-                            <div class="form group col-md-12" style="text-align: right;">
-                                <a href="frm_arqueoDetalle.php" title="Resgistrar detalle de arqueo" target="_blank"><i class="far fa-2x fa-plus-square"></i></a>
+                                                <?php foreach ($dtP->listaParr() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
+                                                <?php endforeach; ?>
+
+                                            </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Kermesse</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de la Kermesse" title="Ingrese el nombre de la Kermesse" readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de Inicio</label>
+                                            <input type="Date" class="form-control" id="fInicio" name="fInicio" title="Elija la fecha de inicio" readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de Final</label>
+                                            <input type="Date" class="form-control" id="fFinal" name="fFinal" title="Elija la fecha de cierre" readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripción de la Kermesse" title="Ingrese descripción de la Kermesse" readonly required>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <a href="tbl_kermesse.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
+                                    </div>
+                                </form>
                             </div>
-
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>ID Arqueo Caja</th>
-                                        <th>Moneda</th>
-                                        <th>Denominación</th>
-                                        <th>Cantidad</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($arq->listarArqueoDetalle() as $r) : ?>
-                                        <tr>
-                                            <td><?php echo $r->__GET('idArqueoCajaDet'); ?></td>
-                                            <td><?php echo $r->__GET('id_ArqueoCaja'); ?></td>
-                                            <td><?php echo $r->__GET('moneda'); ?></td>
-                                            <td><?php echo $r->__GET('valorDenominacion'); ?></td>
-                                            <td><?php echo $r->__GET('cantidad'); ?></td>
-                                            <td>
-                                                <a href="frm_edit_arqueoDetalle.php?editArqueoDetalle=<?php echo $r->__GET('id') ?>"><i class="far fa-edit fa-2x"></i></a>
-                                                <a href="frm_edit_arqueoDetalle.php?vieArqueoDetall=<?php echo $r->__GET('id') ?>"><i class="far fa-eye fa-2x"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>ID Arqueo Caja</th>
-                                        <th>Moneda</th>
-                                        <th>Denominación</th>
-                                        <th>Cantidad</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <!-- /.card -->
                         </div>
+                        <!-- /.card -->
                     </div>
+                    <!--/.col (right) -->
                 </div>
-            </div>
-
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_kermesse").val("<?php echo $k->__GET('id_kermesse') ?>");
+            $("#idParroquia").val("<?php echo $k->__GET('idParroquia') ?>");
+            $("#nombre").val("<?php echo $k->__GET('nombre') ?>");
+            $("#fInicio").val("<?php echo $k->__GET('fInicio') ?>");
+            $("#fFinal").val("<?php echo $k->__GET('fFinal') ?>");
+            $("#descripcion").val("<?php echo $k->__GET('descripcion') ?>");
+        }
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
 </body>
 
 </html>

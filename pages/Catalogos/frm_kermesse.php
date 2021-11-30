@@ -456,12 +456,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manipulación de Datos</h1>
+                            <h1>Ingreso nueva Kermesse</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manipulación de Datos</li>
+                                <li class="breadcrumb-item active">Ingreso nueva Kermesse</li>
                             </ol>
                         </div>
                     </div>
@@ -477,16 +477,16 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Producto</h3>
+                                    <h3 class="card-title">Ingreso nueva Kermesse</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_kermesse.php">
                                     <div class="card-body">
 
                                         <div class="form-group">
                                             <label>Selecciona la Parroquia</label>
-                                            <select class="form-control" name="parroquia" id="idParroquia" required>
+                                            <select class="form-control" name="idParroquia" id="idParroquia" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtP->listaParr() as $r) : ?>
@@ -496,66 +496,35 @@ if (isset($varMsj)) {
                                                 <?php endforeach; ?>
 
                                             </select>
+                                            <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
                                             <label>Kermesse</label>
-                                            <input type="text" class="form-control" id="kerm_nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de la Kermesse" title="Ingrese el nombre de la Kermesse" required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de la Kermesse" title="Ingrese el nombre de la Kermesse" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Fecha de Inicio</label>
-                                            <input type="date" class="form-control" id="kerm_fInicio" name="fInicio" title="Elija la fecha de inicio" required>
+                                            <input type="Date" class="form-control" id="fInicio" name="fInicio" placeholder="Elija la fecha de inicio" title="Elija la fecha de inicio" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Fecha de Final</label>
-                                            <input type="date" class="form-control" id="kerm_fFinal" name="fFinal" title="Elija la fecha de cierre" required>
+                                            <input type="Date" class="form-control" id="fFinal" name="fFinal" placeholder="Elija la fecha de cierre" title="Elija la fecha de cierre" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="text" class="form-control" id="kerm_descripcion" name="desripcion" placeholder="Ingrese una descripción" title="Ingrese una descripción" required>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripción de la Kermesse" title="Ingrese descripción de la Kermesse" required>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Usuario que lo creo</label>
-                                            <input type="text" class="form-control" id="kerm_ucreacion" name="usuario_creacion" title="Usuario que lo creo" value="Usuario1" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fecha de Creación</label>
-                                            <input type="date" class="form-control" id="kerm_fcreacion" name="fecha_creacion" title="Fecha de creación de kermesse" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Usuario con ultima modificacion</label>
-                                            <input type="text" class="form-control" id="kerm_umod" name="usuario_modificacion" title="Usuario que lo modifico" value="Usuario1" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fecha de modificación</label>
-                                            <input type="date" class="form-control" id="kerm_fmod" name="fecha_modificacion" title="Fecha de modificación de kermesse" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Usuario que lo elimino</label>
-                                            <input type="text" class="form-control" id="kerm_uelim" name="usuario_eliminacion" title="Usuario que lo elimino" value="Usuario1" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="prod_estado" id="estado" disabled>
-                                                <option value="1">Ingresado</option>
-                                                <option value="2">Modificado</option>
-                                                <option value="3">Eliminado</option>
-                                            </select>
-                                        </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="reset" class="btn btn-danger">Cancelar</button>
                                     </div>
                                 </form>
                             </div>

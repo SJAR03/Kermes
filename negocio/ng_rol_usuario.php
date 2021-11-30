@@ -3,20 +3,8 @@
 include_once("../Entidades/rol_usuario.php");
 include_once("../Datos/dt_rol_usuario.php");
 
-include_once("../Entidades/usuario.php");
-include_once("../Datos/dt_usuario.php");
-
-include_once("../Entidades/rol.php");
-include_once("../Datos/dt_rol.php");
-
 $rou = new rol_usuario();
 $dtRO = new dt_rol_usuario();
-
-$u = new usuario();
-$dtU = new dt_usuario();
-
-$r = new rol();
-$dtR = new dt_rol();
 
 if ($_POST) {
     $varAccion = $_POST['txtaccion'];
@@ -41,12 +29,9 @@ if ($_POST) {
 
         case '2':
             try {
-                //CONSTRUIMOS OBJETOS
-                //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
+                $rou->__SET('id_rol_usuario', $_POST['id_rol_usuario']);
                 $rou->__SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
                 $rou->__SET('tbl_usuario_id_usuario', $_POST['tbl_usuario_id_usuario']);
-                $rou->__SET('id_rol_usuario', $_POST['id_rol_usuario']);
-
 
 
                 $dtRO->editRolUsuario($rou);

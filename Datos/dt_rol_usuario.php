@@ -117,25 +117,24 @@ class dt_rol_usuario extends Conexion
         }
     }
 
-    public function editRolUsuario(rol_usuario $eru)
+    public function EditRolUsuario(rol_usuario $ru)
     {
         try {
             $this->myCon = parent::conectar();
-            $sql = "UPDATE dbkermesse.rol_usuario SET
-            tbl_usuario_id_usuario= ?,
-            tbl_rol_id_rol= ?
+            $querySQL = "UPDATE dbkermesse.rol_usuario SET
+            tbl_usuario_id_usuario = ?,
+            tbl_rol_id_rol = ?,
             WHERE id_rol_usuario = ?";
-            $this->myCon->prepare($sql)
-                ->execute(
-                    array(
-                        $eru->__GET('tbl_usuario_id_usuario'),
-                        $eru->__GET('tbl_rol_id_rol'),
-                        $eru->__GET('id_rol_usuario')
-                    )
-                );
+
+            $this->myCon->prepare($querySQL)
+                ->execute(array(
+                    $ru->__GET('tbl_usuario_id_usuario'),
+                    $ru->__GET('tbl_rol_id_rol'),
+                    $ru->__GET('id_rol_usuario')
+                ));
+
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
-            var_dump($e);
             die($e->getMessage());
         }
     }

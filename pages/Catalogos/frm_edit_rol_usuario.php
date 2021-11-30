@@ -6,31 +6,93 @@ include '../../Entidades/rol_usuario.php';
 include '../../Datos/dt_rol_usuario.php';
 
 include '../../Entidades/usuario.php';
-include '../../Datos/dt_usuario.php';
-
 include '../../Entidades/rol.php';
+include '../../Entidades/opciones.php';
+
+include '../../Datos/dt_usuario.php';
 include '../../Datos/dt_rol.php';
+include '../../Datos/dt_opciones.php';
+
+//SEGURIDAD//
+
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+    //nos envía al inicio
+    header("Location: ../../login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->__SET('id_rol', $dtr->getIdRol($usuario[0]->__GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->__GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+    $miPagina = substr($url, $inicio, $fin - $inicio);
+    // var_dump($miPagina);
+} else {
+    $miPagina = substr($url, $inicio);
+    // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+    //obtengo el valor de cada elemento
+    $opcion = $listOpc[$i]->__GET('opcion_descripcion');
+    if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+    {
+        $acceso = true; //ACCESO CONCEDIDO
+        break;
+    }
+}
+
+if (!$acceso) {
+    //ACCESO NO CONCEDIDO 
+    header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
+// 
 
 $dtU = new dt_usuario();
 $dtR = new dt_rol();
+$RU = new rol_usuario();
 $dtRU = new dt_rol_usuario();
-$RO = new rol_usuario();
-
 
 $varIdRU = 0;
 
 if (isset($varIdRU)) {
-    $varIdRU = $_GET['editRoUsu'];
+    $varIdRU = $_GET['editRoUsu']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
 }
 
-
+//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
 $RU = $dtRU->getRolUsuario($varIdRU);
 
-/* $varMsj = 0;
-
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-} */
 ?>
 
 
@@ -40,7 +102,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Modificar Rol de Usuario</title>
+    <title>AdminLTE 3 | Modificar Rol a Usuario</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -446,12 +508,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Modificar Rol de Usuario</h1>
+                            <h1>Modificar Rol a Usuario</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Modificar Rol de Usuario</li>
+                                <li class="breadcrumb-item active">Modificar Rol a Usuario</li>
                             </ol>
                         </div>
                     </div>
@@ -467,61 +529,53 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Modificar Rol de Usuario</h3>
+                                    <h3 class="card-title">Modificar Rol a Usuario</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form method="POST" action="../../negocio/ng_rol_usuario.php">
                                     <div class="card-body">
+                                        <label>ID</label>
+                                        <input type="text" class="form-control" id="id_rol_usuario" name="id_rol_usuario" placeholder="ID" readonly require>
 
                                         <div class="form-group">
-                                            <label>ID</label>
-                                            <input type="int" value="<?php echo $RU->__GET('id_rol_usuario') ?>" class="form-control" id="id_rol_usuario" name="id_rol_usuario" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Selecciona el rol</label>
-                                            <select class="form-control" name="tbl_rol_id_rol" id="tbl_rol_id_rol" required>
+                                            <label>Seleccione el Rol</label>
+                                            <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
                                                 <option value="">Seleccione...</option>
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
                                                     <tr>
                                                         <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
                                                     </tr>
                                                 <?php endforeach; ?>
-
                                             </select>
                                             <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona el usuario</label>
-                                            <select class="form-control" name="tbl_usuario_id_usuario" id="tbl_usuario_id_usuario" required>
+                                            <label>Seleccione el usuario</label>
+                                            <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
                                                 <option value="">Seleccione...</option>
-
                                                 <?php foreach ($dtU->listaUsu() as $r) : ?>
                                                     <tr>
                                                         <option value="<?php echo $r->__GET('id_usuario'); ?>"><?php echo $r->__GET('usuario'); ?></option>
                                                     </tr>
                                                 <?php endforeach; ?>
-
                                             </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
-                                    </div>
-                                    <!-- /.card-body -->
+                                        <!-- /.card-body -->
 
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                        <button type="reset" class="btn btn-danger">Cancelar</button>
-                                        <a href="tbl_rol_usuarios.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
-                                    </div>
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        </div>
                                 </form>
+                                </di v>
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
                         </div>
                     </div>
-                </div>
             </section>
             <!-- /.content -->
         </div>
@@ -552,6 +606,28 @@ if (isset($varMsj)) {
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_rol_usuario").val("<?php echo $RU->__GET('id_rol_usuario') ?>");
+            $("#tbl_rol_id_rol").val("<?php echo $RU->__GET('tbl_rol_id_rol') ?>");
+            $("#tbl_usuario_id_usuario").val("<?php echo $RU->__GET('tbl_usuario_id_usuario') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
+
 
     <script>
         $(function() {

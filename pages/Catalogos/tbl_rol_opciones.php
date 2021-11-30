@@ -4,6 +4,88 @@ error_reporting(0);
 include '../../Entidades/vw_rol_opciones.php';
 include '../../Datos/dt_rol_opciones.php';
 
+include '../../Entidades/usuario.php';
+include '../../Entidades/rol.php';
+include '../../Entidades/opciones.php';
+
+include '../../Datos/dt_usuario.php';
+include '../../Datos/dt_rol.php';
+include '../../Datos/dt_opciones.php';
+
+//SEGURIDAD//
+
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+    //nos envía al inicio
+    header("Location: ../../login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->__SET('id_rol', $dtr->getIdRol($usuario[0]->__GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->__GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+    $miPagina = substr($url, $inicio, $fin - $inicio);
+    // var_dump($miPagina);
+} else {
+    $miPagina = substr($url, $inicio);
+    // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+    //obtengo el valor de cada elemento
+    $opcion = $listOpc[$i]->__GET('opcion_descripcion');
+    if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+    {
+        $acceso = true; //ACCESO CONCEDIDO
+        break;
+    }
+}
+
+if (!$acceso) {
+    //ACCESO NO CONCEDIDO 
+    header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
+// 
+
+$dtu = new dt_usuario();
+
+$varMsj = 0;
+
+if (isset($varMsj)) {
+    $varMsj = $_GET['msj'];
+}
+
 $dtu = new dt_rol_opciones();
 
 $varMsj = 0;
@@ -551,25 +633,28 @@ if (isset($varMsj)) {
             }
 
             $(document).ready(function() {
-                // Mensajes de Control
+                /////// VARIABLE DE CONTROL MSJ ////////
                 var mensaje = 0;
                 mensaje = "<?php echo $varMsj ?>";
 
-                switch (mensaje) {
-                    case "1":
-                        successAlert('Éxito', 'Se han registrado exitosamente los datos.');
-                        break;
-
-                    case "2":
-                    case "4":
-                        errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
-                        break;
-
-                    case "3":
-                        successAlert('Éxito', 'Se modificó exitosamente la opción del rol.');
-                    default:
-
+                if (mensaje == "1") {
+                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
                 }
+                if (mensaje == "2") {
+                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+                if (mensaje == "3") {
+                    successAlert('Exito', 'Los datos han sido editados exitosamente.');
+                }
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+                }
+
+                if (mensaje == "6") {
+                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+                }
+
+                ////////////////////////////////////////
 
             });
 
