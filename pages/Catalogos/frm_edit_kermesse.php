@@ -8,12 +8,16 @@ include '../../Datos/dt_parroquia.php';
 
 $dtK = new Dt_Kermesse();
 $dtP = new Dt_Parroquia();
+$k = new Kermesse();
+$p = new Parroquia();
 
+$varIdKermesse = 0;
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+if (isset($varIdKermesse)) {
+    $varIdKermesse = $_GET['editKe'];
 }
+
+$k = $dtK->getKermesse($varIdKermesse);
 
 ?>
 
@@ -23,7 +27,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Ingreso de Kermesse</title>
+    <title>Kermesse | Editar Kermesse</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -171,7 +175,7 @@ if (isset($varMsj)) {
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="../../index3.html" class="brand-link">
+            <a href="../../index.php" class="brand-link">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
@@ -456,12 +460,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Manipulación de Datos</h1>
+                            <h1>Modificar Kermesse</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Manipulación de Datos</li>
+                                <li class="breadcrumb-item active">Modificar Kermesse</li>
                             </ol>
                         </div>
                     </div>
@@ -477,16 +481,18 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Registrar Producto</h3>
+                                    <h3 class="card-title">Modificar Kermesse</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
+                                <form method="POST" action="../../negocio/ng_kermesse.php">
                                     <div class="card-body">
+                                        <label>ID Kermesse</label>
+                                        <input type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="ID" readonly require>
 
                                         <div class="form-group">
                                             <label>Selecciona la Parroquia</label>
-                                            <select class="form-control" name="parroquia" id="idParroquia" required>
+                                            <select class="form-control" name="idParroquia" id="idParroquia" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtP->listaParr() as $r) : ?>
@@ -496,66 +502,35 @@ if (isset($varMsj)) {
                                                 <?php endforeach; ?>
 
                                             </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
                                             <label>Kermesse</label>
-                                            <input type="text" class="form-control" id="kerm_nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de la Kermesse" title="Ingrese el nombre de la Kermesse" required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de la Kermesse" title="Ingrese el nombre de la Kermesse" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Fecha de Inicio</label>
-                                            <input type="date" class="form-control" id="kerm_fInicio" name="fInicio" title="Elija la fecha de inicio" required>
+                                            <input type="Date" class="form-control" id="fInicio" name="fInicio" title="Elija la fecha de inicio" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Fecha de Final</label>
-                                            <input type="date" class="form-control" id="kerm_fFinal" name="fFinal" title="Elija la fecha de cierre" required>
+                                            <input type="Date" class="form-control" id="fFinal" name="fFinal" title="Elija la fecha de cierre" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="text" class="form-control" id="kerm_descripcion" name="desripcion" placeholder="Ingrese una descripción" title="Ingrese una descripción" required>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripción de la Kermesse" title="Ingrese descripción de la Kermesse" required>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Usuario que lo creo</label>
-                                            <input type="text" class="form-control" id="kerm_ucreacion" name="usuario_creacion" title="Usuario que lo creo" value="Usuario1" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fecha de Creación</label>
-                                            <input type="date" class="form-control" id="kerm_fcreacion" name="fecha_creacion" title="Fecha de creación de kermesse" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Usuario con ultima modificacion</label>
-                                            <input type="text" class="form-control" id="kerm_umod" name="usuario_modificacion" title="Usuario que lo modifico" value="Usuario1" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Fecha de modificación</label>
-                                            <input type="date" class="form-control" id="kerm_fmod" name="fecha_modificacion" title="Fecha de modificación de kermesse" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Usuario que lo elimino</label>
-                                            <input type="text" class="form-control" id="kerm_uelim" name="usuario_eliminacion" title="Usuario que lo elimino" value="Usuario1" required disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Estado</label>
-                                            <select class="form-control" name="prod_estado" id="estado" disabled>
-                                                <option value="1">Ingresado</option>
-                                                <option value="2">Modificado</option>
-                                                <option value="3">Eliminado</option>
-                                            </select>
-                                        </div>
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="reset" class="btn btn-danger">Cancelar</button>
                                     </div>
                                 </form>
                             </div>
@@ -601,6 +576,24 @@ if (isset($varMsj)) {
             bsCustomFileInput.init();
         });
     </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_kermesse").val("<?php echo $k->__GET('id_kermesse') ?>");
+            $("#idParroquia").val("<?php echo $k->__GET('idParroquia') ?>");
+            $("#nombre").val("<?php echo $k->__GET('nombre') ?>");
+            $("#fInicio").val("<?php echo $k->__GET('fInicio') ?>");
+            $("#fFinal").val("<?php echo $k->__GET('fFinal') ?>");
+            $("#descripcion").val("<?php echo $k->__GET('descripcion') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
 </body>
 
 </html>

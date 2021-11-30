@@ -549,25 +549,28 @@ if (isset($varMsj)) {
             }
 
             $(document).ready(function() {
-                // Mensajes de Control
+                /////// VARIABLE DE CONTROL MSJ ////////
                 var mensaje = 0;
                 mensaje = "<?php echo $varMsj ?>";
 
-                switch (mensaje) {
-                    case "1":
-                        successAlert('Éxito', 'Se han registrado exitosamente los datos.');
-                        break;
-
-                    case "2":
-                    case "4":
-                        errorAlert('Fallo', 'Revise los datos. Intente de nuevo.');
-                        break;
-
-                    case "3":
-                        successAlert('Éxito', 'Se modificó exitosamente el rol.');
-                    default:
-
+                if (mensaje == "1") {
+                    successAlert('Exito', 'Los datos han sido registrado exitosamente!');
                 }
+                if (mensaje == "2") {
+                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                }
+                if (mensaje == "3") {
+                    successAlert('Exito', 'Los datos han sido editados exitosamente.');
+                }
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+                }
+
+                if (mensaje == "6") {
+                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+                }
+
+                ////////////////////////////////////////
 
             });
 

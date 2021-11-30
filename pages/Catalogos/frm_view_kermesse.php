@@ -1,32 +1,26 @@
 <?php
+include '../../Entidades/kermesse.php';
+include '../../Datos/dt_kermesse.php';
 
-error_reporting(0);
+include '../../Entidades/parroquia.php';
+include '../../Datos/dt_parroquia.php';
 
-include '../../Entidades/rol_usuario.php';
-include '../../Datos/dt_rol_usuario.php';
 
-include '../../Entidades/usuario.php';
-include '../../Datos/dt_usuario.php';
+$dtK = new Dt_Kermesse();
+$dtP = new Dt_Parroquia();
+$k = new Kermesse();
+$p = new Parroquia();
 
-include '../../Entidades/rol.php';
-include '../../Datos/dt_rol.php';
 
-$dtU = new dt_usuario();
-$dtR = new dt_rol();
-$RU = new rol_usuario();
-$dtRU = new dt_rol_usuario();
+$varIdKermesse = 0;
 
-$varIdRU = 0;
-
-if (isset($varIdRU)) {
-    $varIdRU = $_GET['editRoUsu']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
+if (isset($varIdKermesse)) {
+    $varIdKermesse = $_GET['viewKe'];
 }
 
-//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
-$RU = $dtRU->getRolUsuario($varIdRU);
+$k = $dtK->getKermesse($varIdKermesse);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +28,7 @@ $RU = $dtRU->getRolUsuario($varIdRU);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Modificar Rol a Usuario</title>
+    <title>Kermesse | Visualizar Kermesse</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -214,7 +208,8 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon classwith font-awesome or any other icon font library -->
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-shield-alt"></i>
@@ -302,7 +297,12 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                         <p>Lista Precios</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_listaprecio_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Precios Detalles</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -348,6 +348,12 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                 </li>
 
                                 <li class="nav-item">
+                                    <a href="../Catalogos/tbl_ingreso_comunidad_det.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ingreso Comunidad Detalles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="../Catalogos/tbl_comunidad.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Comunidad</p>
@@ -379,6 +385,14 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                         <p>Arqueo Caja</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_arqueoCajaDetalle.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Arqueo Caja Detalle</p>
+                                    </a>
+                                </li>
+
                                 <li class="nav-item">
                                     <a href="../Catalogos/tbl_denominacion.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
@@ -397,6 +411,13 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                     <a href="../Catalogos/tbl_tasaCambio.php" class="nav-link" target="blank">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Tasa Cambio</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="../Catalogos/tbl_tasaCambioDetalles.php" class="nav-link" target="blank">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Tasa Cambio Detalles</p>
                                     </a>
                                 </li>
                             </ul>
@@ -440,12 +461,12 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Modificar Rol a Usuario</h1>
+                            <h1>Visualizar Kermesse</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Modificar Rol a Usuario</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Visualizar Kermesse</li>
                             </ol>
                         </div>
                     </div>
@@ -461,53 +482,65 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Modificar Rol a Usuario</h3>
+                                    <h3 class="card-title">Visualizar Kermesse</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form method="POST" action="../../negocio/ng_rol_usuario.php">
+                                <form method="POST" action="../../negocio/ng_kermesse.php">
                                     <div class="card-body">
-                                        <label>ID</label>
-                                        <input type="text" class="form-control" id="id_rol_usuario" name="id_rol_usuario" placeholder="ID" readonly require>
+                                        <label>ID Kermesse</label>
+                                        <input type="text" class="form-control" id="id_kermesse" name="id_kermesse" placeholder="ID" readonly require>
 
                                         <div class="form-group">
-                                            <label>Seleccione el Rol</label>
-                                            <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
+                                            <label>Selecciona la Parroquia</label>
+                                            <select class="form-control" name="idParroquia" id="idParroquia" disabled required>
                                                 <option value="">Seleccione...</option>
-                                                <?php foreach ($dtR->listaRol() as $r) : ?>
+
+                                                <?php foreach ($dtP->listaParr() as $r) : ?>
                                                     <tr>
-                                                        <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
+                                                        <option value="<?php echo $r->__GET('idParroquia'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                                                     </tr>
                                                 <?php endforeach; ?>
+
                                             </select>
                                             <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Seleccione el usuario</label>
-                                            <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
-                                                <option value="">Seleccione...</option>
-                                                <?php foreach ($dtU->listaUsu() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_usuario'); ?>"><?php echo $r->__GET('usuario'); ?></option>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                            <label>Kermesse</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre de la Kermesse" title="Ingrese el nombre de la Kermesse" readonly required>
                                         </div>
 
-                                        <!-- /.card-body -->
-
-                                        <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
-                                            <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        <div class="form-group">
+                                            <label>Fecha de Inicio</label>
+                                            <input type="Date" class="form-control" id="fInicio" name="fInicio" title="Elija la fecha de inicio" readonly required>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label>Fecha de Final</label>
+                                            <input type="Date" class="form-control" id="fFinal" name="fFinal" title="Elija la fecha de cierre" readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese descripción de la Kermesse" title="Ingrese descripción de la Kermesse" readonly required>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <a href="tbl_kermesse.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
+                                    </div>
                                 </form>
-                                </di v>
-                                <!-- /.card -->
                             </div>
+                            <!-- /.card -->
                         </div>
+                        <!-- /.card -->
                     </div>
+                    <!--/.col (right) -->
+                </div>
+                <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>
@@ -538,7 +571,6 @@ $RU = $dtRU->getRolUsuario($varIdRU);
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
-
     <script>
         $(function() {
             bsCustomFileInput.init();
@@ -548,9 +580,12 @@ $RU = $dtRU->getRolUsuario($varIdRU);
     <script>
         ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
         function setValores() {
-            $("#id_rol_usuario").val("<?php echo $RU->__GET('id_rol_usuario') ?>");
-            $("#tbl_rol_id_rol").val("<?php echo $RU->__GET('tbl_rol_id_rol') ?>");
-            $("#tbl_usuario_id_usuario").val("<?php echo $RU->__GET('tbl_usuario_id_usuario') ?>");
+            $("#id_kermesse").val("<?php echo $k->__GET('id_kermesse') ?>");
+            $("#idParroquia").val("<?php echo $k->__GET('idParroquia') ?>");
+            $("#nombre").val("<?php echo $k->__GET('nombre') ?>");
+            $("#fInicio").val("<?php echo $k->__GET('fInicio') ?>");
+            $("#fFinal").val("<?php echo $k->__GET('fFinal') ?>");
+            $("#descripcion").val("<?php echo $k->__GET('descripcion') ?>");
         }
 
         $(document).ready(function() {
@@ -559,13 +594,6 @@ $RU = $dtRU->getRolUsuario($varIdRU);
         });
     </script>
 
-
-
-    <script>
-        $(function() {
-            bsCustomFileInput.init();
-        });
-    </script>
 </body>
 
 </html>

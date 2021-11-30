@@ -8,7 +8,7 @@ class Dt_Kermesse extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_kermesse";
+            $querySQL = "SELECT * FROM dbkermesse.vw_kermesse where estado <> 'Eliminado';";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -47,7 +47,7 @@ class Dt_Kermesse extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_kermesse";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_kermesse where estado <> 3;";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -86,8 +86,17 @@ class Dt_Kermesse extends Conexion
         try {
             $fecha = date('Y-m-d');
             $this->myCon = parent::conectar();
+
+            /* PRIMERA FORMA DE ESTABLECER LA FECHA COMO FECHA ACTUAL*/
+            /* date_default_timezone_set("America/Managua");
+            $fecha = date("Y-m-d H:i:s");
+            $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad(id_kermesse,id_comunidad, id_producto, cant_productos, total_bonos, usuario_creacion, fecha_creacion)
+                VALUES (?, ?, ?, ?, ?, 1, '$fecha')"; */
+
+            /* SEGUNDA FORMA DE ESTABLECER LA FECHA COMO FECHA ACTUAL */
+
             $sql = "INSERT INTO dbkermesse.tbl_kermesse(idParroquia, nombre, fInicio, fFinal, descripcion, usuario_creacion, fecha_creacion, estado)
-                VALUES (?, ?, ?, ?, ?, 1, '$fecha', 1)";
+                VALUES (?, ?, ?, ?, ?, 3, now(), 1)";
 
             $this->myCon->prepare($sql)
                 ->execute(array(
@@ -104,32 +113,78 @@ class Dt_Kermesse extends Conexion
         }
     }
 
-    public function getGastos($id)
+    public function getKermesse($gk)
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_gastos where id_registro_gastos= ?";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_kermesse where id_kermesse= ?";
             $stm = $this->myCon->prepare($querySQL);
-            $stm->execute(array($id));
+            $stm->execute(array($gk));
 
             $r = $stm->fetch(PDO::FETCH_OBJ);
 
-            $icd = new gastos();
+            $igk = new Kermesse();
 
             //_SET(CAMPOBD, atributoEntidad)
-            $icd->__SET('id_registro_gastos', $r->id_registro_gastos);
-            $icd->__SET('idKermesse', $r->idKermesse);
-            $icd->__SET('idCatGastos', $r->idCatGastos);
-            $icd->__SET('fechaGasto', $r->fechaGasto);
-            $icd->__SET('concepto', $r->concepto);
-            $icd->__SET('monto', $r->monto);
-            $icd->__SET('estado', $r->estado);
-
-
-
+            $igk->__SET('id_kermesse', $r->id_kermesse);
+            $igk->__SET('idParroquia', $r->idParroquia);
+            $igk->__SET('nombre', $r->nombre);
+            $igk->__SET('fInicio', $r->fInicio);
+            $igk->__SET('fFinal', $r->fFinal);
+            $igk->__SET('descripcion', $r->descripcion);
+            $igk->__SET('estado', $r->estado);
 
             $this->myCon = parent::desconectar();
-            return $icd;
+            return $igk;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function UpdateKermesse(Kermesse $p)
+    {
+        try {
+            $fecha = date('Y/m/d');
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_kermesse SET
+            idParroquia = ?,
+            nombre = ?,
+            fInicio = ?,
+            fFinal = ?,
+            descripcion = ?,
+            usuario_modificacion = ?,
+            fecha_modificacion = '$fecha',
+            estado = 2
+            WHERE id_kermesse = ?";
+
+
+            $this->myCon->prepare($querySQL)
+                ->execute(array(
+                    $p->__GET('idParroquia'),
+                    $p->__GET('nombre'),
+                    $p->__GET('fInicio'),
+                    $p->__GET('fFinal'),
+                    $p->__GET('descripcion'),
+                    $p->__GET('usuario_modificacion'),
+                    $p->__GET('id_kermesse')
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function eliminarKermesse($ek)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $querySQL = "UPDATE dbkermesse.tbl_kermesse SET estado=3, usuario_eliminacion = 3, fecha_eliminacion= now() WHERE id_kermesse =?";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute(array($ek));
+
+            $this->myCon = parent::desconectar();
         } catch (Exception $e) {
             die($e->getMessage());
         }
