@@ -1,26 +1,28 @@
 <?php
+
 error_reporting(0);
 
-include '../../Entidades/arqueoCajaDetalles.php';
-include '../../Datos/dt_arqueoDetalle.php';
-include '../../Entidades/arqueocaja.php';
-include '../../Datos/dt_arqueocaja.php';
-include '../../entidades/moneda.php';
-include '../../datos/dt_moneda.php';
-include '../../entidades/denominacion.php';
-include '../../datos/dt_denominacion.php';
+include '../../Entidades/lista_precio.php';
+include '../../Datos/dt_lista_precio.php';
 
-$dtDenominacion = new Dt_Denominacion();
-$dtMoneda = new Dt_Moneda();
-$caja = new dt_arqueocaja();
-$arq = new Dt_ArqueoDetalle();
+include '../../Entidades/kermesse.php';
+include '../../Datos/dt_kermesse.php';
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+$dtICD = new dt_lista_precio();
+$dtICom = new Dt_Kermesse();
+$ICD = new lista_precio();
+
+$varIdICD = 0;
+
+if (isset($varIdICD)) {
+    $varIdICD = $_GET['viewICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
 }
 
+//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
+$ICD = $dtICD->getListaPrecio($varIdICD);
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +30,7 @@ if (isset($varMsj)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kermesse | Editar detalle de caja</title>
+    <title>AdminLTE 3 | Editar Lista Precio</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -429,12 +431,12 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Editar detalle de arqueo</h1>
+                            <h1>Lista Precio</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Editar detalle de caja</li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                <li class="breadcrumb-item active">Lista Precio</li>
                             </ol>
                         </div>
                     </div>
@@ -450,65 +452,52 @@ if (isset($varMsj)) {
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Editar detalle de caja</h3>
+                                    <h3 class="card-title">Lista Precio</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form>
-
+                                <form method="POST" action="../../negocio/ng_lista_precio.php">
                                     <div class="card-body">
+                                        <label>ID Lista Precio: </label>
+                                        <input type="text" class="form-control" id="id_lista_precio" name="id_lista_precio" placeholder="ID" readonly require>
 
                                         <div class="form-group">
-                                            <label>ID de arqueo</label>
-                                            <select class="form-control" name="idArqueo" id="idArqueo">
-                                                <?php foreach ($caja->listararqueocaja() as $r) : ?>
-                                                    <option value="1"> <?php echo $r->__GET('id'); ?> </option>
+                                            <label>Kermesse</label>
+                                            <select class="form-control" id="id_kermesse" name="id_kermesse" disabled required>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtICom->listaKermT() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
                                                 <?php endforeach; ?>
                                             </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Moneda</label>
-                                            <select class="form-control" name="moneda" id="moneda">
-                                                <?php foreach ($dtMoneda->listarMoneda() as $r) : ?>
-                                                    <option value="1"> <?php echo $r->__GET('nombre'); ?> </option>
-                                                <?php endforeach; ?>
-                                            </select>
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="45" placeholder="Ingrese el nombre" title="Ingrese el nombre" readonly required>
                                         </div>
 
                                         <div class="form-group">
-                                            <labe>Denominación</label>
-                                                <select class="form-control" name="denominacion" id="denominacion">
-                                                    <?php foreach ($dtDenominacion->listarDenominaciones() as $r) : ?>
-                                                        <option value="1"> <?php echo $r->__GET('valor_letras'); ?> </option>
-                                                    <?php endforeach; ?>
-                                                </select>
+                                            <label>Descripción</label>
+                                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese una descripción" title="Ingrese una descripción" readonly required>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>Cantidad</label>
-                                            <input type="number" class="form-control" id="cantidad" name="cantidad" maxlength="45" placeholder="Cantidad" title="Ingrese la cantidad" required>
+                                        <div class="form-group" hidden>
+                                            <label>Estado</label>
+                                            <input type="text" class="form-control" id=estado name="estado" value="2" hidden>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label>Subtotal</label>
-                                            <input type="number" class="form-control" id="subtotal" name="subtotal" maxlength="45" placeholder="Subtotal" title="Ingrese el subtotal" required>
+                                        <div class="card-footer">
+                                            <a href="tbl_lista_precio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                                         </div>
-                                    </div>
-                                    <!-- /.card-body -->
-
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Ingresar</button>
-                                    </div>
+                                        <!-- /.card-body -->
                                 </form>
+                                </di v>
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!--/.col (right) -->
-                </div>
-                <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>
@@ -539,6 +528,31 @@ if (isset($varMsj)) {
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_lista_precio").val("<?php echo $ICD->__GET('id_lista_precio') ?>");
+            $("#id_kermesse").val("<?php echo $ICD->__GET('id_kermesse') ?>");
+            $("#nombre").val("<?php echo $ICD->__GET('nombre') ?>");
+            $("#descripcion").val("<?php echo $ICD->__GET('descripcion') ?>");
+            $("#estado").val("<?php echo $ICD->__GET('estado') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
+
+
     <script>
         $(function() {
             bsCustomFileInput.init();

@@ -24,12 +24,13 @@ if ($_POST)
 
                 $dtICD-> regListaPrecio($icd);
                 //var_dump($emp);
-                header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=1");
+                header("Location: /Kermes/pages/Catalogos/frm_listaprecio_Det.php?msj=1");
             }
             catch (Exception $e) {
                 header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=2");   
             die($e->getMessage());
         }
+        break;
 
         case '2':
             try {
@@ -46,4 +47,14 @@ if ($_POST)
             }
             break;
     }
+}
+if($_GET){
+    try{
+        $icd->__SET('id_lista_precio', $_GET['delG']);
+        $dtICD->eliminarListaPrecio($icd->__GET('id_lista_precio'));
+        header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=5");
+    }catch(Exception $e){
+        header("Location: /Kermes/pages/Catalogos/tbl_lista_precio.php?msj=6");
+        die($e->getMessage()); 
+    }  
 }

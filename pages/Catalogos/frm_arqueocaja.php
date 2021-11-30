@@ -18,6 +18,80 @@ $dtCom = new dt_arqueocaja();
 $dtMoneda = new Dt_Moneda();
 $dtDenominacion = new Dt_Denominacion();
 
+//IMPORTAMOS ENTIDADES Y DATOS
+include '../../Entidades/vw_usuario.php';
+include '../../Entidades/usuario.php';
+include '../../Entidades/rol.php';
+include '../../Entidades/opciones.php';
+
+include '../../Datos/dt_usuario.php';
+include '../../Datos/dt_rol.php';
+include '../../Datos/dt_opciones.php';
+
+//SEGURIDAD//
+
+$usuario = new Usuario();
+$rol = new Rol();
+$listOpc = new Opciones();
+//DATOS
+$dtr = new Dt_Rol();
+$dtOpc = new Dt_Opciones();
+
+//MANEJO Y CONTROL DE LA SESION
+session_start(); // INICIAMOS LA SESION
+
+//VALIDAMOS SI LA SESION ESTÁ VACÍA
+if (empty($_SESSION['acceso'])) {
+    //nos envía al inicio
+    header("Location: ../../login.php?msj=2");
+}
+
+$usuario = $_SESSION['acceso']; // OBTENEMOS EL VALOR DE LA SESION
+
+//OBTENEMOS EL ROL
+$rol->__SET('id_rol', $dtr->getIdRol($usuario[0]->__GET('usuario')));
+
+//OBTENEMOS LAS OPCIONES DEL ROL
+$listOpc = $dtOpc->getOpciones($rol->__GET('id_rol'));
+
+//OBTENEMOS LA OPCION ACTUAL
+$url = $_SERVER['REQUEST_URI'];
+// var_dump($url);
+$inicio = strrpos($url, '/') + 1;
+// var_dump($inicio); //6
+// $total= strlen($url); 
+// var_dump($total); //28
+$fin = strripos($url, '?');
+// var_dump($fin); //22
+if ($fin > 0) {
+    $miPagina = substr($url, $inicio, $fin - $inicio);
+    // var_dump($miPagina);
+} else {
+    $miPagina = substr($url, $inicio);
+    // var_dump($miPagina);
+}
+
+////// VALIDAMOS LA OPCIÓN ACTUAL CON LA MATRIZ DE OPCIONES //////
+//obtenemos el numero de elementos
+$longitud = count($listOpc);
+$acceso = false; // VARIABLE DE CONTROL
+
+//Recorro todos los elementos de la matriz de opciones
+for ($i = 0; $i < $longitud; $i++) {
+    //obtengo el valor de cada elemento
+    $opcion = $listOpc[$i]->__GET('opcion_descripcion');
+    if (strcmp($miPagina, $opcion) == 0) //COMPARO LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+    {
+        $acceso = true; //ACCESO CONCEDIDO
+        break;
+    }
+}
+
+if (!$acceso) {
+    //ACCESO NO CONCEDIDO 
+    header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+}
+
 $varMsj = 0;
 
 if (isset($varMsj)) {
@@ -458,7 +532,7 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_arqueocaja.php">
                   <div class="card-body">
 
                     <div class="form-group">
@@ -474,11 +548,6 @@ if (isset($varMsj)) {
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                     </div>
 
-                    <div class="form-group">
-                      <label>Fecha del Arqueo</label>
-                      <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
-                    </div>
-
               <!-- Detalles del arqueo -->
               <div class="card card-info">
                 <div class="card-header">
@@ -486,7 +555,6 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
                   <div class="card-body">
 
                     <div class="form-group">
@@ -499,7 +567,6 @@ if (isset($varMsj)) {
                           </tr>
                         <?php endforeach; ?>
                       </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                     </div>
 
                     <div class="form-group">
@@ -508,7 +575,7 @@ if (isset($varMsj)) {
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtDenominacion->listarDenominaciones() as $r) : ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                            <option value="<?php echo $r->__GET('id'); ?>"><?php echo $r->__GET('valor'); ?></option>
                           </tr>
                         <?php endforeach; ?>
                       </select>
@@ -540,7 +607,6 @@ if (isset($varMsj)) {
                 <table class="table table-head-fixed text-nowrap" id="tablaDetalles">
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>Moneda</th>
                       <th>Denominacion</th>
                       <th>Cantidad</th>
@@ -561,7 +627,6 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="button" class="btn btn-primary" onclick="agregarDetalle()">Guardar</button>
                   </div>
-                </form>
               </div>
               <!-- /.card -->
 
@@ -576,6 +641,7 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <a href="tbl_arqueocaja.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>
@@ -622,12 +688,17 @@ if (isset($varMsj)) {
 
 <script>
   function agregarDetalle() {
+
+    // Construir un objeto detalle
+    var moneda = document.getElementById('id_moneda');
+    var denominacion = document.getElementById('id_denominacion');
+    var cantidad = document.getElementById('cantidad');
+
         $("#tablaDetalles tbody").append("<tr>" + 
-          "<td>1</td>" +
-          "<td>Córdoba</td>" +
-          "<td>12</td>" +
-          "<td>10</td>" +
-          "<td>120</td>" +
+          "<td>" + moneda.options[moneda.selectedIndex].text + "</td>" +
+          "<td>" + denominacion.options[denominacion.selectedIndex].text + "</td>" +
+          "<td>" + cantidad.value + "</td>" +
+          "<td>" + (parseInt(denominacion.options[denominacion.selectedIndex].text) * parseInt(cantidad.value)) + "</td>" +
           "</tr>");
           calcularTotal();
   }
@@ -640,10 +711,11 @@ if (isset($varMsj)) {
     for(var i = 1; i < tabla.rows.length; i++) {
       var celda = tabla.rows.item(i).cells;
 
-      for (var j = 4; j < celda.length; j++) {
+      for (var j = 3; j < celda.length; j++) {
         total += parseInt(celda.item(j).innerHTML);
       }
     }
+    console.log(total);
     inputTotal.value = total;
   }
 </script>

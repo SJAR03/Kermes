@@ -73,7 +73,7 @@ for ($i = 0; $i < $longitud; $i++) {
 
 if (!$acceso) {
   //ACCESO NO CONCEDIDO 
-  header("Location: 401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
+  header("Location: ../../401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
 }
 
 $dtCbono = new Dt_Control_Bonos();

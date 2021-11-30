@@ -700,7 +700,7 @@ if (isset($varMsj)) {
       $("#mes").val("<?php echo $tc->__GET('mes') ?>");
       $("#anio").val("<?php echo $tc->__GET('anio') ?>");
 
-      $("#id_tasaCambio").val("<?php echo $tc->__GET('id_tasaCambio') ?>")
+      $("#id_tasaCambio").val("<?php echo $tc->__GET('id_tasaCambio') ?>");
       $("#id_tasaCambio2").val("<?php echo $tc->__GET('id_tasaCambio') ?>");
     }
   </script>
