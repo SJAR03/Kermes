@@ -4,6 +4,7 @@ include_once("Conexion.php");
 class Dt_Ingreso_Comunidad extends Conexion
 {
     private $myCon;
+   
 
     public function listaComunidad()
     {
@@ -80,8 +81,29 @@ class Dt_Ingreso_Comunidad extends Conexion
         }
     }
 
+    public function getIdIngCom()
+    {
+        try {
+            $this->myCon = parent::conectar();
 
-    public function regIngComunidad(Ingreso_Comunidad $ic, Ingreso_Comunidad_Det $icd)
+            $querySQL = "SELECT id_ingreso_comunidad from dbkermesse.tbl_ingreso_comunidad where estado != 3 Order by id_ingreso_comunidad DESC Limit 1";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute();
+
+            $ic = new Ingreso_Comunidad;
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $ic->__SET('id_ingreso_comunidad', $r->id_ingreso_comunidad);
+            $this->myCon = parent::desconectar();
+
+            return $ic->__GET('id_ingreso_comunidad');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+    public function regIngComunidad(Ingreso_Comunidad $ic)
     {
         try {
             $this->myCon = parent::conectar();
@@ -122,14 +144,15 @@ class Dt_Ingreso_Comunidad extends Conexion
         }        
         
         
-        try {
+       /*  try {
+            
             $this->myCon = parent::conectar();
             $sql = "INSERT INTO dbkermesse.tbl_ingreso_comunidad_det(id_ingreso_comunidad,id_bono, denominacion, cantidad, subtotal_bono)
                 VALUES (?, ?, ?, ?, ?)";
 
             $this->myCon->prepare($sql)
             ->execute(array(
-                $icd->__GET('id_ingreso_comunidad'),
+                $icd->__GET('id_ingreso_comunidad'), 
                 $icd->__GET('id_bono'),
                 $icd->__GET('denominacion'),
                 $icd->__GET('cantidad'),
@@ -140,7 +163,7 @@ class Dt_Ingreso_Comunidad extends Conexion
         } 
         catch (Exception $e) {
             die($e->getMessage());
-        }
+        } */ 
         
     }
 

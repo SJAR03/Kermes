@@ -25,10 +25,10 @@ if ($_POST)
 
                 $dtICD-> regIngComunidadDet($icd);
                 //var_dump($emp);
-                header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=1");
+                header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=1");
             }
             catch (Exception $e) {
-                header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=2");   
+                header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=2");   
             die($e->getMessage());
             }
             break;
@@ -50,11 +50,11 @@ if ($_POST)
     
                     $dtICD ->editIngComunidadDet($icd);
                     //var_dump($emp);
-                    header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=3");
+                    header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=3");
                 }
                 catch(Exception $e)
                 {
-                    header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad_det.php?msj=4");
+                    header("Location: /Kermes/pages/Catalogos/tbl_ingreso_comunidad.php?msj=4");
                     die($e -> getMessage());
                 }
                 break;

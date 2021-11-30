@@ -5,6 +5,9 @@ error_reporting(0);
 include '../../entidades/ingreso_comunidad.php';
 include '../../datos/dt_ingreso_comunidad.php';
 
+include '../../entidades/ingreso_comunidad_det.php';
+include '../../datos/dt_ingreso_comunidad_det.php';
+
 include '../../entidades/kermesse.php';
 include '../../datos/dt_kermesse.php';
 
@@ -89,6 +92,7 @@ if (!$acceso) {
 }
 
 $dtICom = new Dt_Ingreso_Comunidad();
+$dtICD = new Dt_Ingreso_Comunidad_Det();
 $dtK = new Dt_Kermesse();
 $dtCom = new Dt_Comunidad();
 $dtP = new Dt_Producto();
@@ -608,12 +612,43 @@ if (isset($varMsj)) {
                     </div>
 
                     <div class="form-group">
+                      <label>Total de bonos</label>
+                      <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
+                    </div>
+
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
+                </form>
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          
+            <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Registrar Ingreso en la Comunidad Detalle</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad_det.php">
+                  <div class="card-body"> 
+
+                    <div class="form-group">
                       <label>Seleccione el Ingreso Comunidad</label>
                       <select class="form-control" id="id_ingreso_comunidad" name="id_ingreso_comunidad" required>
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtICom->listaIngresoComunidad() as $r) : ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('cant_productos'); ?></option>
+                            <option value="<?php echo $r->__GET('id_ingreso_comunidad'); ?>"><?php echo $r->__GET('id_ingreso_comunidad'); ?></option>
                           </tr>
                         <?php endforeach; ?>
                       </select>
@@ -648,50 +683,7 @@ if (isset($varMsj)) {
                       <input type="float" class="form-control" id="subtotal_bono" name="subtotal_bono" placeholder="Ingrese el subtotal de bonos" title="Ingrese el subtotal de bonos" required>
                     </div>
 
-                    <div class="form-group">
-                      <label>Total de bonos</label>
-                      <input type="int" class="form-control" id="total_bonos" name="total_bonos" placeholder="Ingrese el total de bonos" title="Ingrese el total de bonos" required>
-                    </div>
-
-                    <!-- <div class="form-group">
-                       <label>Estado</label>
-                      <select class="form-control" name="estado" id="estado"  required>
-                        <option value="1">Activado</option> --> -->
-                       <!--  <option value="2">Modificado</option>
-                        <option value="3">Eliminado</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Creacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_creacion" name="usuario_creacion" placeholder="Ingrese creacion del usuario " title="Ingrese creacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de creacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" placeholder="Ingrese fecha de creacion" title="Ingrese fecha de creacion" required>
-                    </div> -->
-
-                    <!-- <div class="form-group">
-                      <label>Modificacion de Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_modificacion" name="usuario_modificacion" placeholder="Ingrese modificacion del usuario" title="Ingrese modificacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de modificacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_modificacion" name="fecha_modificacion" placeholder="Ingrese fecha de modificacion" title="Ingrese fecha de modificacion" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Eliminacion Usuarios</label>
-                      <input type="int" class="form-control" id="usuario_eliminacion" name="usuario_eliminacion" placeholder="Ingrese eliminacion del usuario" title="Ingrese eliminacion del usuario" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label>Fechas de eliminacion de Usuarios</label>
-                      <input type="date" class="form-control" id="fecha_eliminacion" name="fecha_eliminacion" placeholder="Ingrese fecha de eliminacion" title="Ingrese fecha de eliminacion" required>
-                    </div> -->
-
+                                     
                   </div>
                   <!-- /.card-body -->
 
@@ -704,6 +696,7 @@ if (isset($varMsj)) {
                 <!-- /.card -->
               </div>
             </div>
+
           </div>
       </section>
       <!-- /.content -->
