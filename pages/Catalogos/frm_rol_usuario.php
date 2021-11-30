@@ -76,19 +76,12 @@ if (!$acceso) {
 
 // 
 
-$dtu = new dt_usuario();
-
-$varMsj = 0;
-
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-}
-
 $dtU = new dt_usuario();
 $dtR = new dt_rol();
 $dtRU = new dt_rol_usuario();
 
 $varMsj = 0;
+
 if (isset($varMsj)) {
     $varMsj = $_GET['msj'];
 }

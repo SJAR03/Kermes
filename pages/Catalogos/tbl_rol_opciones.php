@@ -641,17 +641,22 @@ if (isset($varMsj)) {
                     successAlert('Exito', 'Los datos han sido registrado exitosamente!');
                 }
                 if (mensaje == "2") {
-                    successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+                    errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
                 }
                 if (mensaje == "3") {
                     successAlert('Exito', 'Los datos han sido editados exitosamente.');
                 }
+
+                if (mensaje == "4") {
+                    errorAlert('Error', 'Revise los datos e intente nuevamente!!!')
+                }
+
                 if (mensaje == "5") {
                     successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
                 }
 
                 if (mensaje == "6") {
-                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+                    errorAlert('Error', 'Los datos no han sido eliminados exitosamente.')
                 }
 
                 ////////////////////////////////////////
