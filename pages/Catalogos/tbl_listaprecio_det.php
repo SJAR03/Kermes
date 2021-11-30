@@ -461,7 +461,6 @@ if (isset($varMsj)) {
                                 <tbody>
                                     <?php
                                     foreach ($dtu->listarVwListaPreciosDet() as $r) :
-                                        echo $dtu->listarListaPreciosDet();
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_listaprecio_det'); ?></td>

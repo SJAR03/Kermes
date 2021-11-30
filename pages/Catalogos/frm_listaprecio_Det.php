@@ -463,7 +463,7 @@ if (isset($varMsj)) {
                       <label>Seleccione la Lista Precio</label>
                       <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
                         <option value="">Seleccione...</option>
-                        <?php foreach ($dtCom->listarlistaPrecios() as $r) : ?>
+                        <?php foreach ($dtCom->listarVwlistaPrecios() as $r) : ?>
                           <tr>
                             <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
