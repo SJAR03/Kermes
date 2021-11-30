@@ -468,8 +468,8 @@ if (isset($varMsj)) {
                                             <td><?php echo $r->__GET('Producto'); ?></td>
                                             <td><?php echo $r->__GET('precio_venta'); ?></td>
                                             <td>
-                                            <a href="frm_edit_listaprecio_det.php?editICD=<?php echo $r->__GET('id_listaprecio_det') ?>" target="blank"><i class="far fa-2x fa-edit" title="Visualizar la lista precio detalle"></i></a>
-                                                <a href="frm_listaprecio_Det.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio detallada"></i></a>
+                                                <a href="frm_edit_listaprecio_det.php?editICD=<?php echo $r->__GET('id_listaprecio_det') ?>" target="blank"><i class="far fa-2x fa-edit" title="Visualizar la lista precio detalle"></i></a>
+                                                <a href="frm_view_listaprecio_det.php?viewICD=<?php echo $r->__GET('id_listaprecio_det') ?>" target="blank"><i class="far fa-eye fa-2x" title="Visualizar la lista precio detallada"></i></a>
                                             </td>
                                         </tr>
                                     <?php

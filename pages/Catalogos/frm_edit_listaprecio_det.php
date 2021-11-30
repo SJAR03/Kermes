@@ -1,32 +1,30 @@
 <?php
 
-error_reporting(0);
+//error_reporting(0);
 
-include '../../Entidades/vw_listaprecio_Det.php';
-include '../../Entidades/listaprecio_det.php';
+include '../../Entidades/listaprecio_Det.php';
 include '../../Datos/dt_listaprecio_det.php';
 
 include '../../Entidades/lista_precio.php';
-include '../../Datos/dt_listaprecio_det.php';
+include '../../Datos/dt_lista_precio.php';
 
-include '../../Entidades/productos.php';
 include '../../Datos/dt_productos.php';
+include '../../Entidades/productos.php';
 
-$dtComu = new dt_listaprecioDet();
-$Comu = new listaprecio_det();
+$dtICD = new dt_listaprecioDet();
+$ICD = new listaprecio_det();
+$dtLp = new dt_lista_precio();
 
-$dtPro = new Dt_Producto();
+$dtp = new Dt_Producto();
 
-$dtList = new dt_lista_precio();
+$varIdICD = 0;
 
-$varIdComu = 0;
-
-if (isset($varIdComu)) {
-    $varIdComu = $_GET['editICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
+if (isset($varIdICD)) {
+    $varIdICD = $_GET['editICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
 }
 
 //OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
-$Comu = $dtComu->getListaPrecioDet($varIdComu);
+$ICD = $dtICD->getListaPrecioDet($varIdICD);
 
 ?>
 
@@ -465,14 +463,14 @@ $Comu = $dtComu->getListaPrecioDet($varIdComu);
                                 <!-- form start -->
                                 <form method="POST" action="../../negocio/ng_listaprecio_det.php">
                                     <div class="card-body">
-                                        <label>ID Categoría Gastos: </label>
+                                        <label>ID Gasto: </label>
                                         <input type="text" class="form-control" id="id_listaprecio_det" name="id_listaprecio_det" placeholder="ID" readonly require>
 
                                         <div class="form-group">
-                                            <label>Seleccione la lista Precio</label>
+                                            <label>Seleccione la lista precio</label>
                                             <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
                                                 <option value="">Seleccione...</option>
-                                                <?php foreach ($dtList->listarvwlistaPrecios() as $r) : ?>
+                                                <?php foreach ($dtLp->listarlistaPrecios() as $r) : ?>
                                                     <tr>
                                                         <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                                                     </tr>
@@ -482,28 +480,33 @@ $Comu = $dtComu->getListaPrecioDet($varIdComu);
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Seleccione un Producto</label>
+                                            <label>Seleccione el producto</label>
                                             <select class="form-control" id="id_producto" name="id_producto" required>
                                                 <option value="">Seleccione...</option>
-                                                <?php foreach ($dtPro->listaProdT() as $r) : ?>
+                                                <?php foreach ($dtp->listaProdT() as $r) : ?>
                                                     <tr>
                                                         <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Precio Venta</label>
+                                            <input type="float" class="form-control" id="precio_venta" name="precio_venta" placeholder="Ingrese el precio venta" title="Ingrese el precio venta">
                                         </div>
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
-                                            <button type="reset" class="btn btn-danger">Cancelar</button>
                                         </div>
                                 </form>
+                                </di v>
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
                         </div>
                     </div>
-                </div>
             </section>
             <!-- /.content -->
         </div>
@@ -536,13 +539,18 @@ $Comu = $dtComu->getListaPrecioDet($varIdComu);
     <!-- Page specific script -->
 
     <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
+
+    <script>
         ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
         function setValores() {
-            $("#id_listaprecio_det").val("<?php echo $Comu->__GET('id_listaprecio_det') ?>");
-            $("#id_lista_precio").val("<?php echo $Comu->__GET('id_lista_precio') ?>");
-            $("#id_producto").val("<?php echo $Comu->__GET('id_producto') ?>");
-            $("#precio_venta").val("<?php echo $Comu->__GET('precio_venta') ?>");
-
+            $("#id_listaprecio_det").val("<?php echo $ICD->__GET('id_listaprecio_det') ?>");
+            $("#id_lista_precio").val("<?php echo $ICD->__GET('id_lista_precio') ?>");
+            $("#id_producto").val("<?php echo $ICD->__GET('id_producto') ?>");
+            $("#precio_venta").val("<?php echo $ICD->__GET('precio_venta') ?>");
         }
 
         $(document).ready(function() {
@@ -550,6 +558,7 @@ $Comu = $dtComu->getListaPrecioDet($varIdComu);
             setValores();
         });
     </script>
+
 
 
     <script>
