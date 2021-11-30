@@ -76,14 +76,6 @@ if (!$acceso) {
 
 // 
 
-$dtu = new dt_usuario();
-
-$varMsj = 0;
-
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-}
-
 $dtU = new dt_opciones();
 $dtR = new dt_rol();
 $dtRO = new dt_rol_opciones();
@@ -550,7 +542,7 @@ $RO = $dtRO->getRolOpcion($varIdRO);
 
                                         <div class="form-group">
                                             <label>Selecciona el rol</label>
-                                            <select class="form-control" name="rol" id="id_rol" required disabled>
+                                            <select class="form-control" name="tbl_rol_id_rol" id="tbl_rol_id_rol" required disabled>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
@@ -563,8 +555,8 @@ $RO = $dtRO->getRolOpcion($varIdRO);
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona el usuario</label>
-                                            <select class="form-control" name="usuario" id="id_usuario" required disabled>
+                                            <label>Seleccione la opción</label>
+                                            <select class="form-control" name="tbl_opciones_id_opciones" id="tbl_opciones_id_opciones" required disabled>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaOpc() as $r) : ?>
@@ -581,7 +573,7 @@ $RO = $dtRO->getRolOpcion($varIdRO);
                                     <!-- /.card-body -->
 
                                     <div class="card-footer" style="text-align: center;">
-                                        <a href="tbl_ingreso_comunidad.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                                        <a href="tbl_rol_opciones.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
@@ -627,6 +619,21 @@ $RO = $dtRO->getRolOpcion($varIdRO);
             bsCustomFileInput.init();
         });
     </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_rol_opciones").val("<?php echo $RO->__GET('id_rol_opciones') ?>");
+            $("#tbl_rol_id_rol").val("<?php echo $RO->__GET('tbl_rol_id_rol') ?>");
+            $("#tbl_opciones_id_opciones").val("<?php echo $RO->__GET('tbl_opciones_id_opciones') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
 </body>
 
 </html>

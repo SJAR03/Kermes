@@ -535,13 +535,12 @@ $RO = $dtRO->getRolOpcion($varIdRO);
 
                                         <div class="form-group">
                                             <label>ID</label>
-                                            <input type="int" value="<?php echo $RO->__GET('id_rol_opciones') ?>" class="form-control" id="id_rol_opciones" name="id_rol_opciones" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
-
+                                            <input type="int" class="form-control" id="id_rol_opciones" name="id_rol_opciones" maxlength="45" placeholder="Ingrese ID" title="Ingrese ID " readonly required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Selecciona el rol</label>
-                                            <select class="form-control" name="id_rol" id="id_rol" required>
+                                            <select class="form-control" name="tbl_rol_id_rol" id="tbl_rol_id_rol" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
@@ -555,8 +554,8 @@ $RO = $dtRO->getRolOpcion($varIdRO);
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Selecciona el usuario</label>
-                                            <select class="form-control" name="usuario" id="id_usuario" required>
+                                            <label>Selecciona la opción</label>
+                                            <select class="form-control" name="tbl_opciones_id_opciones" id="tbl_opciones_id_opciones" required>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaOpc() as $r) : ?>
@@ -566,6 +565,7 @@ $RO = $dtRO->getRolOpcion($varIdRO);
                                                 <?php endforeach; ?>
 
                                             </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
                                     </div>
@@ -621,6 +621,21 @@ $RO = $dtRO->getRolOpcion($varIdRO);
             bsCustomFileInput.init();
         });
     </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_rol_opciones").val("<?php echo $RO->__GET('id_rol_opciones') ?>");
+            $("#tbl_rol_id_rol").val("<?php echo $RO->__GET('tbl_rol_id_rol') ?>");
+            $("#tbl_opciones_id_opciones").val("<?php echo $RO->__GET('tbl_opciones_id_opciones') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
 </body>
 
 </html>

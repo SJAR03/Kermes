@@ -30,9 +30,8 @@ if ($_POST) {
         case '2':
             try {
                 $rou->__SET('id_rol_usuario', $_POST['id_rol_usuario']);
-                $rou->__SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
                 $rou->__SET('tbl_usuario_id_usuario', $_POST['tbl_usuario_id_usuario']);
-
+                $rou->__SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
 
                 $dtRO->editRolUsuario($rou);
                 //var_dump($emp);

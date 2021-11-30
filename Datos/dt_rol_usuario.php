@@ -62,14 +62,7 @@ class dt_rol_usuario extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT p.id_rol_usuario, c.usuario as usuario, r.rol_descripcion as rol
-            FROM dbkermesse.rol_usuario p 
-            Inner Join dbkermesse.tbl_usuario c 
-            on c.id_usuario=p.tbl_usuario_id_usuario
-            Inner Join dbkermesse.tbl_rol r
-            on r.id_rol = p.tbl_rol_id_rol
-            where p.tbl_usuario_id_usuario= ? and p.tbl_rol_id_rol=?;";
-
+            $querySQL = "SELECT * FROM dbkermesse.rol_usuario where id_rol_usuario= ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($gru));
 
@@ -123,7 +116,7 @@ class dt_rol_usuario extends Conexion
             $this->myCon = parent::conectar();
             $querySQL = "UPDATE dbkermesse.rol_usuario SET
             tbl_usuario_id_usuario = ?,
-            tbl_rol_id_rol = ?,
+            tbl_rol_id_rol = ?
             WHERE id_rol_usuario = ?";
 
             $this->myCon->prepare($querySQL)

@@ -43,8 +43,9 @@ if ($_POST) {
             try {
                 //CONSTRUIMOS OBJETOS
                 //ATRIBUTO ENTIDAD  //NAME DEL CONTROL
-                $rou->__SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
                 $rou->__SET('id_rol_opciones', $_POST['id_rol_opciones']);
+                $rou->__SET('tbl_rol_id_rol', $_POST['tbl_rol_id_rol']);
+                $rou->__SET('tbl_opciones_id_opciones', $_POST['tbl_opciones_id_opciones']);
 
                 $dtRO->editRolOpciones($rou);
                 //var_dump($emp);

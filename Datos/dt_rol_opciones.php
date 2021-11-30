@@ -62,14 +62,7 @@ class dt_rol_opciones extends Conexion
     {
         try {
             $this->myCon = parent::conectar();
-            $querySQL = "SELECT p.id_rol_opcion, c.opcion_descripcion as opcion, r.rol_descripcion as rol
-            FROM dbkermesse.rol_opciones p 
-            Inner Join dbkermesse.tbl_opciones c 
-            on c.id_opciones=p.tbl_opciones_id_opciones
-            Inner Join dbkermesse.tbl_rol r
-            on r.id_rol = p.tbl_rol_id_rol
-            where p.tbl_opciones_id_opciones= ? and p.tbl_rol_id_rol=?;";
-
+            $querySQL = "SELECT * FROM dbkermesse.rol_opciones where id_rol_opciones= ?";
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute(array($gro));
 
@@ -79,8 +72,8 @@ class dt_rol_opciones extends Conexion
 
             //_SET(CAMPOBD, atributoEntidad)
             $ro->__SET('id_rol_opciones', $r->id_rol_opciones);
-            $ro->__SET('tbl_opciones_id_opciones', $r->tbl_opciones_id_opciones);
             $ro->__SET('tbl_rol_id_rol', $r->tbl_rol_id_rol);
+            $ro->__SET('tbl_opciones_id_opciones', $r->tbl_opciones_id_opciones);
 
             $this->myCon = parent::desconectar();
             return $ro;
@@ -117,24 +110,24 @@ class dt_rol_opciones extends Conexion
         }
     }
 
-    public function editRolOpciones(rol_opciones $ero)
+    public function EditRolOpciones(rol_opciones $ero)
     {
         try {
             $this->myCon = parent::conectar();
-            $sql = "UPDATE dbkermesse.rol_opciones SET
-            tbl_opciones_id_opciones= ?,
-            tbl_rol_id_rol= ?
+            $querySQL = "UPDATE dbkermesse.rol_opciones SET
+            tbl_rol_id_rol = ?,
+            tbl_opciones_id_opciones = ?
             WHERE id_rol_opciones = ?";
-            $this->myCon->prepare($sql)
-                ->execute(
-                    array(
-                        $ero->__GET('tbl_opciones_id_opciones'),
-                        $ero->__GET('tbl_rol_id_rol')
-                    )
-                );
+
+            $this->myCon->prepare($querySQL)
+                ->execute(array(
+                    $ero->__GET('tbl_rol_id_rol'),
+                    $ero->__GET('tbl_opciones_id_opciones'),
+                    $ero->__GET('id_rol_opciones')
+                ));
+
             $this->myCon = parent::desconectar();
         } catch (Exception $e) {
-            var_dump($e);
             die($e->getMessage());
         }
     }

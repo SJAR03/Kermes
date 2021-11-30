@@ -539,19 +539,6 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                         <input type="text" class="form-control" id="id_rol_usuario" name="id_rol_usuario" placeholder="ID" readonly require>
 
                                         <div class="form-group">
-                                            <label>Seleccione el Rol</label>
-                                            <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
-                                                <option value="">Seleccione...</option>
-                                                <?php foreach ($dtR->listaRol() as $r) : ?>
-                                                    <tr>
-                                                        <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
-                                        </div>
-
-                                        <div class="form-group">
                                             <label>Seleccione el usuario</label>
                                             <select class="form-control" id="tbl_usuario_id_usuario" name="tbl_usuario_id_usuario" required>
                                                 <option value="">Seleccione...</option>
@@ -564,11 +551,25 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                             <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>Seleccione el Rol</label>
+                                            <select class="form-control" id="tbl_rol_id_rol" name="tbl_rol_id_rol" required>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtR->listaRol() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_rol'); ?>"><?php echo $r->__GET('rol_descripcion'); ?></option>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
                                         <!-- /.card-body -->
 
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                             <button type="reset" class="btn btn-danger">Cancelar</button>
+                                            <a href="tbl_rol_usuario.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                         </div>
                                 </form>
                                 </di v>
@@ -617,8 +618,8 @@ $RU = $dtRU->getRolUsuario($varIdRU);
         ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
         function setValores() {
             $("#id_rol_usuario").val("<?php echo $RU->__GET('id_rol_usuario') ?>");
-            $("#tbl_rol_id_rol").val("<?php echo $RU->__GET('tbl_rol_id_rol') ?>");
             $("#tbl_usuario_id_usuario").val("<?php echo $RU->__GET('tbl_usuario_id_usuario') ?>");
+            $("#tbl_rol_id_rol").val("<?php echo $RU->__GET('tbl_rol_id_rol') ?>");
         }
 
         $(document).ready(function() {

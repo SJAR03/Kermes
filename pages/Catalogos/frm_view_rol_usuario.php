@@ -78,14 +78,6 @@ if (!$acceso) {
 
 // 
 
-$dtu = new dt_usuario();
-
-$varMsj = 0;
-
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
-}
-
 $dtU = new dt_usuario();
 $dtR = new dt_rol();
 $dtRU = new dt_rol_usuario();
@@ -552,7 +544,7 @@ $RU = $dtRU->getRolUsuario($varIdRU);
 
                                         <div class="form-group">
                                             <label>Selecciona el rol</label>
-                                            <select class="form-control" name="rol" id="rol" required disabled>
+                                            <select class="form-control" name="tbl_rol_id_rol" id="tbl_rol_id_rol" required disabled>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtR->listaRol() as $r) : ?>
@@ -568,7 +560,7 @@ $RU = $dtRU->getRolUsuario($varIdRU);
 
                                         <div class="form-group">
                                             <label>Selecciona el usuario</label>
-                                            <select class="form-control" name="usuario" id="usuario" required disabled>
+                                            <select class="form-control" name="tbl_usuario_id_usuario" id="tbl_usuario_id_usuario" required disabled>
                                                 <option value="">Seleccione...</option>
 
                                                 <?php foreach ($dtU->listaUsu() as $r) : ?>
@@ -585,7 +577,7 @@ $RU = $dtRU->getRolUsuario($varIdRU);
                                     <!-- /.card-body -->
 
                                     <div class="card-footer" style="text-align: center;">
-                                        <a href="tbl_ingreso_comunidad.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
+                                        <a href="tbl_rol_usuario.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                                     </div>
                                 </form>
                             </div>
@@ -631,6 +623,21 @@ $RU = $dtRU->getRolUsuario($varIdRU);
             bsCustomFileInput.init();
         });
     </script>
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_rol_usuario").val("<?php echo $RU->__GET('id_rol_usuario') ?>");
+            $("#tbl_usuario_id_usuario").val("<?php echo $RU->__GET('tbl_usuario_id_usuario') ?>");
+            $("#tbl_rol_id_rol").val("<?php echo $RU->__GET('tbl_rol_id_rol') ?>");
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
+
 </body>
 
 </html>
