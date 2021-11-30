@@ -141,7 +141,7 @@
                     </a>
                 </li> -->
         <li class="nav-item">
-          <a class="nav-link" href="../../login.php" title="Cerrar Sesión">
+          <a class="nav-link" href="./login.php" title="Cerrar Sesión">
             <i class="fas fa-power-off"></i>&nbsp;Cerrar Sesión
           </a>
         </li>
