@@ -101,7 +101,7 @@ if (isset($varMsj)) {
   <!-- JQVMap -->
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css" />
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
+  <link rel="stylesheet" href="./plugins/jAlert/dist/jAlert.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css" />
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
@@ -1164,8 +1164,8 @@ if (isset($varMsj)) {
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
   <!-- JAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+  <script src="./plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="./plugins/jAlert/dist/jAlert-functions.min.js">
 
   </script>
 

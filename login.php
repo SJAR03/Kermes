@@ -34,7 +34,7 @@ if (isset($varMsj)) {
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
+  <link rel="stylesheet" href="./plugins/jAlert/dist/jAlert.css">
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
 </head>
 
@@ -84,8 +84,8 @@ if (isset($varMsj)) {
   <!-- Bootstrap 4 -->
   <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- JAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+  <script src="./plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="./plugins/jAlert/dist/jAlert-functions.min.js">
 
   </script>
   <!-- AdminLTE App -->
