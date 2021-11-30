@@ -43,18 +43,13 @@
                 $fecha = date("Y-m-d: H:i:s"); */
 
                 $this->myCon = parent::conectar();
-                $sql = "INSERT INTO dbkermesse.tbl_arqueocaja(idKermesse, fechaArqueo, granTotal, usuario_modificacion, fecha_modificacion, usuario_eliminacion, fecha_eliminacion)
-                    VALUES (?, ?, ?, 1, NOW(), ?, ?, ?, ?, 1)";
+                $sql = "INSERT INTO dbkermesse.tbl_arqueocaja(idKermesse, fechaArqueo, granTotal, usuario_creacion, fecha_creacion, estado)
+                    VALUES (?, NOW(), ?, 1, NOW(), 1)";
 
                 $this->myCon->prepare($sql)
                 ->execute(array(
                     $ic->__GET('idKermesse'),
-                    $ic->__GET('fechaArqueo'),
-                    $ic->__GET('granTotal'),
-                    $ic->__GET('usuario_modificacion'),
-                    $ic->__GET('fecha_modificacion'),
-                    $ic->__GET('usuario_eliminacion'),
-                    $ic->__GET('fecha_eliminacion')));
+                    $ic->__GET('granTotal')));
 
                     $this->myCon = parent::desconectar();
 

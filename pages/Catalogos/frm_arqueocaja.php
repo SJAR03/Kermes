@@ -458,7 +458,7 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_arqueocaja.php">
                   <div class="card-body">
 
                     <div class="form-group">
@@ -474,11 +474,6 @@ if (isset($varMsj)) {
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
                     </div>
 
-                    <div class="form-group">
-                      <label>Fecha del Arqueo</label>
-                      <input type="date" class="form-control" id="fechaArqueo" name="fechaArqueo" placeholder="Ingrese fecha del arqueo" title="Ingrese fecha del arqueo" required>
-                    </div>
-
               <!-- Detalles del arqueo -->
               <div class="card card-info">
                 <div class="card-header">
@@ -486,7 +481,6 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
                   <div class="card-body">
 
                     <div class="form-group">
@@ -508,7 +502,7 @@ if (isset($varMsj)) {
                         <option value="">Seleccione...</option>
                         <?php foreach ($dtDenominacion->listarDenominaciones() as $r) : ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                            <option value="<?php echo $r->__GET('id'); ?>"><?php echo $r->__GET('valor'); ?></option>
                           </tr>
                         <?php endforeach; ?>
                       </select>
@@ -540,7 +534,6 @@ if (isset($varMsj)) {
                 <table class="table table-head-fixed text-nowrap" id="tablaDetalles">
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>Moneda</th>
                       <th>Denominacion</th>
                       <th>Cantidad</th>
@@ -561,7 +554,6 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="button" class="btn btn-primary" onclick="agregarDetalle()">Guardar</button>
                   </div>
-                </form>
               </div>
               <!-- /.card -->
 
@@ -576,6 +568,7 @@ if (isset($varMsj)) {
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <a href="tbl_arqueocaja.php" title="Regresar a la página anterior"><i class="fas fa-2x fa-undo-alt"></i></a>
                   </div>
                 </form>
               </div>
@@ -622,12 +615,17 @@ if (isset($varMsj)) {
 
 <script>
   function agregarDetalle() {
+
+    // Construir un objeto detalle
+    var moneda = document.getElementById('id_moneda');
+    var denominacion = document.getElementById('id_denominacion');
+    var cantidad = document.getElementById('cantidad');
+
         $("#tablaDetalles tbody").append("<tr>" + 
-          "<td>1</td>" +
-          "<td>Córdoba</td>" +
-          "<td>12</td>" +
-          "<td>10</td>" +
-          "<td>120</td>" +
+          "<td>" + moneda.options[moneda.selectedIndex].text + "</td>" +
+          "<td>" + denominacion.options[denominacion.selectedIndex].text + "</td>" +
+          "<td>" + cantidad.value + "</td>" +
+          "<td>" + (parseInt(denominacion.options[denominacion.selectedIndex].text) * parseInt(cantidad.value)) + "</td>" +
           "</tr>");
           calcularTotal();
   }
@@ -640,10 +638,11 @@ if (isset($varMsj)) {
     for(var i = 1; i < tabla.rows.length; i++) {
       var celda = tabla.rows.item(i).cells;
 
-      for (var j = 4; j < celda.length; j++) {
+      for (var j = 3; j < celda.length; j++) {
         total += parseInt(celda.item(j).innerHTML);
       }
     }
+    console.log(total);
     inputTotal.value = total;
   }
 </script>
