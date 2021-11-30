@@ -464,17 +464,26 @@ if (isset($varMsj)) {
                                 <tbody>
                                     <?php
                                     foreach ($dtu->listarVwlistaPrecios() as $r) :
-                                        echo $dtu->listarVwlistaPrecios();
                                     ?>
                                         <tr>
                                             <td><?php echo $r->__GET('id_lista_precio'); ?></td>
                                             <td><?php echo $r->__GET('kermess'); ?></td>
                                             <td><?php echo $r->__GET('nombre'); ?></td>
                                             <td><?php echo $r->__GET('descripcion'); ?></td>
-                                            <td><?php echo $r->__GET('estado'); ?></td>
+                                            <td><?php
+                                                if ($r->__GET('estado') == '1') {
+                                                    echo 'Registrado';
+                                                } elseif ($r->__GET('estado') == '2') {
+                                                    echo 'Editado';
+                                                } elseif ($r->__GET('estado') == '3') {
+                                                    echo 'Eliminado';
+                                                }
+                                                ?>
+                                            </td>
                                             <td>
                                                 <a href="frm_edit_lista_precio.php?editICD=<?php echo $r->__GET('id_lista_precio') ?>" target="blank"><i class="far fa-2x fa-edit" title="Visualizar la lista precio"></i></a>
-                                                <a href="frm_lista_precio.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio"></i></a>
+                                                <a href="frm_view_lista_precio.php?viewICD=<?php echo $r->__GET('id_lista_precio') ?>" target="blank"><i class="far fa-eye fa-2x" title="Visualizar la lista precio"></i></a>
+                                                <a href="../../negocio/ng_lista_precio.php?delG=<?php echo $r->__GET('id_lista_precio'); ?>" target="blank"><i class="far fa-2x fa-trash-alt" title="Eliminar Precio"></i></a>
                                             </td>
                                         </tr>
                                     <?php
@@ -556,6 +565,13 @@ if (isset($varMsj)) {
                 }
                 if (mensaje == "3") {
                     successAlert('Exito', 'Los datos han sido editados exitosamente.')
+                }
+                if (mensaje == "5") {
+                    successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+                }
+
+                if (mensaje == "6") {
+                    successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
                 }
                 ////////////////////////////////////////
 

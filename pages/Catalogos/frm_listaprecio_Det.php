@@ -5,16 +5,24 @@ error_reporting(0);
 include '../../Entidades/productos.php';
 include '../../Datos/dt_productos.php';
 
+include '../../entidades/kermesse.php';
+include '../../datos/dt_kermesse.php';
+
 include '../../Entidades/vw_lista_precio.php';
+include '../../Entidades/lista_precio.php';
 include '../../Datos/dt_lista_precio.php';
 
-include '../../Entidades/listaprecio_det.php';
+include '../../Entidades/vw_listaprecio_det.php';;
 include '../../Datos/dt_listaprecio_det.php';
+include '../../Entidades/listaprecio_det.php';
 
-$dtK = new Dt_Producto();
+$dtK = new Dt_Kermesse();
 $dtCom = new dt_lista_precio();
+$dtu = new dt_listaprecioDet();
+$dtp = new Dt_Producto();
 
-
+$tc = new lista_precio();
+$tc = $dtCom->getListaPrecioR();
 
 $varMsj = 0;
 
@@ -30,7 +38,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Registrar Lista Precio Detalle</title>
+  <title>AdminLTE 3 | General Form Elements</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -38,6 +46,7 @@ if (isset($varMsj)) {
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -431,12 +440,12 @@ if (isset($varMsj)) {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Nuevo lista precio detallado</h1>
+              <h1>Nuevo ingreso de Lista Precio</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item active">Registrar lista precio detallado</li>
+                <li class="breadcrumb-item active">Registrar Lista Precio</li>
               </ol>
             </div>
           </div>
@@ -452,50 +461,93 @@ if (isset($varMsj)) {
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Registrar lista precio detallado</h3>
+                  <h3 class="card-title">Registrar Lista Precio</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_lista_precio.php">
                   <div class="card-body">
 
                     <div class="form-group">
-                      <label>Seleccione la Lista Precio</label>
-                      <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
+                      <label>Seleccione la kermesses</label>
+                      <select class="form-control" id="id_kermesse" name="id_kermesse" disabled>
                         <option value="">Seleccione...</option>
-                        <?php foreach ($dtCom->listarVwlistaPrecios() as $r) : ?>
+                        <?php foreach ($dtK->listaKermT() as $r) : ?>
                           <tr>
-                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                            <option value="<?php echo $r->__GET('id_kermesse'); ?>"><?php echo $r->__GET('nombre'); ?></option>
                           </tr>
                         <?php endforeach; ?>
                       </select>
                       <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="number"  name="id_lista_precio2" id="id_lista_precio2" hidden/>
                     </div>
 
                     <div class="form-group">
-                      <label>Seleccione el producto</label>
-                      <select class="form-control" id="id_producto" name="id_producto" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtK->listaProdT() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('listaProdT'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <label>Nombre</label>
+                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" title="Ingrese nombre" readonly required>
                     </div>
 
                     <div class="form-group">
-                      <label>Precio Venta</label>
-                      <input type="number" class="form-control" id="precio_venta" name="precio_venta" placeholder="Ingrese el precio de la venta" title="Ingrese el precio de la venta" required>
+                      <label>Descripción</label>
+                      <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese la descripción" title="Ingrese la descripción" readonly required>
+                    </div>
+
+                    <div class="form-group" hidden>
+                      <label>Estado</label>
+                      <input type="text" class="form-control" id="estado" name="estado" placeholder="Registrado" title="Ingrese la descripción" value=1 required>
                     </div>
 
                   </div>
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" disabled>Guardar</button>
+                  </div>
+                </form>
+                </di v>
+                <!-- /.card -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Registrar lista precio detallado</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="POST" action="../../negocio/ng_listaprecio_det.php">
+                  <div class="card-body">
+
+                    <div class="form-group">
+                      <label>Seleccione el producto</label>
+                      <select class="form-control" id="id_producto" name="id_producto" required>
+                        <option value="">Seleccione...</option>
+                        <?php foreach ($dtp->listaProdT() as $r) : ?>
+                          <tr>
+                            <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                          </tr>
+                        <?php endforeach; ?>
+                      </select>
+                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
+                      <input type="number" name="id_lista_precio" id="id_lista_precio" hidden/>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Precio Venta</label>
+                      <input type="float" class="form-control" id="precio_venta" name="precio_venta" placeholder="Ingrese el precio de la venta" title="Ingrese el precio de la venta" required>
+                    </div>
+
+                  </div>
+                  <!-- /.card-body -->
+
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" >Guardar</button>
+
                   </div>
                 </form>
                 </di v>
@@ -533,6 +585,87 @@ if (isset($varMsj)) {
   <!-- AdminLTE for demo purposes -->
   <script src="../../dist/js/demo.js"></script>
   <!-- Page specific script -->
+  <!-- jQuery -->
+  <script src="../../plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../../plugins/DT/datatables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
+  <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
+  <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
+  <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"></script>
+
+  <!-- AdminLTE App -->
+  <script src="../../dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../../dist/js/demo.js"></script>
+  <!-- Page specific script -->
+  <script>
+    $(document).ready(function() {
+      /////// VARIABLE DE CONTROL MSJ ////////
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+
+      setValores();
+
+      if (mensaje == "1") {
+        successAlert('Exito', 'Los datos han sido registrado exitosamente!');
+      }
+      if (mensaje == "2") {
+        successAlert('Error', 'Revise los datos e intente nuevamente!!!');
+      }
+      if (mensaje == "3") {
+        successAlert('Exito', 'Los datos han sido editados exitosamente.');
+      }
+      if (mensaje == "5") {
+        successAlert('Exito', 'Los datos han sido eliminados exitosamente.')
+      }
+
+      if (mensaje == "6") {
+        successAlert('Exito', 'Los datos no han sido eliminados exitosamente.')
+      }
+
+      ////////////////////////////////////////
+
+      //////////////DATATABLE/////////////////
+      $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["excel", "pdf"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+      /*$('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+      });*/
+    });
+
+    function setValores() {
+      $("#id_kermesse").val("<?php echo $tc->__GET('id_kermesse') ?>");
+      $("#nombre").val("<?php echo $tc->__GET('nombre') ?>");
+      $("#descripcion").val("<?php echo $tc->__GET('descripcion') ?>");
+
+      $("#id_lista_precio").val("<?php echo $tc->__GET('id_lista_precio') ?>");
+      $("#id_lista_precio2").val("<?php echo $tc->__GET('id_lista_precio') ?>");
+    }
+  </script>
   <script>
     $(function() {
       bsCustomFileInput.init();

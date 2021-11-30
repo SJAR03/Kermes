@@ -11,7 +11,7 @@ class dt_lista_precio extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.tbl_lista_precio";
+            $querySQL = "SELECT * FROM dbkermesse.tbl_lista_precio where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -41,7 +41,7 @@ class dt_lista_precio extends Conexion
         try {
             $this->myCon = parent::conectar();
             $result = array();
-            $querySQL = "SELECT * FROM dbkermesse.vw_lista_precio";
+            $querySQL = "SELECT * FROM dbkermesse.vw_lista_precio where estado <> 3";
 
             $stm = $this->myCon->prepare($querySQL);
             $stm->execute();
@@ -139,6 +139,74 @@ class dt_lista_precio extends Conexion
 
             $this->myCon = parent::desconectar();
         }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function getListaPrecioR()
+    {
+        try {
+            $this->myCon = parent::conectar();
+
+            $querySQL = "SELECT * from dbkermesse.tbl_lista_precio where estado != 3 Order by id_lista_precio DESC Limit 1";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute();
+
+            $tc = new lista_precio;
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+
+            $tc->__SET('id_lista_precio', $r->id_lista_precio);
+            $tc->__SET('id_kermesse', $r->id_kermesse);
+            $tc->__SET('nombre', $r->nombre);
+            $tc->__SET('descripcion', $r->descripcion);
+            $tc->__SET('estado', $r->estado);
+
+
+            $this->myCon = parent::desconectar();
+
+            return $tc;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    public function getIdListaPrecio()
+    {
+        try {
+            $this->myCon = parent::conectar();
+
+            $querySQL = "SELECT id_lista_precio from dbkermesse.tbl_lista_precio where estado != 3 Order by id_lista_precio DESC Limit 1";
+
+            $stm = $this->myCon->prepare($querySQL);
+            $stm->execute();
+
+            $tc = new TasaCambio;
+            $r = $stm->fetch(PDO::FETCH_OBJ);
+            $tc->__SET('id_lista_precio', $r->id_tasaCambio);
+            $this->myCon = parent::desconectar();
+
+            return $tc->__GET('id_lista_precio');
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function eliminarListaPrecio($id)
+    {
+        try {
+            $this->myCon = parent::conectar();
+            $sql = "UPDATE dbkermesse.tbl_lista_precio SET 
+                        estado=3 
+                    WHERE id_lista_precio =?";
+
+            $this->myCon->prepare($sql)
+                ->execute(array(
+                    $id
+                ));
+
+            $this->myCon = parent::desconectar();
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }

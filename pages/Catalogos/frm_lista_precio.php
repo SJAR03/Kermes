@@ -34,7 +34,7 @@ if (isset($varMsj)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | General Form Elements</title>
+  <title>AdminLTE 3 | Registrar Lista Precio</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -496,7 +496,7 @@ if (isset($varMsj)) {
 
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <a href="tbl_lista_precio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                   </div>
                 </form>
                 </di v>
@@ -515,21 +515,8 @@ if (isset($varMsj)) {
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="../../negocio/ng_Ingreso_Comunidad.php">
+                <form method="POST" action="../../negocio/ng_listaprecio_det.php">
                   <div class="card-body">
-
-                    <div class="form-group">
-                      <label>Seleccione la Lista Precio</label>
-                      <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
-                        <option value="">Seleccione...</option>
-                        <?php foreach ($dtCom->listarVwlistaPrecios() as $r) : ?>
-                          <tr>
-                            <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
-                          </tr>
-                        <?php endforeach; ?>
-                      </select>
-                      <input type="hidden" value="1" name="txtaccion" id="txtaccion" />
-                    </div>
 
                     <div class="form-group">
                       <label>Seleccione el producto</label>
@@ -553,8 +540,8 @@ if (isset($varMsj)) {
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="reset" class="btn btn-danger">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" disabled>Guardar</button>
+                    <a href="tbl_lista_precio.php"><i class="fas fa-undo-alt fa-2x col-md-12" title="Regresar" style="padding-top: 20px;"></i></a>
                   </div>
                 </form>
                 </di v>
@@ -562,63 +549,6 @@ if (isset($varMsj)) {
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">Tabla Lista Precio Det</h3>
-                </div>
-
-                <div class="card-body">
-                  <div class="form-group col-md-12" style="text-align: right;">
-                    <a href="frm_listaprecio_Det.php" title="Registrar una nueva lista precio Det" target="blank">
-                      <i class="far fa-plus-square fa-2x"></i>
-                    </a>
-                  </div>
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Lista Precio</th>
-                        <th>Producto</th>
-                        <th>Precio Venta</th>
-                        <th>Opciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      foreach ($dtu->listarVwListaPreciosDet() as $r) :
-                      ?>
-                        <tr>
-                          <td><?php echo $r->__GET('id_listaprecio_det'); ?></td>
-                          <td><?php echo $r->__GET('lista_precio'); ?></td>
-                          <td><?php echo $r->__GET('Producto'); ?></td>
-                          <td><?php echo $r->__GET('precio_venta'); ?></td>
-                          <td>
-                            <a href="frm_listaprecio_Det.php"><i class="far fa-edit fa-2x" title="Editar la lista precio detallada"></i></a>
-                            <a href="frm_listaprecio_Det.php"><i class="far fa-eye fa-2x" title="Visualizar la lista pregio detallada"></i></a>
-                          </td>
-                        </tr>
-                      <?php
-                      endforeach;
-                      ?>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>ID</th>
-                        <th>Lista Precio</th>
-                        <th>Producto</th>
-                        <th>Precio Venta</th>
-                        <th>Opciones</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
       <!-- /.content -->
     </div>

@@ -1,33 +1,48 @@
 <?php
+
 error_reporting(0);
-//IMPORTAMOS ENTIDADES Y DATOS
+
 include '../../Entidades/vw_listaprecio_Det.php';
+include '../../Entidades/listaprecio_det.php';
 include '../../Datos/dt_listaprecio_det.php';
 
-$dtu = new dt_listaprecioDet();
+include '../../Entidades/lista_precio.php';
+include '../../Datos/dt_listaprecio_det.php';
 
-$varMsj = 0;
-if (isset($varMsj)) {
-    $varMsj = $_GET['msj'];
+include '../../Entidades/productos.php';
+include '../../Datos/dt_productos.php';
+
+$dtComu = new dt_listaprecioDet();
+$Comu = new listaprecio_det();
+
+$dtPro = new Dt_Producto();
+
+$dtList = new dt_lista_precio();
+
+$varIdComu = 0;
+
+if (isset($varIdComu)) {
+    $varIdComu = $_GET['editICD']; //RECUPERAMOS EL VALOR DE NUESTRA VARIABLE PARA EDITAR LA COMUNIDAD
 }
 
+//OBTENEMOS LOS DATOS DE LA COMUNIDAD PARA SER EDITADO
+$Comu = $dtComu->getListaPrecioDet($varIdComu);
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KERMESSE | Tabla listaprecio_det</title>
+    <title>AdminLTE 3 | Editar Lista Precio Detalle</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/DT/datatables.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Responsive-2.2.9/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="../../plugins/DT/Buttons-2.0.0/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -423,133 +438,125 @@ if (isset($varMsj)) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1>Editar Lista Precio Detalle</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li>
+                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                <li class="breadcrumb-item active">Editar Lista Precio Detalle</li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Tabla Lista Precio Det</h3>
-                        </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Editar Lista Precio Detalle</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form method="POST" action="../../negocio/ng_listaprecio_det.php">
+                                    <div class="card-body">
+                                        <label>ID Categoría Gastos: </label>
+                                        <input type="text" class="form-control" id="id_listaprecio_det" name="id_listaprecio_det" placeholder="ID" readonly require>
 
-                        <div class="card-body">
-                            <div class="form-group col-md-12" style="text-align: right;">
-                                <a href="frm_listaprecio_Det.php" title="Registrar una nueva lista precio Det" target="blank">
-                                    <i class="far fa-plus-square fa-2x"></i>
-                                </a>
+                                        <div class="form-group">
+                                            <label>Seleccione la lista Precio</label>
+                                            <select class="form-control" id="id_lista_precio" name="id_lista_precio" required>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtList->listarvwlistaPrecios() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_lista_precio'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <input type="hidden" value="2" name="txtaccion" id="txtaccion" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Seleccione un Producto</label>
+                                            <select class="form-control" id="id_producto" name="id_producto" required>
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($dtPro->listaProdT() as $r) : ?>
+                                                    <tr>
+                                                        <option value="<?php echo $r->__GET('id_producto'); ?>"><?php echo $r->__GET('nombre'); ?></option>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="reset" class="btn btn-danger">Cancelar</button>
+                                        </div>
+                                </form>
                             </div>
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Lista Precio</th>
-                                        <th>Producto</th>
-                                        <th>Precio Venta</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    foreach ($dtu->listarVwListaPreciosDet() as $r) :
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $r->__GET('id_listaprecio_det'); ?></td>
-                                            <td><?php echo $r->__GET('lista_precio'); ?></td>
-                                            <td><?php echo $r->__GET('Producto'); ?></td>
-                                            <td><?php echo $r->__GET('precio_venta'); ?></td>
-                                            <td>
-                                            <a href="frm_edit_listaprecio_det.php?editICD=<?php echo $r->__GET('id_listaprecio_det') ?>" target="blank"><i class="far fa-2x fa-edit" title="Visualizar la lista precio detalle"></i></a>
-                                                <a href="frm_listaprecio_Det.php"><i class="far fa-eye fa-2x" title="Visualizar la lista precio detallada"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    endforeach;
-                                    ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Lista Precio</th>
-                                        <th>Producto</th>
-                                        <th>Precio Venta</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                            <!-- /.card -->
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="float-right d-none d-sm-block">
-                    <b>Version</b> 3.1.0-rc
-                </div>
-                <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-            </footer>
-
-            <!-- Control Sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
-            <!-- /.control-sidebar -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.1.0-rc
+            </div>
+            <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
 
-        <!-- jQuery -->
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-        <script src="../../plugins/DT/datatables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/responsive.dataTables.min.js"></script>
-        <script src="../../plugins/DT/Responsive-2.2.9/js/dataTables.responsive.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/dataTables.buttons.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.bootstrap4.min.js"></script>
-        <script src="../../plugins/DT/JSZip-2.5.0/jszip.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/pdfmake.min.js"></script>
-        <script src="../../plugins/DT/pdfmake-0.1.36/vfs_fonts.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.html5.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.print.min.js"></script>
-        <script src="../../plugins/DT/Buttons-2.0.0/js/buttons.colVis.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+
+    <script>
+        ///FUNCION PARA CARGAR LOS VALORES EN LOS CONTROLES
+        function setValores() {
+            $("#id_listaprecio_det").val("<?php echo $Comu->__GET('id_listaprecio_det') ?>");
+            $("#id_lista_precio").val("<?php echo $Comu->__GET('id_lista_precio') ?>");
+            $("#id_producto").val("<?php echo $Comu->__GET('id_producto') ?>");
+            $("#precio_venta").val("<?php echo $Comu->__GET('precio_venta') ?>");
+
+        }
+
+        $(document).ready(function() {
+            ////CARGAMOS LOS VALORES EN LOS CONTROLES
+            setValores();
+        });
+    </script>
 
 
-        <!-- AdminLTE App -->
-        <script src="../../dist/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="../../dist/js/demo.js"></script>
-        <!-- Page specific script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["excel", "pdf"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
-                });
-            });
-        </script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
+    </script>
 </body>
 
 </html>
