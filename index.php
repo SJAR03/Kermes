@@ -72,6 +72,11 @@ if (!$acceso) {
   header("Location: 401.php"); //REDIRECCIONAMOS A LA PAGINA DE ACCESO RESTRINGIDO
 }
 
+$varMsj = 0;
+
+if (isset($varMsj)) {
+  $varMsj = $_GET['msj'];
+}
 
 ?>
 
@@ -96,6 +101,7 @@ if (!$acceso) {
   <!-- JQVMap -->
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css" />
   <!-- Theme style -->
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css" />
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
@@ -1156,12 +1162,35 @@ if (!$acceso) {
   <script src="plugins/summernote/summernote-bs4.min.js"></script>
   <!-- overlayScrollbars -->
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+  <!-- JAlert js -->
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+  </script>
+
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      /////// VARIABLE DE CONTROL MSJ ////////
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+
+      if (mensaje == "1") {
+        successAlert('Exito', 'Inicio de Sesión exitoso!');
+      }
+
+      ////////////////////////////////////////
+
+    });
+  </script>
+
 </body>
 
 </html>

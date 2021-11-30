@@ -12,6 +12,12 @@ if (session_destroy()) {
   echo "Error al cerrar la sesión";
 }
 
+$varMsj = 0;
+
+if (isset($varMsj)) {
+  $varMsj = $_GET['msj'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +34,7 @@ if (session_destroy()) {
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
+  <link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css">
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
 </head>
 
@@ -76,8 +83,39 @@ if (session_destroy()) {
   <script src="./plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- JAlert js -->
+  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js">
+
+  </script>
   <!-- AdminLTE App -->
   <script src="./dist/js/adminlte.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      /////// VARIABLE DE CONTROL MSJ ////////
+      var mensaje = 0;
+      mensaje = "<?php echo $varMsj ?>";
+
+      if (mensaje == "403") {
+        errorAlert('Error', 'Debe de llenar todos los campos para iniciar sesión!');
+      }
+      if (mensaje == "401") {
+        errorAlert('Error', 'Usuario o Contraseña incorrecta!');
+      }
+
+      if (mensaje == "400") {
+        errorAlert('Error', 'Revise los datos e intente nuevamente!')
+      }
+
+      if (mensaje == "2") {
+        errorAlert('Error', 'Debe iniciar sesión primero')
+      }
+      ////////////////////////////////////////
+
+    });
+  </script>
+
 </body>
 
 </html>
